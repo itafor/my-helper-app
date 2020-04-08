@@ -1,0 +1,12 @@
+.text-blue {
+    color: #2124d6 !important;
+    font-weight: bold;
+}
+
+.h2-heading {
+    margin: 0px;
+    display: inline-block;
+}
+.req-btn {
+    float: right;
+}
