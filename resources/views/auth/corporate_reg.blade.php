@@ -7,12 +7,38 @@
             <div class="card card-register card-white">
                 <div class="card-header">
                     <!-- <img class="card-img" src="{{ asset('white') }}/img/card-primary.png" alt="Card image"> -->
-                    <h4 class="text-blue card-title">{{ __('Individual') }}</h4>
+                    <h4 class="text-blue card-title">{{ __('Corporate') }}</h4>
                 </div>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
-                    <input type="hidden" name="user_type" value="1">
+                    <input type="hidden" name="user_type" value="2">
                     <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group{{ $errors->has('company_name') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="company_name" class="form-control{{ $errors->has('company_name') ? ' is-invalid' : '' }}" placeholder="{{ _('Company Name') }}" value="{{ old('company_name') }}">
+                                    @include('alerts.feedback', ['field' => 'company_name'])
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group{{ $errors->has('website') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="website" class="form-control{{ $errors->has('website') ? ' is-invalid' : '' }}" placeholder="{{ _('Website') }}" value="{{ old('website') }}">
+                                    @include('alerts.feedback', ['field' => 'website'])
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -21,7 +47,7 @@
                                             <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
-                                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ _('Name') }}" value="{{ old('name') }}">
+                                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Contact Person's Firstname" value="{{ old('name') }}">
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                             </div>
@@ -32,7 +58,7 @@
                                             <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
-                                    <input type="text" name="last_name" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ _('Last Name') }}" value="{{ old('lastname') }}">
+                                    <input type="text" name="last_name" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="Contact Person's Surname" value="{{ old('lastname') }}">
                                     @include('alerts.feedback', ['field' => 'lastname'])
                                 </div>
                             </div>
@@ -45,7 +71,7 @@
                                             <i class="tim-icons icon-email-85"></i>
                                         </div>
                                     </div>
-                                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Email') }}" value="{{ old('email') }}">
+                                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Contact Person's Email" value="{{ old('email') }}">
                                     @include('alerts.feedback', ['field' => 'email'])
                                 </div>
                             </div>
@@ -56,12 +82,12 @@
                                             <i class="tim-icons icon-email-85"></i>
                                         </div>
                                     </div>
-                                    <input type="tel" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ _('Phone No') }}" value="{{ old('phone') }}">
+                                    <input type="tel" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="Contact Person's Phone No" value="{{ old('phone') }}">
                                     @include('alerts.feedback', ['field' => 'phone'])
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('username') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -73,7 +99,7 @@
                                     @include('alerts.feedback', ['field' => 'username'])
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                             <div class="col-md-3">
