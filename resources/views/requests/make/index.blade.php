@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageSlug' => 'requests'])
 
 @section('content')
     <div class="header py-7 py-lg-8">
@@ -16,9 +16,10 @@
                         <div class="col-md-12">
                             <div class="card ">
                             <div class="card-header">
-                                <h4 class="card-title"> Simple Table</h4>
+                                <h4 class="card-title">Requests</h4>
                             </div>
                             <div class="card-body">
+                            @include('alerts.success')
                                 <div class="table-responsive">
                                     <table class="table tablesorter " id="">
                                         <thead class=" text-primary">
@@ -32,18 +33,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($allRequests as $req)
                                             <tr>
-                                                <td>Dakota Rice</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                                <td class="text-center">$36,738</td>
+                                                <td>{{ strftime('%d-%b-%Y', strtotime($req->created_at))  }}</td>
+                                                <td>{{ $req->user->name }} {{ $req->user->last_name }}</td>
+                                                <td>{{ $req->category->title }}</td>
+                                                <td class="text-center">{{ $req->description }}</td>
+                                                <td class="text-center">{{ $req->type }}</td>
+                                                <td class="text-center">{{ $req->city->name }}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Minerva Hooper</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                                <td class="text-center">$23,789</td>
-                                            </tr>
+                                        @endforeach
+                                            
                                         </tbody>
                                     </table>
                                 </div>

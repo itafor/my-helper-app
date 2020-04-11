@@ -7,7 +7,7 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'White Dashboard') }}</title>
+        <title>Lockdown Clerk</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('white') }}/img/apple-icon.png">
         <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png">
@@ -20,11 +20,14 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
+        <script>
+            var baseUrl = '{{url("/")}}';
+        </script>
     </head>
     <body class="white-content {{ $class ?? '' }}">
         @auth()
             <div class="wrapper">
-                    @include('layouts.navbars.sidebar')
+                    {{-- @include('layouts.navbars.sidebar') --}}
                 <div class="main-panel">
                     @include('layouts.navbars.navbar')
 
@@ -91,6 +94,7 @@
         <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
         <!--  Google Maps Plugin    -->
         <!-- Place this tag in your head or just before your close body tag. -->
+        <script src="{{ asset('js/custom.js') }}"></script>
         {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
         <!-- Chart JS -->
         {{-- <script src="{{ asset('white') }}/js/plugins/chartjs.min.js"></script> --}}
