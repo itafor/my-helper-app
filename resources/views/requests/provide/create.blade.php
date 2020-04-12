@@ -1,157 +1,349 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
-@section('content')
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png')}}">
+	<link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png')}}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Lockdown Clerk</title>
 
-<div class="container-fluid mt--7">
-        <div class="row">
-            <div class="col-xl-12 order-xl-1">
-                <div class="card">
-                    <div class="card-header bg-white border-0">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="mb-0">{{ __('What do you want to provide for the lockdown?') }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="" autocomplete="off">
-                            @csrf
-                            <input type="hidden" name="request_type" value="2">
-                            <h6 class="heading-small text-muted mb-4">{{ __('Provide') }}</h6>
-                            <div class="pl-lg-4">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group{{ $errors->has('category') ? ' has-danger' : '' }}">
-                                            <strong><label class="form-control-label" for="input-category">{{ __('Category') }}</label></strong>
-                                            <select name="category" id="input-category" class="form-control form-control-alternative{{ $errors->has('category') ? ' is-invalid' : '' }}" value="{{ old('category') }}" required>
-                                                <option value="">Select a Category</option>
-                                                    <option value="">Industry 1</option>
-                                            </select>
-                                            @if ($errors->has('industry'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('category') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group{{ $errors->has('company_name') ? ' has-danger' : '' }}">
-                                            <strong><label class="form-control-label" for="input-company">{{ __('Description') }}</label></strong>
-                                            <textarea name="description" id="input-description" class="form-control form-control-alternative{{ $errors->has('company_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Description') }}" value="{{ old('description') }}"></textarea>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-                                            @if ($errors->has('company_name'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('company_name') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>                                                         
-                                </div>
-                                <h3>Location:</h3>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="country_id">{{ __('Country') }}</label></strong>
-                                                <select name="country" id="country_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
-                                                    <option value="">Select a country</option>
-                                                    @foreach(getCountries() as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('country'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('country') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="state_id">{{ __('State') }}</label></strong>
-                                                <select name="state" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
-                                                    <option value="">Select State</option>
-                                                </select>
-                                                @if ($errors->has('state'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('state') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    <!-- </div>
+	<!--     Fonts and icons     -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 
-                                    <div class="row"> -->
-                                        <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('city') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="city_id">{{ __('City') }}</label></strong>
-                                                <select name="city" id="city_id" class="form-control form-control-alternative{{ $errors->has('city') ? ' is-invalid' : '' }}" placeholder="{{ __('City') }}" value="{{ old('street') }}" required >
-                                                    <option value="">Select City</option>
-                                                </select>
-                                                @if ($errors->has('city'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('city') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
-                                                <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
+	<!-- CSS Files -->
+    <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('assets/css/gsdk-bootstrap-wizard.css')}}" rel="stylesheet" />
 
-                                                @if ($errors->has('street'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('street') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                <!-- </div> -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="state_id">{{ __('Type') }}</label></strong>
-                                                <select name="type" id="type_id" class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" value="{{ old('type') }}" >
-                                                    <option value="">Select</option>
-                                                    <option value="free">Free</option>
-                                                    <option value="paid">Paid</option>
-                                                </select>
-                                                @if ($errors->has('state'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('state') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="state_id">{{ __('How would you like to be contacted?') }}</label></strong>
-                                                <select name="state" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" value="{{ old('state') }}" >
-                                                    <option value="">Select</option>
-                                                    <option value="phone">Phone</option>
-                                                    <option value="email">Email</option>
-                                                </select>
-                                                @if ($errors->has('state'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('state') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                            
-                                <div style="clear:both"></div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link href="assets/css/demo.css" rel="stylesheet" />
+</head>
+
+<body>
+<script>
+    var baseUrl = '{{url("/")}}';
+</script>
+<div class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
+    <!--   Creative Tim Branding   -->
+    <!-- <a href="http://creative-tim.com">
+         <div class="logo-container">
+            <div class="logo">
+                <img src="{{ asset('assets/img/new_logo.png')}}">
+            </div>
+            <div class="brand">
+                Creative Tim
             </div>
         </div>
-        
-        {{--@include('layouts.footers.auth') --}}
-    </div>
+    </a> -->
 
-@endsection
+	<!--  Made With Get Shit Done Kit  -->
+		<!-- <a href="http://demos.creative-tim.com/get-shit-done/index.html?ref=get-shit-done-bootstrap-wizard" class="made-with-mk">
+			<div class="brand">GK</div>
+			<div class="made-with">Made with <strong>GSDK</strong></div>
+		</a> -->
+
+    <!--   Big container   -->
+    <div class="container">
+        <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+                <div class="col-sm-6 loginLink">
+                    <h2>
+                        <b>
+                            Please Login <a href="{{ route('login') }}">here</a> 
+                        </b>
+                    </h2>
+
+                </div>
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+
+                <div class="card wizard-card" data-color="orange" id="wizardProfile">
+                    <form action="{{ url('register') }}" method="POST">
+                    @csrf
+                <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
+                    <input type="hidden" name="request_type" value="2">
+                    	<div class="wizard-header">
+                        	<h3>
+                        	   What do you want to provide for the <b>Lock down</b>  <br>
+                        	   <!-- <small>This information will let us know more about you.</small> -->
+                        	</h3>
+                    	</div>
+
+						<div class="wizard-navigation">
+							<ul>
+	                            <li><a href="#account" data-toggle="tab">Requests</a></li>
+	                            <li><a href="#address" data-toggle="tab">Location</a></li>
+	                            <li><a href="#about" data-toggle="tab">Personal Info</a></li>
+	                        </ul>
+
+						</div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane" id="about">
+                                <div class="row">
+                                    <h4 class="info-text"> Basic information</h4>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Individual</label>
+                                            <input name="user_type" type="radio" class="form-control" value="1">
+                                        </div>
+                                    </div>   
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Corporate
+                                                <input name="user_type" type="radio" class="form-control" value="2">
+                                            </label>
+                                        </div>
+                                    </div> 
+                                    <div class="individual">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>First Name <small>(required)</small></label>
+                                                <input name="name" type="text" class="form-control" placeholder="Andrew...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Last Name <small>(required)</small></label>
+                                                <input name="last_name" type="text" class="form-control" placeholder="Smith...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 ">
+                                            <div class="form-group">
+                                                <label>Email <small>(required)</small></label>
+                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Phone <small>(required)</small></label>
+                                                <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Username <small>(required)</small></label>
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Password <small>(required)</small></label>
+                                                <input name="password" type="password" class="form-control" placeholder="Smith...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Confirm Password <small>(required)</small></label>
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Smith...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="corporate">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Company Name <small>(required)</small></label>
+                                                <input name="company_name" type="text" class="form-control" placeholder="John Doe Ltd...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Company Website <small>(required)</small></label>
+                                                <input name="website" type="text" class="form-control" placeholder="https://www.example.com">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Contact First Name <small>(required)</small></label>
+                                                <input name="name" type="text" class="form-control" placeholder="Andrew...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Contact Last Name <small>(required)</small></label>
+                                                <input name="last_name" type="text" class="form-control" placeholder="Smith...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 ">
+                                            <div class="form-group">
+                                                <label>Contact Email <small>(required)</small></label>
+                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Phone <small>(required)</small></label>
+                                                <input name="phone" type="tel" class="form-control" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Username <small>(required)</small></label>
+                                                <input name="username" type="text" class="form-control" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Password <small>(required)</small></label>
+                                                <input name="password" type="password" class="form-control" placeholder="assword...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Confirm Password <small>(required)</small></label>
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="account">
+                                <div class="row">
+
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label>Category</label><br>
+                                                    <select name="category_id" class="form-control">
+                                                @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>        
+                                                @endforeach
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label>Type</label><br>
+                                                <select name="type" class="form-control">
+                                                    <option value=""> Type </option>
+                                                    <option value="Free">Free</option>
+                                                    <option value="Paid">Paid</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>How would you like to be contacted?</label><br>
+                                                <select name="mode_of_contact" class="form-control">
+                                                    <option value="Email">Email</option>
+                                                    <option value="Phone">Phone</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="description">
+                                            <!-- <div class="row"> -->
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <textarea name="description" class="form-control" placeholder="" rows="9"></textarea>
+                                                    </div>
+                                                </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="address">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h4 class="info-text"> Are you living in a nice area? </h4>
+                                    </div>
+                                    <div class="col-sm-6">
+                                         <div class="form-group">
+                                            <label>Country</label><br>
+                                             <select name="country_id" class="form-control" id="country_id">
+                                                <option value=""> Please Select a Country </option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                         <div class="form-group">
+                                            <label>State</label><br>
+                                             <select name="state_id" class="form-control" id="state_id">
+                                                <option value=""> Pick a Country </option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                         <div class="form-group">
+                                            <label>City</label><br>
+                                             <select name="city_id" class="form-control" id="city_id" required>
+                                                <option value="">Select a state</option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                         <div class="form-group">
+                                            <label>Street Name</label>
+                                            <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
+                                          </div>
+                                    </div>
+                                    <!-- <div class="col-sm-3">
+                                         <div class="form-group">
+                                            <label>Street Number</label>
+                                            <input type="text" class="form-control" placeholder="242">
+                                          </div>
+                                    </div>
+                                    <div class="col-sm-5 col-sm-offset-1">
+                                         <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" class="form-control" placeholder="New York...">
+                                          </div>
+                                    </div> -->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wizard-footer height-wizard">
+                            <div class="pull-right">
+                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm' name='next' value='Next' />
+                                <input type='submit' id="finish" class='btn btn-finish btn-fill btn-warning btn-wd btn-sm'/>
+
+                            </div>
+
+                            <div class="pull-left">
+                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd btn-sm' name='previous' value='Previous' />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </form>
+                </div>
+            </div> <!-- wizard container -->
+        </div>
+        </div><!-- end row -->
+    </div> <!--  big container -->
+
+    <!-- <div class="footer">
+        <div class="container">
+             Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/bootstrap-wizard">here.</a>
+        </div>
+    </div> -->
+
+</div>
+
+</body>
+
+	<!--   Core JS Files   -->
+    <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
+        <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
+        <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+	<script src="{{ asset('assets/js/jquery-2.2.4.min.js')}}" type="text/javascript"></script>
+	<script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+	<script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+
+	<!--  Plugin for the Wizard -->
+	<script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
+
+	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+	<script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
+
+</html>

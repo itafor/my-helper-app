@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\LockdownRequest;
 use App\Category;
+use App\Country;
+use App\State;
+use App\City;
 use Session;
 
 class MakeRequestController extends Controller
@@ -28,7 +31,10 @@ class MakeRequestController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('requests.make.create', compact('categories'));
+        $countries = Country::all();
+        $states = State::all();
+        $cities = City::all();
+        return view('requests.make.create', compact('categories', 'countries', 'states', 'cities'));
     }
 
     /**
@@ -57,6 +63,26 @@ class MakeRequestController extends Controller
         Session::flash('status', 'Requests has been successfully registered');
         return redirect()->route('requests');
 
+    }
+
+    public function checkEmail(Request $request){
+        $email = $request->input('email');
+        $isExists = \App\User::where('email',$email)->first();
+        if($isExists){
+            return response()->json(array("exists" => true));
+        }else{
+            return response()->json(array("exists" => false));
+        }
+    }
+
+    public function checkUserName(Request $request){
+        $username = $request->input('username');
+        $isExists = \App\User::where('username',$username)->first();
+        if($isExists){
+            return response()->json(array("exists" => true));
+        }else{
+            return response()->json(array("exists" => false));
+        }
     }
 
     /**

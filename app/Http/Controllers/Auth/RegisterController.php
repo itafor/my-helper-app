@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use App\LockdownRequest;
+
 class RegisterController extends Controller
 {
     /*
@@ -49,9 +53,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'name' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             // 'agree_terms_and_conditions' => ['required'],
         ]);
     }
@@ -79,5 +83,49 @@ class RegisterController extends Controller
             'user_type' => $data['user_type'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+        
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        // $request = new Request;
+        // $req = app('App\Http\Controllers\MakeRequestController')->store($request->all(), $user->id);
+        // dd($data);
+        
+        $lockdownRequest = new LockdownRequest;
+        $userId = $user->id;
+
+        $lockdownRequest->user_id = $userId;
+        $lockdownRequest->request_type = $request->request_type;
+        $lockdownRequest->category_id = $request->category_id;
+        $lockdownRequest->description = $request->description;
+        $lockdownRequest->country_id = $request->country_id;
+        $lockdownRequest->state_id = $request->state_id;
+        $lockdownRequest->city_id = $request->city_id;
+        $lockdownRequest->street = $request->street;
+        $lockdownRequest->type = $request->type;
+        $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+
+    // dd($lockdownRequest);
+        
+        $lockdownRequest->save();
+        return $request->wantsJson()
+                    ? new Response('', 201)
+                    : redirect($this->redirectPath());
     }
 }
