@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use App\Country;
+use App\State;
+use App\City;
 
 class ProvideRequestController extends Controller
 {
@@ -23,7 +27,12 @@ class ProvideRequestController extends Controller
      */
     public function create()
     {
-        return view('requests.provide.create');
+        $categories = Category::all();
+        $countries = Country::all();
+        $states = State::all();
+        $cities = City::all();
+
+        return view('requests.provide.create', compact('categories', 'countries', 'states', 'cities'));
     }
 
     /**

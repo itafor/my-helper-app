@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+
+        <!-- CSS Files -->
         <script>
             var baseUrl = '{{url("/")}}';
         </script>
@@ -89,9 +92,18 @@
             </div>
         </div>
         <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
-        <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
-        <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
-        <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+            <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
+            <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
+        <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+
+        <!--  Plugin for the Wizard -->
+        <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
+
+        <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+          
+            <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+            <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
         <!--  Google Maps Plugin    -->
         <!-- Place this tag in your head or just before your close body tag. -->
         <script src="{{ asset('js/custom.js') }}"></script>

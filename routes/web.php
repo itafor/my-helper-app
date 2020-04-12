@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['uses' => 'LandingPageController@landing_page'])->middleware('guest');
 
 Route::get('reg_type', function() {
 	return view('auth.select_registration_type');
@@ -30,6 +28,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('getstates/{id}', 'AjaxController@getState');
 Route::get('getcities/{id}', 'AjaxController@getCity');
+Route::get('make/req/create', ['uses' => 'MakeRequestController@create', 'as' => 'make.request'])->middleware('guest');
+Route::get('provide/req/create', ['uses' => 'ProvideRequestController@create', 'as' => 'provide.request'])->middleware('guest');
+Route::get('checkemail', 'MakeRequestController@checkEmail');
+Route::get('checkusername', 'MakeRequestController@checkUserName');
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
@@ -51,9 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Requests
 	Route::get('requests', ['uses' => 'MakeRequestController@index', 'as' => 'requests']);
-	Route::get('make/request', ['uses' => 'MakeRequestController@create', 'as' => 'make.request']);
+	// Route::get('make/request', ['uses' => 'MakeRequestController@create', 'as' => 'make.request']);
 	Route::post('make/request', ['uses' => 'MakeRequestController@store', 'as' => 'store.make.request']);
 
-	Route::get('provide/request', ['uses' => 'ProvideRequestController@create', 'as' => 'provide.request']);
+	// Route::get('provide/request', ['uses' => 'ProvideRequestController@create', 'as' => 'provide.request']);
 });
 
