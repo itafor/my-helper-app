@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\LockDownRequest;
+use App\LockdownRequest;
 
 class LandingPageController extends Controller
 {
@@ -12,5 +12,7 @@ class LandingPageController extends Controller
     {
         $allRequests = LockdownRequest::orderBy('created_at', 'DESC')->get();
         return view('welcome', compact('allRequests'));
+
+        
     }
 }
