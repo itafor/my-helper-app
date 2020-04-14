@@ -21,6 +21,7 @@
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
         <!-- CSS Files -->
         <script>
@@ -104,6 +105,7 @@
           
             <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
             <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <!--  Google Maps Plugin    -->
         <!-- Place this tag in your head or just before your close body tag. -->
         <script src="{{ asset('js/custom.js') }}"></script>

@@ -29,7 +29,7 @@
                                 <div class="card-body">
                                 @include('alerts.success')
                                 <div class="table-responsive">
-                                    <table class="table tablesorter " id="">
+                                    <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
                                                 <th>Date</th>
