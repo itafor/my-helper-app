@@ -12,9 +12,9 @@
                                     Select Request Type
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('make.request') }}">Make Request</a>
+                                    <a class="dropdown-item" href="{{ route('new.make.request') }}">Make Request</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Provide Request</a>
+                                    <a class="dropdown-item" href="{{ route('new.provide.request') }}">Provide Request</a>
                                 </div>
                             </div>
                         <p class="text-lead text-light">
@@ -35,8 +35,8 @@
                                                 <th>Date</th>
                                                 <th>Request Type</th>
                                                 <th>Category</th>
-                                                <th>Name</th>
-                                                <th class="text-center">Details</th>
+                                                <th>Username</th>
+                                                <th>Details</th>
                                                 <th>Type</th>
                                                 <th>City</th>
                                             </tr>
@@ -46,22 +46,34 @@
                                             
                                                 <tr class='clickable-row' 
                                                     @if($req->request_type == 1)
-                                                        onclick="alert('Please login to see this request')"
                                                         data-href="{{ route('view.make.request', [$req->id]) }}">
                                                     @else
                                                         data-href="{{ route('view.request', [$req->id]) }}">
                                                     @endif
                                                     @php
                                                         $today = \Carbon\Carbon::today();
-                                                        $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($today)
-                                                    @endphp
-                                                    <td>{{ $age  }} {{ $age == 1 ? 'day': 'days' }}</td>
-                                                    <td>{{ $req->request_type == 1 ? 'I need' : 'I want to provide' }}</td>
-                                                    <td>{{ $req->category->title }}</td>
-                                                    <td>{{ $req->user->name }} {{ $req->user->last_name }}</td>
-                                                    <td class="text-center">{{ Str::limit($req->description, 30) }}</td>
-                                                    <td class="text-center">{{ $req->type }}</td>
-                                                    <td class="text-center">{{ $req->city->name }}</td>
+                                                        $time = \Carbon\Carbon::now();
+                                                        $ageInSeconds = \Carbon\Carbon::parse($req->created_at)->diffInSeconds($time);
+                                                        $ageInMins = \Carbon\Carbon::parse($req->created_at)->diffInMinutes($time);
+                                                        $ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
+                                                        $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
+                                                        @endphp
+                                                    @if($ageInSeconds < 60)
+                                                        <td class="text-left">{{ $ageInSeconds }}{{ $ageInSeconds < 2 ? 'sec' : 'secs'}} ago</td>
+                                                    @elseif($ageInMins < 60)
+                                                        <td class="text-left">{{ $ageInMins }}{{ $ageInMins < 2 ? 'min' : 'mins'}} ago</td>
+                                                    @elseif($ageInHrs < 24)
+                                                        <td class="text-left">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
+                                                    @else 
+                                                        <td class="text-left">{{ $age  }} {{ $age < 2 ? 'day': 'days' }}</td>
+                                                    @endif
+
+                                                    <td class="text-left">{{ $req->request_type == 1 ? 'I need' : 'I want to provide' }}</td>
+                                                    <td class="text-left">{{ $req->category->title }}</td>
+                                                    <td class="text-left">{{ $req->user->username }} {{ $req->user->last_name }}</td>
+                                                    <td class="text-left">{{ Str::limit($req->description, 30) }}</td>
+                                                    <td class="text-left">{{ $req->type }}</td>
+                                                    <td class="text-left">{{ $req->city->name }}</td>
                                                 </tr>
                                             
                                         @endforeach

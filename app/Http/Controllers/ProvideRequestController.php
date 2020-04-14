@@ -8,6 +8,7 @@ use App\Country;
 use App\State;
 use App\City;
 use App\LockdownRequest;
+use Session;
 
 class ProvideRequestController extends Controller
 {
@@ -37,6 +38,21 @@ class ProvideRequestController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function auth_create()
+    {
+        $categories = Category::all();
+        $countries = Country::all();
+        $states = State::all();
+        $cities = City::all();
+
+        return view('requests.provide.auth_create', compact('categories', 'countries', 'states', 'cities'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -44,7 +60,23 @@ class ProvideRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lockdownRequest = new LockdownRequest;
+        $userId = auth()->user()->id;
+
+        $lockdownRequest->user_id = $userId;
+        $lockdownRequest->request_type = $request->request_type;
+        $lockdownRequest->category_id = $request->category_id;
+        $lockdownRequest->description = $request->description;
+        $lockdownRequest->country_id = $request->country_id;
+        $lockdownRequest->state_id = $request->state_id;
+        $lockdownRequest->city_id = $request->city_id;
+        $lockdownRequest->street = $request->street;
+        $lockdownRequest->type = $request->type;
+        $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+        
+        $lockdownRequest->save();
+        Session::flash('status', 'Requests has been successfully registered');
+        return redirect()->route('requests');
     }
 
     /**
@@ -56,7 +88,6 @@ class ProvideRequestController extends Controller
     public function show($id)
     {
         $getRequest = LockdownRequest::find($id);
-        // dd($getRequest);
         return view('requests.show', compact('getRequest'));
     }
 

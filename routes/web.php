@@ -55,9 +55,11 @@ Route::group(['middleware' => 'auth'], function () {
 	// Requests
 	Route::get('requests', ['uses' => 'MakeRequestController@index', 'as' => 'requests']);
 	Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'as' => 'view.make.request']);
-	// Route::get('make/request', ['uses' => 'MakeRequestController@create', 'as' => 'make.request']);
+	Route::get('make/request', ['uses' => 'MakeRequestController@auth_create', 'as' => 'new.make.request']);
 	Route::post('make/request', ['uses' => 'MakeRequestController@store', 'as' => 'store.make.request']);
+	Route::get('show/{id}', ['uses' => 'MakeRequestController@show', 'as' => 'show.auth.request']);
 
-	// Route::get('provide/request', ['uses' => 'ProvideRequestController@create', 'as' => 'provide.request']);
+	Route::get('provide/request', ['uses' => 'ProvideRequestController@auth_create', 'as' => 'new.provide.request']);
+	Route::post('provide/request', ['uses' => 'ProvideRequestController@store', 'as' => 'store.provide.request']);
 });
 

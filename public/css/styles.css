@@ -15,4 +15,5 @@
 }
 .clickable-row:hover {
     cursor: pointer;
+    background-color:lightgray;
 }

@@ -102,28 +102,25 @@ class RegisterController extends Controller
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
-
-        // $request = new Request;
-        // $req = app('App\Http\Controllers\MakeRequestController')->store($request->all(), $user->id);
-        // dd($data);
         
-        $lockdownRequest = new LockdownRequest;
-        $userId = $user->id;
-
-        $lockdownRequest->user_id = $userId;
-        $lockdownRequest->request_type = $request->request_type;
-        $lockdownRequest->category_id = $request->category_id;
-        $lockdownRequest->description = $request->description;
-        $lockdownRequest->country_id = $request->country_id;
-        $lockdownRequest->state_id = $request->state_id;
-        $lockdownRequest->city_id = $request->city_id;
-        $lockdownRequest->street = $request->street;
-        $lockdownRequest->type = $request->type;
-        $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-
-    // dd($lockdownRequest);
+        if($request->has('category_id') || $request->has('description') || $request->type) {
+            $lockdownRequest = new LockdownRequest;
+            $userId = $user->id;
+    
         
-        $lockdownRequest->save();
+            $lockdownRequest->user_id = $userId;
+            $lockdownRequest->request_type = $request->request_type;
+            $lockdownRequest->category_id = $request->category_id;
+            $lockdownRequest->description = $request->description;
+            $lockdownRequest->country_id = $request->country_id;
+            $lockdownRequest->state_id = $request->state_id;
+            $lockdownRequest->city_id = $request->city_id;
+            $lockdownRequest->street = $request->street;
+            $lockdownRequest->type = $request->type;
+            $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+            
+            $lockdownRequest->save();
+        }
         return $request->wantsJson()
                     ? new Response('', 201)
                     : redirect($this->redirectPath());
