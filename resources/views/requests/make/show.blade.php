@@ -82,12 +82,7 @@
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->type }}</strong></label>
                             </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"></label>    
-                                <span class="review-stars" style="color: #1e88e5;">
-                                    <i class="fa fa-star" aria-hidden="true"></i>                                    
-                                </span>  
-                            </div>                            
+                                                     
                         </div>
                     </div>
                 </div>
