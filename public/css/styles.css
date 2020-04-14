@@ -13,3 +13,6 @@
 .pad {
     padding: 10px;
 }
+.clickable-row:hover {
+    cursor: pointer;
+}
