@@ -37,4 +37,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City');
+    }
 }
