@@ -55,7 +55,7 @@
                                                         $today = \Carbon\Carbon::today();
                                                         $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($today)
                                                     @endphp
-                                                    <td>{{ $age  }} {{ $age == 1 ? 'day': 'days' }}</td>
+                                                    <td>{{ $age }} {{ $age < 2 ? 'day': 'days' }}</td>
                                                     <td>{{ $req->request_type == 1 ? 'I need' : 'I want to provide' }}</td>
                                                     <td>{{ $req->category->title }}</td>
                                                     <td>{{ $req->user->name }} {{ $req->user->last_name }}</td>
