@@ -7,6 +7,7 @@ use App\Category;
 use App\Country;
 use App\State;
 use App\City;
+use App\LockdownRequest;
 
 class ProvideRequestController extends Controller
 {
@@ -54,7 +55,9 @@ class ProvideRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $getRequest = LockdownRequest::find($id);
+        // dd($getRequest);
+        return view('requests.show', compact('getRequest'));
     }
 
     /**

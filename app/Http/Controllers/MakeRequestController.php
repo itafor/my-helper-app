@@ -93,7 +93,9 @@ class MakeRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $getRequest = LockdownRequest::find($id);
+        // dd($getRequest);
+        return view('requests.make.show', compact('getRequest'));
     }
 
     /**

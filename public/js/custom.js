@@ -108,3 +108,8 @@ $('input:radio[name="user_type"]').click(function(){
 
     }
 })
+
+// make rows clickable
+$(".clickable-row").click(function() {
+    window.location = $(this).data("href");
+});
