@@ -113,3 +113,7 @@ $('input:radio[name="user_type"]').click(function(){
 $(".clickable-row").click(function() {
     window.location = $(this).data("href");
 });
+
+$(document).ready( function () {
+    $('#requests').DataTable();
+} );
