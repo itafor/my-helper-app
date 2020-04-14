@@ -46,7 +46,7 @@ function duplicateEmail(element){
     var email = $(element).val();
     $.ajax({
         type: "GET",
-        url: "/checkemail",
+        url: baseUrl+"/checkemail",
         data: {email:email},
         dataType: "json",
         success: function(res) {
@@ -69,7 +69,7 @@ function duplicateUserName(element){
     var username = $(element).val();
     $.ajax({
         type: "GET",
-        url: "/checkusername",
+        url: baseUrl+"/checkusername",
         data: {username:username},
         dataType: "json",
         success: function(res) {
