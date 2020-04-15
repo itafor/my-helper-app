@@ -7,7 +7,7 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'White Dashboard') }}</title>
+        <title>Lockdown Clerk</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('white') }}/img/apple-icon.png">
         <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png">
@@ -20,6 +20,13 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+        <!-- CSS Files -->
+        <script>
+            var baseUrl = '{{url("/")}}';
+        </script>
     </head>
     <body class="white-content {{ $class ?? '' }}">
         @auth()
@@ -51,7 +58,7 @@
                 </div>
             </div>
         @endauth
-        <div class="fixed-plugin">
+        <!-- <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
                 <a href="#" data-toggle="dropdown">
                 <i class="fa fa-cog fa-2x"> </i>
@@ -84,13 +91,24 @@
                 </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
-        <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
-        <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
-        <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+            <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
+            <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
+        <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+
+        <!--  Plugin for the Wizard -->
+        <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
+
+        <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+          
+            <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+            <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <!--  Google Maps Plugin    -->
         <!-- Place this tag in your head or just before your close body tag. -->
+        <script src="{{ asset('js/custom.js') }}"></script>
         {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
         <!-- Chart JS -->
         {{-- <script src="{{ asset('white') }}/js/plugins/chartjs.min.js"></script> --}}
