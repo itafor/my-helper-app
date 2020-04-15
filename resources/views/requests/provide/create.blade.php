@@ -249,9 +249,6 @@
                             </div>
                             <div class="tab-pane" id="address">
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="info-text"> Are you living in a nice area? </h4>
-                                    </div>
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                             <label>Country</label><br>
@@ -267,7 +264,7 @@
                                          <div class="form-group">
                                             <label>State</label><br>
                                              <select name="state_id" class="form-control" id="state_id">
-                                                <option value=""> Pick a Country </option>
+                                                <option value=""> Select a State </option>
                                             </select>
                                           </div>
                                     </div>
@@ -275,7 +272,7 @@
                                          <div class="form-group">
                                             <label>City</label><br>
                                              <select name="city_id" class="form-control" id="city_id" required>
-                                                <option value="">Select a state</option>
+                                                <option value="">Select a City</option>
                                             </select>
                                           </div>
                                     </div>
@@ -285,19 +282,6 @@
                                             <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
                                           </div>
                                     </div>
-                                    <!-- <div class="col-sm-3">
-                                         <div class="form-group">
-                                            <label>Street Number</label>
-                                            <input type="text" class="form-control" placeholder="242">
-                                          </div>
-                                    </div>
-                                    <div class="col-sm-5 col-sm-offset-1">
-                                         <div class="form-group">
-                                            <label>City</label>
-                                            <input type="text" class="form-control" placeholder="New York...">
-                                          </div>
-                                    </div> -->
-                                    
                                 </div>
                             </div>
                         </div>

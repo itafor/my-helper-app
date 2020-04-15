@@ -24,7 +24,7 @@ Route::get('/corporate/register', function() {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'MakeRequestController@index')->name('home');
 Auth::routes();
 Route::get('getstates/{id}', 'AjaxController@getState');
 Route::get('getcities/{id}', 'AjaxController@getCity');

@@ -32,13 +32,13 @@
                                     <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Request Type</th>
-                                                <th>Category</th>
-                                                <th>Username</th>
-                                                <th>Details</th>
-                                                <th>Type</th>
-                                                <th>City</th>
+                                                <th class="text-left">Time</th>
+                                                <th class="text-left">Request Type</th>
+                                                <th class="text-left">Category</th>
+                                                <th class="text-left">Display Name</th>
+                                                <th class="text-left">Details</th>
+                                                <th class="text-left">Type</th>
+                                                <th class="text-left">City</th>
                                             </tr>
                                         </thead>
                                         <tbody>

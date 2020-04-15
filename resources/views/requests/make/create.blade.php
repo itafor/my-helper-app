@@ -66,7 +66,7 @@
                     <input type="hidden" name="request_type" value="1">
                     	<div class="wizard-header">
                         	<h3>
-                        	   What do you need for the <b>Lock down</b>  <br>
+                        	   Let us get to know <b>you</b>  <br>
                         	   <!-- <small>This information will let us know more about you.</small> -->
                         	</h3>
                     	</div>
@@ -249,9 +249,7 @@
                             </div>
                             <div class="tab-pane" id="address">
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="info-text"> Are you living in a nice area? </h4>
-                                    </div>
+                                    
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                             <label>Country</label><br>
@@ -267,7 +265,7 @@
                                          <div class="form-group">
                                             <label>State</label><br>
                                              <select name="state_id" class="form-control" id="state_id">
-                                                <option value=""> Pick a Country </option>
+                                                <option value=""> Select a State </option>
                                             </select>
                                           </div>
                                     </div>
@@ -275,7 +273,7 @@
                                          <div class="form-group">
                                             <label>City</label><br>
                                              <select name="city_id" class="form-control" id="city_id" required>
-                                                <option value="">Select a state</option>
+                                                <option value="">Select a city</option>
                                             </select>
                                           </div>
                                     </div>
