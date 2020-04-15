@@ -58,7 +58,7 @@
                 </div>
             </div>
         @endauth
-        <div class="fixed-plugin">
+        <!-- <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
                 <a href="#" data-toggle="dropdown">
                 <i class="fa fa-cog fa-2x"> </i>
@@ -91,7 +91,7 @@
                 </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
         <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
             <script src="{{ asset('white') }}/js/core/popper.min.js"></script>

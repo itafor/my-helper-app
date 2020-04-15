@@ -54,8 +54,6 @@ function duplicateEmail(element){
                 alert('Email taken, please Login');
                 $('#finish').prop('disabled', true)
                 $('.loginLink').show();
-            }else{
-                $('#finish').prop('disabled', false)
             }
         },
         error: function (jqXHR, exception) {
@@ -76,8 +74,6 @@ function duplicateUserName(element){
             if(res.exists){
                 alert('Username taken, Choose another');
                 $('#finish').prop('disabled', true);
-            }else{
-                $('#finish').prop('disabled', false)
             }
         },
         error: function (jqXHR, exception) {

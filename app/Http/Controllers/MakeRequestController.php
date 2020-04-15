@@ -38,6 +38,20 @@ class MakeRequestController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function auth_create()
+    {
+        $categories = Category::all();
+        $countries = Country::all();
+        $states = State::all();
+        $cities = City::all();
+        return view('requests.make.auth_create', compact('categories', 'countries', 'states', 'cities'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

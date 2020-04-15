@@ -23,7 +23,7 @@
                     </a>
                 </li> -->
                 <li class="nav-item ">
-                    <a href="{{ route('register') }}" class="nav-link">
+                    <a href="{{ url('reg_type') }}" class="nav-link">
                         <i class="tim-icons icon-laptop"></i> {{ _('Register') }}
                     </a>
                 </li>

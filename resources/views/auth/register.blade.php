@@ -45,7 +45,7 @@
                                             <i class="tim-icons icon-email-85"></i>
                                         </div>
                                     </div>
-                                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Email') }}" value="{{ old('email') }}">
+                                    <input onblur="duplicateEmail(this)" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Email') }}" value="{{ old('email') }}">
                                     @include('alerts.feedback', ['field' => 'email'])
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                             <i class="tim-icons icon-email-85"></i>
                                         </div>
                                     </div>
-                                    <input type="text" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" placeholder="{{ _('Username') }}" value="{{ old('username') }}">
+                                    <input onblur="duplicateUserName(this)" type="text" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" placeholder="{{ _('Username') }}" value="{{ old('username') }}">
                                     @include('alerts.feedback', ['field' => 'username'])
                                 </div>
                             </div>
