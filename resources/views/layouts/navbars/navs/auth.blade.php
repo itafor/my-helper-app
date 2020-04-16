@@ -1,6 +1,6 @@
 <header id="topHeader" class="header auth-header">
      <div class="logo">
-        <a href="#" class="simple-text logo-normal">
+        <a href="/" class="simple-text logo-normal">
             <img src="{{ asset('white') }}/img/lc_logo.png" alt="Lockdown Clerk">
         </a>
     </div>

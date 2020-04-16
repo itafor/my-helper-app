@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width" />
 
 	<!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 
 	<!-- CSS Files -->
@@ -21,7 +22,7 @@
 	<link href="assets/css/demo.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="white-content">
 <script>
     var baseUrl = '{{url("/")}}';
 </script>
@@ -59,14 +60,14 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
 
-                <div class="card wizard-card" data-color="orange" id="wizardProfile">
+                <div class="card wizard-card" data-color="blue" id="wizardProfile">
                     <form action="{{ url('register') }}" method="POST">
                     @csrf
                 <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
                     <input type="hidden" name="request_type" value="1">
                     	<div class="wizard-header">
                         	<h3>
-                        	   Let us get to know <b>you</b>  <br>
+                        	   Let us get to know <b>you</b> <br>
                         	   <!-- <small>This information will let us know more about you.</small> -->
                         	</h3>
                     	</div>
@@ -85,13 +86,13 @@
                                 <div class="row">
                                     <h4 class="info-text"> Basic information</h4>
                                     <div class="col-sm-6">
-                                        <div class="form-group">
+                                        <div class="form-group radio-group">
                                             <label>Individual</label>
                                             <input name="user_type" type="radio" class="form-control" value="1">
                                         </div>
                                     </div>   
                                     <div class="col-sm-6">
-                                        <div class="form-group">
+                                        <div class="form-group radio-group">
                                             <label>Corporate
                                                 <input name="user_type" type="radio" class="form-control" value="2">
                                             </label>
@@ -307,7 +308,7 @@
                             </div>
 
                             <div class="pull-left">
-                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd btn-sm' name='previous' value='Previous' />
+                                <input type='button' class='btn btn-previous btn-fill btn-primary btn-wd btn-sm' name='previous' value='Previous' />
                             </div>
                             <div class="clearfix"></div>
                         </div>

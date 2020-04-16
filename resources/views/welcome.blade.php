@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="header py-7 py-lg-8">
-        <div class="container">
+        <div class="container-fluid">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
@@ -35,7 +35,7 @@
                                     <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
-                                                <th class="text-left">Time</th>
+                                                <th class="text-left time">Time</th>
                                                 <th class="text-left">Request Type</th>
                                                 <th class="text-left">Category</th>
                                                 <th class="text-left">Display Name</th>

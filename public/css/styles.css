@@ -33,12 +33,12 @@ header.header{
     background: #ffffff;
     box-shadow: 0 0 2px 1px rgba(0,0,0,0.083);
     -webkit-transform: translate3d(0,0,0);
-    transition:all ease-in .5s;
+    transition:all ease-in-out .5s;
 }
 header.sticky-header{
 	position:fixed !important;
 	top:0;
-	transition:all ease-in .5s;
+	transition:all ease-in-out .5s;
 }
 
 body { overflow-x: hidden; }
@@ -108,17 +108,26 @@ header.header .navbar.navbar-transparent {
 .card-body .col-md-6{
 	max-width:49% !important;
 }
-.card-register .card-header {
+.card-body.form-wrap .col-md-6{
+	max-width:50% !important;
+}
+.card-register .card-header, .card-login .card-header {
     padding: 35px 0 35px !important;
 }
-.card-register .card-header h2{
+.card-register .card-header h2, .card-login .card-header h2{
 	font-size: 22px;
 	font-weight:300 !important;
 	margin:0;
 	color:#5c6ad2 !important;
 }
+.login-page .card-login .input-group:last-child {
+    margin-bottom: 0 !important;
+}
 .pad{
 	display:inline-block;
+}
+.input-group, .form-group{
+	margin-bottom:15px;
 }
 
 .table-responsive {
@@ -151,6 +160,18 @@ table.dataTable.no-footer {
 	min-width:100% !important;
 }
 
+.white-content .sidebar{
+	margin-top:150px;
+}
+.sidebar, .off-canvas-sidebar{
+	background: linear-gradient(0deg, #ae40ee 0%, #3358f4 100%) !important;
+}
+.main-panel{
+	border-top:none !important;
+}
+
+
+
 /** ==== Media Queries ==== **/
 @media only screen and (max-width:991px){
 	header.header .navbar.navbar-transparent {
@@ -170,4 +191,21 @@ table.dataTable.no-footer {
 	    position: relative;
 	    margin-left: calc(100% - 18px);
 	}
+
+	.container, .container-fluid {
+    	min-width: calc(100% - 40px) !important;
+    	max-width: calc(100% - 40px) !important;
+    	padding:0 !important;
+	}	
+	.table-responsive {
+    overflow-x: scroll !important;
+	}
+	.table-responsive td{
+		min-width:100px !important;
+		padding:8px 7px !important;
+	}
+	.table-responsive td.time{
+		min-width:60px !important;
+	}
+	.content-header h2{display:block; text-align:center; margin:0 0 20px;}
 }
