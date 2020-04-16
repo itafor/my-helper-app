@@ -17,3 +17,157 @@
     cursor: pointer;
     background-color:lightgray;
 }
+
+
+/** ==== Custom CSS Added by Branch -Femi ==== **/
+.navbar-wrapper{
+	display:none !important;
+}
+
+header.header{
+	display: block;
+    position: relative;
+    padding: 15px 5%;
+    width: 100%;
+    z-index: 1090;
+    background: #ffffff;
+    box-shadow: 0 0 2px 1px rgba(0,0,0,0.083);
+    -webkit-transform: translate3d(0,0,0);
+    transition:all ease-in .5s;
+}
+header.sticky-header{
+	position:fixed !important;
+	top:0;
+	transition:all ease-in .5s;
+}
+
+body { overflow-x: hidden; }
+
+header.header .logo{
+	width: 200px;
+    height: 50px;
+    overflow: hidden;
+    float: none;
+    position: relative;
+    display: inline-block;
+    z-index:1060;	
+}
+header.header .logo a{
+	width:100%;
+	height:100%;
+	display:inline-block;
+	position: relative;
+}
+header.header .logo a img{
+	max-width: 100%;
+    width: auto;
+    height: 50px;
+}
+header.header .navbar.navbar-transparent {
+    background: transparent !important;
+    width: auto;
+    float: right;
+    display: inline-block;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+}
+.full-page>.content {
+    padding-bottom: 150px;
+    padding-top: 100px !important;
+}
+.content-wrapper{
+	padding:0;
+}
+.content-wrapper .content-header{
+	display: inline-block;
+    position: relative;
+    padding: 0 15px;
+    width: 100%;
+    margin: 0 0 25px;
+    text-align: left;
+}
+.content-wrapper .content-header h2{
+	font-weight:300;
+}
+.white-content .card:not(.card-white) {
+    box-shadow: 0 1px 10px 0 rgba(31, 31, 31, 0.105) !important;
+}
+.card-title{
+	font-size: 20px;t;
+    text-transform: uppercase;
+    font-weight: 400 !important;
+}
+.card .card-header {
+    padding: 15px 25px 0;
+    border-bottom: 1px solid #efefef !important;
+}
+.card .card-body {
+    padding: 40px 25px !important;
+}
+.card-body .col-md-6{
+	max-width:49% !important;
+}
+.card-register .card-header {
+    padding: 35px 0 35px !important;
+}
+.card-register .card-header h2{
+	font-size: 22px;
+	font-weight:300 !important;
+	margin:0;
+	color:#5c6ad2 !important;
+}
+.pad{
+	display:inline-block;
+}
+
+.table-responsive {
+    overflow: unset !important;
+}
+
+.dataTables_wrapper .dataTables_filter input, .dataTables_wrapper select {
+    margin-left: 0.5em;
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 3px 0px rgba(20,20,20,0.105);
+    line-height: 25px;
+    padding: 3px 10px;
+    outline:none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+	border-radius: 3px;
+    background: #3358f4 !important;
+    color: #FFFFFE !important;
+    border: 1px solid #3358f4 !important;
+    line-height: 18px;
+}
+table.dataTable.no-footer {
+    border-bottom: 2px solid #d3d4d9 !important;
+}
+
+.dropdown-menu{
+	min-width:100% !important;
+}
+
+/** ==== Media Queries ==== **/
+@media only screen and (max-width:991px){
+	header.header .navbar.navbar-transparent {
+	    padding:0;
+	    margin-top:15px;
+	}
+	header.header .navbar.bg-white {
+	    padding:0 25px;
+	    margin-top:30px;
+	}
+	header.header .navbar-nav{
+		float:right;
+	}
+
+	.navbar button.navbar-toggler[data-target="#navigation"] {
+	    padding-top: 0;
+	    position: relative;
+	    margin-left: calc(100% - 18px);
+	}
+}

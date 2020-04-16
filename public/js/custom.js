@@ -113,3 +113,15 @@ $(".clickable-row").click(function() {
 $(document).ready( function () {
     $('#requests').DataTable();
 } );
+
+
+//sticky header
+$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+
+    if (scroll >= 200) {
+        $("#topHeader").addClass("sticky-header");
+    } else {
+        $("#topHeader").removeClass("sticky-header");
+    }
+});
