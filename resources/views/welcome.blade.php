@@ -7,7 +7,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                            <h2 class="text-blue h2-heading">{{ __('What do u need right now for your lockdown?') }}</h2>
+                            <h2 class="text-blue h2-heading">{{ __('What do you need right now for your lockdown?') }}</h2>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Get Started
@@ -66,7 +66,7 @@
                                                     @if($ageInHrs < 24)
                                                         <td class="text-left">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
                                                     @else 
-                                                        <td class="text-left">{{ $age  }} {{ $age < 2 ? 'day': 'days' }}</td>
+                                                        <td class="text-left">{{ $age  }} {{ $age < 2 ? 'day': 'days' }} ago</td>
                                                     @endif
                                                     <td class="text-left">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
                                                     <td class="text-left">{{ $req->category->title }}</td>
