@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="header py-7 py-lg-8">
-        <div class="container">
+        <div class="container-fluid">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <h2 class="text-blue h2-heading">{{ __('What do u need right now for your lockdown?') }}</h2>
+                    <div class="col-md-12 content-wrapper">
+                        <div class="content-header">
+                            <h2 class="text-blue h2-heading">{{ __('What do u need right now for your lockdown?') }}</h2>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Select Request Type
@@ -17,9 +18,11 @@
                                     <a class="dropdown-item" href="{{ route('provide.request') }}">Provide Request</a>
                                 </div>
                             </div>
-                        <p class="text-lead text-light">
-                            {{ __('What do u need right now for your lockdown?') }}
-                        </p>
+                            <p class="text-lead text-light">
+                                {{ __('What do u need right now for your lockdown?') }}
+                            </p>
+                        </div>
+                        
                         
                         <div class="col-md-12">
                             <div class="card ">
@@ -32,7 +35,7 @@
                                     <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
-                                                <th class="text-left">Time</th>
+                                                <th class="text-left time">Time</th>
                                                 <th class="text-left">Request Type</th>
                                                 <th class="text-left">Category</th>
                                                 <th class="text-left">Display Name</th>

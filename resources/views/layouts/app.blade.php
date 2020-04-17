@@ -9,7 +9,7 @@
 
         <title>Lockdown Clerk</title>
         <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('white') }}/img/apple-icon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('white') }}/img/favicon.png">
         <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
