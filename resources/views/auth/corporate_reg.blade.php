@@ -7,15 +7,15 @@
             <div class="card card-register card-white">
                 <div class="card-header">
                     <!-- <img class="card-img" src="{{ asset('white') }}/img/card-primary.png" alt="Card image"> -->
-                    <h4 class="text-blue card-title">{{ __('Corporate') }}</h4>
+                    <h2 class="text-center">{{ __('Corporate Registration') }}</h2>
                 </div>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
                     <input type="hidden" name="user_type" value="2">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-sm-6">
+                    <div class="card-body form-wrap">
+                        <!-- row -->
+                        <div class="row form-group">
+                            <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('company_name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -26,7 +26,7 @@
                                     @include('alerts.feedback', ['field' => 'company_name'])
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('website') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -39,8 +39,9 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <!-- row -->
+                        <div class="row form-group">
+                            <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -63,7 +64,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+
+                        <!-- row -->
+                        <div class="row form-group">
                             <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -71,7 +74,7 @@
                                             <i class="tim-icons icon-email-85"></i>
                                         </div>
                                     </div>
-                                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Contact Person's Email" value="{{ old('email') }}">
+                                    <input type="email" onblur="duplicateEmail(this)" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Contact Person's Email" value="{{ old('email') }}">
                                     @include('alerts.feedback', ['field' => 'email'])
                                 </div>
                             </div>
@@ -79,7 +82,7 @@
                                 <div class="input-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="tim-icons icon-email-85"></i>
+                                            <i class="tim-icons icon-mobile"></i>
                                         </div>
                                     </div>
                                     <input type="tel" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="Contact Person's Phone No" value="{{ old('phone') }}">
@@ -101,7 +104,8 @@
                             </div>
                         </div> -->
 
-                        <div class="row">
+                        <!-- row -->
+                        <div class="row form-group">
                             <div class="col-md-3">
                                 <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="country_id">{{ __('Country') }}</label>
@@ -159,7 +163,8 @@
                             </div>
                         </div> 
 
-                        <div class="row">
+                        <!-- row -->
+                        <div class="row form-group">
                             <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">

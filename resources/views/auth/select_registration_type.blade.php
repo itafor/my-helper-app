@@ -2,24 +2,29 @@
 
 @section('content')
     <div class="row">
-        <div class="container">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-3">&nbsp;</div> 
+        <div class="col-md-6 reg-type">
             <div class="card card-register card-white ">
                 <div class="card-header">
-                    <h1 class="text-blue text-center">{{ _('Select Reg. Type') }}</h1>
+                    <!--<h2 class="text-blue text-center">{{ _('Select Reg. Type') }}</h2>-->
+                    <h2 class="text-center">Select <br />Registration Type </h2>
                 </div>
-                <a href="{{ url('/register') }}" class="pad">
-                    <button type="submit" class="btn btn-block btn-round btn-lg">{{ _('Individual') }}</button>
-                </a>
-                <a href="{{ url('/corporate/register') }}"class="pad">
-                    <button type="submit" class="btn btn-block btn-round btn-lg">{{ _('Corporate') }}</button>
-                </a>
-              
+                <div class="card-body">
+                    <div class="col-md-6 pad text-center">
+                        <a href="{{ url('/register') }}" class="pad">
+                            <button type="submit" class="btn btn-block btn-round btn-md">{{ _('Individual') }}</button>
+                        </a>
+                    </div>
+                    
+                    <div class="col-md-6 pad text-center">
+                        <a href="{{ url('/corporate/register') }}"class="pad">
+                        <button type="submit" class="btn btn-block btn-round btn-md">{{ _('Corporate') }}</button>
+                    </a>
+                    </div>
+                    
+                </div>
             </div>
         </div>
-        <!-- <div class="col-md-6 mr-auto">
-            
-        </div> -->
-        </div>
+        <div class="col-md-3">&nbsp;</div> 
     </div>
 @endsection

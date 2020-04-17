@@ -12,7 +12,7 @@
  
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
- 
+body {font-family:Poppins, sans-serif;}
 a {
   color: #2CA8FF;
 }
@@ -51,10 +51,11 @@ input[type="button"]:focus {
   min-height: 100vh;
   background-position: center center;
   background-size: cover;
+  background-color:#f5f6fa;
 }
 
 .wizard-container {
-  padding-top: 100px;
+  padding: 100px 0;
   z-index: 3;
 }
 
@@ -193,12 +194,20 @@ h1 .subtitle {
   width: 100%;
 }
 
+.wizard-header{
+  padding:15px;
+}
+.wizard-header h3{
+  font-size:24px; 
+  font-weight: 400 !important;
+  color: #3472f7;
+}
 .wizard-card {
   min-height: 410px;
   background-color: #FFFFFF;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 10px 0;
+  padding: 15px 15px 25px;
 }
 .wizard-card .picture-container {
   position: relative;
@@ -418,6 +427,17 @@ h1 .subtitle {
   right: 25px;
   top: 13px;
   vertical-align: middle;
+}
+.radio-group input[type="radio"]{
+   height:20px;
+   display: inline-block;
+    width: 30px;
+    float: left;
+}
+.radio-group label{
+  display:inline-block;
+  line-height: 27px;
+    margin-left: 3px;
 }
 .has-success .form-control, .has-error .form-control, .has-success .form-control:focus, .has-error .form-control:focus {
   border-color: #E3E3E3;
