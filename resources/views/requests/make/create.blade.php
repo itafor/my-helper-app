@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width" />
 
 	<!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200;300;400;600;700&display=swap" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 
 	<!-- CSS Files -->
@@ -188,7 +188,7 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="assword...">
+                                                <input name="password" type="password" class="form-control" placeholder="Password...">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
@@ -302,13 +302,13 @@
                         </div>
                         <div class="wizard-footer height-wizard">
                             <div class="pull-right">
-                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm' name='next' value='Next' />
-                                <input type='submit' id="finish" class='btn btn-finish btn-fill btn-warning btn-wd btn-sm'/>
+                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm btn-custom' name='next' value='Next' />
+                                <input type='submit' id="finish" class='btn btn-finish btn-fill btn-warning btn-wd btn-sm btn-custom'/>
 
                             </div>
 
                             <div class="pull-left">
-                                <input type='button' class='btn btn-previous btn-fill btn-primary btn-wd btn-sm' name='previous' value='Previous' />
+                                <input type='button' class='btn btn-previous btn-fill btn-primary btn-wd btn-sm btn-custom' name='previous' value='Previous' />
                             </div>
                             <div class="clearfix"></div>
                         </div>

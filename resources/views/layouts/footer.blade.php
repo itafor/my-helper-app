@@ -1,31 +1,16 @@
 <footer class="footer">
-    <!-- <div class="container-fluid">
-        <ul class="nav">
-            <li class="nav-item">
-                <a href="https://creative-tim.com" target="blank" class="nav-link">
-                    {{ _('Creative Tim') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="https://updivision.com" target="blank" class="nav-link">
-                    {{ _('Updivision') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    {{ _('About Us') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    {{ _('Blog') }}
-                </a>
-            </li>
-        </ul>
-        <div class="copyright">
-            &copy; {{ now()->year }} {{ _('made with') }} <i class="tim-icons icon-heart-2"></i> {{ _('by') }}
-            <a href="https://creative-tim.com" target="_blank">{{ _('Creative Tim') }}</a> &amp;
-            <a href="https://updivision.com" target="_blank">{{ _('Updivision') }}</a> {{ _('for a better web') }}.
+    <div class="container-fluid">
+        <div class="copyright copyright-first">
+            Copyright &copy; {{ now()->year }} {{ _( 'All rights reserved.') }}            
         </div>
-    </div> -->
+        <div class="copyright">
+            {{ _('This is a free service provided by ' )}}
+            <a href="https://sterling.ng" target="_blank">
+                {{ _( 'Sterling Bank PLC' ) }}<img src="{{ asset('white') }}/img/brand/sterling_bank.svg" alt="Sterling Bank">
+            </a> {{ _( ' and ' ) }}
+            <a href="https://digitalwebglobal.com" target="_blank">
+                {{ _( 'Digitalweb Application Development Limited' ) }}<img src="{{ asset('white') }}/img/brand/dw_logo.png" alt="Digitalweb AD Limited">
+            </a>.
+        </div>
+    </div> 
 </footer>
