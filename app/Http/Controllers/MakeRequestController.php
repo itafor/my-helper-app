@@ -8,6 +8,7 @@ use App\Category;
 use App\Country;
 use App\State;
 use App\City;
+use Stevebauman\Location\Facades\Location;
 use Session;
 
 class MakeRequestController extends Controller
@@ -20,7 +21,6 @@ class MakeRequestController extends Controller
     public function index(Request $request)
     {
         $ip = $request->ip();
-        dd($ip);
         $allRequests = LockdownRequest::orderBy('created_at')->get();
         return view('requests.make.index', compact('allRequests'));
     }
@@ -34,9 +34,16 @@ class MakeRequestController extends Controller
     {
         $categories = Category::all();
         $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
-        return view('requests.make.create', compact('categories', 'countries', 'states', 'cities'));
+
+        // get location of user
+        $loc = Location::get('105.112.24.184');
+        $location = $loc->countryCode;
+
+        // default the country, states and city to these values
+        $getCountry = Country::where('sortname', $location)->first();
+        $states = State::where('country_id', $getCountry->id)->get();
+        // $cities = City::where('state_id', $states[0]->id)->get();
+        return view('requests.make.create', compact('categories', 'countries', 'states', 'location'));
     }
 
     /**
@@ -48,9 +55,16 @@ class MakeRequestController extends Controller
     {
         $categories = Category::all();
         $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
-        return view('requests.make.auth_create', compact('categories', 'countries', 'states', 'cities'));
+
+        // get location of user
+        $loc = Location::get('105.112.24.184');
+        $location = $loc->countryCode;
+
+        // default the country, states and city to these values
+        $getCountry = Country::where('sortname', $location)->first();
+        $states = State::where('country_id', $getCountry->id)->get();
+        // $cities = City::where('state_id', $states[0]->id)->get();
+        return view('requests.make.auth_create', compact('categories', 'countries', 'states','location'));
     }
 
     /**
