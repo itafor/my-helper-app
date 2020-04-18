@@ -35,6 +35,7 @@
                                     <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
+                                                <th class="text-left id hidden_all">SN</th>
                                                 <th class="text-left time">Time</th>
                                                 <th class="text-left req_type">Request Type</th>
                                                 <th class="text-left category">Category</th>
@@ -72,7 +73,7 @@
                                                     @else
                                                         <td class="text-left time_c">{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</td>
                                                     @endif
-                                                    
+
                                                     <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
                                                     <td class="text-left category_c">{{ $req->category->title }}</td>
                                                     <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
