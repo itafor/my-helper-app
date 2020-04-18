@@ -256,7 +256,7 @@
                                              <select name="country_id" class="form-control" id="country_id">
                                                 <option value=""> Please Select a Country </option>
                                                 @foreach($countries as $country)
-                                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                                    <option {{ $country->sortname == $location ? "selected" : "" }} value="{{ $country->id }}">{{ $country->country_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -266,6 +266,9 @@
                                             <label>State</label><br>
                                              <select name="state_id" class="form-control" id="state_id">
                                                 <option value=""> Select a State </option>
+                                                @foreach($states as $state)
+                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                @endforeach
                                             </select>
                                           </div>
                                     </div>

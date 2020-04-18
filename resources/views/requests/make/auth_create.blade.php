@@ -56,7 +56,7 @@
                                                 <select name="country_id" id="country_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
                                                     <option value="">Select a country</option>
                                                     @foreach(getCountries() as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                                        <option {{ $country->sortname == $location ? "selected" : "" }} value="{{ $country->id }}">{{ $country->country_name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('country'))
@@ -71,6 +71,9 @@
                                                 <strong><label class="form-control-label" for="state_id">{{ __('State') }}</label></strong>
                                                 <select name="state_id" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
                                                     <option value="">Select State</option>
+                                                    @foreach($states as $state)
+                                                        <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @if ($errors->has('state'))
                                                     <span class="invalid-feedback" role="alert">
@@ -87,6 +90,7 @@
                                                 <strong><label class="form-control-label" for="city_id">{{ __('City') }}</label></strong>
                                                 <select name="city_id" id="city_id" class="form-control form-control-alternative{{ $errors->has('city') ? ' is-invalid' : '' }}" placeholder="{{ __('City') }}" value="{{ old('street') }}" required >
                                                     <option value="">Select City</option>
+                                                    
                                                 </select>
                                                 @if ($errors->has('city'))
                                                     <span class="invalid-feedback" role="alert">
