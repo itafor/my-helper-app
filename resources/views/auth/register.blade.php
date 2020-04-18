@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         
-        <div class="col-md-12">
+        <div class="col-md-8 offset-md-2">
             <div class="card card-register card-white">
                 <div class="card-header">
                     <!-- <img class="card-img" src="{{ asset('white') }}/img/card-primary.png" alt="Card image"> -->
@@ -165,8 +165,8 @@
                         </div>
                         
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ _('Submit') }}</button>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-round btn-lg btn-lg-pd btn-custom">{{ _('Submit') }}</button>
                     </div>
                 </form>
             </div>
