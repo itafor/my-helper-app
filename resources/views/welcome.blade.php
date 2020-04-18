@@ -68,11 +68,12 @@
                                                         $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
                                                         @endphp
                                                    
-                                                   @if($ageInMins < 60)
+                                                    @if($ageInMins < 60)
                                                         <td class="text-left time_c">{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</td>
 
-                                                    @elseif(($ageInHrs > 1 ) && ( $ageInHrs < 24 ))
-                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hour' : ' hours'}} ago</td>
+                                                    @elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
+                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</td>
+                                                        
                                                     @else
                                                         <td class="text-left time_c">{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</td>
                                                     @endif
