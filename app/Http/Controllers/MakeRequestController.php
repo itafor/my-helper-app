@@ -30,13 +30,17 @@ class MakeRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $categories = Category::all();
         $countries = Country::all();
-
+        $ip = $request->ip();
+        if($ip == '127.0.0.1'){
+            $ip = '105.112.24.184';
+        }
+        
         // get location of user
-        $loc = Location::get('105.112.24.184');
+        $loc = Location::get($ip);
         $location = $loc->countryCode;
 
         // default the country, states and city to these values
@@ -51,13 +55,17 @@ class MakeRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function auth_create()
+    public function auth_create(Request $request)
     {
         $categories = Category::all();
         $countries = Country::all();
-
+        $ip = $request->ip();
+        if($ip == '127.0.0.1'){
+            $ip = '105.112.24.184';
+        }
+        
         // get location of user
-        $loc = Location::get('105.112.24.184');
+        $loc = Location::get($ip);
         $location = $loc->countryCode;
 
         // default the country, states and city to these values
