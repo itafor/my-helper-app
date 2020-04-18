@@ -165,7 +165,7 @@
                         </div>
                         
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer text-center mb-20">
                         <button type="submit" class="btn btn-round btn-lg btn-lg-pd btn-custom">{{ _('Submit') }}</button>
                     </div>
                 </form>

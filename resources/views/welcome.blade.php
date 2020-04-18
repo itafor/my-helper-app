@@ -54,6 +54,7 @@
                                                     @else
                                                         data-href="{{ route('view.request', [$req->id]) }}">
                                                     @endif
+                                                <td class='text-left id_c hidden_all'>{{ $req->id }}</td>
                                                     @php
                                                         $today = \Carbon\Carbon::today();
                                                         $time = \Carbon\Carbon::now();
@@ -62,18 +63,27 @@
                                                         $ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
                                                         $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
                                                         @endphp
-                                                    
-                                                    @if($ageInHrs < 24)
-                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
-                                                    @else 
-                                                        <td class="text-left time_c">{{ $age  }} {{ $age < 2 ? 'day': 'days' }} ago</td>
-                                                    @endif
+                                                   
+                                                   @if($ageInMins < 60)
+                                                        <td class="text-left time_c">{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</td>
 
+                                                    @elseif(($ageInHrs > 1 ) && ( $ageInHrs < 24 ))
+                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hour' : ' hours'}} ago</td>
+                                                    @else
+                                                        <td class="text-left time_c">{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</td>
+                                                    @endif
+                                                    
                                                     <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
                                                     <td class="text-left category_c">{{ $req->category->title }}</td>
                                                     <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
                                                     <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
-                                                    <td class="text-left type_c">{{ $req->type }}</td>
+
+                                                    @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
+                                                    <td class="text-left type_c_paid">{{ $req->type }}</td>
+                                                    @else
+                                                    <td class="text-left type_c_free">{{ $req->type }}</td>
+                                                    @endif
+
                                                     <td class="text-left city_c">{{ $req->city->name }}</td>
                                                 </tr>
                                             

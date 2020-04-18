@@ -188,7 +188,7 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="assword...">
+                                                <input name="password" type="password" class="form-control" placeholder="Password...">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     

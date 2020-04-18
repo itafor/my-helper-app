@@ -36,6 +36,16 @@ h1,h2,h3,h4,h5,h6{
 
 
 /** ==== Custom CSS Added by Branch -Femi ==== **/
+.mb-10{margin-bottom:10px !important;} .pb-10{padding-bottom:10px !important;}
+.mb-20{margin-bottom:20px !important;} .pb-20{padding-bottom:20px !important;}
+.mb-30{margin-bottom:30px !important;} .pb-30{padding-bottom:30px !important;}
+.mb-40{margin-bottom:40px !important;} .pb-40{padding-bottom:40px !important;}
+.mb-50{margin-bottom:50px !important;} .pb-50{padding-bottom:50px !important;}
+.mb-60{margin-bottom:60px !important;} .pb-60{padding-bottom:60px !important;}
+.mb-70{margin-bottom:70px !important;} .pb-70{padding-bottom:70px !important;}
+.mb-80{margin-bottom:80px !important;} .pb-80{padding-bottom:80px !important;}
+.mb-90{margin-bottom:90px !important;} .pb-90{padding-bottom:90px !important;}
+.mb-100{margin-bottom:100px !important;} .pb-100{padding-bottom:100px !important;}
 .navbar-wrapper{
 	display:none !important;
 }
@@ -189,6 +199,7 @@ table.dataTable thead th, table.dataTable thead td{
 .white-content .table>tbody>tr>td.type_c_paid{
 	color:var(--blue) !important;
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
@@ -282,6 +293,9 @@ table.dataTable.no-footer {
 .copyright-first{
 	float: left !important;
 }
+.hidden_all{
+	display:none !important;
+}
 
 
 
@@ -332,5 +346,7 @@ table.dataTable.no-footer {
 		padding:16px 30px 70px 30px;
 	}
 
-
+	table.dataTable thead th.req_type, table.dataTable thead th.name{
+		min-width:120px;
+	}
 }
