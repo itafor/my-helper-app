@@ -63,6 +63,8 @@ class ProvideRequestController extends Controller
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
 
+
+
         $lockdownRequest->user_id = $userId;
         $lockdownRequest->request_type = $request->request_type;
         $lockdownRequest->category_id = $request->category_id;
@@ -75,7 +77,7 @@ class ProvideRequestController extends Controller
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
         
         $lockdownRequest->save();
-        Session::flash('status', 'Requests has been successfully registered');
+        Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
     }
 

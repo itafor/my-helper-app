@@ -17,8 +17,10 @@ class MakeRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $ip = $request->ip();
+        dd($ip);
         $allRequests = LockdownRequest::orderBy('created_at')->get();
         return view('requests.make.index', compact('allRequests'));
     }
@@ -74,7 +76,7 @@ class MakeRequestController extends Controller
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
         
         $lockdownRequest->save();
-        Session::flash('status', 'Requests has been successfully registered');
+        Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
 
     }
