@@ -115,8 +115,8 @@
                                                 <strong><label class="form-control-label" for="type">{{ __('Type') }}</label></strong>
                                                 <select name="type" id="type_id" class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" value="{{ old('type') }}" >
                                                     <option value="">Select</option>
-                                                    <option value="free">Free</option>
-                                                    <option value="paid">Paid</option>
+                                                    <option value="Free">Free</option>
+                                                    <option value="Paid">Paid</option>
                                                 </select>
                                                 @if ($errors->has('type'))
                                                     <span class="invalid-feedback" role="alert">
