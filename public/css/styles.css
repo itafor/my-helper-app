@@ -1,3 +1,19 @@
+:root{
+	--c_blue: #2124d6;
+	--c_red: #D62421;
+	--c_green: #24D621;
+	--c_white: #ffffff;
+}
+body{
+	font-family:'Mukta Vaani',sans-serif;
+}
+button, input, optgroup, select, textarea{
+	font-family:'Mukta Vaani',sans-serif;	
+}
+h1,h2,h3,h4,h5,h6{
+	font-weight:600;
+}
+
 .text-blue {
     color: #2124d6 !important;
     font-weight: bold;
@@ -20,6 +36,16 @@
 
 
 /** ==== Custom CSS Added by Branch -Femi ==== **/
+.mb-10{margin-bottom:10px !important;} .pb-10{padding-bottom:10px !important;}
+.mb-20{margin-bottom:20px !important;} .pb-20{padding-bottom:20px !important;}
+.mb-30{margin-bottom:30px !important;} .pb-30{padding-bottom:30px !important;}
+.mb-40{margin-bottom:40px !important;} .pb-40{padding-bottom:40px !important;}
+.mb-50{margin-bottom:50px !important;} .pb-50{padding-bottom:50px !important;}
+.mb-60{margin-bottom:60px !important;} .pb-60{padding-bottom:60px !important;}
+.mb-70{margin-bottom:70px !important;} .pb-70{padding-bottom:70px !important;}
+.mb-80{margin-bottom:80px !important;} .pb-80{padding-bottom:80px !important;}
+.mb-90{margin-bottom:90px !important;} .pb-90{padding-bottom:90px !important;}
+.mb-100{margin-bottom:100px !important;} .pb-100{padding-bottom:100px !important;}
 .navbar-wrapper{
 	display:none !important;
 }
@@ -88,7 +114,8 @@ header.header .navbar.navbar-transparent {
     text-align: left;
 }
 .content-wrapper .content-header h2{
-	font-weight:300;
+	font-weight:500;
+	font-size:36px;
 }
 .white-content .card:not(.card-white) {
     box-shadow: 0 1px 10px 0 rgba(31, 31, 31, 0.105) !important;
@@ -101,6 +128,12 @@ header.header .navbar.navbar-transparent {
 .card .card-header {
     padding: 15px 25px 0;
     border-bottom: 1px solid #efefef !important;
+    background: rgb(102,95,226);
+    color: #ffffff !important;
+    background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%) !important;
+}
+.card .card-header h2{
+	color:#ffffff !important;
 }
 .card .card-body {
     padding: 40px 25px !important;
@@ -118,13 +151,22 @@ header.header .navbar.navbar-transparent {
 	font-size: 22px;
 	font-weight:300 !important;
 	margin:0;
-	color:#5c6ad2 !important;
 }
 .login-page .card-login .input-group:last-child {
     margin-bottom: 0 !important;
 }
 .pad{
 	display:inline-block;
+}
+.btn-lg-pd{
+	padding-left:50px !important;
+	padding-right:50px !important;
+}
+.form-control:focus, .form-control:active{
+	border-color:var(--blue) !important;
+}
+.login-page .link {
+    font-size: 12px;
 }
 .input-group, .form-group{
 	margin-bottom:15px;
@@ -142,15 +184,49 @@ header.header .navbar.navbar-transparent {
     padding: 3px 10px;
     outline:none;
 }
+table.dataTable thead th, table.dataTable thead td{
+	font-size:15px;
+}
+.white-content .table>tbody>tr>td{
+	font-size:15px;
+}
+.white-content .table>tbody>tr>td.time_c{
+	color:var(--blue);
+}
+.white-content .table>tbody>tr>td.type_c_free{
+	color:var(--green) !important;
+}
+.white-content .table>tbody>tr>td.type_c_paid{
+	color:var(--blue) !important;
+}
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
 	border-radius: 3px;
-    background: #3358f4 !important;
-    color: #FFFFFE !important;
     border: 1px solid #3358f4 !important;
     line-height: 18px;
+    background: rgb(102,95,226);
+    color: #ffffff !important;
+    background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%) !important;
+}
+.btn-custom{
+	background: rgb(102,95,226);
+    color: #ffffff !important;
+    background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%) !important;
+}
+.btn-custom:hover{
+	background: rgb(233,111,109);
+	background: linear-gradient(180deg, rgba(233,111,109,1) 0%, rgba(214,36,33,1) 35%, rgba(233,111,109,1) 100%) !important;
+}
+.btn-header, .btn-red{
+	background:rgba(214,36,33,1) !important;
+	color: var(--c_white) !important;
+	margin-bottom:10px !important;
+}
+.btn-header:hover, .btn-red:hover{
+	background:#ffffff !important;
+	color:var(--c_blue) !important;
 }
 table.dataTable.no-footer {
     border-bottom: 2px solid #d3d4d9 !important;
@@ -169,6 +245,57 @@ table.dataTable.no-footer {
 .main-panel{
 	border-top:none !important;
 }
+.list-header h3{
+	margin:0 0 15px !important;
+}
+.white-content .card:not(.card-white) .card-header {
+    background: rgb(102,95,226);
+    color: #ffffff;
+    background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%);
+}
+.white-content .card:not(.card-white) .card-header .card-title, .white-content .card:not(.card-white) .card-body .card-title {
+    color: #ffffff !important;
+}
+
+.main-panel>.content {
+    padding: 16px 30px 30px 280px;
+    min-height: calc(100vh - 70px);
+}
+.text-white{
+	color: var(--c_white);
+}
+.card-body .item-row{
+	border-bottom: 1px solid #dfdfdf;
+    line-height: 38px;
+    margin: 0;
+    transition: all ease-in-out .3s
+}
+.card-body .item-row:hover{
+	background:#efefef;
+	transition: all ease-in-out .3s
+}
+.card-body .item-row h5{
+	margin:0;
+}
+.copyright a{
+	color:var(--c_blue);
+}
+.copyright a:hover{
+	color:var(--c_red);
+}
+.copyright a img{
+	height:30px; 
+	display: none;
+}
+.footer {
+    padding: 24px 0 24px 15px;
+}
+.copyright-first{
+	float: left !important;
+}
+.hidden_all{
+	display:none !important;
+}
 
 
 
@@ -185,7 +312,10 @@ table.dataTable.no-footer {
 	header.header .navbar-nav{
 		float:right;
 	}
-
+	.card-body .item-row > div{
+		display: inline-block;
+		width: 50%;
+	}
 	.navbar button.navbar-toggler[data-target="#navigation"] {
 	    padding-top: 0;
 	    position: relative;
@@ -207,5 +337,16 @@ table.dataTable.no-footer {
 	.table-responsive td.time{
 		min-width:60px !important;
 	}
-	.content-header h2{display:block; text-align:center; margin:0 0 20px;}
+	.content-header h2{
+		display:block; 
+		text-align:center; 
+		margin:0 0 20px;
+	}
+	.main-panel>.content{
+		padding:16px 30px 70px 30px;
+	}
+
+	table.dataTable thead th.req_type, table.dataTable thead th.name{
+		min-width:120px;
+	}
 }

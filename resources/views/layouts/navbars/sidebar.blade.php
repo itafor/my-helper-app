@@ -1,8 +1,8 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="#" class="simple-text logo-mini">{{ _('LC') }}</a>
-            <a href="#" class="simple-text logo-normal">{{ _('Lockdown Clerk') }}</a>
+            <!--<a href="#" class="simple-text logo-mini">{{ _('LC') }}</a>-->
+            <a href="#" class="simple-text logo-normal">{{ _('Dashboard') }}</a>
         </div>
         <ul class="nav">
             <li @if ($pageSlug == 'Requests') class="active " @endif>

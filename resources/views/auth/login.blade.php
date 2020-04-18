@@ -8,7 +8,7 @@
             <div class="card card-login card-white">
                 <div class="card-header">
                     <!-- <img src="{{ asset('white') }}/img/card-primary.png" alt=""> -->
-                    <h2 class="text-center">{{ _('Log in') }}</h2>
+                    <h2 class="text-center">{{ _('Sign In') }}</h2>
                 </div>
                 <div class="card-body">
                     <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">{{ _('Submit') }}</button>
+                    <button type="submit" href="" class="btn btn-lg btn-block mb-3 btn-custom">{{ _('Submit') }}</button>
                     <div class="pull-left">
                         <h6>
                             <a href="{{ route('selectReg') }}" class="link footer-link">{{ _('Create Account') }}</a>
