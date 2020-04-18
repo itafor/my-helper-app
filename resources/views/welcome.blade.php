@@ -46,7 +46,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($allRequests as $req)
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach( $allRequests as $req )
                                             
                                         <tr class='clickable-row' 
                                                     @if($req->request_type == 1)
@@ -55,7 +58,7 @@
                                                     @else
                                                         data-href="{{ route('view.request', [$req->id]) }}">
                                                     @endif
-                                                <td class='text-left id_c hidden_all'>{{ $req->id }}</td>
+                                                <td class='text-left id_c hidden_all'>{{ $i }}</td>
                                                     @php
                                                         $today = \Carbon\Carbon::today();
                                                         $time = \Carbon\Carbon::now();
@@ -87,7 +90,9 @@
 
                                                     <td class="text-left city_c">{{ $req->city->name }}</td>
                                                 </tr>
-                                            
+                                             @php
+                                            $i++;
+                                            @endphp
                                         @endforeach
                                             
                                         </tbody>
