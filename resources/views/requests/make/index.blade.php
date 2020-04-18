@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="header py-7 py-lg-8">
-        <div class="container">
+        <div class="container-fluid">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <h2 class="text-blue h2-heading">{{ __('What do you need right now for your lockdown?') }}</h2>
+                    <div class="col-md-12 content-wrapper">
+                        <div class="content-header">
+                            <h2 class="text-blue h2-heading">{{ __('What do you need right now for your lockdown?') }}</h2>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Get Started
@@ -20,7 +21,7 @@
                         <!-- <p class="text-lead text-light">
                             {{ __('What do u need right now for your lockdown?') }}
                         </p> -->
-                        
+                        </div>
                         <div class="col-md-12">
                             <div class="card ">
                                 <div class="card-header">
@@ -32,13 +33,13 @@
                                     <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
-                                                <th class="text-left">Date</th>
-                                                <th class="text-left">Request Type</th>
-                                                <th class="text-left">Category</th>
-                                                <th class="text-left">Display Name</th>
-                                                <th class="text-left">Details</th>
-                                                <th class="text-left">Type</th>
-                                                <th class="text-left">City</th>
+                                                <th class="text-left time">Time</th>
+                                                <th class="text-left req_type">Request Type</th>
+                                                <th class="text-left category">Category</th>
+                                                <th class="text-left name">Display Name</th>
+                                                <th class="text-left details">Details</th>
+                                                <th class="text-left type">Type</th>
+                                                <th class="text-left city">City</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,17 +61,17 @@
                                                         @endphp
                                                    
                                                     @if($ageInHrs < 24)
-                                                        <td class="text-left">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
+                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
                                                     @else 
-                                                        <td class="text-left">{{ $age  }} {{ $age < 2 ? 'day': 'days' }} ago</td>
+                                                        <td class="text-left time_c">{{ $age  }} {{ $age < 2 ? 'day': 'days' }} ago</td>
                                                     @endif
 
-                                                    <td class="text-left">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
-                                                    <td class="text-left">{{ $req->category->title }}</td>
-                                                    <td class="text-left">{{ $req->user->username }} {{ $req->user->last_name }}</td>
-                                                    <td class="text-left">{{ Str::limit($req->description, 30) }}</td>
-                                                    <td class="text-left">{{ $req->type }}</td>
-                                                    <td class="text-left">{{ $req->city->name }}</td>
+                                                    <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
+                                                    <td class="text-left category_c">{{ $req->category->title }}</td>
+                                                    <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
+                                                    <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
+                                                    <td class="text-left type_c">{{ $req->type }}</td>
+                                                    <td class="text-left city_c">{{ $req->city->name }}</td>
                                                 </tr>
                                             
                                         @endforeach

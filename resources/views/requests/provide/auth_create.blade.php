@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-xl-12 order-xl-1">
                 <div class="card">
-                    <div class="card-header bg-white border-0">
+                    <div class="card-header list-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('What do you want to provide for this lockdown?') }}</h3>
+                                <h3 class="text-white">{{ __('What do you want to provide for this lockdown?') }}</h3>
                             </div>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                         <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off">
                             @csrf
                             <input type="hidden" name="request_type" value="2">
-                            <h6 class="heading-small text-muted mb-4">{{ __('Provide Request') }}</h6>
+                            <h4 class="heading-small text-muted mb-4">{{ __('Provide Request') }}</h4>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-md-8">
@@ -144,7 +144,7 @@
                             
                                 <div style="clear:both"></div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-custom mt-4">{{ __('Save') }}</button>
                                 </div>
                             </div>
                         </form>

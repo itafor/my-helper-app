@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ _('Edit Profile') }}</h5>
+                    <h5 class="title text-white">{{ _('Edit Profile') }}</h5>
                 </div>
                 <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
                     <div class="card-body">
@@ -27,14 +27,14 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ _('Save') }}</button>
+                        <button type="submit" class="btn btn-fill btn-red">{{ _('Save') }}</button>
                     </div>
                 </form>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ _('Password') }}</h5>
+                    <h5 class="title text-white">{{ _('Password') }}</h5>
                 </div>
                 <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
                     <div class="card-body">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ _('Change password') }}</button>
+                        <button type="submit" class="btn btn-fill btn-red">{{ _('Change password') }}</button>
                     </div>
                 </form>
             </div>

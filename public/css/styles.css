@@ -2,6 +2,7 @@
 	--c_blue: #2124d6;
 	--c_red: #D62421;
 	--c_green: #24D621;
+	--c_white: #ffffff;
 }
 body{
 	font-family:'Mukta Vaani',sans-serif;
@@ -104,7 +105,7 @@ header.header .navbar.navbar-transparent {
 }
 .content-wrapper .content-header h2{
 	font-weight:500;
-	font-size:40px;
+	font-size:36px;
 }
 .white-content .card:not(.card-white) {
     box-shadow: 0 1px 10px 0 rgba(31, 31, 31, 0.105) !important;
@@ -207,6 +208,15 @@ table.dataTable thead th, table.dataTable thead td{
 	background: rgb(233,111,109);
 	background: linear-gradient(180deg, rgba(233,111,109,1) 0%, rgba(214,36,33,1) 35%, rgba(233,111,109,1) 100%) !important;
 }
+.btn-header, .btn-red{
+	background:rgba(214,36,33,1) !important;
+	color: var(--c_white) !important;
+	margin-bottom:10px !important;
+}
+.btn-header:hover, .btn-red:hover{
+	background:#ffffff !important;
+	color:var(--c_blue) !important;
+}
 table.dataTable.no-footer {
     border-bottom: 2px solid #d3d4d9 !important;
 }
@@ -224,6 +234,9 @@ table.dataTable.no-footer {
 .main-panel{
 	border-top:none !important;
 }
+.list-header h3{
+	margin:0 0 15px !important;
+}
 .white-content .card:not(.card-white) .card-header {
     background: rgb(102,95,226);
     color: #ffffff;
@@ -231,6 +244,43 @@ table.dataTable.no-footer {
 }
 .white-content .card:not(.card-white) .card-header .card-title, .white-content .card:not(.card-white) .card-body .card-title {
     color: #ffffff !important;
+}
+
+.main-panel>.content {
+    padding: 16px 30px 30px 280px;
+    min-height: calc(100vh - 70px);
+}
+.text-white{
+	color: var(--c_white);
+}
+.card-body .item-row{
+	border-bottom: 1px solid #dfdfdf;
+    line-height: 38px;
+    margin: 0;
+    transition: all ease-in-out .3s
+}
+.card-body .item-row:hover{
+	background:#efefef;
+	transition: all ease-in-out .3s
+}
+.card-body .item-row h5{
+	margin:0;
+}
+.copyright a{
+	color:var(--c_blue);
+}
+.copyright a:hover{
+	color:var(--c_red);
+}
+.copyright a img{
+	height:30px; 
+	display: none;
+}
+.footer {
+    padding: 24px 0 24px 15px;
+}
+.copyright-first{
+	float: left !important;
 }
 
 
@@ -248,7 +298,10 @@ table.dataTable.no-footer {
 	header.header .navbar-nav{
 		float:right;
 	}
-
+	.card-body .item-row > div{
+		display: inline-block;
+		width: 50%;
+	}
 	.navbar button.navbar-toggler[data-target="#navigation"] {
 	    padding-top: 0;
 	    position: relative;
@@ -270,5 +323,14 @@ table.dataTable.no-footer {
 	.table-responsive td.time{
 		min-width:60px !important;
 	}
-	.content-header h2{display:block; text-align:center; margin:0 0 20px;}
+	.content-header h2{
+		display:block; 
+		text-align:center; 
+		margin:0 0 20px;
+	}
+	.main-panel>.content{
+		padding:16px 30px 70px 30px;
+	}
+
+
 }
