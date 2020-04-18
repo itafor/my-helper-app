@@ -294,7 +294,7 @@ table.dataTable.no-footer {
 	float: left !important;
 }
 .hidden_all{
-	/**display:none !important;**/
+	display:none !important;
 }
 
 
