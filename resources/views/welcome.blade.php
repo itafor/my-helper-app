@@ -7,20 +7,20 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                            <h2 class="text-blue h2-heading">{{ __('What do you need right now for the lockdown?') }}</h2>
+                            <h2 class="text-blue h2-heading">{{ __('What do you need right now for your lockdown?') }}</h2>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Select Request Type
+                                    Get Started
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('make.request') }}">Make Request</a>
+                                    <a class="dropdown-item" href="{{ route('make.request') }}">Receiver</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Provide Request</a>
+                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Supplier</a>
                                 </div>
                             </div>
-                            <!--<p class="text-lead text-light">
+                            <!-- <p class="text-lead text-light">
                                 {{ __('What do u need right now for your lockdown?') }}
-                            </p>-->
+                            </p> -->
                         </div>
                         
                         
@@ -36,12 +36,12 @@
                                         <thead class=" text-primary">
                                             <tr>
                                                 <th class="text-left time">Time</th>
-                                                <th class="text-left req_type">Request Type</th>
-                                                <th class="text-left category">Category</th>
-                                                <th class="text-left name">Display Name</th>
-                                                <th class="text-left details">Details</th>
-                                                <th class="text-left type">Type</th>
-                                                <th class="text-left city">City</th>
+                                                <th class="text-left">Request Type</th>
+                                                <th class="text-left">Category</th>
+                                                <th class="text-left">Display Name</th>
+                                                <th class="text-left">Details</th>
+                                                <th class="text-left">Type</th>
+                                                <th class="text-left">City</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,29 +62,18 @@
                                                         $ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
                                                         $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
                                                         @endphp
-                                                    @if($ageInSeconds < 60)
-                                                        <td class="text-left time_c">{{ $ageInSeconds }}{{ $ageInSeconds < 2 ? 'sec' : 'secs'}} ago</td>
-                                                    @elseif($ageInMins < 60)
-                                                        <td class="text-left time_c">{{ $ageInMins }}{{ $ageInMins < 2 ? 'min' : 'mins'}} ago</td>
-                                                    @elseif($ageInHrs < 24)
-                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
+                                                    
+                                                    @if($ageInHrs < 24)
+                                                        <td class="text-left">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
                                                     @else 
-                                                        <td class="text-left time_c">{{ $age  }} {{ $age < 2 ? 'day': 'days' }}</td>
+                                                        <td class="text-left">{{ $age  }} {{ $age < 2 ? 'day': 'days' }} ago</td>
                                                     @endif
-                                                    <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'I need' : 'I want to provide' }}</td>
-                                                    <td class="text-left category_c">{{ $req->category->title }}</td>
-                                                    <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
-                                                    <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
-                                                    @php
-                                                        $type = $req->type;
-                                                    @endphp
-                                                        @if ($type == 'free')
-                                                    <td class="text-left type_c_free">{{ $req->type }}</td>
-                                                    @else
-                                                    <td class="text-left type_c_paid">{{ $req->type }}</td>
-                                                    @endif
-
-                                                    <td class="text-left city_c">{{ $req->city->name }}</td>
+                                                    <td class="text-left">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
+                                                    <td class="text-left">{{ $req->category->title }}</td>
+                                                    <td class="text-left">{{ $req->user->username }} {{ $req->user->last_name }}</td>
+                                                    <td class="text-left">{{ Str::limit($req->description, 30) }}</td>
+                                                    <td class="text-left">{{ $req->type }}</td>
+                                                    <td class="text-left">{{ $req->city->name }}</td>
                                                 </tr>
                                             
                                         @endforeach
