@@ -7,8 +7,8 @@
 
             <div class="card card-login card-white">
                 <div class="card-header">
-                    <img src="{{ asset('white') }}/img/card-primary.png" alt="">
-                    <h1 class="card-title">{{ _('Reset password') }}</h1>
+                   <!-- <img src="{{ asset('white') }}/img/card-primary.png" alt="">-->
+                    <h2 class="text-center">{{ _('Reset Your Password') }}</h2>
                 </div>
                 <div class="card-body">
                     @include('alerts.success')

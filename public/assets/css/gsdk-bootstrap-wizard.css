@@ -12,7 +12,7 @@
  
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
-body {font-family:Poppins, sans-serif;}
+body {font-family:'Mukta Vaani',sans-serif;}
 a {
   color: #2CA8FF;
 }
@@ -969,6 +969,17 @@ label small {
 }
 .footer .heart {
   color: #FF3B30;
+}
+
+.btn-custom{
+  background: rgb(102,95,226);
+    color: #ffffff !important;
+    background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%) !important;
+    border:0 !important;
+}
+.btn-custom:hover{
+  background: rgb(233,111,109);
+  background: linear-gradient(180deg, rgba(233,111,109,1) 0%, rgba(214,36,33,1) 35%, rgba(233,111,109,1) 100%) !important;
 }
 
 @media (max-width: 768px) {

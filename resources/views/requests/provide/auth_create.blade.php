@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-xl-12 order-xl-1">
                 <div class="card">
-                    <div class="card-header bg-white border-0">
+                    <div class="card-header list-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('What do you want to provide for this lockdown?') }}</h3>
+                                <h3 class="text-white">{{ __('What do you want to provide for this lockdown?') }}</h3>
                             </div>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                         <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off">
                             @csrf
                             <input type="hidden" name="request_type" value="2">
-                            <h6 class="heading-small text-muted mb-4">{{ __('Provide Request') }}</h6>
+                            <h4 class="heading-small text-muted mb-4">{{ __('Provide Request') }}</h4>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-md-8">
@@ -56,7 +56,7 @@
                                                 <select name="country_id" id="country_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
                                                     <option value="">Select a country</option>
                                                     @foreach(getCountries() as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                                        <option {{ $country->sortname == $location ? "selected" : "" }} value="{{ $country->id }}">{{ $country->country_name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('country'))
@@ -71,6 +71,9 @@
                                                 <strong><label class="form-control-label" for="state_id">{{ __('State') }}</label></strong>
                                                 <select name="state_id" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
                                                     <option value="">Select State</option>
+                                                    @foreach($states as $state)
+                                                        <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @if ($errors->has('state'))
                                                     <span class="invalid-feedback" role="alert">
@@ -144,7 +147,7 @@
                             
                                 <div style="clear:both"></div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-custom mt-4">{{ __('Save') }}</button>
                                 </div>
                             </div>
                         </form>

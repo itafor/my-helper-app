@@ -12,13 +12,13 @@
                 <div class="card-body">
                     <div class="col-md-6 pad text-center">
                         <a href="{{ url('/register') }}" class="pad">
-                            <button type="submit" class="btn btn-block btn-round btn-md">{{ _('Individual') }}</button>
+                            <button type="submit" class="btn btn-block btn-round btn-md btn-custom">{{ _('Individual') }}</button>
                         </a>
                     </div>
                     
                     <div class="col-md-6 pad text-center">
                         <a href="{{ url('/corporate/register') }}"class="pad">
-                        <button type="submit" class="btn btn-block btn-round btn-md">{{ _('Corporate') }}</button>
+                        <button type="submit" class="btn btn-block btn-round btn-md btn-custom">{{ _('Corporate') }}</button>
                     </a>
                     </div>
                     

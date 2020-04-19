@@ -8,6 +8,7 @@ use App\Country;
 use App\State;
 use App\City;
 use App\LockdownRequest;
+use Stevebauman\Location\Facades\Location;
 use Session;
 
 class ProvideRequestController extends Controller
@@ -27,14 +28,25 @@ class ProvideRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $categories = Category::all();
         $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
+        $ip = $request->ip();
+        if($ip == '127.0.0.1'){
+            $ip = '105.112.24.184';
+        }
 
-        return view('requests.provide.create', compact('categories', 'countries', 'states', 'cities'));
+        // get location of user
+        $loc = Location::get($ip);
+        $location = $loc->countryCode;
+
+        // default the country, states and city to these values
+        $getCountry = Country::where('sortname', $location)->first();
+        $states = State::where('country_id', $getCountry->id)->get();
+        // $cities = City::where('state_id', $states[0]->id)->get();
+
+        return view('requests.provide.create', compact('categories', 'countries', 'states', 'location'));
     }
 
     /**
@@ -42,14 +54,25 @@ class ProvideRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function auth_create()
+    public function auth_create(Request $request)
     {
         $categories = Category::all();
         $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
+        $ip = $request->ip();
+        if($ip == '127.0.0.1'){
+            $ip = '105.112.24.184';
+        }
 
-        return view('requests.provide.auth_create', compact('categories', 'countries', 'states', 'cities'));
+        // get location of user
+        $loc = Location::get($ip);
+        $location = $loc->countryCode;
+
+        // default the country, states and city to these values
+        $getCountry = Country::where('sortname', $location)->first();
+        $states = State::where('country_id', $getCountry->id)->get();
+        // $cities = City::where('state_id', $states[0]->id)->get();
+
+        return view('requests.provide.auth_create', compact('categories', 'countries', 'states', 'location'));
     }
 
     /**
@@ -63,6 +86,8 @@ class ProvideRequestController extends Controller
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
 
+
+
         $lockdownRequest->user_id = $userId;
         $lockdownRequest->request_type = $request->request_type;
         $lockdownRequest->category_id = $request->category_id;
@@ -75,7 +100,7 @@ class ProvideRequestController extends Controller
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
         
         $lockdownRequest->save();
-        Session::flash('status', 'Requests has been successfully registered');
+        Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
     }
 

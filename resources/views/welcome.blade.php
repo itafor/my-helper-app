@@ -35,17 +35,21 @@
                                     <table class="table tablesorter " id="requests">
                                         <thead class=" text-primary">
                                             <tr>
+                                                <th class="text-left id hidden_all">SN</th>
                                                 <th class="text-left time">Time</th>
-                                                <th class="text-left">Request Type</th>
-                                                <th class="text-left">Category</th>
-                                                <th class="text-left">Display Name</th>
-                                                <th class="text-left">Details</th>
-                                                <th class="text-left">Type</th>
-                                                <th class="text-left">City</th>
+                                                <th class="text-left req_type">Request Type</th>
+                                                <th class="text-left category">Category</th>
+                                                <th class="text-left name">Display Name</th>
+                                                <th class="text-left details">Details</th>
+                                                <th class="text-left type">Type</th>
+                                                <th class="text-left city">City</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($allRequests as $req)
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach( $allRequests as $req )
                                             
                                         <tr class='clickable-row' 
                                                     @if($req->request_type == 1)
@@ -54,6 +58,7 @@
                                                     @else
                                                         data-href="{{ route('view.request', [$req->id]) }}">
                                                     @endif
+                                                <td class='text-left id_c hidden_all'>{{ $i }}</td>
                                                     @php
                                                         $today = \Carbon\Carbon::today();
                                                         $time = \Carbon\Carbon::now();
@@ -62,20 +67,33 @@
                                                         $ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
                                                         $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
                                                         @endphp
-                                                    
-                                                    @if($ageInHrs < 24)
-                                                        <td class="text-left">{{ $ageInHrs }}{{ $ageInHrs < 2 ? 'hr' : 'hrs'}} ago</td>
-                                                    @else 
-                                                        <td class="text-left">{{ $age  }} {{ $age < 2 ? 'day': 'days' }} ago</td>
+                                                   
+                                                    @if($ageInMins < 60)
+                                                        <td class="text-left time_c">{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</td>
+
+                                                    @elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
+                                                        <td class="text-left time_c">{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</td>
+                                                        
+                                                    @else
+                                                        <td class="text-left time_c">{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</td>
                                                     @endif
-                                                    <td class="text-left">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
-                                                    <td class="text-left">{{ $req->category->title }}</td>
-                                                    <td class="text-left">{{ $req->user->username }} {{ $req->user->last_name }}</td>
-                                                    <td class="text-left">{{ Str::limit($req->description, 30) }}</td>
-                                                    <td class="text-left">{{ $req->type }}</td>
-                                                    <td class="text-left">{{ $req->city->name }}</td>
+
+                                                    <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
+                                                    <td class="text-left category_c">{{ $req->category->title }}</td>
+                                                    <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
+                                                    <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
+
+                                                    @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
+                                                    <td class="text-left type_c_paid">{{ $req->type }}</td>
+                                                    @else
+                                                    <td class="text-left type_c_free">{{ $req->type }}</td>
+                                                    @endif
+
+                                                    <td class="text-left city_c">{{ $req->city->name }}</td>
                                                 </tr>
-                                            
+                                             @php
+                                            $i++;
+                                            @endphp
                                         @endforeach
                                             
                                         </tbody>

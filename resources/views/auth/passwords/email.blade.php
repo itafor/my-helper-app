@@ -7,8 +7,8 @@
 
             <div class="card card-login card-white">
                 <div class="card-header">
-                    <img src="{{ asset('white') }}/img/card-primary.png" alt="">
-                    <h1 class="card-title">{{ _('Reset password') }}</h1>
+                    <!--<img src="{{ asset('white') }}/img/card-primary.png" alt="">-->
+                    <h2 class="text-center">{{ _('Reset Your Password') }}</h2>
                 </div>
                 <div class="card-body">
                     @include('alerts.success')
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">{{ _('Send Password Reset Link') }}</button>
+                    <button type="submit" class="btn btn-custom btn-lg btn-block mb-3">{{ _('Send Password Reset Link') }}</button>
                 </div>
             </div>
         </form>
