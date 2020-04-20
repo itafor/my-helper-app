@@ -88,13 +88,15 @@
                                     <div class="col-sm-6">
                                         <div class="form-group radio-group">
                                             <label>Individual</label>
-                                            <input name="user_type" type="radio" class="form-control" value="1">
+                                            <input class="select_individual" name="user_type" type="radio" class="form-control" value="1" 
+                                                required/>
                                         </div>
                                     </div>   
                                     <div class="col-sm-6">
                                         <div class="form-group radio-group">
                                             <label>Corporate
-                                                <input name="user_type" type="radio" class="form-control" value="2">
+                                                <input name="user_type" type="radio" class="form-control" value="2" 
+                                                    required=""/>
                                             </label>
                                         </div>
                                     </div> 
@@ -126,19 +128,19 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="Smith...">
+                                                <input name="password" type="password" class="form-control" placeholder="Password" id="password">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Confirm Password <small>(required)</small></label>
-                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Smith...">
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Passwor." id="password_confirmation">
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +184,7 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" type="text" class="form-control" placeholder="Username">
+                                                <input name="username" class="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
