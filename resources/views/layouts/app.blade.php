@@ -22,7 +22,7 @@
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
-        
+
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
         <!-- CSS Files -->
@@ -227,6 +227,7 @@
                 });
             });
         </script>
+         
         @stack('js')
     </body>
 </html>

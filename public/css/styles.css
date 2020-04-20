@@ -3,6 +3,7 @@
 	--c_red: #D62421;
 	--c_green: #24D621;
 	--c_white: #ffffff;
+	--c_black: #1d253b;
 }
 body{
 	font-family:'Mukta Vaani',sans-serif;
@@ -214,6 +215,7 @@ table.dataTable thead th, table.dataTable thead td{
 	background: rgb(102,95,226);
     color: #ffffff !important;
     background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%) !important;
+    border-radius: 0.4285rem;
 }
 .btn-custom:hover{
 	background: rgb(233,111,109);
@@ -274,8 +276,10 @@ table.dataTable.no-footer {
 	background:#efefef;
 	transition: all ease-in-out .3s
 }
-.card-body .item-row h5{
+.card-body .item-row h5, .card-body .item-row label{
 	margin:0;
+	font-size:15px;
+	font-weight:400 !important;
 }
 .copyright a{
 	color:var(--c_blue);
@@ -295,6 +299,95 @@ table.dataTable.no-footer {
 }
 .hidden_all{
 	display:none !important;
+}
+
+
+.card-inner{
+	box-shadow: 0 1px 10px -2px rgba(31, 31, 31, 0.105) !important;
+	margin:0;
+	border-bottom:2px solid #ededed;
+	border-radius:0;
+}
+
+.card-inner .avatar{
+	width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    margin: 15px 0 0 15px;
+    font-size: 32px;
+}
+
+.card-inner .request-content, .card-inner .request-content .request-meta{
+	position:relative;
+	overflow:hidden;
+	display:inline-block;
+}
+.card-inner .request-content .request-meta p{
+	display:inline-block;
+	font-size:14px;
+}
+.card-inner .card-detail{
+	padding:25px 15px;
+}
+.card-inner .request-content{
+	font-size: 16px;
+    margin-left: 25px;
+}
+
+.card-inner .request-meta p{
+	display:inline-block;
+	position:relative;
+	font-size:15px;
+	margin:0 15px 0 0;
+	line-height:15px;
+}
+.card-inner .request-meta i{
+	margin-right:5px;
+	font-weight: 600;
+}
+.card-inner .request-comment{
+	font-size:16px; 
+	margin:15px 0 25px;
+	position: relative;
+}
+.request-meta .type{
+	background: #a10af9;
+    padding: 5px 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
+    color: #ffffff;
+}
+.request-meta .type_c_free{
+	background: var(--c_green);
+    padding: 5px 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
+    color: #ffffff;
+}
+.request-meta .type_c_paid{
+	background: var(--c_blue);
+    padding: 5px 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
+    color: #ffffff;
+}
+
+.card-inner .btn-request{
+	padding:7px 14px !important;
+	position:relative;
+	border-radius:4px;
+	display:block;
+}
+.bottom-meta .time{
+	font-size:15px;
+	color:var(--c_black);
+}
+.hidden-mobile{
+	display:block;
+}
+.hidden-pc{
+	display:none;
 }
 
 
@@ -348,5 +441,45 @@ table.dataTable.no-footer {
 
 	table.dataTable thead th.req_type, table.dataTable thead th.name{
 		min-width:120px;
+	}
+	.card-inner .col-md-1{
+		width:20%;
+		vertical-align: top;
+		padding:0 0 0 15px;
+	}
+	.card-inner .col-md-11{
+		width:80%;
+		vertical-align: top;
+		padding:0 15px 0 0;
+	}
+	.card-inner .avatar {
+	    width: 45px;
+	    height: 45px;
+	    line-height: 45px;
+	    border-radius: 50%;
+	    background: #f4f5f1;
+	    margin: 0px 0 0 0px;
+	    font-size: 25px;
+	}
+	.card-inner .request-content {
+	    margin-left: 5px;
+	}
+
+	.card-inner .request-meta p {
+	    margin: 0 10px 10px 0;
+	}
+	.bottom-meta .pull-right{
+		float:none;
+		display:block;
+	}
+	.bottom-meta{
+		display:inline-block;
+		width:100%;
+	}
+	.hidden-mobile{
+		display:none;
+	}
+	.hidden-pc{
+		display:block;
 	}
 }
