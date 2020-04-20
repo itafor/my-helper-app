@@ -47,13 +47,16 @@
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->country->country_name }}</strong></label>
                             </div>
-
+                        </div>
+                        <div class="row item-row">
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><h5>{{ __('State') }}</h5></label>
                             </div>
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->state->name }}</strong></label>
                             </div>
+                        </div>
+                        <div class="row item-row">
 
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><h5>{{ __('City') }}</h5></label>
@@ -61,6 +64,8 @@
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->city->name }}</strong></label>
                             </div>
+                        </div>
+                        <div class="row item-row">
 
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><h5>{{ __('Street') }}</h5></label>
