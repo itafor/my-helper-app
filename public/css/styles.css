@@ -352,21 +352,21 @@ table.dataTable.no-footer {
 	position: relative;
 }
 .request-meta .type{
-	background: #a10af9;
+	background: #dda1ff;
     padding: 5px 10px;
     border-radius: 3px;
     box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
     color: #ffffff;
 }
 .request-meta .type_c_free{
-	background: var(--c_green);
+	background: #b3dab2;
     padding: 5px 10px;
     border-radius: 3px;
     box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
     color: #ffffff;
 }
 .request-meta .type_c_paid{
-	background: var(--c_blue);
+	background: #b2b2d8;
     padding: 5px 10px;
     border-radius: 3px;
     box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
