@@ -71,8 +71,8 @@ header.sticky-header{
 body { overflow-x: hidden; }
 
 header.header .logo{
-	width: 200px;
-    height: 50px;
+	width: auto;
+    height: 65px;
     overflow: hidden;
     float: none;
     position: relative;
@@ -88,7 +88,7 @@ header.header .logo a{
 header.header .logo a img{
 	max-width: 100%;
     width: auto;
-    height: 50px;
+    height: 70px;
 }
 header.header .navbar.navbar-transparent {
     background: transparent !important;
@@ -352,21 +352,21 @@ table.dataTable.no-footer {
 	position: relative;
 }
 .request-meta .type{
-	background: #a10af9;
+	background: #dda1ff;
     padding: 5px 10px;
     border-radius: 3px;
     box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
     color: #ffffff;
 }
 .request-meta .type_c_free{
-	background: var(--c_green);
+	background: #b3dab2;
     padding: 5px 10px;
     border-radius: 3px;
     box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
     color: #ffffff;
 }
 .request-meta .type_c_paid{
-	background: var(--c_blue);
+	background: #b2b2d8;
     padding: 5px 10px;
     border-radius: 3px;
     box-shadow: 0 0 5px -3px rgba(30,30,30,0.104) inset;
@@ -394,6 +394,12 @@ table.dataTable.no-footer {
 
 /** ==== Media Queries ==== **/
 @media only screen and (max-width:991px){
+	header.header .logo{
+	    height: 45px;
+	}
+	header.header .logo a img{
+	    height: 50px;
+	}
 	header.header .navbar.navbar-transparent {
 	    padding:0;
 	    margin-top:15px;
