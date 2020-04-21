@@ -1,7 +1,7 @@
 <header id="topHeader" class="header auth-header">
      <div class="logo">
         <a href="{{ url('/') }}" class="simple-text logo-normal">
-            <img src="{{ asset('white') }}/img/lc_logo.png" alt="Lockdown Clerk">
+            <img src="{{ asset('white') }}/img/logo_group.png" alt="Lockdown Clerk">
         </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">

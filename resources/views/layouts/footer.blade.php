@@ -10,7 +10,7 @@
             </a> {{ _( ' and ' ) }}
             <a href="https://digitalwebglobal.com" target="_blank">
                 {{ _( 'Digitalweb Application Development Limited' ) }}<img src="{{ asset('white') }}/img/brand/dw_logo.png" alt="Digitalweb AD Limited">
-            </a>.
+            </a>
         </div>
     </div> 
 </footer>
