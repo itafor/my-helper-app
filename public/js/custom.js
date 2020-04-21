@@ -38,6 +38,9 @@ $('#state_id').change(function(){
         });
     }
 });
+
+
+
 // hide login link
 $('.loginLink').hide();
 
@@ -54,6 +57,12 @@ function duplicateEmail(element){
                 alert('Email taken, please Login');
                 $('#finish').prop('disabled', true)
                 $('.loginLink').show();
+                $(":input").not("[name=email]").prop("disabled", true)
+            } else {
+                $(":input").not("[name=email]").prop("disabled", false)
+                $('#finish').prop('disabled', false)
+                $('#finish').prop('disabled', false)
+                $('.loginLink').hide();
             }
         },
         error: function (jqXHR, exception) {
@@ -74,6 +83,10 @@ function duplicateUserName(element){
             if(res.exists){
                 alert('Username taken, Choose another');
                 $('#finish').prop('disabled', true);
+                $(":input").not("[name=username]").prop("disabled", true)
+            } else {
+                $(":input").not("[name=username]").prop("disabled", false)
+                $('#finish').prop('disabled', false)
             }
         },
         error: function (jqXHR, exception) {
@@ -113,6 +126,13 @@ $(".clickable-row").click(function() {
 $(document).ready( function () {
     $('#requests').DataTable();
 } );
+
+// $('#finish').click(function() {
+//     if (!$('.select_corporate') || !$('.select_individual')) {
+//         alert('Please pick a user type')
+//     }
+// })
+
 
 
 //sticky header

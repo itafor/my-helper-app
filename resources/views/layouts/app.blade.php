@@ -95,7 +95,8 @@
             </div>
         </div> -->
         <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
-        <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+       
             <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
             <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
         <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
@@ -107,7 +108,6 @@
           
             <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
             <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
-            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <!--  Google Maps Plugin    -->
         <!-- Place this tag in your head or just before your close body tag. -->
         <script src="{{ asset('js/custom.js') }}"></script>
