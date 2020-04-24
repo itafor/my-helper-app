@@ -8,7 +8,11 @@
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="text-white">{{ __('View Request') }}</h3>
+                                @if($getRequest->type == "paid")
+                                    <h3 class="text-white">{{ __('Commercial Provider') }}</h3>
+                                @else
+                                    <h3 class="text-white">{{ __('Donor Provider') }}</h3>
+                                @endif
                             </div>
                             <div class="col-4 text-right">
                               <a href="{{ url('/') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
@@ -16,7 +20,52 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row item-row">
+                        <!-- <div class="row"> -->
+                            @if($getRequest->type == "paid")
+                                <h1>Commercial Provider</h1>
+                                <h2>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h2>
+                                <p>
+                                    Please call me on <i>"
+                                    <strong>
+                                        @if($getRequest->show_phone == 1)
+                                            {{ $getRequest->user->phone }}
+                                        @else
+                                            *******
+                                        @endif
+                                    </strong>"</i> for <b>sale </b>of <i>"<strong>{{ $getRequest->description }}</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }} axis</strong>"</i>.
+                                </p>
+                                <p>Thank you for your patronage</p>
+                                <p> Name: <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
+                                @if($getRequest->show_address == 0)
+                                    <p>Address ***</p>
+                                @else
+                                    <p>Address: {{ $getRequest->street }}</p>
+                                @endif
+                            @else
+                                <h1>Donor Provider</h1>
+                                <h2>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h2>
+                                <p>Please call me on <i>"
+                                    <strong>
+                                        @if($getRequest->show_phone == 1)
+                                            {{ $getRequest->user->phone }}
+                                        @else
+                                            *******
+                                        @endif
+                                    </strong>"</i> for <b>free</b> <i>"<strong>({{ $getRequest->description }})</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }} axis</strong>"</i>.
+                                
+                                </p>
+                                <p>Thank you for your patronage</p>
+                                <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
+                                @if($getRequest->show_address == 0)
+                                    <p>Address ***</p>
+                                @else
+                                    <p>Address: {{ $getRequest->street }}</p>
+                                @endif
+                            @endif
+                            
+                            
+                        <!-- </div> -->
+                        <!-- <div class="row item-row">
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><h5>{{ __('Name') }}</h5></label>
                             </div>
@@ -124,7 +173,21 @@
                             <div class="col-xl-6">
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->type }}</strong></label>
                             </div>                           
-                        </div>
+                        </div> -->
+                            @if(auth()->check())
+                                @if(auth()->user()->id != $getRequest->user_id)
+                                    <div class="col-4 text-right">
+                                        <a onclick="disableButton()" id="email" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="col-4 text-right">
+                                    <a onclick="alert('please login to contact this person')" href="{{ route('show.auth.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
+                                </div>
+                            @endif                            
+                        <!-- <div class="col-4 text-right">
+                            <a href="{{ route('show.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
+                        </div> -->
                     </div>
                 </div>
             </div>

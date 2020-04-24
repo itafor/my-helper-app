@@ -7,7 +7,9 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                            <h2 class="text-blue h2-heading">{{ __('What do you need right now for your lockdown?') }}</h2>
+                            <h3 class="text-blue h2-heading">{{ __('We’re here to help you get through the stress of
+                             the lockdown. Welcome to LockdownClerk where you can receive or provide goods and 
+                             services during the lockdown. Click here to get started') }}</h3>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Get Started
@@ -15,7 +17,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('make.request') }}">Receiver</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Supplier</a>
+                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Provider</a>
                                 </div>
                             </div>
                             <!-- <p class="text-lead text-light">

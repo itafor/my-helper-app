@@ -61,5 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('provide/request', ['uses' => 'ProvideRequestController@auth_create', 'as' => 'new.provide.request']);
 	Route::post('provide/request', ['uses' => 'ProvideRequestController@store', 'as' => 'store.provide.request']);
+	Route::get('show/{id}/request', ['uses' => 'ProvideRequestController@show', 'as' => 'show.request']);
+	Route::get('send/makerequest/{id}', ['uses' => 'MakeRequestController@sendMail', 'as' => 'send.requestDetails']);
+	Route::get('send/providerequest/{id}', ['uses' => 'ProvideRequestController@sendMail', 'as' => 'send.provideDetails']);
 });
 

@@ -8,8 +8,10 @@ use App\Category;
 use App\Country;
 use App\State;
 use App\City;
+use App\User;
 use Stevebauman\Location\Facades\Location;
 use Session;
+use App\Notifications\SendRequestDetails;
 
 class MakeRequestController extends Controller
 {
@@ -21,7 +23,7 @@ class MakeRequestController extends Controller
     public function index(Request $request)
     {
         $ip = $request->ip();
-        $allRequests = LockdownRequest::orderBy('created_at')->get();
+        $allRequests = LockdownRequest::orderBy('created_at', 'DESC')->get();
         return view('requests.make.index', compact('allRequests'));
     }
 
@@ -96,6 +98,8 @@ class MakeRequestController extends Controller
         $lockdownRequest->street = $request->street;
         $lockdownRequest->type = $request->type;
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+        $lockdownRequest->show_address = $request->show_address;
+        $lockdownRequest->show_phone = $request->show_phone;
         
         $lockdownRequest->save();
         Session::flash('status', 'Request has been successfully registered');
@@ -134,6 +138,18 @@ class MakeRequestController extends Controller
         $getRequest = LockdownRequest::find($id);
         // dd($getRequest);
         return view('requests.make.show', compact('getRequest'));
+    }
+
+    public function sendMail($req)
+    {
+        $reqDetail = LockdownRequest::find($req);
+        $user = auth()->user();
+        $receiver = $reqDetail->user;
+        // dd($receiver);
+        $receiver->notify(new SendRequestDetails($user, $reqDetail));
+        // dd($receiver);
+        Session::flash('status', 'Email has been successfully sent');
+        return redirect()->route('requests');
     }
 
     /**
