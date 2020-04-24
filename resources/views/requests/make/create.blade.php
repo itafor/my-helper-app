@@ -127,6 +127,15 @@
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
+                                                <label>Show Phone Number</label>
+                                                <select name="show_phone" class="form-control">
+                                                    <option value="0"> No </option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
                                                 <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username">
                                             </div>
@@ -140,7 +149,7 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Confirm Password <small>(required)</small></label>
-                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Passwor." id="password_confirmation">
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password." id="password_confirmation">
                                             </div>
                                         </div>
                                     </div>
@@ -183,8 +192,17 @@
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
+                                                <label>Show Phone Number</label>
+                                                <select name="show_phone" class="form-control">
+                                                    <option value="0"> No </option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" class="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
@@ -287,6 +305,15 @@
                                          <div class="form-group">
                                             <label>Street Name</label>
                                             <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
+                                          </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Show Street Address</label><br>
+                                             <select name="show_address" class="form-control" id="show_address">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
                                           </div>
                                     </div>
                                     <!-- <div class="col-sm-3">
