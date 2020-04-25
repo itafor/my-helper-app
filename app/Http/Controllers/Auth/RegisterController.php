@@ -118,6 +118,8 @@ class RegisterController extends Controller
             $lockdownRequest->street = $request->street;
             $lockdownRequest->type = $request->type;
             $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+            $lockdownRequest->show_address = $request->show_address;
+            $lockdownRequest->show_phone = $request->show_phone;
             
             $lockdownRequest->save();
         }

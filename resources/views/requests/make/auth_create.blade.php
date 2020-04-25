@@ -114,7 +114,23 @@
                                     </div>
                                 <!-- </div> -->
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="input-show_address">{{ __('Show Street Address') }}</label></strong>
+                                                <select name="show_address" id="show_address" class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" >
+                                                    <option value="">Select</option>
+                                                    <option value="0">No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+
+                                               @if ($errors->has('show_address'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('show_address') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="type">{{ __('Type') }}</label></strong>
                                                 <select name="type" id="type_id" class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" value="{{ old('type') }}" >
@@ -129,7 +145,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('mode_of_contact') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="mode_of_contact">{{ __('How would you like to be contacted?') }}</label></strong>
                                                 <select name="mode_of_contact" id="mode_of_contact" class="form-control form-control-alternative{{ $errors->has('mode_of_contact') ? ' is-invalid' : '' }}" value="{{ old('mode_of_contact') }}" >
@@ -140,6 +156,20 @@
                                                 @if ($errors->has('state'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('state') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('show_phone') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="show_phone">{{ __('Show Phone Number') }}</label></strong>
+                                                <select name="show_phone" id="show_phone" class="form-control form-control-alternative{{ $errors->has('show_phone') ? ' is-invalid' : '' }}">
+                                                    <option value="0">No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                                @if ($errors->has('show_phone'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('show_phone') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
