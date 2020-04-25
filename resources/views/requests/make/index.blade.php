@@ -189,6 +189,12 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <div class="disclaimer">
+                                          <p><span>Disclaimer:</span> 
+                                    This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed.  Kindly engage with caution.</p>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

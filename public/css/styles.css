@@ -389,16 +389,27 @@ table.dataTable.no-footer {
 .hidden-pc{
 	display:none;
 }
-
+.disclaimer{
+	display:inline-block;
+	width:100%;
+	margin:40px 0 15px;
+	padding:0 25px;
+	font-size:15px;
+}
+.disclaimer span{
+	display:block;
+	margin:0 0 12px;
+	font-weight:600;
+}
 
 
 /** ==== Media Queries ==== **/
 @media only screen and (max-width:991px){
 	header.header .logo{
-	    height: 45px;
+	    height: 50px;
 	}
 	header.header .logo a img{
-	    height: 50px;
+	    height: 55px;
 	}
 	header.header .navbar.navbar-transparent {
 	    padding:0;
@@ -487,5 +498,14 @@ table.dataTable.no-footer {
 	}
 	.hidden-pc{
 		display:block;
+	}
+}
+
+@media only screen and (max-width:480px){
+	header.header .logo{
+	    height: 55px;
+	}
+	header.header .logo a img{
+	    height: 60px;
 	}
 }
