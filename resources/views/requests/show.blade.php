@@ -8,11 +8,7 @@
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                @if($getRequest->type == "paid")
-                                    <h3 class="text-white">{{ __('Commercial Provider') }}</h3>
-                                @else
-                                    <h3 class="text-white">{{ __('Donor Provider') }}</h3>
-                                @endif
+                                <h3 class="text-white">{{ $getRequest->category->title }}</h3>
                             </div>
                             <div class="col-4 text-right">
                               <a href="{{ url('/') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
@@ -21,18 +17,17 @@
                     </div>
                     <div class="card-body">
                         <!-- <div class="row"> -->
-                            @if($getRequest->type == "paid")
-                                <h2>Commercial Provider</h2>
-                                <h3>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h3>
+                            @if($getRequest->type == "paid" || $getRequest->type == "Paid")
+                                <h3>Welcome to my <strong>{{ $getRequest->user->username }}</strong> page</h3>
                                 <p>
-                                    Please call me on <i>"
+                                @if($getRequest->show_phone == 1)
+                                    Please call me on <i>
                                     <strong>
-                                        @if($getRequest->show_phone == 1)
-                                            {{ $getRequest->user->phone }}
+                                            {{ $getRequest->user->phone }}</strong>
                                         @else
-                                            *******
+                                            Kindly contact me
                                         @endif
-                                    </strong>"</i> for <b>sale </b>of <i>"<strong>{{ $getRequest->description }}</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i>.
+                                    </i> for <b>sale </b>of <i>"<strong>{{ $getRequest->description }}</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i> axis.
                                 </p>
                                 <p>Thank you for your patronage</p>
                                 <p> Name: <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
@@ -42,19 +37,19 @@
                                     <p>Address: {{ $getRequest->street }}</p>
                                 @endif
                             @else
-                                <h2>Donor Provider</h2>
-                                <h3>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h3>
-                                <p>Please call me on <i>"
+
+                                <h3>Welcome to my page <strong>{{ $getRequest->user->username }}</strong></h3>
+                                @if($getRequest->show_phone == 1)
+                                    <p>Please call me on <i>"
                                     <strong>
-                                        @if($getRequest->show_phone == 1)
                                             {{ $getRequest->user->phone }}
                                         @else
-                                            *******
+                                            <p>Please contact me through this platform
                                         @endif
-                                    </strong>"</i> for <b>free</b> <i>"<strong>({{ $getRequest->description }})</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i>.
+                                    </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} ({{ $getRequest->description }})</strong>"</i> around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i>.
                                 
                                 </p>
-                                <p>Thank you for your patronage</p>
+                                <p>Thank you</p>
                                 <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
                                 @if($getRequest->show_address == 0)
                                     <p>Address ***</p>
