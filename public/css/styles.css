@@ -19,6 +19,14 @@ h1,h2,h3,h4,h5,h6{
     color: #2124d6 !important;
     font-weight: bold;
 }
+.content-header h3{
+	font-weight:500;
+	margin-bottom:25px;
+}
+
+.content-header h3 span{
+	color:#494949;
+}
 
 .h2-heading {
     margin: 0px;
@@ -65,14 +73,14 @@ h1,h2,h3,h4,h5,h6{
 .logo-group a {
 	width:auto;
 	height:40px;
-	margin-right:3px;
+	margin-right:10px;
 	display:inline-block;
 	background: #ffffff;
     box-shadow: none;
     transition: all ease-in-out .3s;
 }
 .logo-group a:hover{
-	box-shadow:0 0 7px 1px rgba(0,0,0,0.223);
+	/**box-shadow:0 0 7px 1px rgba(0,0,0,0.223);**/
 	transition: all ease-in-out .3s;
 }
 .logo-group a img{
@@ -83,11 +91,11 @@ h1,h2,h3,h4,h5,h6{
 	padding: 2px 0 0 2px;
 }
 .logo-wrapper .logo-col-2 .sponsor-info{
-	font-size:10px;
-	font-weight:600;
-	color:#6d6d6d;
-	letter-spacing: -0.75px;
-	font-style:italic;
+	font-size: 12px;
+    font-weight: 600;
+    color: #494949;
+    letter-spacing: -0.35px;
+    font-style: italic;
 }
 
 .logo-wrapper .logo-col-2{
@@ -160,8 +168,8 @@ header.header .navbar.navbar-transparent {
     padding-right: 0;
 }
 .full-page>.content {
-    padding-bottom: 150px;
-    padding-top: 100px !important;
+    padding-bottom: 75px;
+    padding-top: 50px !important;
 }
 .content-wrapper{
 	padding:0;
@@ -606,7 +614,7 @@ table.dataTable.no-footer {
 		width:80%;
 	}
 	.logo-wrapper .logo-col-1, .logo-wrapper .logo-col-2{
-		width: 70%;
+		width: 80%;
 	    border: 0;
 	    padding: 7px 0 0 0;
 	    height: auto;
@@ -649,6 +657,9 @@ table.dataTable.no-footer {
 	    position: absolute !important;
 	    right: 10px;
 	    margin-top: 30px;
+	}
+	.logo-wrapper .logo-col-2 .sponsor-info{
+		font-size: 11px;
 	}
 }
 
