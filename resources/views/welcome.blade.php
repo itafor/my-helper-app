@@ -144,7 +144,7 @@
                                             
                                         <tr class='clickable-row' 
                                                     @if($req->request_type == 1)
-                                                        onclick="alert('Please login to see this request')"
+    
                                                         data-href="{{ route('view.make.request', [$req->id]) }}">
                                                     @else
                                                         data-href="{{ route('view.request', [$req->id]) }}">

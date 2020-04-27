@@ -8,7 +8,7 @@
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="text-white">{{ $getRequest->category->title }}</h3>
+                                <h3 class="text-white">Supply of {{ $getRequest->category->title }}</h3>
                             </div>
                             <div class="col-4 text-right">
                               <a href="{{ url('/') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
@@ -18,42 +18,38 @@
                     <div class="card-body">
                         <!-- <div class="row"> -->
                             @if($getRequest->type == "paid" || $getRequest->type == "Paid")
-                                <h3>Welcome to my <strong>{{ $getRequest->user->username }}</strong> page</h3>
+                                <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
                                 <p>
                                 @if($getRequest->show_phone == 1)
-                                    Please call me on <i>
+                                    Please call me on 
                                     <strong>
                                             {{ $getRequest->user->phone }}</strong>
                                         @else
-                                            Kindly contact me
+                                            Kindly contact me through this platform
                                         @endif
-                                    </i> for <b>sale </b>of <i>"<strong>{{ $getRequest->description }}</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i> axis.
+                                     for <b>sale </b>of <strong>{{ $getRequest->category->title }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
                                 </p>
                                 <p>Thank you for your patronage</p>
-                                <p> Name: <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
-                                @if($getRequest->show_address == 0)
-                                    <p>Address ***</p>
-                                @else
+                                <p><strong>{{ $getRequest->user->username }}</strong></p> 
+                                @if($getRequest->show_address == 1)
                                     <p>Address: {{ $getRequest->street }}</p>
                                 @endif
                             @else
 
-                                <h3>Welcome to my page <strong>{{ $getRequest->user->username }}</strong></h3>
+                                <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
                                 @if($getRequest->show_phone == 1)
-                                    <p>Please call me on <i>"
+                                    <p>Please call me on 
                                     <strong>
                                             {{ $getRequest->user->phone }}
                                         @else
-                                            <p>Please contact me through this platform
+                                            <p>Kindly contact me through this platform
                                         @endif
-                                    </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} ({{ $getRequest->description }})</strong>"</i> around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i>.
+                                    </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} - ({{ $getRequest->description }})</strong> around<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
                                 
                                 </p>
                                 <p>Thank you</p>
-                                <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
-                                @if($getRequest->show_address == 0)
-                                    <p>Address ***</p>
-                                @else
+                                <p><strong>{{ $getRequest->user->username }}</strong></p> 
+                                @if($getRequest->show_address == 1)
                                     <p>Address: {{ $getRequest->street }}</p>
                                 @endif
                             @endif
@@ -169,17 +165,23 @@
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->type }}</strong></label>
                             </div>                           
                         </div> -->
-                            @if(auth()->check())
-                                @if(auth()->user()->id != $getRequest->user_id)
-                                    <div class="col-4 text-right">
-                                        <a onclick="disableButton()" id="email" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
+                        </div>
+                        @if(auth()->check())
+                            @if(in_array(auth()->user()->id, $checkIfContacted))
+                                <p style="color:red">You have previously contacted this user</p>
+                            @else
+                                @if($getRequest->user_id != auth()->user()->id)
+                                    <div class="col-4 text-left">
+                                    <a onclick="disableButton()" id="email" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                                     </div>
                                 @endif
-                            @else
-                                <div class="col-4 text-right">
-                                    <a onclick="alert('please login to contact this person')" href="{{ route('show.auth.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
-                                </div>
-                            @endif                            
+                            @endif
+                        @else
+                            <div class="col-4 text-left">
+                                <a onclick="alert('please login to contact this person')" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
+                            </div>
+                        @endif  
+                    </div>                    
                         <!-- <div class="col-4 text-right">
                             <a href="{{ route('show.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
                         </div> -->
