@@ -26,7 +26,7 @@
                         </div>
                         
                         
-                        <div class="col-md-12">
+                        <div class="col-md-12 welcome-cards">
                             <div class="card ">
                                 <div class="card-header">
                                     <h4 class="card-title">Requests</h4>
@@ -191,6 +191,10 @@
                                             
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="disclaimer">
+                                    <p><span>Disclaimer:</span> 
+                                    This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed.  Kindly engage with caution.</p>
                                 </div>
                             </div>
                         </div>

@@ -22,8 +22,8 @@
                     <div class="card-body">
                         <!-- <div class="row"> -->
                             @if($getRequest->type == "paid")
-                                <h1>Commercial Provider</h1>
-                                <h2>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h2>
+                                <h2>Commercial Provider</h2>
+                                <h3>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h3>
                                 <p>
                                     Please call me on <i>"
                                     <strong>
@@ -32,7 +32,7 @@
                                         @else
                                             *******
                                         @endif
-                                    </strong>"</i> for <b>sale </b>of <i>"<strong>{{ $getRequest->description }}</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }} axis</strong>"</i>.
+                                    </strong>"</i> for <b>sale </b>of <i>"<strong>{{ $getRequest->description }}</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i>.
                                 </p>
                                 <p>Thank you for your patronage</p>
                                 <p> Name: <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
@@ -42,8 +42,8 @@
                                     <p>Address: {{ $getRequest->street }}</p>
                                 @endif
                             @else
-                                <h1>Donor Provider</h1>
-                                <h2>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h2>
+                                <h2>Donor Provider</h2>
+                                <h3>Welcome to my "<strong>{{ $getRequest->category->title }}</strong>" page</h3>
                                 <p>Please call me on <i>"
                                     <strong>
                                         @if($getRequest->show_phone == 1)
@@ -51,7 +51,7 @@
                                         @else
                                             *******
                                         @endif
-                                    </strong>"</i> for <b>free</b> <i>"<strong>({{ $getRequest->description }})</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }} axis</strong>"</i>.
+                                    </strong>"</i> for <b>free</b> <i>"<strong>({{ $getRequest->description }})</strong>"</i> at affordable prices around <i>"<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>"</i>.
                                 
                                 </p>
                                 <p>Thank you for your patronage</p>
