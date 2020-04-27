@@ -1,8 +1,26 @@
 <header id="topHeader" class="header auth-header">
-     <div class="logo">
-        <a href="{{ url('/') }}" class="simple-text logo-normal">
-            <img src="{{ asset('white') }}/img/logo_group.png" alt="Lockdown Clerk">
-        </a>
+     <div class="logo-wrapper">
+        <div class="logo-col-1">
+            <a href="{{ url('/') }}" class="simple-text logo-normal">
+                <img src="{{ asset('white') }}/img/lc_logo.png" alt="Lockdown Clerk">
+            </a>
+        </div>
+        <div class="logo-col-2">
+            <div class="logo-group">
+                <a href="https://sterling.ng" target="_blank">
+                    <img src="{{ asset('white') }}/img/sterling_logo.png" alt="Sterling Bank">
+                </a>
+                <a href="https://giving.ng" target="_blank">
+                    <img src="{{ asset('white') }}/img/giving_logo.png" alt="Giving">
+                </a>
+                <a href="https://digitalwebglobal.com" target="_blank">
+                    <img src="{{ asset('white') }}/img/dw_logo.png" alt="Giving">
+                </a>
+            </div>
+            <div class="sponsor-info">
+                This is a free service provided by Sterling Bank, Giving and Digitalweb
+            </div>
+        </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
         <div class="container-fluid">
