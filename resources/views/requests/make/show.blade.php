@@ -23,7 +23,7 @@
                     <div class="card-body">
                         @if($getRequest->type == "paid")
                             <!-- <h1>Requesting for paid service</h1> -->
-                            <p>Please i require the following "<strong>{{ $getRequest->category->title }}</strong>" service in "<strong>{{ $getRequest->city->name }} axis</strong>". I am willing to pay for it</p>
+                            <p>I require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>". I am willing to pay for it.</p>
                             <p>Kindly call me on <i>"
                                 <strong>
                                     @if($getRequest->show_phone == 1)
@@ -31,7 +31,7 @@
                                     @else
                                         *******
                                     @endif
-                                </strong>"</i> for <b>sale of</b> <i>"{{ $getRequest->description }}"</i> at affordable prices around <i>"{{ $getRequest->city->name }} axis"</i>.
+                                </strong>"</i> for <b>sale of</b> <i>"{{ $getRequest->description }}"</i> at affordable prices around <i>"{{ $getRequest->city->name }}, {{ $getRequest->state->name }}"</i>.
                             </p>
                             <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
                             @if($getRequest->show_address == 0)
@@ -41,7 +41,7 @@
                             @endif
                         @else
                             <!-- <h1>Requesting for free service</h1> -->
-                            <p>Please i require the following "<strong>{{ $getRequest->category->title }}</strong>" service in "<strong>{{ $getRequest->city->name }} axis</strong>" for free</p>
+                            <p>I require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>" for free</p>
                             <p>Kindly call me on <i>"
                                 <strong>
                                     @if($getRequest->show_phone == 1)
@@ -49,7 +49,7 @@
                                     @else
                                         *******
                                     @endif
-                            </p>
+                            </strong></i></p>
                             <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
                             @if($getRequest->show_address == 0)
                                 <p>Address ***</p>
@@ -59,7 +59,7 @@
                         @endif
                     </div>
                     @if($getRequest->user_id == auth()->user()->id)
-                        <div class="col-4 text-right">
+                        <div class="col-4 text-left">
                             <a href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" onclick="disableButton()" id="email" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
                         </div>
                     @endif
