@@ -165,10 +165,10 @@
                                 <label class="form-control-label" for="input-name"><strong>{{ $getRequest->type }}</strong></label>
                             </div>                           
                         </div> -->
+                        </div>
                         @if(auth()->check())
                             @if(in_array(auth()->user()->id, $checkIfContacted))
                                 <p style="color:red">You have previously contacted this user</p>
-                        </div>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
                                     <div class="col-4 text-left">
