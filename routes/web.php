@@ -33,6 +33,7 @@ Route::get('provide/req/create', ['uses' => 'ProvideRequestController@create', '
 Route::get('checkemail', 'MakeRequestController@checkEmail');
 Route::get('checkusername', 'MakeRequestController@checkUserName');
 Route::get('view/{id}/request', ['uses' => 'ProvideRequestController@show', 'as' => 'view.request']);
+Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'as' => 'view.make.request']);
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
@@ -54,7 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	// Requests
 	Route::get('requests', ['uses' => 'MakeRequestController@index', 'as' => 'requests']);
-	Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'as' => 'view.make.request']);
 	Route::get('make/request', ['uses' => 'MakeRequestController@auth_create', 'as' => 'new.make.request']);
 	Route::post('make/request', ['uses' => 'MakeRequestController@store', 'as' => 'store.make.request']);
 	Route::get('show/{id}', ['uses' => 'MakeRequestController@show', 'as' => 'show.auth.request']);

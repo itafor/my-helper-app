@@ -47,7 +47,7 @@ class ProvideRequestDetails extends Notification
     {
         return (new MailMessage)
                     ->line('You got a mail from '. $this->sender->name)
-                    ->line('They need '. $this->details->category->title)
+                    // ->line('They are interested in '. $this->details->category->title)
                     ->line('Their phone number is '. $this->sender->phone)
                     ->line('Their email address is '. $this->sender->email)
                     ->action('View Request', route('show.request', $this->details->id))
