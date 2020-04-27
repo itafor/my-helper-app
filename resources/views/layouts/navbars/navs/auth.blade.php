@@ -14,11 +14,11 @@
                     <img src="{{ asset('white') }}/img/giving_logo.png" alt="Giving">
                 </a>
                 <a href="https://digitalwebglobal.com" target="_blank">
-                    <img src="{{ asset('white') }}/img/dw_logo.png" alt="Giving">
+                    <img src="{{ asset('white') }}/img/dw_logo.png" alt="Digitalweb">
                 </a>
             </div>
             <div class="sponsor-info">
-                This is a free service provided by Sterling Bank, Giving and Digitalweb
+                Free service provided by Sterling Bank, Giving and Digitalweb
             </div>
         </div>
     </div>

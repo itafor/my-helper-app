@@ -23,7 +23,7 @@
                     <div class="card-body">
                         @if($getRequest->type == "paid")
                             <!-- <h1>Requesting for paid service</h1> -->
-                            <p>Please i require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>". I am willing to pay for it</p>
+                            <p>I require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>". I am willing to pay for it.</p>
                             <p>Kindly call me on <i>"
                                 <strong>
                                     @if($getRequest->show_phone == 1)
@@ -41,7 +41,7 @@
                             @endif
                         @else
                             <!-- <h1>Requesting for free service</h1> -->
-                            <p>Please i require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>" for free</p>
+                            <p>I require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>" for free</p>
                             <p>Kindly call me on <i>"
                                 <strong>
                                     @if($getRequest->show_phone == 1)
@@ -49,7 +49,7 @@
                                     @else
                                         *******
                                     @endif
-                            </p>
+                            </strong></i></p>
                             <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
                             @if($getRequest->show_address == 0)
                                 <p>Address ***</p>

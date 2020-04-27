@@ -26,7 +26,7 @@
                         </div>
                         
                         
-                        <div class="col-md-12">
+                        <div class="col-md-12 welcome-cards">
                             <div class="card ">
                                 <div class="card-header">
                                     <h4 class="card-title">Requests</h4>
