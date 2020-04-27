@@ -136,20 +136,32 @@ class MakeRequestController extends Controller
     public function show($id)
     {
         $getRequest = LockdownRequest::find($id);
+        $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
+        
         // dd($getRequest);
-        return view('requests.make.show', compact('getRequest'));
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted'));
     }
 
     public function sendMail($req)
     {
         $reqDetail = LockdownRequest::find($req);
         $user = auth()->user();
-        $receiver = $reqDetail->user;
-        // dd($receiver);
-        $receiver->notify(new SendRequestDetails($user, $reqDetail));
-        // dd($receiver);
-        Session::flash('status', 'Email has been successfully sent');
-        return redirect()->route('requests');
+
+        $checkIfContacted = $reqDetail->users()->allRelatedIds()->toArray();
+
+        if(in_array($user->id, $checkIfContacted)) {
+            Session::flash('status', 'You have previously shown interest in this request');
+            return redirect()->route('requests');
+        }
+        else {
+            $user->lockdownRequests()->sync($reqDetail->id, false);
+            $receiver = $reqDetail->user;
+        
+            $receiver->notify(new SendRequestDetails($user, $reqDetail));
+            // dd($receiver);
+            Session::flash('status', 'Email has been successfully sent');
+            return redirect()->route('requests');
+        }
     }
 
     /**

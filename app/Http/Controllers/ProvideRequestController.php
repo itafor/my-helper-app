@@ -116,18 +116,29 @@ class ProvideRequestController extends Controller
     public function show($id)
     {
         $getRequest = LockdownRequest::find($id);
-        return view('requests.show', compact('getRequest'));
+        $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
+        return view('requests.show', compact('getRequest', 'checkIfContacted'));
     }
 
     public function sendMail($req)
     {
         $reqDetail = LockdownRequest::find($req);
         $user = auth()->user();
-        $receiver = $reqDetail->user;
-        // dd($receiver);
-        $receiver->notify(new ProvideRequestDetails($user, $reqDetail));
-        Session::flash('status', 'Email has been successfully sent');
-        return redirect()->route('requests');
+
+        $checkIfContacted = $reqDetail->users()->allRelatedIds()->toArray();
+
+        if(in_array($user->id, $checkIfContacted)) {
+            Session::flash('status', 'You have previously shown interest in this request');
+            return redirect()->route('requests');
+        } else {
+
+            $user->lockdownRequests()->sync($reqDetail->id, false);
+            $receiver = $reqDetail->user;
+            // dd($receiver);
+            $receiver->notify(new ProvideRequestDetails($user, $reqDetail));
+            Session::flash('status', 'Email has been successfully sent');
+            return redirect()->route('requests');
+        }
     }
 
     /**

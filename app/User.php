@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\City');
     }
+
+    public function lockdownRequests()
+    {
+        return $this->belongsToMany('App\LockdownRequest');
+    }
 }
