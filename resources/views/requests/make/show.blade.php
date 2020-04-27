@@ -7,13 +7,8 @@
                 <div class="card">
                     <div class="card-header list-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
-                                @if($getRequest->type == "paid")
-                                    <h3 class="text-white">{{ __('Requesting for paid service') }}</h3>
-                                @else
-                                    <h3 class="text-white">{{ __('Requesting for free service') }}</h3>
-                                @endif
-                                
+                            <div class="col-8">    
+                                <h3 class="text-white">{{ $getRequest->category->title }}</h3>  
                             </div>
                             <div class="col-4 text-right">
                                 <a href="{{ route('requests') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
@@ -21,17 +16,16 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if($getRequest->type == "paid")
+                        @if($getRequest->type == "paid" || $getRequest->type == "Paid")
                             <!-- <h1>Requesting for paid service</h1> -->
-                            <p>I require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>". I am willing to pay for it.</p>
-                            <p>Kindly call me on <i>"
-                                <strong>
-                                    @if($getRequest->show_phone == 1)
-                                        {{ $getRequest->user->phone }}
-                                    @else
-                                        *******
-                                    @endif
-                                </strong>"</i> for <b>sale of</b> <i>"{{ $getRequest->description }}"</i> at affordable prices around <i>"{{ $getRequest->city->name }}, {{ $getRequest->state->name }}"</i>.
+                            <p>I require <strong>{{ $getRequest->category->title }}</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>. I am willing to pay for it.</p>
+                            @if($getRequest->show_phone == 1)
+                                <p>Kindly call me on <i>
+                                    <strong>{ $getRequest->user->phone }}</strong>
+                            @else
+                                <p>Kindly contact me
+                            @endif
+                                 for <b>sale of</b> <b>{{ $getRequest->category->title }}({{ $getRequest->description }})</b> at affordable prices around <i>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</i>.
                             </p>
                             <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
                             @if($getRequest->show_address == 0)
@@ -41,15 +35,13 @@
                             @endif
                         @else
                             <!-- <h1>Requesting for free service</h1> -->
-                            <p>I require "<strong>{{ $getRequest->category->title }}</strong>" around "<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>" for free</p>
-                            <p>Kindly call me on <i>"
-                                <strong>
-                                    @if($getRequest->show_phone == 1)
-                                        {{ $getRequest->user->phone }}
-                                    @else
-                                        *******
-                                    @endif
-                            </strong></i></p>
+                            <p>I require <strong>{{ $getRequest->category->title }}({{$getRequest->description}})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong> for free.</p>
+                            @if($getRequest->show_phone == 1)
+                                <p>Kindly call me on
+                                    <strong>{{ $getRequest->user->phone }}</strong>  
+                            
+                            @endif
+                            </p>
                             <p> Name <strong>{{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</strong></p> 
                             @if($getRequest->show_address == 0)
                                 <p>Address ***</p>
