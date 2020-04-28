@@ -136,7 +136,7 @@ class ProvideRequestController extends Controller
             $receiver = $reqDetail->user;
             // dd($receiver);
             $receiver->notify(new ProvideRequestDetails($user, $reqDetail));
-            Session::flash('status', 'Email has been successfully sent');
+            Session::flash("status", "Email has been sent to your mailbox. Kindly Check your spam/junk folder if you didn't receve it in your inbox.");
             return redirect()->route('requests');
         }
     }

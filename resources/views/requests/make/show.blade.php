@@ -39,6 +39,7 @@
                             @if($getRequest->show_phone == 1)
                                 <p>Kindly call me on
                                     <strong>{{ $getRequest->user->phone }}</strong>  
+                            @else
                                 <p>Kindly contact me through this platform
                             @endif
                             </p>
