@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', ['uses' => 'LandingPageController@landing_page']);
+Route::get('/', ['uses' => 'LandingPageController@landing_page', 'as'=>'home.landingpage']);
 
 Route::get('reg_type', function() {
 	return view('auth.select_registration_type');
