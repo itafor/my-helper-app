@@ -49,14 +49,6 @@
     <div class="container">
         <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-                <div class="col-sm-6 loginLink">
-                    <h2>
-                        <b>
-                            Please Login <a href="{{ route('login') }}">here</a> 
-                        </b>
-                    </h2>
-
-                </div>
             <!--      Wizard container        -->
             <div class="wizard-container">
 
@@ -114,6 +106,7 @@
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Email <small>(required)</small></label>
+                                                <a href="{{ route('login') }}" class="loginLink"><span><small >Click here to login</small></span></a>
                                                 <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
                                             </div>
                                         </div>
@@ -121,6 +114,15 @@
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
+                                                <select name="show_phone" class="form-control">
+                                                    <option value="0"> No </option>
+                                                    <option value="1">Yes</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
@@ -170,6 +172,7 @@
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Contact Email <small>(required)</small></label>
+                                                <a href="{{ route('login') }}" class="loginLink"><span><small >Click here to login</small></span></a>
                                                 <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
                                             </div>
                                         </div>
@@ -177,6 +180,15 @@
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">     
+                                            <div class="form-group">
+                                                <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
+                                                <select name="show_phone" class="form-control">
+                                                    <option value="0"> No </option>
+                                                    <option value="1">Yes</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
@@ -225,7 +237,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">
+                                        <!-- <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>How would you like to be contacted?</label><br>
                                                 <select name="mode_of_contact" class="form-control">
@@ -233,7 +245,7 @@
                                                     <option value="Phone">Phone</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="tab-pane" id="description">
                                             <!-- <div class="row"> -->
                                                 <div class="col-sm-12">
@@ -264,7 +276,7 @@
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                             <label>State</label><br>
-                                             <select name="state_id" class="form-control" id="state_id">
+                                             <select name="state_id" class="form-control" id="state_id" required>
                                                 <option value=""> Select a State </option>
                                                 @foreach($states as $state)
                                                     <option value="{{ $state->id }}">{{ $state->name }}</option>
@@ -286,6 +298,15 @@
                                             <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
                                           </div>
                                     </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Show Street Address</label><br>
+                                             <select name="show_address" class="form-control" id="show_address">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                          </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -304,7 +325,16 @@
 
                     </form>
                 </div>
+                <div class="col-sm-6 loginLink">
+                    <h2>
+                        <b>
+                            Please Login <a href="{{ route('login') }}">here</a> 
+                        </b>
+                    </h2>
+
+                </div>
             </div> <!-- wizard container -->
+            
         </div>
         </div><!-- end row -->
     </div> <!--  big container -->

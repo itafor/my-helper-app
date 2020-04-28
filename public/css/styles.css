@@ -19,6 +19,17 @@ h1,h2,h3,h4,h5,h6{
     color: #2124d6 !important;
     font-weight: bold;
 }
+.content-header h3{
+	font-weight:500;
+	margin-bottom:25px;
+	padding: 0 10%;
+}
+
+.content-header h3 span{
+	color:#494949;
+	font-size:20px;
+	display:block;
+}
 
 .h2-heading {
     margin: 0px;
@@ -30,10 +41,66 @@ h1,h2,h3,h4,h5,h6{
 .pad {
     padding: 10px;
 }
-.clickable-row:hover {
-    cursor: pointer;
-    background-color:lightgray;
+.logo-wrapper{
+	display:inline-block;
+	height:auto;
+	position:relative;
+	margin:0;
+	padding:0;
 }
+.logo-wrapper .logo-col-1, 
+.logo-wrapper .logo-col-2{
+	height:60px;
+	padding:10px;
+	display:inline-block;
+	border-right:2px solid #dfdfdf;
+	margin:0;
+	vertical-align:top;
+}
+.logo-wrapper a{
+	position:relative;
+	width:100%;
+	height:100%;
+	display:inline-block;
+}
+.logo-wrapper .logo-col-1 img{
+	width:auto;
+	height:60px;
+	padding:0 0 10px;
+	max-width:100%;
+}
+.logo-group a {
+	width:auto;
+	height:40px;
+	margin-right:10px;
+	display:inline-block;
+	background: #ffffff;
+    box-shadow: none;
+    transition: all ease-in-out .3s;
+}
+.logo-group a:hover{
+	/**box-shadow:0 0 7px 1px rgba(0,0,0,0.223);**/
+	transition: all ease-in-out .3s;
+}
+.logo-group a img{
+	width:auto;
+	height:35px;
+	padding:0 10px 0 0;
+	max-width:100%;
+	padding: 2px 0 0 2px;
+}
+.logo-wrapper .logo-col-2 .sponsor-info{
+	font-size: 12px;
+    font-weight: 600;
+    color: #494949;
+    letter-spacing: -0.35px;
+    font-style: italic;
+}
+
+.logo-wrapper .logo-col-2{
+	border:none;
+}
+
 
 
 /** ==== Custom CSS Added by Branch -Femi ==== **/
@@ -100,8 +167,8 @@ header.header .navbar.navbar-transparent {
     padding-right: 0;
 }
 .full-page>.content {
-    padding-bottom: 150px;
-    padding-top: 100px !important;
+    padding-bottom: 75px;
+    padding-top: 50px !important;
 }
 .content-wrapper{
 	padding:0;
@@ -137,7 +204,7 @@ header.header .navbar.navbar-transparent {
 	color:#ffffff !important;
 }
 .card .card-body {
-    padding: 40px 25px !important;
+    padding: 40px 25px;
 }
 .card-body .col-md-6{
 	max-width:49% !important;
@@ -389,24 +456,83 @@ table.dataTable.no-footer {
 .hidden-pc{
 	display:none;
 }
+.disclaimer{
+	display:inline-block;
+	width:100%;
+	margin:40px 0 15px;
+	padding:0 25px;
+	font-size:15px;
+}
+.disclaimer span{
+	display:block;
+	margin:0 0 12px;
+	font-weight:600;
+}
+table .clickable-row{
+	transition: all ease-in-out .3s;
+}
+table .clickable-row:hover {
+    cursor: pointer;
+	color: #ffffff;
+	background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%);
+	transition:all ease-in-out .3s;
+}
+table .clickable-row td{
+	color:#646464;
+	transition:all ease-in-out .3s;
+}
+table .clickable-row:hover td {
+	color: #ffffff !important;
+}
+.request-card{
+	background-position:right;
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+
+.request-card h2{
+	font-size:40px;
+	width:70%;
+}
+
+.request-card h3{
+	width:70%;
+	font-size:34px;
+}
+
+.request-card p{
+	width:70%;
+	font-size:18px;
+	margin-bottom: 15px;
+}
+
+.request-card .card-btn{
+	margin-bottom:30px;
+}
+
+
+
 
 
 
 /** ==== Media Queries ==== **/
 @media only screen and (max-width:991px){
 	header.header .logo{
-	    height: 45px;
+	    height: 50px;
 	}
 	header.header .logo a img{
-	    height: 50px;
+	    height: 55px;
 	}
 	header.header .navbar.navbar-transparent {
 	    padding:0;
 	    margin-top:15px;
 	}
 	header.header .navbar.bg-white {
-	    padding:0 25px;
-	    margin-top:30px;
+	    padding: 0 25px;
+	    margin-top: 12px;
+	    left: 0;
+	    box-shadow: 0 1px 3px -1px rgba(0,0,0,0.120);
+
 	}
 	header.header .navbar-nav{
 		float:right;
@@ -433,6 +559,8 @@ table.dataTable.no-footer {
 		min-width:100px !important;
 		padding:8px 7px !important;
 	}
+
+
 	.table-responsive td.time{
 		min-width:60px !important;
 	}
@@ -487,5 +615,117 @@ table.dataTable.no-footer {
 	}
 	.hidden-pc{
 		display:block;
+	}
+	.logo-wrapper .logo-col-1 img{
+		height:40px;
+	}
+	.logo-group a {
+		height:30px;
+	}
+	.logo-group a img{
+		height:20px;
+	}
+	.copyright{
+		width:100%;
+	}
+	
+}
+
+@media only screen and (max-width:620px){
+	header.header .logo{
+	    height: 55px;
+	}
+	header.header .logo a img{
+	    height: 60px;
+	}
+	.logo-wrapper .logo-col-1 img{
+		height:40px;
+	}
+	.logo-group a {
+		height:30px;
+	}
+	.logo-group a img{
+		height:25px;
+	}
+	.content-header h3, .content-header h3 span{
+		padding:0 5%;
+	}
+	.main-panel>.content {
+    	padding: 15px 15px 70px 15px;
+	}
+	.welcome-cards .card-body {
+    	padding: 40px 0px;
+	}
+	.login-page .card-body{
+		padding:40px 15px;
+	}
+	.logo-wrapper{
+		width:80%;
+	}
+	.logo-wrapper .logo-col-1, .logo-wrapper .logo-col-2{
+		width: 80%;
+	    border: 0;
+	    padding: 7px 0 0 0;
+	    height: auto;
+	    border-bottom: 1px solid #dfdfdf;
+	}
+	.logo-wrapper .logo-col-2{
+		border-bottom:0;
+	}
+	.navbar.navbar-transparent .navbar-toggler{
+		position:absolute;
+		top:0;
+		right:0;
+		transition:all ease-in-out .1s;
+	}
+	.navbar .navbar-toggler.collapsed, .navbar .navbar-toggler.collapse{
+		position: absolute !important;
+    	z-index: 1050;
+	    right: -10px;
+	    top: -100px;
+	    transition:all ease-in-out .1s;
+	}
+	.navbar button.navbar-toggler[data-target="#navigation"]{
+		top:0 !important;
+		margin: 0;
+	    position: absolute;
+	    right: 0 !important;
+	}
+	header.header .navbar.bg-white {
+   		height: 0;
+   	}
+	header.header .navbar-nav {
+	    position: absolute !important;
+	    right: 24px;
+	    margin-top: -100px;
+	    background: #ffffff;
+	    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.123);
+	}
+	header.header .navbar-nav.ml-auto {
+	    width: 120px;
+	    position: absolute !important;
+	    right: 10px;
+	    margin-top: 30px;
+	}
+	.logo-wrapper .logo-col-2 .sponsor-info{
+		font-size: 11px;
+	}
+}
+
+@media only screen and (max-width:360px){
+	
+	.logo-wrapper .logo-col-1 img {
+	    height: 30px;
+	    margin: 0;
+	    padding: 0 0 5px;
+	}
+	.logo-group a {
+		height:20px;
+	}
+	.logo-group a img{
+		height:20px;
+	}
+	.main-panel>.content {
+    	padding: 15px 0 70px;
 	}
 }

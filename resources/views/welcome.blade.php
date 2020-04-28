@@ -7,15 +7,15 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                            <h2 class="text-blue h2-heading">{{ __('What do you need right now for your lockdown?') }}</h2>
+                            <h3 class="text-blue text-center h2-heading">{{ __('Welcome to LockdownClerk where you can receive or provide goods and services for free or at a fee during the lockdown.') }} <span> {{__('We’re here to help you get through the stress of the lockdown. ')}}</span></h3>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Get Started
+                                    Get or Provide Help Here
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('make.request') }}">Receiver</a>
+                                    <a class="dropdown-item" href="{{ route('make.request') }}">Get Help</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Supplier</a>
+                                    <a class="dropdown-item" href="{{ route('provide.request') }}">Provide Help</a>
                                 </div>
                             </div>
                             <!-- <p class="text-lead text-light">
@@ -24,7 +24,7 @@
                         </div>
                         
                         
-                        <div class="col-md-12">
+                        <div class="col-md-12 welcome-cards">
                             <div class="card ">
                                 <div class="card-header">
                                     <h4 class="card-title">Requests</h4>
@@ -144,7 +144,7 @@
                                             
                                         <tr class='clickable-row' 
                                                     @if($req->request_type == 1)
-                                                        onclick="alert('Please login to see this request')"
+    
                                                         data-href="{{ route('view.make.request', [$req->id]) }}">
                                                     @else
                                                         data-href="{{ route('view.request', [$req->id]) }}">
@@ -171,7 +171,7 @@
 
                                                     <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
                                                     <td class="text-left category_c">{{ $req->category->title }}</td>
-                                                    <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
+                                                    <td class="text-left name_c">{{ $req->user->username }}</td>
                                                     <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
 
                                                     @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
@@ -189,6 +189,10 @@
                                             
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="disclaimer">
+                                    <p><span>Disclaimer:</span> 
+                                    This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed.  Kindly engage with caution.</p>
                                 </div>
                             </div>
                         </div>

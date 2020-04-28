@@ -7,129 +7,68 @@
                 <div class="card">
                     <div class="card-header list-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="text-white">{{ __('View Request') }}</h3>
+                            <div class="col-8">    
+                                <h3 class="text-white">Request for {{ $getRequest->category->title }}</h3>  
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('requests') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                @if(auth()->check())
+                                    <a href="{{ route('requests') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                @else
+                                    <a href="{{ route('home.landingpage') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Name') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->user->name }}</strong></label>
-                            </div>
+                    <div class="card-body request-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
+                        @if($getRequest->type == "paid" || $getRequest->type == "Paid")
+                            <!-- <h1>Requesting for paid service</h1> -->
+                            <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
+                            <p>I require <strong>{{ $getRequest->category->title }}</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>. I am willing to pay for it.</p>
+                            @if($getRequest->show_phone == 1)
+                                <p>Kindly call me on <i>
+                                    <strong>{{ $getRequest->user->phone }}</strong>
+                            @else
+                                <p>Kindly contact me through this platform
+                            @endif
+                                 for <b>sale of</b> <b>{{ $getRequest->category->title }}({{ $getRequest->description }})</b> at affordable prices around <i>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</i>.
+                            </p>
+                            <p> <strong>{{ $getRequest->user->username }}</strong></p> 
+                            @if($getRequest->show_address == 1)
+                                <p>Address: {{ $getRequest->street }}</p>
+                            @endif
+                        @else
+                            <!-- <h1>Requesting for free service</h1> -->
+                            <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
+                            <p>I require <strong>{{ $getRequest->category->title }}({{$getRequest->description}})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong> for free.</p>
+                            @if($getRequest->show_phone == 1)
+                                <p>Kindly call me on
+                                    <strong>{{ $getRequest->user->phone }}</strong>  
+                            @else
+                                <p>Kindly contact me through this platform
+                            @endif
+                            </p>
+                            <p><strong>{{ $getRequest->user->username }}</strong></p> 
+                            @if($getRequest->show_address == 1)
+                                <p>Address: {{ $getRequest->street }}</p>
+                            @endif
+                        @endif
                         </div>
-                        <div class="row item-row">   
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Phone') }}</h5></label>
+                        @if(auth()->check())
+                            @if(in_array(auth()->user()->id, $checkIfContacted))
+                                <p style="color:red">You have previously contacted this user</p>
+                            @else
+                                @if($getRequest->user_id != auth()->user()->id)
+                                    <div class="col-4 text-left card-btn">
+                                        <a href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" onclick="disableButton()" id="email" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
+                                    </div>
+                                @endif
+                            @endif
+                        @else
+                            <div class="col-4 text-left card-btn">
+                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                             </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->user->phone }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Email') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->user->email }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Country') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->country->country_name }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('State') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->state->name }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('City') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->city->name }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Street') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->street }}</strong></label>
-                            </div>
-                        </div>
-                            @if($getRequest->user->user_type == 2) 
-
-                        <div class="row item-row">
-                                <div class="col-xl-6">
-                                    <label class="form-control-label" for="input-name"><h5>Company Name</h5></label>
-                                </div>
-                                <div class="col-xl-6">
-                                    <label class="form-control-label" for="input-name">{{ $getRequest->user->company_name }}<strong></strong></label>
-                                </div>
-                            </div>
-                        <div class="row item-row">
-                                <div class="col-xl-6">
-                                    <label class="form-control-label" for="input-name"><h5>{{ __("Company's Website") }}</h5></label>
-                                </div>
-                                <div class="col-xl-6">
-                                    <label class="form-control-label" for="input-name"><strong>{{ $getRequest->user->website }}</strong></label>
-                                </div>
-                        </div>
-                        
-                            @endif 
-                        
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('User Type') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->user->user_type == 1 ? 'Individual':'Corporate' }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Description') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->description }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Category') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->category->title }}</strong></label>
-                            </div>
-                        </div>
-                        <div class="row item-row">
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><h5>{{ __('Type') }}</h5></label>
-                            </div>
-                            <div class="col-xl-6">
-                                <label class="form-control-label" for="input-name"><strong>{{ $getRequest->type }}</strong></label>
-                            </div>
-                                                     
-                        </div>
+                        @endif  
                     </div>
-                </div>
             </div>
         </div>
     </div>

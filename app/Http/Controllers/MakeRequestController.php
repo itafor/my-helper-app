@@ -8,8 +8,10 @@ use App\Category;
 use App\Country;
 use App\State;
 use App\City;
+use App\User;
 use Stevebauman\Location\Facades\Location;
 use Session;
+use App\Notifications\SendRequestDetails;
 
 class MakeRequestController extends Controller
 {
@@ -21,7 +23,7 @@ class MakeRequestController extends Controller
     public function index(Request $request)
     {
         $ip = $request->ip();
-        $allRequests = LockdownRequest::orderBy('created_at')->get();
+        $allRequests = LockdownRequest::orderBy('created_at', 'DESC')->get();
         return view('requests.make.index', compact('allRequests'));
     }
 
@@ -96,6 +98,8 @@ class MakeRequestController extends Controller
         $lockdownRequest->street = $request->street;
         $lockdownRequest->type = $request->type;
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+        $lockdownRequest->show_address = $request->show_address;
+        $lockdownRequest->show_phone = $request->show_phone;
         
         $lockdownRequest->save();
         Session::flash('status', 'Request has been successfully registered');
@@ -132,8 +136,32 @@ class MakeRequestController extends Controller
     public function show($id)
     {
         $getRequest = LockdownRequest::find($id);
+        $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
+        
         // dd($getRequest);
-        return view('requests.make.show', compact('getRequest'));
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted'));
+    }
+
+    public function sendMail($req)
+    {
+        $reqDetail = LockdownRequest::find($req);
+        $user = auth()->user();
+
+        $checkIfContacted = $reqDetail->users()->allRelatedIds()->toArray();
+
+        if(in_array($user->id, $checkIfContacted)) {
+            Session::flash('status', 'You have previously shown interest in this request');
+            return redirect()->route('requests');
+        }
+        else {
+            $user->lockdownRequests()->sync($reqDetail->id, false);
+            $receiver = $reqDetail->user;
+        
+            $receiver->notify(new SendRequestDetails($user, $reqDetail));
+            // dd($receiver);
+            Session::flash("status", "Email has been sent to your mailbox. Kindly Check your spam/junk folder if you didn't receve it in your inbox.");
+            return redirect()->route('requests');
+        }
     }
 
     /**
