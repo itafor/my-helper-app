@@ -32,7 +32,12 @@ h1,h2,h3,h4,h5,h6{
 }
 .clickable-row:hover {
     cursor: pointer;
-    background-color:lightgray;
+	color: #ffffff;
+	/* background-color:lightgray; */
+	background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%);
+}
+.clickable-row:hover td {
+	background: transparent;
 }
 .logo-wrapper{
 	display:inline-block;

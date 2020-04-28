@@ -44,7 +44,7 @@
                                         @else
                                             <p>Kindly contact me through this platform
                                         @endif
-                                    </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} - ({{ $getRequest->description }})</strong> around<strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                    </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
                                 
                                 </p>
                                 <p>Thank you</p>
