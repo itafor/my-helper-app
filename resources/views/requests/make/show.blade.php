@@ -11,7 +11,11 @@
                                 <h3 class="text-white">Request for {{ $getRequest->category->title }}</h3>  
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('requests') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                @if(auth()->check())
+                                    <a href="{{ route('requests') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                @else
+                                    <a href="{{ route('home.landingpage') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                @endif
                             </div>
                         </div>
                     </div>
