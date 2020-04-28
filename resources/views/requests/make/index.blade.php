@@ -7,9 +7,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                        <h3 class="text-blue h2-heading">{{ __('We’re here to help you get through the stress of
-                             the lockdown. Welcome to LockdownClerk where you can receive or provide goods and 
-                             services for free or at a fee during the lockdown". Click here to get started') }}</h3>
+                            <h3 class="text-blue text-center h2-heading">{{ __('Welcome to LockdownClerk where you can receive or provide goods and services for free or at a fee during the lockdown.') }} <span> {{__('We’re here to help you get through the stress of the lockdown. ')}}</span></h3>
 
                             <div class="btn-group req-btn">
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
