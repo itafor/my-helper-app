@@ -114,7 +114,7 @@
                                     </div>
                                 <!-- </div> -->
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="input-show_address">{{ __('Show Street Address') }}</label></strong>
                                                 <select name="show_address" id="show_address" class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" >
@@ -130,7 +130,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="type">{{ __('Type') }}</label></strong>
                                                 <select name="type" id="type_id" class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" value="{{ old('type') }}" >
@@ -145,7 +145,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('mode_of_contact') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="mode_of_contact">{{ __('How would you like to be contacted?') }}</label></strong>
                                                 <select name="mode_of_contact" id="mode_of_contact" class="form-control form-control-alternative{{ $errors->has('mode_of_contact') ? ' is-invalid' : '' }}" value="{{ old('mode_of_contact') }}" >
@@ -159,10 +159,10 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        </div> -->
+                                        <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_phone') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="show_phone">{{ __('Show Phone Number') }}</label></strong>
+                                                <strong><label class="form-control-label" for="show_phone">{{ __('Show Phone Number') }}<small>(If No, you would be contacted via mail)</small></label></strong>
                                                 <select name="show_phone" id="show_phone" class="form-control form-control-alternative{{ $errors->has('show_phone') ? ' is-invalid' : '' }}">
                                                     <option value="0">No</option>
                                                     <option value="1">Yes</option>

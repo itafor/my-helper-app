@@ -7,16 +7,18 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                        <h3 class="text-blue h2-heading">{{ __('Welcome to LockDown Clerk where you can receive or provide goods and services during the lockdown.') }}<br /> <span>{{ __('We’re here to help you get through the stress of the lockdown.') }}</span></h3>
+                        <h3 class="text-blue h2-heading">{{ __('We’re here to help you get through the stress of
+                             the lockdown. Welcome to LockdownClerk where you can receive or provide goods and 
+                             services for free or at a fee during the lockdown". Click here to get started') }}</h3>
 
                             <div class="btn-group req-btn">
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Get or Provide Help Here
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('new.make.request') }}">Receiver</a>
+                                    <a class="dropdown-item" href="{{ route('new.make.request') }}">Get Help</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('new.provide.request') }}">Provider</a>
+                                    <a class="dropdown-item" href="{{ route('new.provide.request') }}">Provide Help</a>
                                 </div>
                             </div>
                         <!-- <p class="text-lead text-light">
@@ -170,7 +172,7 @@
 
                                                         <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
                                                         <td class="text-left category_c">{{ $req->category->title }}</td>
-                                                        <td class="text-left name_c">{{ $req->user->username }} {{ $req->user->last_name }}</td>
+                                                        <td class="text-left name_c">{{ $req->user->username }}</td>
                                                         <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
 
                                                         @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
