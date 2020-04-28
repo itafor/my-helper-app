@@ -18,8 +18,7 @@
     <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{ asset('assets/css/gsdk-bootstrap-wizard.css')}}" rel="stylesheet" />
 
-	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link href="assets/css/demo.css" rel="stylesheet" />
+	<link href="{{ asset('assets/css/demo.css') }}" rel="stylesheet" />
 </head>
 
 <body class="white-content">
@@ -109,7 +108,7 @@
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Email <small>(required)</small></label>
-                                                <a href="{{ route('login') }}" class="loginLink"><span><small >Click here to login</small></span></a>
+                                                <a href="{{ route('login') }}" class="loginLink"><span><small class="loginText" >Click here to login</small></span></a>
                                                 <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
                                             </div>
                                             <!-- <div class="form-group">
