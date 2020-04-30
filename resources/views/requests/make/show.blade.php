@@ -19,7 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body request-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
                         @if($getRequest->type == "paid" || $getRequest->type == "Paid")
                             <!-- <h1>Requesting for paid service</h1> -->
                             <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
@@ -58,13 +58,13 @@
                                 <p style="color:red">You have previously contacted this user</p>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
-                                    <div class="col-4 text-left">
+                                    <div class="col-4 text-left card-btn">
                                         <a href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" onclick="disableButton()" id="email" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                                     </div>
                                 @endif
                             @endif
                         @else
-                            <div class="col-4 text-left">
+                            <div class="col-4 text-left card-btn">
                                 <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                             </div>
                         @endif  

@@ -19,6 +19,17 @@ h1,h2,h3,h4,h5,h6{
     color: #2124d6 !important;
     font-weight: bold;
 }
+.content-header h3{
+	font-weight:500;
+	margin-bottom:25px;
+	padding: 0 10%;
+}
+
+.content-header h3 span{
+	color:#494949;
+	font-size:20px;
+	display:block;
+}
 
 .h2-heading {
     margin: 0px;
@@ -29,15 +40,6 @@ h1,h2,h3,h4,h5,h6{
 }
 .pad {
     padding: 10px;
-}
-.clickable-row:hover {
-    cursor: pointer;
-	color: #ffffff;
-	/* background-color:lightgray; */
-	background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%);
-}
-.clickable-row:hover td {
-	background: transparent;
 }
 .logo-wrapper{
 	display:inline-block;
@@ -70,14 +72,14 @@ h1,h2,h3,h4,h5,h6{
 .logo-group a {
 	width:auto;
 	height:40px;
-	margin-right:3px;
+	margin-right:10px;
 	display:inline-block;
 	background: #ffffff;
     box-shadow: none;
     transition: all ease-in-out .3s;
 }
 .logo-group a:hover{
-	box-shadow:0 0 7px 1px rgba(0,0,0,0.223);
+	/**box-shadow:0 0 7px 1px rgba(0,0,0,0.223);**/
 	transition: all ease-in-out .3s;
 }
 .logo-group a img{
@@ -88,11 +90,11 @@ h1,h2,h3,h4,h5,h6{
 	padding: 2px 0 0 2px;
 }
 .logo-wrapper .logo-col-2 .sponsor-info{
-	font-size:10px;
-	font-weight:600;
-	color:#6d6d6d;
-	letter-spacing: -0.75px;
-	font-style:italic;
+	font-size: 12px;
+    font-weight: 600;
+    color: #494949;
+    letter-spacing: -0.35px;
+    font-style: italic;
 }
 
 .logo-wrapper .logo-col-2{
@@ -165,8 +167,8 @@ header.header .navbar.navbar-transparent {
     padding-right: 0;
 }
 .full-page>.content {
-    padding-bottom: 150px;
-    padding-top: 100px !important;
+    padding-bottom: 75px;
+    padding-top: 50px !important;
 }
 .content-wrapper{
 	padding:0;
@@ -466,6 +468,51 @@ table.dataTable.no-footer {
 	margin:0 0 12px;
 	font-weight:600;
 }
+table .clickable-row{
+	transition: all ease-in-out .3s;
+}
+table .clickable-row:hover {
+    cursor: pointer;
+	color: #ffffff;
+	background: linear-gradient(180deg, rgba(102,95,226,1) 0%, rgba(33,36,214,1) 35%, rgba(102,95,226,1) 100%);
+	transition:all ease-in-out .3s;
+}
+table .clickable-row td{
+	color:#646464;
+	transition:all ease-in-out .3s;
+}
+table .clickable-row:hover td {
+	color: #ffffff !important;
+}
+.request-card{
+	background-position:right;
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+
+.request-card h2{
+	font-size:40px;
+	width:70%;
+}
+
+.request-card h3{
+	width:70%;
+	font-size:34px;
+}
+
+.request-card p{
+	width:70%;
+	font-size:18px;
+	margin-bottom: 15px;
+}
+
+.request-card .card-btn{
+	margin-bottom:30px;
+}
+
+
+
+
 
 
 /** ==== Media Queries ==== **/
@@ -512,6 +559,8 @@ table.dataTable.no-footer {
 		min-width:100px !important;
 		padding:8px 7px !important;
 	}
+
+
 	.table-responsive td.time{
 		min-width:60px !important;
 	}
@@ -598,6 +647,9 @@ table.dataTable.no-footer {
 	.logo-group a img{
 		height:25px;
 	}
+	.content-header h3, .content-header h3 span{
+		padding:0 5%;
+	}
 	.main-panel>.content {
     	padding: 15px 15px 70px 15px;
 	}
@@ -611,7 +663,7 @@ table.dataTable.no-footer {
 		width:80%;
 	}
 	.logo-wrapper .logo-col-1, .logo-wrapper .logo-col-2{
-		width: 70%;
+		width: 80%;
 	    border: 0;
 	    padding: 7px 0 0 0;
 	    height: auto;
@@ -654,6 +706,9 @@ table.dataTable.no-footer {
 	    position: absolute !important;
 	    right: 10px;
 	    margin-top: 30px;
+	}
+	.logo-wrapper .logo-col-2 .sponsor-info{
+		font-size: 11px;
 	}
 }
 
