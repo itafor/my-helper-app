@@ -44,7 +44,7 @@
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-Lockdown Clerk
+MyHelperApp
 @endif
 
 {{-- Subcopy --}}
