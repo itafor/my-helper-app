@@ -2,7 +2,7 @@
     <div class="logo-wrapper">
        <div class="logo-col-1">
             <a href="{{ url('/') }}" class="simple-text logo-normal">
-                <img src="{{ asset('white') }}/img/lc_logo.png" alt="Lockdown Clerk">
+                <img src="{{ asset('white') }}/img/lc_logo.png" alt="MyHelperApp Logo">
             </a>
         </div>
         <div class="logo-col-2">
