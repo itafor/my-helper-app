@@ -21,7 +21,7 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} LockdownClerk.
+© {{ date('Y') }} MyHelperApp.
 @endcomponent
 @endslot
 @endcomponent

@@ -7,7 +7,7 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Lockdown Clerk</title>
+        <title>MyHelperApp</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('white') }}/img/favicon.png">
         <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png">

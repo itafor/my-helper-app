@@ -2,7 +2,7 @@
      <div class="logo-wrapper">
         <div class="logo-col-1">
             <a href="{{ url('/') }}" class="simple-text logo-normal">
-                <img src="{{ asset('white') }}/img/lc_logo.png" alt="Lockdown Clerk">
+                <img src="{{ asset('white') }}/img/lc_logo.png" alt="MyHelperApp Logo">
             </a>
         </div>
         <div class="logo-col-2">
@@ -32,7 +32,7 @@
                         <span class="navbar-toggler-bar bar3"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" href="{{ route('requests') }}">{{ $page ?? __('Lockdown Clerk') }}</a>
+                <a class="navbar-brand" href="{{ route('requests') }}">{{ $page ?? __('MyHelperApp') }}</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-bar navbar-kebab"></span>
