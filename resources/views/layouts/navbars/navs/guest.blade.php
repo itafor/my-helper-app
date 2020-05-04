@@ -47,6 +47,11 @@
                         </a>
                     </li> -->
                     <li class="nav-item ">
+                        <a href="{{ route('how_it_works') }}" class="nav-link">
+                            <i class="tim-icons icon-laptop"></i> {{ _('How it works') }}
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                         <a href="{{ url('reg_type') }}" class="nav-link">
                             <i class="tim-icons icon-laptop"></i> {{ _('Register') }}
                         </a>
