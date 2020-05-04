@@ -35,6 +35,8 @@ Route::get('checkusername', 'MakeRequestController@checkUserName');
 Route::get('view/{id}/request', ['uses' => 'ProvideRequestController@show', 'as' => 'view.request']);
 Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'as' => 'view.make.request']);
 
+Route::get('how-it-works', ['uses' => 'PagesController@how_it_works', 'as' => 'how_it_works']);
+
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
