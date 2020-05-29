@@ -117,7 +117,20 @@ h1,h2,h3,h4,h5,h6{
 .navbar-wrapper{
 	display:none !important;
 }
-
+.search-filter{
+	display:inline-block;
+	width:100%;
+	padding:0 15px;
+	position:relative;
+	overflow:hidden;
+	margin:0 0 15px;
+}
+.search-filter input{
+	width:90%;
+	margin:0 5%;
+	border:1px solid #cdcdcd !important;
+	border-radius:0;
+}
 header.header{
 	display: block;
     position: relative;
