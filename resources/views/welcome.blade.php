@@ -25,13 +25,24 @@
                         
                         
                         <div class="col-md-12 welcome-cards">
-                            <div class="card ">
+                            <div id="card" class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Requests</h4>
                                 </div>
                                 <div class="card-body">
+                                   
                                 @include('alerts.success')
                                 <div class="requests hidden-pc" id="all-requests">
+                                     <!--Search CODE -->
+                                     <div class="search-filter">
+                                        <span class="bmd-form-group">
+                                            <div class="input-group">
+                                                <input id="cardSearch" class="form-control" placeholder="Search name, category, request type, time, price or location etc." maxlength="100"  onkeyup="searchCards()" type="text">    
+                                            </div>
+                                        </span>
+                                        <p id="summary"></p>
+                                    </div>
+                                    <!--Search CODE -->
                                         @php
                                             $i = 1;
                                         @endphp
@@ -54,29 +65,29 @@
                                                         <div class="request-content">
                                                             <div class="request-meta">
 
-                                                                <p class="type"><i class="tim-icons icon-basket-simple" aria-hidden="true"></i>{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</p>
+                                                                <p id="req_type" class="type"><i class="tim-icons icon-basket-simple" aria-hidden="true"></i>{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</p>
 
-                                                                <p class="type"><i class="tim-icons icon-tag" aria-hidden="true"></i>{{ $req->category->title }}</p>
+                                                                <p id="category" class="type"><i class="tim-icons icon-tag" aria-hidden="true"></i>{{ $req->category->title }}</p>
 
                                                                 @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
-                                                                <p class="type type_c_paid"><i class="tim-icons icon-money-coins" aria-hidden="true"></i>{{ $req->type }}</p>
+                                                                <p id="price" class="type type_c_paid"><i class="tim-icons icon-money-coins" aria-hidden="true"></i>{{ $req->type }}</p>
                                                                 @else
-                                                                <p class="type type_c_free"><i class="tim-icons icon-notes" aria-hidden="true"></i>{{ $req->type }}</p>
+                                                                <p id="price" class="type type_c_free"><i class="tim-icons icon-notes" aria-hidden="true"></i>{{ $req->type }}</p>
                                                                 @endif
 
                                                             </div>
                                                             <div class="request-comment">
                                                                 @if( $req->request_type == 1 )
-                                                                <p class="text">{{ $req->user->name }}'s Comments:  <span class="request">{{ Str::limit($req->description, 90) }}</span></p>
+                                                                <p id="name" class="text">{{ $req->user->name }}'s Comments:  <span class="request">{{ Str::limit($req->description, 90) }}</span></p>
 
                                                                 @else
-                                                                <p class="text">{{ $req->user->name }}'s Comments:  <span class="supply">{{ Str::limit($req->description, 90) }}</span></p>
+                                                                <p id="name" class="text">{{ $req->user->name }}'s Comments:  <span class="supply">{{ Str::limit($req->description, 90) }}</span></p>
 
                                                                 @endif
                                                             </div>
                                                             <div class="request-meta bottom-meta">
                                                                 <div class="pull-left">
-                                                                    <p><i class="tim-icons icon-map-big" aria-hidden="true"></i>
+                                                                    <p id="city"><i class="tim-icons icon-map-big" aria-hidden="true"></i>
                                                                         {{ $req->city->name }} {{ $req->state->name }}, {{ $req->country->country_name }}
                                                                     </p>
                                                                 </div>
@@ -92,13 +103,13 @@
                                                                     @endphp
                                                        
                                                                     @if($ageInMins < 60)
-                                                                        <div class="text-left time_c"><i class="tim-icons icon-time-alarm" aria-hidden="true"></i>{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</div>
+                                                                        <div id="time" class="text-left time_c"><i class="tim-icons icon-time-alarm" aria-hidden="true"></i>{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</div>
 
                                                                     @elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
-                                                                        <div class="text-left time_c"><i class="tim-icons icon-time-alarm" aria-hidden="true"></i>{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</div>
+                                                                        <div id="time" class="text-left time_c"><i class="tim-icons icon-time-alarm" aria-hidden="true"></i>{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</div>
 
                                                                     @else
-                                                                        <div class="text-left time_c"><i class="tim-icons icon-time-alarm" aria-hidden="true"></i>{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</div>
+                                                                        <div id="time" class="text-left time_c"><i class="tim-icons icon-time-alarm" aria-hidden="true"></i>{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</div>
                                                                     @endif
 
                                                                     
@@ -120,7 +131,10 @@
                                             $i++;
                                         @endphp
                                     @endforeach
-                                    </div>
+
+                                    
+                                </div>
+
 
                                 <div class="table-responsive hidden-mobile">
                                     <table class="table tablesorter " id="requests">
