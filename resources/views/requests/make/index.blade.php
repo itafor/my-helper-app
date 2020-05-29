@@ -24,7 +24,7 @@
                         </p> -->
                         </div>
                         <div class="col-md-12 welcome-cards">
-                            <div class="card ">
+                            <div id="card" class="card ">
                                 <div class="card-header">
                                     <h4 class="card-title">Requests</h4>
                                 </div>
