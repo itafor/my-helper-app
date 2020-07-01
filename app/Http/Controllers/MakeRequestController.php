@@ -135,11 +135,29 @@ class MakeRequestController extends Controller
      */
     public function show($id)
     {
+        $userId = auth()->user()->id;
         $getRequest = LockdownRequest::find($id);
+        // dd($getRequest);
+        
+        // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
+        // times of contacts by the same person
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
         
-        // dd($getRequest);
-        return view('requests.make.show', compact('getRequest', 'checkIfContacted'));
+        // Suggest 
+        $suggestions = LockdownRequest::orWhere([
+                                                    ['category_id', $getRequest->category_id],
+                                                    ['state_id', $getRequest->state_id],
+                                                    ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    ['request_type', '!=', $getRequest->request_type ]
+                                                ])
+                                        ->where([
+                                            ['user_id', '!=', $userId],
+                                            ])
+                                        ->orderBy('created_at', 'DESC')
+                                        ->get();
+        
+        // dd($suggestions);
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
     }
 
     public function sendMail($req)

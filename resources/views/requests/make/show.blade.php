@@ -52,7 +52,23 @@
                                 <p>Address: {{ $getRequest->street }}</p>
                             @endif
                         @endif
+                        
+                        <div class="suggestion">
+                            @foreach($suggestions as $suggestion)
+                                <div class="suggestion-area">
+                                    <a href="{{ route('view.make.request', [$id=$suggestion->id]) }}">
+                                        <b>Category:</b>{{ $suggestion->category->title }} <br>
+                                        <b>Description:</b>{{ $suggestion->description }} <br>
+                                    </a>
+                                </div>
+                                <br>
+                            @endforeach
                         </div>
+                    </div>
+
+                        
+
+                        <!-- Check if the person is logged in -->
                         @if(auth()->check())
                             @if(in_array(auth()->user()->id, $checkIfContacted))
                                 <p style="color:red">You have previously contacted this user</p>
