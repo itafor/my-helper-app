@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\LockdownRequest;
+use App\Notifications\NewRegisteredUser;
 
 class RegisterController extends Controller
 {
@@ -95,6 +96,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
+        $user->notify(new NewRegisteredUser($user));
         
 
         $this->guard()->login($user);
