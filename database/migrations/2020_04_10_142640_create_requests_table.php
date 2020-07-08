@@ -15,7 +15,7 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('lockdown_requests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->nullable()->unsigned()->index();;
+            $table->bigInteger('user_id')->nullable()->unsigned()->index();
             $table->integer('request_type')->nullable();
             $table->integer('category_id')->nullable();
             $table->string('description')->nullable();
