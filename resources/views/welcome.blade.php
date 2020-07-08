@@ -5,8 +5,48 @@
         <div class="container-fluid">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
+                    <div class="header-hero-wrap">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="hero-box">
+                                    <div class="image-wrap">
+                                        <img src="{{ asset('white') }}/img/welcome_001.jpg" alt="Welcome to My Helper"/>
+                                    </div>
+                                    <div class="content">
+                                        <h4>{{ __('Welcome to MyHelperApp')}}</h4>
+                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods and services for free or at a fee.') }}
+                                            <br /><a href="{{ route('make.request') }}">{{ __('Get Started') }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="hero-box">
+                                    <div class="image-wrap">
+                                        <img src="{{ asset('white') }}/img/welcome_002.jpg" alt="Get or Provide Help"/>
+                                    </div>
+                                    <div class="content">
+                                        <h4>{{ __('Get or Provide help')}}</h4>
+                                        <p>{{ __('Select any request to provide help. You can create your own request too. ') }}
+                                            <br /><a href="{{ route('make.request') }}">{{ __('Create a request') }}</a> or <a href="{{ route('provide.request') }}">{{ __('Provide help') }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="hero-box">
+                                    <div class="image-wrap">
+                                        <img src="{{ asset('white') }}/img/welcome_003.jpg" alt="How It Works"/>
+                                    </div>
+                                    <div class="content">
+                                        <h4>{{ __('How It Works') }}</h4>
+                                         <p>{{ __('Whether free or paid, learn how you can be helped or how you can help others.')}}  
+                                            <br /><a href="{{ route('how_it_works') }}">{{ __('Learn more') }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                     <div class="col-md-12 content-wrapper">
-                        <div class="content-header">
+                        <div class="content-header hidden_all">
                             <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods and services for free or at a fee.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
                             <div class="btn-group req-btn" >
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -24,7 +64,7 @@
                         </div>
                         
                         
-                        <div class="col-md-12 welcome-cards">
+                        <div class="welcome-cards">
                             <div id="card" class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Requests</h4>
