@@ -133,7 +133,7 @@ class MakeRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function auth_show($id)
     {
         $userId = auth()->user()->id;
         $getRequest = LockdownRequest::find($id);
@@ -142,16 +142,50 @@ class MakeRequestController extends Controller
         // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
         // times of contacts by the same person
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
+        // dd($getRequest->request_type);
         
-        // Suggest 
+        // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
                                                     ['state_id', $getRequest->state_id],
                                                     ['street', 'LIKE', '%'.$getRequest->street. '%'],
-                                                    ['request_type', '!=', $getRequest->request_type ]
-                                                ])
+                                                    ])
                                         ->where([
-                                            ['user_id', '!=', $userId],
+                                                    ['user_id', '!=', $userId],
+                                                    ['request_type', '!=', $getRequest->request_type ]
+                                            ])
+                                        ->orderBy('created_at', 'DESC')
+                                        ->get();
+        
+        
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        
+        $getRequest = LockdownRequest::find($id);
+        // dd($getRequest);
+        
+        // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
+        // times of contacts by the same person
+        $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
+        // dd($getRequest->request_type);
+        
+        // Suggest leads to requests
+        $suggestions = LockdownRequest::orWhere([
+                                                    ['category_id', $getRequest->category_id],
+                                                    ['state_id', $getRequest->state_id],
+                                                    ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    ])
+                                        ->where([
+                                                    ['request_type', '!=', $getRequest->request_type ]
                                             ])
                                         ->orderBy('created_at', 'DESC')
                                         ->get();

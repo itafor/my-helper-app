@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use App\User;
 use App\LockdownRequest;
 
-class SendRequestDetails extends Notification
+class SendRequestDetails extends Notification implements ShouldQueue
 {
     use Queueable;
     public $sender;
