@@ -108,7 +108,7 @@ class ProvideRequestController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * show details about provide request to users
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -117,7 +117,50 @@ class ProvideRequestController extends Controller
     {
         $getRequest = LockdownRequest::find($id);
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
-        return view('requests.show', compact('getRequest', 'checkIfContacted'));
+        $getRequest = LockdownRequest::find($id);
+        // Suggest leads to requests
+        $suggestions = LockdownRequest::orWhere([
+                                                    ['category_id', $getRequest->category_id],
+                                                    ['state_id', $getRequest->state_id],
+                                                    ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    ])
+                                        ->where([
+                                                    ['request_type', '!=', $getRequest->request_type ]
+                                            ])
+                                        ->orderBy('created_at', 'DESC')
+                                        ->get();
+                                        // dd($suggestions);
+        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+    }
+
+
+    /**
+     * Show details about a page to an authenticated user
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function auth_show($id)
+    {
+        $getRequest = LockdownRequest::find($id);
+        $userId = auth()->user()->id;
+        $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
+        $getRequest = LockdownRequest::find($id);
+        // Suggest leads to requests
+        $suggestions = LockdownRequest::orWhere([
+                                                    ['category_id', $getRequest->category_id],
+                                                    ['state_id', $getRequest->state_id],
+                                                    ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    ])
+                                        ->where([
+                                                    ['user_id', '!=', $userId],
+                                                    // ['request_type', 2 ]
+                                                    ['request_type', '!=', $getRequest->request_type ]
+                                            ])
+                                        ->orderBy('created_at', 'DESC')
+                                        ->get();
+                                        // dd($suggestions);
+        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
     }
 
     public function sendMail($req)

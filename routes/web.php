@@ -37,17 +37,6 @@ Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'a
 
 Route::get('how-it-works', ['uses' => 'PagesController@how_it_works', 'as' => 'how_it_works']);
 
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
-	Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
-	Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
-	Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'PageController@rtl']);
-	Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
-	Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
-	Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
-});
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
@@ -60,6 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('make/request', ['uses' => 'MakeRequestController@auth_create', 'as' => 'new.make.request']);
 	Route::post('make/request', ['uses' => 'MakeRequestController@store', 'as' => 'store.make.request']);
 	Route::get('show/{id}', ['uses' => 'MakeRequestController@show', 'as' => 'show.auth.request']);
+	Route::get('auth_view/{id}/request', ['uses' => 'ProvideRequestController@auth_show', 'as' => 'auth_view.provide.request']);
+	Route::get('auth_view/make/{id}/request', ['uses' => 'MakeRequestController@auth_show', 'as' => 'auth_view.make.request']);
 
 	Route::get('provide/request', ['uses' => 'ProvideRequestController@auth_create', 'as' => 'new.provide.request']);
 	Route::post('provide/request', ['uses' => 'ProvideRequestController@store', 'as' => 'store.provide.request']);

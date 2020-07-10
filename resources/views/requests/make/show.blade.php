@@ -56,9 +56,16 @@
                         <div class="suggestion">
                             @foreach($suggestions as $suggestion)
                                 <div class="suggestion-area">
+                                <!-- Render different URLs if they are guests or not -->
+                                @if(auth()->check())
+                                    <a href="{{ route('auth_view.make.request', [$id=$suggestion->id]) }}">
+                                @else
                                     <a href="{{ route('view.make.request', [$id=$suggestion->id]) }}">
+                                @endif
                                         <b>Category:</b>{{ $suggestion->category->title }} <br>
                                         <b>Description:</b>{{ $suggestion->description }} <br>
+                                        <b>Username:</b>{{ $suggestion->user->username }} <br>
+                                        <b>State:</b>{{ $suggestion->state->name }} <br>
                                     </a>
                                 </div>
                                 <br>
