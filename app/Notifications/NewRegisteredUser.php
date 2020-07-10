@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 use App\User;
 
 
-class NewRegisteredUser extends Notification
+class NewRegisteredUser extends Notification implements ShouldQueue
 {
     use Queueable;
     public $user;
