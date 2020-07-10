@@ -65,7 +65,7 @@
                                     @else
                                         <a href="{{ route('view.make.request', [$id=$suggestion->id]) }}">
                                     @endif
-                                            <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo">{{ $suggestion->category->title }} </span></h4>                                            
+                                            <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
                                             <div class="memo desc">{{ $suggestion->description }} </div>
                                             <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
                                         </a>
