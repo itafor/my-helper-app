@@ -5,6 +5,7 @@
                 <img src="{{ asset('white') }}/img/lc_logo.png" alt="MyHelperApp Logo">
             </a>
         </div>
+        <!--
         <div class="logo-col-2">
             <div class="logo-group">
                 <a href="https://sterling.ng" target="_blank">
@@ -21,6 +22,7 @@
                 Free service provided by Sterling Bank, Giving and Digitalweb
             </div>
         </div>
+    -->
     </div>
     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent fixed-top">
         <div class="container-fluid">
