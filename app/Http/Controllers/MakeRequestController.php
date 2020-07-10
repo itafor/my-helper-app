@@ -182,7 +182,7 @@ class MakeRequestController extends Controller
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
                                                     ['state_id', $getRequest->state_id],
-                                                    ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([
                                                     ['request_type', '!=', $getRequest->request_type ]

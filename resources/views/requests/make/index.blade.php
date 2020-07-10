@@ -154,9 +154,9 @@
                                                 
                                                     <tr class='clickable-row' 
                                                         @if($req->request_type == 1)
-                                                            data-href="{{ route('view.make.request', [$req->id]) }}">
+                                                            data-href="{{ route('auth_view.make.request', [$req->id]) }}">
                                                         @else
-                                                            data-href="{{ route('view.request', [$req->id]) }}">
+                                                            data-href="{{ route('auth_view.provide.request', [$req->id]) }}">
                                                         @endif
                                                     <td class='text-left id_c hidden_all'>{{ $i }}</td>
                                                         @php
