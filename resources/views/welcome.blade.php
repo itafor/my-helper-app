@@ -10,7 +10,8 @@
                             <div class="col-md-4">
                                 <div class="hero-box">
                                     <div class="image-wrap">
-                                        <img src="{{ asset('white') }}/img/welcome_001.jpg" alt="Welcome to My Helper"/>
+                                        <img src="{{ asset('white') }}/img/welcome_004.jpg" alt="Welcome to My Helper"/>
+                                        <h4>{{ __('Welcome to MyHelperApp') }}</h4>
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('Welcome to MyHelperApp')}}</h4>
@@ -23,6 +24,7 @@
                                 <div class="hero-box">
                                     <div class="image-wrap">
                                         <img src="{{ asset('white') }}/img/welcome_002.jpg" alt="Get or Provide Help"/>
+                                        <h4>{{ __('Get or Provide help') }}</h4>
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('Get or Provide help')}}</h4>
@@ -34,7 +36,8 @@
                             <div class="col-md-4">
                                 <div class="hero-box">
                                     <div class="image-wrap">
-                                        <img src="{{ asset('white') }}/img/welcome_003.jpg" alt="How It Works"/>
+                                        <img src="{{ asset('white') }}/img/welcome_005.jpg" alt="How It Works"/>
+                                        <h4>{{ __('How It Works') }}</h4>
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('How It Works') }}</h4>
@@ -243,7 +246,40 @@
                                             
                                         </tbody>
                                     </table>
+                                </div>                                
+
+                                <div class="sponsors">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="title">
+                                                <h3>Our Sponsors</h3>
+                                                <div class="sponsor-info">
+                                                    Free service provided by Sterling Bank, Giving and 100StarApps
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="sponsors-wrap">
+                                                <div class="item">
+                                                    <a href="https://sterling.ng" target="_blank">
+                                                        <img src="{{ asset('white') }}/img/sterling_logo.png" alt="Sterling Bank">
+                                                    </a>
+                                                </div>   
+                                                <div class="item">
+                                                    <a href="https://giving.ng" target="_blank">
+                                                        <img src="{{ asset('white') }}/img/giving_logo.png" alt="Giving">
+                                                    </a>
+                                                </div>   
+                                                <div class="item">
+                                                    <a href="https://100startapps.com" target="_blank">
+                                                        <img src="{{ asset('white') }}/img/100startapps_logo.png" alt="100StartApps">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="disclaimer">
                                     <p><span>Disclaimer:</span> 
                                     This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed.  Kindly engage with caution.</p>
