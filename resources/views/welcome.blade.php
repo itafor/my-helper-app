@@ -254,7 +254,7 @@
                                             <div class="title">
                                                 <h3>Our Sponsors</h3>
                                                 <div class="sponsor-info">
-                                                    Free service provided by Sterling Bank, Giving and 100StarApps
+                                                    Free service provided by Sterling Bank, Giving and 100StartApps
                                                 </div>
                                             </div>
                                         </div>
