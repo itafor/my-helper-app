@@ -5,6 +5,7 @@
                 <img src="{{ asset('white') }}/img/lc_logo.png" alt="MyHelperApp Logo">
             </a>
         </div>
+        <!--
         <div class="logo-col-2">
             <div class="logo-group">
                 <a href="https://sterling.ng" target="_blank">
@@ -21,6 +22,7 @@
                 Free service provided by Sterling Bank, Giving and Digitalweb
             </div>
         </div>
+    -->
     </div>
     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent fixed-top">
         <div class="container-fluid">
@@ -46,6 +48,16 @@
                             <i class="tim-icons icon-minimal-left"></i> {{ _('Back to Dashboard') }}
                         </a>
                     </li> -->
+                    <li class="nav-item ">
+                        <a href="{{ route('make.request') }}" class="nav-link">
+                            <i class="fa fa-bookmark-o"></i> {{ _('Get Help') }}
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{ route('provide.request') }}" class="nav-link">
+                            <i class="fa fa-handshake-o"></i> {{ _('Provide Help') }}
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a href="{{ route('how_it_works') }}" class="nav-link">
                             <i class="fas fa-cog"></i> {{ _('How it works') }}
