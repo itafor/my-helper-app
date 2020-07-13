@@ -61,7 +61,7 @@
                                     <div class="suggestion-area">
                                     <!-- Render different URLs if they are guests or not -->
                                     @if(auth()->check())
-                                        <a href="{{ route('auth_view.request', [$id=$suggestion->id]) }}">
+                                        <a href="{{ route('auth_view.provide.request', [$id=$suggestion->id]) }}">
                                     @else
                                         <a href="{{ route('view.request', [$id=$suggestion->id]) }}">
                                     @endif
