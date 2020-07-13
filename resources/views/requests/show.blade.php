@@ -19,8 +19,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body request-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
-                        <!-- <div class="row"> -->
+                    <div class="card-body request-card column-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
+                        <div class="column-one">
                             @if($getRequest->type == "paid" || $getRequest->type == "Paid")
                                 <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
                                 <p>
@@ -57,19 +57,16 @@
                                     <p>Address: {{ $getRequest->street }}</p>
                                 @endif
                             @endif
-
+                        </div>
+                        @if(auth()->check())
                             <div class="column-two">
                                 <div class="suggestion">
-                                    <h4>Matching Supplies</h4>
+                                    <h4>Suggestions</h4>
                                     @foreach($suggestions as $suggestion)
                                         <div class="suggestion-area">
                                         <!-- Render different URLs if they are guests or not -->
-                                        @if(auth()->check())
                                         <!-- Link to the get help page -->
                                             <a href="{{ route('auth_view.make.request', [$id=$suggestion->id]) }}">
-                                        @else
-                                            <a href="{{ route('view.make.request', [$id=$suggestion->id]) }}">
-                                        @endif
                                                 <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
                                                 <div class="memo desc">{{ $suggestion->description }} </div>
                                                 <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
@@ -79,7 +76,8 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @endif
+                        <!-- </div> -->
                         @if(auth()->check())
                             @if(in_array(auth()->user()->id, $checkIfContacted))
                                 <p style="color:red">You have previously contacted this user</p>
@@ -95,7 +93,7 @@
                                 <a onclick="alert('please login to contact this person')" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                             </div>
                         @endif  
-                    </div>                    
+                    <!-- </div>                     -->
                         <!-- <div class="col-4 text-right">
                             <a href="{{ route('show.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
                         </div> -->
