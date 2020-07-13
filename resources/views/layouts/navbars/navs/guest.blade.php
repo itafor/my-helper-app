@@ -49,6 +49,16 @@
                         </a>
                     </li> -->
                     <li class="nav-item ">
+                        <a href="{{ route('make.request') }}" class="nav-link">
+                            <i class="fa fa-bookmark-o"></i> {{ _('Get Help') }}
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{ route('provide.request') }}" class="nav-link">
+                            <i class="fa fa-handshake-o"></i> {{ _('Provide Help') }}
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                         <a href="{{ route('how_it_works') }}" class="nav-link">
                             <i class="fas fa-cog"></i> {{ _('How it works') }}
                         </a>

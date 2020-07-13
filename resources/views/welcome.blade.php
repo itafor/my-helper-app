@@ -29,7 +29,7 @@
                                     <div class="content">
                                         <h4>{{ __('Get or Provide help')}}</h4>
                                         <p>{{ __('Select any request to provide help. You can create your own request too. ') }}
-                                            <br /><a href="{{ route('make.request') }}">{{ __('Create a request') }}</a> or <a href="{{ route('provide.request') }}">{{ __('Provide help') }}</a></p>
+                                            <br /><a href="{{ route('make.request') }}">{{ __('Get Help') }}</a> or <a href="{{ route('provide.request') }}">{{ __('Provide Help') }}</a></p>
                                     </div>
                                 </div>
                             </div>
