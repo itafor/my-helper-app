@@ -23,40 +23,43 @@
                         <div class="column-one">
                             @if($getRequest->type == "paid" || $getRequest->type == "Paid")
                                 <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
-                                <p>
-                                @if($getRequest->show_phone == 1)
-                                    Please call me on 
-                                    <strong>
-                                            {{ $getRequest->user->phone }}</strong>
-                                        @else
-                                            Kindly contact me through this platform
+                                    <div class="user-request-card">
+                                        <p>
+                                        @if($getRequest->show_phone == 1)
+                                            Please call me on 
+                                            <strong>
+                                                    {{ $getRequest->user->phone }}</strong>
+                                                @else
+                                                    Kindly contact me through this platform
+                                                @endif
+                                             for <b>sale </b>of <strong>{{ $getRequest->category->title }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                        </p>
+                                        <p>Thank you for your patronage</p>
+                                        <p><strong>{{ $getRequest->user->username }}</strong></p> 
+                                        @if($getRequest->show_address == 1)
+                                            <p>Address: {{ $getRequest->street }}</p>
                                         @endif
-                                     for <b>sale </b>of <strong>{{ $getRequest->category->title }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
-                                </p>
-                                <p>Thank you for your patronage</p>
-                                <p><strong>{{ $getRequest->user->username }}</strong></p> 
-                                @if($getRequest->show_address == 1)
-                                    <p>Address: {{ $getRequest->street }}</p>
-                                @endif
-                            @else
+                                     @else
 
-                                <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
-                                @if($getRequest->show_phone == 1)
-                                    <p>Please call me on 
-                                    <strong>
-                                            {{ $getRequest->user->phone }}
-                                        @else
-                                            <p>Kindly contact me through this platform
-                                        @endif
-                                    </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
-                                
-                                </p>
-                                <p>Thank you</p>
-                                <p><strong>{{ $getRequest->user->username }}</strong></p> 
-                                @if($getRequest->show_address == 1)
-                                    <p>Address: {{ $getRequest->street }}</p>
+                                    <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
+                                    @if($getRequest->show_phone == 1)
+                                    <div class="user-request-card">
+                                        <p>Please call me on 
+                                        <strong>
+                                                {{ $getRequest->user->phone }}
+                                            @else
+                                                <p>Kindly contact me through this platform
+                                            @endif
+                                        </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                    
+                                    </p>
+                                    <p>Thank you</p>
+                                    <p><strong>{{ $getRequest->user->username }}</strong></p> 
+                                    @if($getRequest->show_address == 1)
+                                        <p>Address: {{ $getRequest->street }}</p>
+                                    @endif
                                 @endif
-                            @endif
+                            </div>
                         </div>
                         @if(auth()->check())
                             <div class="column-two">
@@ -83,13 +86,13 @@
                                 <p style="color:red">You have previously contacted this user</p>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
-                                    <div class="col-4 text-left card-btn">
+                                    <div class="text-left card-btn">
                                     <a onclick="disableButton()" id="email" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                                     </div>
                                 @endif
                             @endif
                         @else
-                            <div class="col-4 text-left card-btn">
+                            <div class="text-left card-btn">
                                 <a onclick="alert('please login to contact this person')" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                             </div>
                         @endif  
