@@ -68,7 +68,7 @@
                                         <!-- Link to the get help page -->
                                             <a href="{{ route('auth_view.make.request', [$id=$suggestion->id]) }}">
                                         @else
-                                            <a href="{{ route('view.request', [$id=$suggestion->id]) }}">
+                                            <a href="{{ route('view.make.request', [$id=$suggestion->id]) }}">
                                         @endif
                                                 <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
                                                 <div class="memo desc">{{ $suggestion->description }} </div>
