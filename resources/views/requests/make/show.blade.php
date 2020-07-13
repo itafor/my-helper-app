@@ -54,26 +54,26 @@
                                 @endif
                             @endif
                         </div>
-                        <div class="column-two">
-                            <div class="suggestion">
-                                <h4>Matching Supplies</h4>
-                                @foreach($suggestions as $suggestion)
-                                    <div class="suggestion-area">
-                                    <!-- Render different URLs if they are guests or not -->
-                                    @if(auth()->check())
-                                        <a href="{{ route('auth_view.provide.request', [$id=$suggestion->id]) }}">
-                                    @else
-                                        <a href="{{ route('view.request', [$id=$suggestion->id]) }}">
-                                    @endif
-                                            <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
-                                            <div class="memo desc">{{ $suggestion->description }} </div>
-                                            <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
-                                        </a>
-                                    </div>
-                                    <br>
-                                @endforeach
+                        <!-- Render suggestion if authenticated -->
+                        @if(auth()->check())
+                            <div class="column-two">
+                                <div class="suggestion">
+                                    <h4>Suggestions</h4>
+                                    @foreach($suggestions as $suggestion)
+                                        <div class="suggestion-area">
+                                        
+                                            <a href="{{ route('auth_view.provide.request', [$id=$suggestion->id]) }}">
+                                        
+                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
+                                                <div class="memo desc">{{ $suggestion->description }} </div>
+                                                <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
+                                            </a>
+                                        </div>
+                                        <br>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         <!-- Check if the person is logged in -->
                         @if(auth()->check())
