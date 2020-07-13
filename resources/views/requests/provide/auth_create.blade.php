@@ -8,7 +8,7 @@
                     <div class="card-header list-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="text-white">{{ __('What do you want to provide for this lockdown?') }}</h3>
+                                <h3 class="text-white">{{ __('What do you want to provide?') }}</h3>
                             </div>
                         </div>
                     </div>
