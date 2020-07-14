@@ -108,7 +108,7 @@ class ProvideRequestController extends Controller
     }
 
     /**
-     * show details about provide request to users
+     * show details about provide request to guest users
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -135,7 +135,7 @@ class ProvideRequestController extends Controller
 
 
     /**
-     * Show details about a page to an authenticated user
+     * Show details about a request to an authenticated users
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -150,7 +150,7 @@ class ProvideRequestController extends Controller
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
                                                     ['state_id', $getRequest->state_id],
-                                                    ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([
                                                     ['user_id', '!=', $userId],

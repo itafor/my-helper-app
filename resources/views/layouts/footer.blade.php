@@ -13,8 +13,8 @@
             </a> 
 
             {{ _( ' and ' ) }}
-            <a href="https://digitalwebglobal.com" target="_blank">
-                {{ _( 'Digitalweb Application Development Limited.' ) }}<img src="{{ asset('white') }}/img/brand/dw_logo.png" alt="Digitalweb AD Limited">
+            <a href="https://100startapps.com" target="_blank">
+                {{ _( '100StartApps.' ) }}<img src="{{ asset('white') }}/img/brand/100startapps_logo.png" alt="Digitalweb AD Limited">
             </a>
         </div>
     </div> 
