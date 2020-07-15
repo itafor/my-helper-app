@@ -59,3 +59,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('send/providerequest/{id}', ['uses' => 'ProvideRequestController@sendMail', 'as' => 'send.provideDetails']);
 });
 
+Route::group([
+
+    'prefix' => 'user'
+
+], function () {
+
+    Route::get('requests', 'UserController@user_requests')->name('user.request');
+
+});
+
