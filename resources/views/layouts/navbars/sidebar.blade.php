@@ -11,6 +11,12 @@
                     <p>{{ _('All Requests') }}</p>
                 </a>
             </li>
+              <li @if ($pageSlug == 'user_requests') class="active " @endif>
+                <a href="{{ route('user.request') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('My Requests') }}</p>
+                </a>
+            </li>
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="tim-icons icon-single-02"></i>
