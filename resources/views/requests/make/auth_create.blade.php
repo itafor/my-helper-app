@@ -22,7 +22,7 @@
                                     <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('category') ? ' has-danger' : '' }}">
                                             <strong><label class="form-control-label" for="input-category">{{ __('Category') }}</label></strong>
-                                            <select name="category_id" id="input-category" class="form-control form-control-alternative{{ $errors->has('category') ? ' is-invalid' : '' }}" value="{{ old('category') }}" required>
+                                            <select name="category_id" id="input-category" class="form-control form-control-alternative{{ $errors->has('category') ? ' is-invalid' : '' }} productCategory" value="{{ old('category') }}" required>
                                                 <option value="">Select a Category</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
