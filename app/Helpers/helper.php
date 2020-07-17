@@ -22,3 +22,8 @@ function getCities()
     $cities = City::all();
     return $cities;
 }
+
+function authUser()
+{
+    return auth()->user();
+}
