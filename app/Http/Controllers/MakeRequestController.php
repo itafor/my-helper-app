@@ -216,6 +216,15 @@ class MakeRequestController extends Controller
         }
     }
 
+    public function user_requests(Request $request){
+
+              $data['userRequests'] = LockdownRequest::where([
+                ['user_id',authUser()->id]
+              ])->orderBy('created_at', 'DESC')->get();
+
+        return view('users.requests', $data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
