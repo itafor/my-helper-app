@@ -65,7 +65,7 @@ Route::group([
 
 ], function () {
 
-    Route::get('requests', 'UserController@user_requests')->name('user.request');
+    Route::get('/requests', 'UserController@user_requests')->name('user.request');
 
 });
 
