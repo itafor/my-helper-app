@@ -19,7 +19,7 @@
         <!-- CSS -->
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
-        <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
 
@@ -68,8 +68,10 @@
          
 
                                 <!-- Jquery -->
-           <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+          <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+          <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
+
        
             <!-- <script src="{{ asset('white') }}/js/core/popper.min.js"></script> -->
             <!-- <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script> -->
@@ -88,10 +90,10 @@
        
         
         <!--  Notifications Plugin    -->
-       <!--  <script src="{{ asset('white') }}/js/plugins/bootstrap-notify.js"></script> -->
+        <!-- <script src="{{ asset('white') }}/js/plugins/bootstrap-notify.js"></script> -->
 
-        <script src="{{ asset('white') }}/js/white-dashboard.min.js?v=1.0.0"></script>
-        <script src="{{ asset('white') }}/js/theme.js"></script>
+        <!-- <script src="{{ asset('white') }}/js/white-dashboard.min.js?v=1.0.0"></script> -->
+        <!-- <script src="{{ asset('white') }}/js/theme.js"></script> -->
 
         @stack('js')
 
@@ -267,6 +269,7 @@
          $('.productCategory').select2();
      })
         </script>
+          <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 
     </body>
