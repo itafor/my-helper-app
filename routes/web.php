@@ -57,15 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('show/{id}/request', ['uses' => 'ProvideRequestController@show', 'as' => 'show.request']);
 	Route::get('send/makerequest/{id}', ['uses' => 'MakeRequestController@sendMail', 'as' => 'send.requestDetails']);
 	Route::get('send/providerequest/{id}', ['uses' => 'ProvideRequestController@sendMail', 'as' => 'send.provideDetails']);
+
+	Route::get('user/requests', 'UserController@user_requests')->name('user.request');
 });
 
-Route::group([
-
-    'prefix' => 'my'
-
-], function () {
-
-    Route::get('/requests', 'UserController@user_requests')->name('user.request');
-
-});
 
