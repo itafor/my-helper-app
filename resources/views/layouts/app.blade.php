@@ -19,12 +19,16 @@
         <!-- CSS -->
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
 
+      
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
+          <!-- select2 css -->
+        <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         <!-- CSS Files -->
         <script>
             var baseUrl = '{{url("/")}}';
@@ -60,62 +64,31 @@
                 </div>
             </div>
         @endauth
-        <!-- <div class="fixed-plugin">
-            <div class="dropdown show-dropdown">
-                <a href="#" data-toggle="dropdown">
-                <i class="fa fa-cog fa-2x"> </i>
-                </a>
-                <ul class="dropdown-menu">
-                <li class="header-title"> Sidebar Background</li>
-                <li class="adjustments-line">
-                    <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <div class="badge-colors text-center">
-                        <span class="badge filter badge-primary active" data-color="primary"></span>
-                        <span class="badge filter badge-info" data-color="blue"></span>
-                        <span class="badge filter badge-success" data-color="green"></span>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </li>
-                <li class="button-container">
-                    <a href="https://www.creative-tim.com/product/white-dashboard-laravel" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-                    <a href="https://white-dashboard-laravel.creative-tim.com/docs/getting-started/laravel-setup.html" target="_blank" class="btn btn-default btn-block btn-round">
-                    Documentation
-                    </a>
-                </li>
-                <li class="header-title">Thank you for 95 shares!</li>
-                <li class="button-container text-center">
-                    <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-                    <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-                    <br>
-                    <br>
-                    <a class="github-button" href="https://github.com/creativetimofficial/white-dashboard-laravel" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-                </li>
-                </ul>
-            </div>
-        </div> -->
-        <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
+       
+         
+
+                                <!-- Jquery -->
+           <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
        
-            <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
-            <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
-        <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+            <!-- <script src="{{ asset('white') }}/js/core/popper.min.js"></script> -->
+            <!-- <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script> -->
+        <!-- <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script> -->
 
         <!--  Plugin for the Wizard -->
-        <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
+        <!-- <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script> -->
 
         <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
           
-            <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-            <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
+            <!-- <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
+            <!-- <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script> -->
         <!--  Google Maps Plugin    -->
         <!-- Place this tag in your head or just before your close body tag. -->
         <script src="{{ asset('js/custom.js') }}"></script>
-        {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
-        <!-- Chart JS -->
-        {{-- <script src="{{ asset('white') }}/js/plugins/chartjs.min.js"></script> --}}
+       
+        
         <!--  Notifications Plugin    -->
-        <script src="{{ asset('white') }}/js/plugins/bootstrap-notify.js"></script>
+       <!--  <script src="{{ asset('white') }}/js/plugins/bootstrap-notify.js"></script> -->
 
         <script src="{{ asset('white') }}/js/white-dashboard.min.js?v=1.0.0"></script>
         <script src="{{ asset('white') }}/js/theme.js"></script>
@@ -286,5 +259,15 @@
         </script>
          
         @stack('js')
+        <script type="text/javascript" src="/js/app.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+         $('.productCategory').select2();
+     })
+        </script>
+
+
     </body>
 </html>
