@@ -130,12 +130,16 @@
             </form>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons media-2_sound-wave"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
+                        <a class="nav-link href="{{ route('logout') }}" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                  <i class="fa fa-lock" aria-hidden="true" title="Log Out"></i>
+                   <p>
+                    <span class="d-lg-none d-md-block">Logout</span>
                   </p>
-                </a>
+                   
+            </a>    
+            <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+            </form>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -144,10 +148,14 @@
                     <span class="d-lg-none d-md-block">Some Actions</span>
                   </p>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{{route('admin.profile')}}">Admin Profile</a>
+                  <a class="dropdown-item" href="{{route('admin.profile')}}">
+                  <i class="now-ui-icons users_single-02" title="View Profile"></i>
+                View Profile</a>
 
                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                     <i class="fa fa-lock" aria-hidden="true" title="Log Out"></i>
                    Logout
             </a>    
             <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -159,12 +167,14 @@
               
               <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.profile')}}">
-                  <i class="now-ui-icons users_single-02"></i>
+                  <i class="now-ui-icons users_single-02" title="View Profile"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Account</span>
                   </p>
                 </a>
               </li>
+
+                
             </ul>
           </div>
         </div>
