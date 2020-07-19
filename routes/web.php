@@ -70,5 +70,21 @@ Route::group(['middleware' => 'auth'], function () {
 	
 });
 
+Route::group([
+
+	'middleware' => ['auth','admin'],
+    'prefix' => 'admin'
+
+], function () {
+
+    Route::get('/requests', 'AdminController@logout')->name('admin.logout');
+    Route::get('/profile', 'AdminController@profile')->name('admin.profile');
+
+	Route::get('/dashboard', function(){
+    return view('admin.dashboard');
+	});
+
+});
+
 
 
