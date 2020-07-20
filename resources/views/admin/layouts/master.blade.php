@@ -70,10 +70,10 @@
               <p>Logistic Agents</p>
             </a>
           </li>
-          <li>
-            <a href="./map.html">
+          <li @if (isset($pageSlug) && $pageSlug == 'products_services') class="active " @endif>
+            <a href="{{route('admin.product.index')}}">
               <i class="now-ui-icons location_map-big"></i>
-              <p>Maps</p>
+              <p>Products and Services</p>
             </a>
           </li>
           <li>

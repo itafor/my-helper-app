@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\UserRequest;
 use App\LockdownRequest;
 use App\User;
@@ -29,4 +30,9 @@ class UserController extends Controller
 
         return view('users.requests', $data);
     }
+
+public function product_services(Request $request) {
+    $data['products'] = Category::orderBy('title','desc')->get();
+    return view('users.products.index',$data);
+}
 }

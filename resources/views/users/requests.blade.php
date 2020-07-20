@@ -65,7 +65,7 @@
 
                                                                 <p id="req_type" class="type"><i class="tim-icons icon-basket-simple" aria-hidden="true"></i>{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</p>
 
-                                                                <p id="category" class="type"><i class="tim-icons icon-tag" aria-hidden="true"></i>{{ $req->category->title }}</p>
+                                                                <p id="category" class="type"><i class="tim-icons icon-tag" aria-hidden="true"></i>{{ $req->category ? $req->category->title : '' }}</p>
 
                                                                 @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
                                                                 <p id="price" class="type type_c_paid"><i class="tim-icons icon-money-coins" aria-hidden="true"></i>{{ $req->type }}</p>
@@ -179,7 +179,7 @@
                                                         @endif
 
                                                         <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
-                                                        <td class="text-left category_c">{{ $req->category->title }}</td>
+                                                        <td class="text-left category_c">{{ $req->category ? $req->category->title : '' }}</td>
                                                         <td class="text-left name_c">{{ $req->user->username }}</td>
                                                         <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
 
