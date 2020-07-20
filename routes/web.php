@@ -77,7 +77,9 @@ Route::group([
 
 ], function () {
 
-    //Route::get('/requests', 'UserController@user_requests')->name('user.request');
+    Route::get('/requests', 'AdminController@logout')->name('admin.logout');
+    Route::get('/profile', 'AdminController@profile')->name('admin.profile');
+
 	Route::get('/dashboard', function(){
     return view('admin.dashboard');
 	});
