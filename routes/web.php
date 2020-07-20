@@ -79,12 +79,16 @@ Route::group([
 
     Route::get('/requests', 'AdminController@logout')->name('admin.logout');
     Route::get('/profile', 'AdminController@profile')->name('admin.profile');
+    Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+    Route::get('/logistic', 'AdminController@logisticEgents')->name('admin.logistic.agent');
+    Route::get('/add_new_logistic_agent', 'AdminController@add_new_logistic_agent')->name('admin.logistic.agent.add');
+    Route::post('/store_logistic', 'AdminController@storeLogisticEgent')->name('admin.logistic.agent.store');
+    Route::get('/{item}/{id}', 'UtilitiesController@destroyItem')->name('admin.del_items');
 
-	Route::get('/dashboard', function(){
-    return view('admin.dashboard');
-	});
 
 });
+
+
 
 
 
