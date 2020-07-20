@@ -34,6 +34,14 @@
   <link href="../admin_dashboard_assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../admin_dashboard_assets/demo/demo.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+
+   <script>
+            var baseUrl = '{{url("/")}}';
+        </script>
+     
 </head>
 
 <body class="">
@@ -42,6 +50,7 @@
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
+
       <div class="logo">
         <a href="/admin/dashboard" class="simple-text logo-normal">
          <img src="{{ asset('white') }}/img/lc_logo.png" alt="MyHelperApp Logo" style="width: 100px; height: 40px;">
@@ -49,16 +58,16 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li>
-            <a href="./dashboard.html">
+          <li @if (isset($pageSlug) && $pageSlug == 'admin_dashboard') class="active " @endif>
+            <a href="{{route('admin.dashboard')}}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="./icons.html">
+          <li @if (isset($pageSlug) && $pageSlug == 'logistic') class="active " @endif>
+            <a href="{{route('admin.logistic.agent')}}">
               <i class="now-ui-icons education_atom"></i>
-              <p>Icons</p>
+              <p>Logistic Agents</p>
             </a>
           </li>
           <li>
@@ -79,12 +88,7 @@
               <p>User Profile</p>
             </a>
           </li>
-          <li class="active ">
-            <a href="./tables.html">
-              <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Table List</p>
-            </a>
-          </li>
+        
           <li>
             <a href="./typography.html">
               <i class="now-ui-icons text_caps-small"></i>
@@ -110,7 +114,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">Welcome to Admin Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -184,7 +188,7 @@
       </div>
 
       <div class="content">
-
+        @include('admin.flash_messages')
         @yield('content')
 
        
@@ -237,6 +241,20 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../admin_dashboard_assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="../admin_dashboard_assets/demo/demo.js"></script>
+  <script src="../admin_dashboard_assets/admin_custom.js"></script>
+           
+   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <!-- sweetalert script -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <script>
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+})
+    </script>
   @yield('scripts')
 </body>
 
