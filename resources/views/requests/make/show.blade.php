@@ -8,7 +8,7 @@
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">    
-                                <h3 class="text-white">Request for {{ $getRequest->category->title }}</h3>  
+                                <h3 class="text-white">Request for {{ $getRequest->category ? $getRequest->category->title : '' }}</h3>  
                             </div>
                             <div class="col-4 text-right">
                                 @if(auth()->check())
@@ -25,14 +25,14 @@
                                 <!-- <h1>Requesting for paid service</h1> -->
                                 <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
                                 <div class="user-request-card">
-                                    <p>I require <strong>{{ $getRequest->category->title }}</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>. I am willing to pay for it.</p>
+                                    <p>I require <strong>{{ $getRequest->category ? $getRequest->category->title : '' }}</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>. I am willing to pay for it.</p>
                                         @if($getRequest->show_phone == 1)
                                             <p>Kindly call me on <i>
                                                 <strong>{{ $getRequest->user->phone }}</strong></i></p>
                                         @else
                                             <p>Kindly contact me through this platform
                                         @endif
-                                             for <b>sale of</b> <b>{{ $getRequest->category->title }}({{ $getRequest->description }})</b> at affordable prices around <i>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</i>.
+                                             for <b>sale of</b> <b>{{ $getRequest->category ? $getRequest->category->title : '' }}({{ $getRequest->description }})</b> at affordable prices around <i>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</i>.
                                         </p>
                                         <p> <strong>{{ $getRequest->user->username }}</strong></p> 
                                         @if($getRequest->show_address == 1)
@@ -42,7 +42,7 @@
                                     <!-- <h1>Requesting for free service</h1> -->
                                 <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
                                 <div class="user-request-card">
-                                        <p>I require <strong>{{ $getRequest->category->title }}({{$getRequest->description}})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong> for free.</p>
+                                        <p>I require <strong>{{ $getRequest->category ? $getRequest->category->title : '' }}({{$getRequest->description}})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong> for free.</p>
                                         @if($getRequest->show_phone == 1)
                                             <p>Kindly call me on
                                                 <strong>{{ $getRequest->user->phone }}</strong>  
@@ -67,7 +67,7 @@
                                         
                                             <a href="{{ route('auth_view.provide.request', [$id=$suggestion->id]) }}">
                                         
-                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
+                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category ? $suggestion->category->title : ''}} </span></h4>                                            
                                                 <div class="memo desc">{{ $suggestion->description }} </div>
                                                 <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
                                             </a>

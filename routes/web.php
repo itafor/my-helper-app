@@ -38,6 +38,8 @@ Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'a
 Route::get('how-it-works', ['uses' => 'PagesController@how_it_works', 'as' => 'how_it_works']);
 
 
+
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
@@ -59,36 +61,50 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('send/providerequest/{id}', ['uses' => 'ProvideRequestController@sendMail', 'as' => 'send.provideDetails']);
 
 	Route::group([
-
     'prefix' => 'user'
-
 ], function () {
-
     Route::get('/requests', 'UserController@user_requests')->name('user.request');
-
+    Route::get('/product/services', 'UserController@product_services')->name('user.product.services');
 });
 	
 });
 
 Route::group([
-
 	'middleware' => ['auth','admin'],
     'prefix' => 'admin'
-
 ], function () {
-
-    Route::get('/requests', 'AdminController@logout')->name('admin.logout');
     Route::get('/profile', 'AdminController@profile')->name('admin.profile');
     Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     Route::get('/logistic', 'AdminController@logisticEgents')->name('admin.logistic.agent');
     Route::get('/add_new_logistic_agent', 'AdminController@add_new_logistic_agent')->name('admin.logistic.agent.add');
+    Route::get('edit_logistic/{id}', 'AdminController@edit_logistic')->name('admin.logistic.agent.edit');
+    Route::post('/update_logistic/', 'AdminController@update_logistic')->name('admin.logistic.agent.update');
+
     Route::post('/store_logistic', 'AdminController@storeLogisticEgent')->name('admin.logistic.agent.store');
     Route::get('/{item}/{id}', 'UtilitiesController@destroyItem')->name('admin.del_items');
-
-
 });
 
+Route::group([
+	'middleware' => ['auth','admin'],
+], function () {
+    Route::get('admin_edit_logistic/{id}', 'AdminController@edit_logistic')->name('admin.logistic.agent.edit');
+    Route::post('/update_logistic', 'AdminController@update_logistic')->name('admin.logistic.agent.update');
+    Route::get('show_logistic_agent_details/{id}', 'AdminController@show_logistic')->name('admin.logistic.agent.show');
+});
 
+Route::group([
+	'middleware' => ['auth','admin'],
+], function () {
+    Route::get('admin/products', 'ProductsController@index')->name('admin.product.index');
+    Route::get('/admin/add_new_product', 'ProductsController@create')->name('admin.product.create');
+    Route::post('/store_product', 'ProductsController@storeLogisticEgent')->name('admin.product.store');
+});
+
+	Route::group([
+    'prefix' => 'product'
+], function () {
+    Route::get('/services', 'ProductsController@product_services')->name('product.services');
+});
 
 
 

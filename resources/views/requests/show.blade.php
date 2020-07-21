@@ -8,7 +8,7 @@
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="text-white">Supply of {{ $getRequest->category->title }}</h3>
+                                <h3 class="text-white">Supply of {{ $getRequest->category ? $getRequest->category->title : ''}}</h3>
                             </div>
                             <div class="col-4 text-right">
                                 @if(auth()->check())
@@ -32,7 +32,7 @@
                                                 @else
                                                     Kindly contact me through this platform
                                                 @endif
-                                             for <b>sale </b>of <strong>{{ $getRequest->category->title }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                             for <b>sale </b>of <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
                                         </p>
                                         <p>Thank you for your patronage</p>
                                         <p><strong>{{ $getRequest->user->username }}</strong></p> 
@@ -50,7 +50,7 @@
                                             @else
                                                 <p>Kindly contact me through this platform
                                             @endif
-                                        </strong>for <b>free</b> <strong>{{ $getRequest->category->title }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                        </strong>for <b>free</b> <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
                                     
                                     </p>
                                     <p>Thank you</p>
@@ -70,7 +70,7 @@
                                         <!-- Render different URLs if they are guests or not -->
                                         <!-- Link to the get help page -->
                                             <a href="{{ route('auth_view.make.request', [$id=$suggestion->id]) }}">
-                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category->title }} </span></h4>                                            
+                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category ? $suggestion->category->title : '' }} </span></h4>                                            
                                                 <div class="memo desc">{{ $suggestion->description }} </div>
                                                 <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
                                             </a>

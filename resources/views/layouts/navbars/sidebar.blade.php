@@ -23,6 +23,13 @@
                     <p>{{ _('User Profile') }}</p>
                 </a>
             </li>
+
+         <li @if ($pageSlug == 'productServices') class="active " @endif>
+                <a href="{{ route('user.product.services')  }}">
+                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    <p>{{ _('Products & Services') }}</p>
+                </a>
+            </li>
             <!-- <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>

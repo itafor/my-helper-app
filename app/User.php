@@ -57,4 +57,25 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\LockdownRequest');
     }
+
+
+    public static function updateLogistic($data)
+    {
+     $logistic  =  self::where([
+            ['id', $data['logistic_id'] ],
+            ['userType', 'Logistic']
+        ])->update([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'company_name' => $data['company_name'],
+            'country_id' => $data['country_id'],
+            'state_id' => $data['state_id'],
+            'city_id' => $data['city_id'],
+            'street' => $data['street'],
+          
+        ]); 
+
+        return $logistic;
+    }
 }

@@ -53,8 +53,14 @@ Admin | Logistic Agents
                         <td>
                     <button type="button" class="btn btn-danger btn-sm" onclick="deleteItems('LogisticAgent',{{ $agent->id  }})"><i class="fa fa-trash" title="Delete"></i></button>
                           
+
+                           <a href="{{route('admin.logistic.agent.show',[$agent->id])}}">
                           <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+
+                          <a href="{{route('admin.logistic.agent.edit',[$agent->id])}}">
                           <button class="btn btn-sm btn-primary"><i class="fa fa-edit" title="Edit"></i></button>
+                          </a>
 
                         </td>
                        
