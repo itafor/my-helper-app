@@ -96,25 +96,21 @@
                     <small style="color: red; font-size: 14px;"> {{ $message }}</small>
                     @enderror
                           </div>
-
                          <div class="form-group">
                             <label for="exampleInputEmail1">Commet (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
-                         
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit" class="btn btn-primary btn-header">
                               Contact  {{ $getRequest->user->username }}
                           </button>
                         </form>
                                     </div>
-
-
                                    @endif
                                 @endif
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+                                <a onclick="alert('please login to contact this person')" href="#" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
 
                             </div>
                         @endif 
