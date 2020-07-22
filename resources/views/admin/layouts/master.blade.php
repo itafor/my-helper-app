@@ -64,6 +64,12 @@
               <p>Dashboard</p>
             </a>
           </li>
+          <li @if (isset($pageSlug) && $pageSlug == 'all_requests') class="active " @endif>
+            <a href="{{route('admin.all.requests')}}">
+              <i class="now-ui-icons education_atom"></i>
+              <p>All Requests</p>
+            </a>
+          </li>
           <li @if (isset($pageSlug) && $pageSlug == 'logistic') class="active " @endif>
             <a href="{{route('admin.logistic.agent')}}">
               <i class="now-ui-icons education_atom"></i>

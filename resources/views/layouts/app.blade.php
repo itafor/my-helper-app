@@ -42,6 +42,7 @@
                     @include('layouts.navbars.navbar')
 
                     <div class="content">
+                        @include('admin.flash_messages')
                         @yield('content')
                     </div>
 
@@ -80,7 +81,7 @@
         <!--  Plugin for the Wizard -->
         <!-- <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script> -->
 
-        <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+        <!--  More information about jquery.validate here: http://jqueryvalidation.org/  -->
           
             <!-- <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
             <!-- <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script> -->

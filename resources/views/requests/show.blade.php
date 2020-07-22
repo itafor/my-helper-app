@@ -60,6 +60,67 @@
                                     @endif
                                 @endif
                             </div>
+
+                                <!-- Check if the person is logged in -->
+                        @if(auth()->check())
+                            @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
+                                <p style="color:red">You have previously contacted this user 
+                                <a href="#">View status</a>
+                                </p>
+                            @else
+                                @if($getRequest->user_id != auth()->user()->id)
+                                
+                                        @if($getRequest->request_type == 2)
+
+                                     <div class="text-left card-btn">
+                                       
+                         <form class="form" method="post" action="{{ route('request.apply') }}">
+                            @csrf
+                          <div class="form-group">
+                            <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$getRequest->id}}" >
+                              @error('request_id')
+                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
+                    @enderror
+                          </div>
+
+                           <div class="form-group">
+                            <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{$getRequest->user_id}}" >
+                               @error('requester_id')
+                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
+                    @enderror
+                          </div>
+
+                          <div class="form-group">
+                            <input type="hidden" name="request_type" class="form-control" id="request_type" value="Provide Help" >
+                               @error('request_type')
+                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
+                    @enderror
+                          </div>
+
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">Commet (Optional)</label>
+                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
+                          </div>
+                         
+                          <button type="submit" class="btn btn-primary">
+                              Contact  {{ $getRequest->user->username }}
+                          </button>
+                        </form>
+                                    </div>
+
+
+                                   @endif
+                                @endif
+                            @endif
+                        @else
+                            <div class="text-left card-btn">
+                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+
+                            </div>
+                        @endif 
+
+
+
                         </div>
                         @if(auth()->check())
                             <div class="column-two">
@@ -81,7 +142,7 @@
                             </div>
                         @endif
                         <!-- </div> -->
-                        @if(auth()->check())
+                    <!--     @if(auth()->check())
                             @if(in_array(auth()->user()->id, $checkIfContacted))
                                 <p style="color:red">You have previously contacted this user</p>
                             @else
@@ -95,7 +156,7 @@
                             <div class="text-left card-btn">
                                 <a onclick="alert('please login to contact this person')" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
                             </div>
-                        @endif  
+                        @endif   -->
                     <!-- </div>                     -->
                         <!-- <div class="col-4 text-right">
                             <a href="{{ route('show.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>

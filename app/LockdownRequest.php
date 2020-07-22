@@ -36,5 +36,9 @@ class LockdownRequest extends Model
         return $this->belongsToMany('App\User');
     }
 
+     public function request_bidders(){
+        return $this->hasMany(RequestBidders::class,'request_id','id');
+    }
+
     
 }

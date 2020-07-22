@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\LockdownRequest;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -21,6 +22,20 @@ class AdminController extends Controller
     public function profile(Request $request) {
     	
     return view('admin.admin_profile');
+}
+
+   public function allRequest(Request $request) {
+    $data['all_requests'] = LockdownRequest::orderBy('created_at','desc')->get();
+        
+    return view('admin.requests.index',$data);
+}
+
+   public function requestDetails($id) {
+    $data['request_details'] = LockdownRequest::where([
+        ['id',$id],
+    ])->with(['user'])->first();
+        
+    return view('admin.requests.show',$data);
 }
 
    public function logisticEgents(Request $request) {
