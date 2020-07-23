@@ -102,25 +102,41 @@
 <body>
     <div class="invoice-box">
 
-        Dear {{$help_provider->name}},<br>
+        Dear <b>{{$help_provider->name}},</b><br>
 
-        {{$request_bidder->name}} {{$request_bidder->last_name}} is highly interested in your offer to provide help. 
+        <b>{{$request_bidder->name}} {{$request_bidder->last_name}}</b> is highly interested in your offer to provide help. 
 
-        View {{$request_bidder->name}} details here  <br>
-        <hr>
+<dl class="row">
+  <dt class="col-sm-6">Phone</dt>
+  <dd class="col-sm-6">
+    {{$request_bidder->phone}} 
+</dd>
 
-        
+  <dt class="col-sm-6">Email</dt>
+  <dd class="col-sm-6">
+    {{$request_bidder->email}} 
+</dd>
+ <dt class="col-sm-6">User comment:</dt>
+  <dd class="col-sm-6">
+    {{$request_bidders->comment}} 
+</dd>
+</dl>
+
+<dl class="row">
+  <dt class="col-sm-6">Help detail description:</dt>
+  <dd class="col-sm-6">
+    <p>{{$user_request->description}}</p>
+    <a href="{{route('auth_view.provide.request',[$user_request->id])}}"> View details</a> 
+</dd>
+ 
+</dl>
 
 
-
-
-
-
-
+<!-- 
 
        request_bidder: {{$request_bidder}}<br>
        user_request : {{$user_request}}<br>
-       help_provider: {{$help_provider}}<br>
+       help_provider: {{$help_provider}}<br -->
     </div>
 </body>
 </html>

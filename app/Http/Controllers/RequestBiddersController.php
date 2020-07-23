@@ -36,7 +36,7 @@ class RequestBiddersController extends Controller
         $user_request = LockdownRequest::find($data['request_id']);// the help (request)
         $help_provider = User::find($data['requester_id']); //The user that want to provide help
 
-       $job = (new SendRequestToGetHelp($request_bidder,$user_request,$help_provider))->delay(5);
+       $job = (new SendRequestToGetHelp($request_bidder,$user_request,$help_provider,$request_bidders))->delay(5);
 
         $this->dispatch($job);
 
@@ -48,5 +48,16 @@ class RequestBiddersController extends Controller
         }
 
         return back()->with('success', 'An attempt to apply for the request below was successful');
+    }
+
+    public function approveSomeoneRequest($id){
+      $data['request_bid'] = RequestBidders::find($id);
+       $data['request_bidder'] =  $data['request_bid']->bidder;
+       $data['request'] =  $data['request_bid']->request;
+       $data['help_provider'] =  $data['request_bid']->requester;
+       $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
+
+       return view('requests.provide.approve_bidder',$data);
+
     }
 }

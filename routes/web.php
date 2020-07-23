@@ -72,6 +72,7 @@ Route::group([
 ], function () {
     Route::post('/apply', 'RequestBiddersController@applyTOGetHelp')->name('request.apply');
     Route::post('/provide', 'RequestBiddersController@provideSomeoneRequest')->name('request.provide');
+    Route::get('/approve/{id}', 'RequestBiddersController@approveSomeoneRequest')->name('request.approve');
 });
 	
 });

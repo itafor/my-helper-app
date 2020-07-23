@@ -60,9 +60,50 @@
                                     @endif
                                 @endif
                             </div>
-
                                 <!-- Check if the person is logged in -->
                         @if(auth()->check())
+                        <!-- show all users that want this help -->
+                         @if(authUser()->id == $getRequest->user->id)
+                        <h3 style="margin-top: 20px;">Users that applied to get your help</h3>
+            <div class="table-responsive">
+                  <table class="table tablesorter" id="requests">
+                    <thead class=" text-primary">
+                       <tr>
+                      <th> Full name </th>
+                      <th> Phone </th>
+                      <th> Email </th>
+                      <th> Actions </th>
+                        </tr>
+                     
+                    </thead>
+                    <tbody>
+                      @foreach($help_request_bidders as $bid)
+                      <tr>
+                        <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
+                            {{$bid->bidder ? $bid->bidder->last_name : 'N/A'}}
+                        </td>
+                        <td>{{$bid->bidder ? $bid->bidder->phone : 'N/A'}} </td>
+                        <td>{{$bid->bidder ? $bid->bidder->email : 'N/A'}} </td>
+                     
+                     <td>
+                     <a href="{{route('request.approve',[$bid->id])}}">
+                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+                        </td>
+                       
+                      </tr>
+                     @endforeach
+                    </tbody>
+                  </table>
+                </div>
+                        
+
+
+                        @endif 
+
+
+
+
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
                                 <p style="color:red">You have previously contacted this user 
                                 <a href="#">View status</a>
@@ -114,8 +155,8 @@
 
                             </div>
                         @endif 
-
-
+                       
+                    
 
                         </div>
                         @if(auth()->check())
