@@ -8,7 +8,8 @@
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">    
-                                <h3 class="text-white">Request for {{ $getRequest->category ? $getRequest->category->title : '' }}</h3>  
+
+                                <h3 class="text-white">Request for  {{ $getRequest->category ? $getRequest->category->title : '' }}</h3>  
                             </div>
                             <div class="col-4 text-right">
                                 @if(auth()->check())
@@ -56,6 +57,68 @@
                                         @endif
                                     @endif
                                 </div>
+                                   <!-- Check if the person is logged in -->
+                        @if(auth()->check())
+                            @if(in_array(auth()->user()->id, $checkIfContacted))
+                                <p style="color:red">You have previously contacted this user</p>
+                            @else
+                                @if($getRequest->user_id != auth()->user()->id)
+                                        @if($getRequest->request_type == 1)
+                                     <div class="text-left card-btn">
+                                       
+                         <form class="form" method="post" action="{{ route('request.provide') }}">
+                            @csrf
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Reqest id</label>
+                            <input type="text" name="request_id" class="form-control" id="request_id" value="{{$getRequest->id}}" >
+                          </div>
+
+                           <div class="form-group">
+                            <label for="exampleInputtext1">Reqester id</label>
+                            <input type="text" name="requester_id" class="form-control" id="request_id" value="{{$getRequest->user_id}}" >
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleInputtext1">Request type</label>
+                            <input type="text" name="request_type" class="form-control" id="request_type" value="Get Help" >
+                          </div>
+
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Logistic Partner</label>
+                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
+                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
+                                        <option value="">Choose logistic partner </option>
+                                        @foreach(getLogisticPartners() as $logistic)
+                                            <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>
+                                        @endforeach
+                                    </select>
+                                    
+                    @error('logistic_partner_id')
+                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
+                    @enderror
+                          </div>
+
+                     <div class="form-group">
+                            <label for="exampleInputEmail1">Delievery cost</label>
+                            <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
+                          </div>
+                     <div class="form-group">
+                            <label for="exampleInputEmail1">Commet (Optional)</label>
+                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
+                          </div>
+                         
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                                    </div>
+                                   @endif
+                                @endif
+                            @endif
+                        @else
+                            <div class="text-left card-btn">
+                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+
+                            </div>
+                        @endif 
                         </div>
                         <!-- Render suggestion if authenticated -->
                         @if(auth()->check())
@@ -91,9 +154,12 @@
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
+                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+
                             </div>
                         @endif  
+
+
                     </div>                       
                 </div>
             </div>

@@ -58,6 +58,18 @@ class User extends Authenticatable
         return $this->belongsToMany('App\LockdownRequest');
     }
 
+    public function requesters(){
+        return $this->hasMany(RequestBidders::class,'requester_id','id');
+    }
+
+    public function bidders(){
+        return $this->hasMany(RequestBidders::class,'bidder_id','id');
+    }
+
+     public function logistic_partners(){
+        return $this->hasMany(RequestBidders::class,'logistic_partner_id','id');
+    }
+
 
     public static function updateLogistic($data)
     {

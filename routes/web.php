@@ -66,6 +66,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/requests', 'UserController@user_requests')->name('user.request');
     Route::get('/product/services', 'UserController@product_services')->name('user.product.services');
 });
+
+Route::group([
+    'prefix' => 'request'
+], function () {
+    Route::post('/apply', 'RequestBiddersController@applyTOGetHelp')->name('request.apply');
+    Route::post('/provide', 'RequestBiddersController@provideSomeoneRequest')->name('request.provide');
+    Route::get('/approve/{id}', 'RequestBiddersController@initialRequestApprovalForhelpSeekers')->name('request.approve');
+
+ Route::post('/approve', 'RequestBiddersController@finalRequestApprovalForhelpSeekers')->name('request.approve.store');
+});
 	
 });
 
@@ -90,6 +100,10 @@ Route::group([
     Route::get('admin_edit_logistic/{id}', 'AdminController@edit_logistic')->name('admin.logistic.agent.edit');
     Route::post('/update_logistic', 'AdminController@update_logistic')->name('admin.logistic.agent.update');
     Route::get('show_logistic_agent_details/{id}', 'AdminController@show_logistic')->name('admin.logistic.agent.show');
+
+    Route::get('all_requests', 'AdminController@allRequest')->name('admin.all.requests');
+    Route::get('request_details/{id}', 'AdminController@requestDetails')->name('admin.request.show');
+
 });
 
 Route::group([
