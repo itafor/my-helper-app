@@ -131,7 +131,7 @@
  We wish to notify you that your application to get help from the following help provider has been approved. A logistic delivery partner has been assigned to deliver the following goods to you any moment from now. please be informed that, you are to pay for delivery cost. <br>
  Please find below the provider and logistic delivery partner information. Thanks<br><br>
 
-Confirmation code: {{$request_bidding_record->confirmation_code}} <br>
+Confirmation code: <b>{{$request_bidding_record->confirmation_code}}</b> <br>
  Note: You are expected to provide the above <b>code</b> to the logistic delivery partner to confirm that the goods has been received and in good condition.<br><br>
 
  Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>

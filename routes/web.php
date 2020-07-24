@@ -71,8 +71,9 @@ Route::group([
     'prefix' => 'request'
 ], function () {
     Route::post('/apply', 'RequestBiddersController@applyTOGetHelp')->name('request.apply');
-    Route::post('/provide', 'RequestBiddersController@provideSomeoneRequest')->name('request.provide');
+    Route::post('/provide', 'RequestBiddersController@grantSomeoneRequest')->name('request.provide');
     Route::get('/approve/{id}', 'RequestBiddersController@initialRequestApprovalForhelpSeekers')->name('request.approve');
+    Route::get('/reject/{id}', 'UtilitiesController@rejectRequest')->name('request.reject');
 
  Route::post('/approve', 'RequestBiddersController@finalRequestApprovalForhelpSeekers')->name('request.approve.store');
 });

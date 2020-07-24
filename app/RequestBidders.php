@@ -86,4 +86,26 @@ public static function createNew($data)
         }
 
     }
+
+
+    public static function grant_request($data)
+    {
+        $logistic = isset($data['logistic_partner_id']) ? $data['logistic_partner_id'] : null;
+        $delievery_cost = isset($data['delievery_cost']) ? $data['delievery_cost'] : null;
+        $comment = isset($data['comment']) ? $data['comment'] : null;
+
+        $grantRequest = self::create([
+            'request_id' => $data['request_id'],
+            'requester_id' => $data['requester_id'],
+            'bidder_id' => $data['bidder_id'],
+            'request_type' =>  $data['request_type'],
+            'status' =>  'Approved',
+            'logistic_partner_id' =>  $logistic,
+            'confirmation_code' =>  mt_rand(100000, 999999).$data['bidder_id'],
+            'delievery_cost' =>  $delievery_cost,
+            'comment' =>  $comment,
+        ]); 
+        
+        return $grantRequest;
+    }
 }

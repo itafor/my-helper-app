@@ -24,12 +24,11 @@
 				<div class="float-left">Help seeker details (Receiver)</div>
 				<div class="float-right">
 					@if($request_bid->status == 'Pending')
-					<button class="btn btn-danger btn-sm">Reject Request</button>
+					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
 					@endif
 				</div>
 				  </div>
 				  <div class="card-body">
-				    <!-- <blockquote class="blockquote mb-0"> -->
                   <dl class="row">
   <dt class="col-sm-3">Full Name</dt>
   <dd class="col-sm-9">
@@ -118,7 +117,7 @@
                           </div>
                          
                           <button type="submit" class="btn btn-primary float-left">Approve request</button>
-					      <button type="button" class="btn btn-danger float-right">Reject request</button>
+					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
                         </form>
                     @elseif($request_bid->status == 'Approved')
@@ -241,36 +240,6 @@
 @endsection
 
 
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-request_bid:{{$request_bid}}
-<br>
-<br>
-<br>
-request_bidder:{{$request_bidder}}
-<br>
-<br>
-<br>
-
-request:{{$request}}
-<br>
-<br>
-<br>
-logistic_partner{{$logistic_partner}}
-
-help_provider:{{$help_provider}}
-</body>
-</html> -->
-
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

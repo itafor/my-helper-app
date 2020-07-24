@@ -119,7 +119,6 @@
 
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
                                 <p style="color:red">You have previously contacted this user 
-                                <a href="#">View status</a>
                                 </p>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)

@@ -147,3 +147,39 @@ $(window).scroll(function() {
         $("#topHeader").removeClass("sticky-header");
     }
 });
+
+function rejectRequest(request_id)
+{
+  Swal.fire({
+  title: 'Do you really want to reject the selected request?',
+  text: 'You can\'t revert this action!',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, reject it!',
+  cancelButtonText: 'No, don\'t reject it'
+}).then((result) => {
+  if (result.value) {
+
+ $.ajax({
+        url: baseUrl+'/request/reject/'+request_id,
+        type: "get",
+        data: {'request_id':request_id},
+        success: function(data) {
+     Swal.fire(
+      'Rejected!',
+      'The selected item has been rejected successfully.',
+      'success'
+    )
+   window.location.href=window.location.href// refresh page
+                    }
+                });
+
+  } else if (result.dismiss === Swal.DismissReason.cancel) {
+    Swal.fire(
+      'Cancelled',
+      'An attempt to reject the selected request failed :)',
+      'error'
+    )
+  }
+})
+}
