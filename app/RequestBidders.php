@@ -71,10 +71,19 @@ public static function createNew($data)
             'logistic_partner_id' => $data['logistic_partner_id'],
             'delievery_cost' => $data['delievery_cost'],
             'comment' => $comment,
-            'confirmation_code' => '1234',
+            'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
             'status' => 'Approved',
         ]); 
 
-        return $approve_request;
+        if($approve_request){
+            $request_bid = self::where([
+            ['id', $data['request_bid_id'] ],
+            ['request_id', $data['request_id'] ],
+            ['bidder_id', $data['bidder_id'] ],
+            ['requester_id', $data['requester_id'] ],
+            ])->first();
+        return $request_bid;
+        }
+
     }
 }

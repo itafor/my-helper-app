@@ -42,6 +42,8 @@ class SendRequestToGetHelp implements ShouldQueue
     {
           Mail::send('emails.send_request_to_get_help', ['request_bidder' => $this->request_bidder,'user_request'=>$this->user_request, 'help_provider'=>$this->help_provider, 'request_bidders'=>$this->request_bidders], function ($message) {
 
+    $message->subject('Indication of interest to get help');
+
     $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
 
     $message->to($this->help_provider->email)->cc('admin@myhelperapp.com');

@@ -85,7 +85,18 @@
                         </td>
                         <td>{{$bid->bidder ? $bid->bidder->phone : 'N/A'}} </td>
                         <td>{{$bid->bidder ? $bid->bidder->email : 'N/A'}} </td>
-                        <td>{{$bid->status}} </td>
+                        <td>
+                            @if($bid->status == 'Approved')
+                           <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
+                            @elseif($bid->status =='Pending')
+                           <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
+                           @elseif($bid->status == 'Delievered')
+                           <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
+                            @elseif($bid->status == 'Rejected')
+                           <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
+                           @endif
+
+                        </td>
                      
                      <td>
                      <a href="{{route('request.approve',[$bid->id])}}">

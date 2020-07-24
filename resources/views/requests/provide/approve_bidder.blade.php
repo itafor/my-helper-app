@@ -23,7 +23,9 @@
 				  <div class="card-header">
 				<div class="float-left">Help seeker details (Receiver)</div>
 				<div class="float-right">
+					@if($request_bid->status == 'Pending')
 					<button class="btn btn-danger btn-sm">Reject Request</button>
+					@endif
 				</div>
 				  </div>
 				  <div class="card-body">

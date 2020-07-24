@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\NotifyLogisticToDeliverGoods;
 use App\Jobs\SendRequestToGetHelp;
+use App\Jobs\sendConfirmationCodeToReceiver;
 use App\LockdownRequest;
 use App\RequestBidders;
 use App\User;
@@ -77,17 +79,23 @@ class RequestBiddersController extends Controller
 
        DB::beginTransaction();
         try{
-       $request_bidders = RequestBidders::approveHelpSeekersRequest($data);
+       $request_bidding_record = RequestBidders::approveHelpSeekersRequest($data);
 
-        //$request_bidder = authUser(); //the user bidding to get help
-        //$user_request = LockdownRequest::find($data['request_id']);// the help (request)
-        //$help_provider = User::find($data['requester_id']); //The user that want to provide help
+       if($request_bidding_record){
 
-       //$job = (new SendRequestToGetHelp($request_bidder,$user_request,$help_provider,$request_bidders))->delay(5);
+        $help_provider= authUser(); //The user that want to provide help
+        $main_request = LockdownRequest::find($data['request_id']);// the help (request)
+        $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
+        $logistic_partner = User::find($data['logistic_partner_id']); // the user bidding to get help 
 
-        //$this->dispatch($job);
+       $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+        $this->dispatch($logistic_partner_job);
+
+         $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+        $this->dispatch($receiver_job);
 
             DB::commit();
+          }
         }
         catch(Exception $e){
             DB::rollback();
