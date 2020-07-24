@@ -86,7 +86,7 @@
                             <div class="form-group">
                             <label for="exampleInputEmail1">Logistic Partner</label>
                             <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
-                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control" required >
+                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
                                         <option value="">Choose logistic partner </option>
                                         @foreach(getLogisticPartners() as $logistic)
                                             <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>

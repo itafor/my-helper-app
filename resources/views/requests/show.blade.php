@@ -72,6 +72,7 @@
                       <th> Full name </th>
                       <th> Phone </th>
                       <th> Email </th>
+                      <th> Status </th>
                       <th> Actions </th>
                         </tr>
                      
@@ -84,6 +85,7 @@
                         </td>
                         <td>{{$bid->bidder ? $bid->bidder->phone : 'N/A'}} </td>
                         <td>{{$bid->bidder ? $bid->bidder->email : 'N/A'}} </td>
+                        <td>{{$bid->status}} </td>
                      
                      <td>
                      <a href="{{route('request.approve',[$bid->id])}}">
