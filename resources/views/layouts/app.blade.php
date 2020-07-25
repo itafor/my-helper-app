@@ -28,6 +28,8 @@
       
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
+<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+        
          
         <!-- CSS Files -->
         <script>
@@ -274,6 +276,15 @@
         
           <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-
+    <!-- sweetalert script -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <script>
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+})
+    </script>
     </body>
 </html>

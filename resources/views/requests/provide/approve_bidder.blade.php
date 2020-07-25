@@ -24,7 +24,7 @@
 				<div class="float-left">Help seeker details (Receiver)</div>
 				<div class="float-right">
 					@if($request_bid->status == 'Pending')
-					<button class="btn btn-danger btn-sm">Reject Request</button>
+					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
 					@endif
 				</div>
 				  </div>
@@ -118,7 +118,7 @@
                           </div>
                          
                           <button type="submit" class="btn btn-primary float-left">Approve request</button>
-					      <button type="button" class="btn btn-danger float-right">Reject request</button>
+					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
                         </form>
                     @elseif($request_bid->status == 'Approved')

@@ -57,6 +57,58 @@
                                         @endif
                                     @endif
                                 </div>
+
+                                          <!-- Check if the person is logged in -->
+                        @if(auth()->check())
+                        <!-- show all users that want this help -->
+                         @if(authUser()->id == $getRequest->user->id)
+                        <h3 style="margin-top: 20px;">Users interested to provide the above request</h3>
+            <div class="table-responsive">
+                  <table class="table tablesorter" id="requests">
+                    <thead class=" text-primary">
+                       <tr>
+                      <th> Full name </th>
+                      <th> Phone </th>
+                      <th> Email </th>
+                      <th> Status </th>
+                      <th> Actions </th>
+                        </tr>
+                     
+                    </thead>
+                    <tbody>
+                      @foreach($help_request_bidders as $bid)
+                      <tr>
+                        <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
+                            {{$bid->bidder ? $bid->bidder->last_name : 'N/A'}}
+                        </td>
+                        <td>{{$bid->bidder ? $bid->bidder->phone : 'N/A'}} </td>
+                        <td>{{$bid->bidder ? $bid->bidder->email : 'N/A'}} </td>
+                        <td>
+                            @if($bid->status == 'Approved')
+                           <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
+                            @elseif($bid->status =='Pending')
+                           <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
+                           @elseif($bid->status == 'Delievered')
+                           <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
+                            @elseif($bid->status == 'Rejected')
+                           <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
+                           @endif
+
+                        </td>
+                     
+                     <td>
+                     <a href="{{route('request.approve',[$bid->id])}}">
+                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+                        </td>
+                       
+                      </tr>
+                     @endforeach
+                    </tbody>
+                  </table>
+                </div>
+           @endif
+           @endif
                                    <!-- Check if the person is logged in -->
                         @if(auth()->check())
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Get Help'))

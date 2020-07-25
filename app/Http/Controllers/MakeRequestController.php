@@ -138,7 +138,7 @@ class MakeRequestController extends Controller
         $userId = auth()->user()->id;
         $getRequest = LockdownRequest::find($id);
         // dd($getRequest);
-        
+         $help_request_bidders = $getRequest->request_bidders;
         // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
         // times of contacts by the same person
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
@@ -158,7 +158,7 @@ class MakeRequestController extends Controller
                                         ->get();
         
         
-        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders'));
     }
 
     /**
