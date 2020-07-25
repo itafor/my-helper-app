@@ -68,7 +68,8 @@
         border-top: 2px solid #eee;
         font-weight: bold;
     }
-#rental_table {
+
+    #rental_table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -82,6 +83,7 @@
 #rental_table .rent_title{
   width: 150px;
 }
+    
     @media only screen and (max-width: 600px) {
         .invoice-box table tr.top table td {
             width: 100%;
@@ -114,20 +116,23 @@
 
 <body>
     <div class="invoice-box">
-        <div class="row">
+
+      <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left"> Goods delivery notice</h4>
+                <h4 class="card-title float-left"> Request to get help approval notice</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
 <p>
-                    Dear <strong>{{$logistic_partner->company_name}}</strong>,<br><br>
+                    Dear <strong>{{$request_owner->name}}</strong>,<br><br>
 
- We wish to notify you that the following goods will be taken from the provider to the receiver. Please find the provider and receiver information below. Thanks<br><br>
+ We wish to notify you that your request to get help on <a href="{{url('/')}}">myhelperapp</a> have been granted by the following help provider. A logistic delivery partner has been assigned to deliver the following goods to you any moment from now. please be informed that, you are to pay for delivery cost. <br>
+ Please find below the provider and logistic delivery partner information. Thanks<br><br>
 
- Note: You are expected to receive a confirmation code from the reciver then proceed to your   <a href="{{url('/')}}">myhelperapp.com</a> to confirm that the goods have been delivered.<br><br>
+Confirmation code: <b>{{$request_bidding_record->confirmation_code}}</b> <br>
+ Note: You are expected to provide the above <b>code</b> to the logistic delivery partner to confirm that the goods has been received and in good condition.<br><br>
 
  Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Description: {{$main_request->description }}<br><br>
@@ -195,50 +200,49 @@
                   </table>
 <hr>
 
-<h3>Help Receiver details</h3>
+<h3>Logistic Partner details</h3>
 
  <table class="table table-bordered" id="rental_table">
            
                     <tbody>
 
                    <tr>
-                     <td class="rent_title">Full Name</td>
+                     <td class="rent_title">Comany Name</td>
                      <td> 
-                        {{$request_bidder ? $request_bidder->name : 'N/A'}} 
-                        {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
+                        {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
                       </td> 
                    </tr>
 
                    <tr>
                      <td class="rent_title">Phone Number</td>
                      <td>  
-                {{$request_bidder ? $request_bidder->phone : 'N/A'}}
+                {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
                       </td>
                    </tr>
 
                    <tr>
                      <td class="rent_title">Email</td>
-                     <td> {{$request_bidder ? $request_bidder->email : 'N/A'}}</td>
+                     <td> {{$logistic_partner ? $logistic_partner->email : 'N/A'}}</td>
                    </tr>
 
                      <tr>
                      <td class="rent_title">Country</td>
                      <td>
-    {{$request_bidder->country ? $request_bidder->country->country_name : 'N/A'}}
+    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
                      </td>
                    </tr>
 
                     <tr>
                      <td class="rent_title">State</td>
                 <td>
-    {{$request_bidder->state ? $request_bidder->state->name : 'N/A'}}
+    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
                 </td>           
               </tr>
 
                  <tr>
                      <td class="rent_title">City</td>
                      <td>
-    {{$request_bidder->city ? $request_bidder->city->name : 'N/A'}}
+    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
                      </td>
                 </tr>
 
@@ -246,7 +250,7 @@
                      <td class="rent_title">Street Address</td>
                      <td>
                       
-                    {{$request_bidder ? $request_bidder->street: 'N/A'}}
+                    {{$logistic_partner ? $logistic_partner->street: 'N/A'}}
                     
                     </td>
                 </tr>
@@ -256,11 +260,11 @@
 
   
 
-      <!--  help_provider: {{$help_provider}}<br>
-       main_request : {{$main_request}}<br>
-       request_bidder: {{$request_bidder}}<br> 
-       logistic_partner: {{$logistic_partner}}<br> 
-       request_bidding_record: {{$request_bidding_record}}<br> -->
+<!-- help_provider {{$help_provider}}<br>
+main_request: {{$main_request}}<br>
+request_owner: {{$request_owner}}<br>
+logistic_partner: {{$logistic_partner}}<br>
+request_bidding_record: {{$request_bidding_record}}<br> -->
                
                 </div>
               </div>
@@ -269,7 +273,11 @@
         
         </div>
 
-
+       
+        
     </div>
 </body>
 </html>
+
+
+

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\GrantUserRequest;
 use App\Jobs\NotifyLogisticToDeliverGoods;
 use App\Jobs\SendRequestToGetHelp;
+use App\Jobs\SendhelpSeekerInfoToLogisticPartner;
 use App\Jobs\sendConfirmationCodeToReceiver;
 use App\LockdownRequest;
 use App\RequestBidders;
@@ -53,7 +55,7 @@ class RequestBiddersController extends Controller
     }
 
     public function initialRequestApprovalForhelpSeekers($id){
-      $data['request_bid'] = RequestBidders::find($id);
+       $data['request_bid'] = RequestBidders::find($id);
        $data['request_bidder'] =  $data['request_bid']->bidder;
        $data['request'] =  $data['request_bid']->request;
        $data['help_provider'] =  $data['request_bid']->requester;
@@ -100,6 +102,50 @@ class RequestBiddersController extends Controller
         catch(Exception $e){
             DB::rollback();
             return back()->withInput()->with('error', 'An attempt to approve user request failed. Please try again');
+        }
+
+        return back()->with('success', 'User request successfully approved');
+
+    }
+
+
+     public function grantSomeoneRequest(Request $request){
+      
+     $data = $request->all();
+    //dd($data);
+       $validator = validator::make($data,[
+            'logistic_partner_id'=>'required',
+            'delievery_cost'=>'required',
+    ]);
+
+    if($validator->fails()){
+         return  back()->withErrors($validator)
+                        ->withInput()->with('error', 'Please fill in a required fields');
+    }
+
+       DB::beginTransaction();
+        try{
+       $request_bidding_record = RequestBidders::grant_request($data);
+
+       if($request_bidding_record){
+
+        $help_provider= authUser(); //The user that want to provide help
+        $main_request = LockdownRequest::find($data['request_id']);// the help (request)
+        $request_owner = User::find($data['requester_id']); // the user bidding to get help 
+        $logistic_partner = User::find($data['logistic_partner_id']); 
+
+       $logistic_partner_job = (new SendhelpSeekerInfoToLogisticPartner($help_provider,$main_request,$request_owner,$logistic_partner,$request_bidding_record))->delay(5);
+        $this->dispatch($logistic_partner_job);
+
+         $receiver_job = (new GrantUserRequest($help_provider,$main_request,$request_owner,$logistic_partner,$request_bidding_record))->delay(5);
+        $this->dispatch($receiver_job);
+
+            DB::commit();
+          }
+        }
+        catch(Exception $e){
+            DB::rollback();
+            return back()->withInput()->with('error', 'An attempt to grant user request failed. Please try again');
         }
 
         return back()->with('success', 'User request successfully approved');

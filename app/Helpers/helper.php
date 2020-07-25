@@ -44,7 +44,7 @@ function user_already_contacted_help_provider($requester_id,$request_id,$user_id
         ['requester_id',$requester_id],
         ['request_id',$request_id],
         ['bidder_id',$user_id],
-        ['request_type','Provide Help'],
+        ['request_type',$request_type == 'Provide Help' ? 'Provide Help' : 'Get Help'],
     ])->first();
     return $result;
 }

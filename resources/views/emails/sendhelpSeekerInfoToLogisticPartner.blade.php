@@ -127,7 +127,7 @@
 
  We wish to notify you that the following goods will be taken from the provider to the receiver. Please find the provider and receiver information below. Thanks<br><br>
 
- Note: You are expected to receive a confirmation code from the reciver then proceed to your   <a href="{{url('/')}}">myhelperapp.com</a> to confirm that the goods have been delivered.<br><br>
+ Note: You are expected to receive a confirmation code from the reciver then proceed to your   <a href="{{url('/')}}">Myhelperapp.com</a> to confirm that the goods have been delivered.<br><br>
 
  Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Description: {{$main_request->description }}<br><br>
@@ -204,41 +204,41 @@
                    <tr>
                      <td class="rent_title">Full Name</td>
                      <td> 
-                        {{$request_bidder ? $request_bidder->name : 'N/A'}} 
-                        {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
+                        {{$request_owner ? $request_owner->name : 'N/A'}} 
+                        {{$request_owner ? $request_owner->last_name : 'N/A'}}
                       </td> 
                    </tr>
 
                    <tr>
                      <td class="rent_title">Phone Number</td>
                      <td>  
-                {{$request_bidder ? $request_bidder->phone : 'N/A'}}
+                {{$request_owner ? $request_owner->phone : 'N/A'}}
                       </td>
                    </tr>
 
                    <tr>
                      <td class="rent_title">Email</td>
-                     <td> {{$request_bidder ? $request_bidder->email : 'N/A'}}</td>
+                     <td> {{$request_owner ? $request_owner->email : 'N/A'}}</td>
                    </tr>
 
                      <tr>
                      <td class="rent_title">Country</td>
                      <td>
-    {{$request_bidder->country ? $request_bidder->country->country_name : 'N/A'}}
+    {{$request_owner->country ? $request_owner->country->country_name : 'N/A'}}
                      </td>
                    </tr>
 
                     <tr>
                      <td class="rent_title">State</td>
                 <td>
-    {{$request_bidder->state ? $request_bidder->state->name : 'N/A'}}
+    {{$request_owner->state ? $request_owner->state->name : 'N/A'}}
                 </td>           
               </tr>
 
                  <tr>
                      <td class="rent_title">City</td>
                      <td>
-    {{$request_bidder->city ? $request_bidder->city->name : 'N/A'}}
+    {{$request_owner->city ? $request_owner->city->name : 'N/A'}}
                      </td>
                 </tr>
 
@@ -246,21 +246,20 @@
                      <td class="rent_title">Street Address</td>
                      <td>
                       
-                    {{$request_bidder ? $request_bidder->street: 'N/A'}}
+                    {{$request_owner ? $request_owner->street: 'N/A'}}
                     
                     </td>
                 </tr>
                
        </tbody>
                   </table>
+<!-- 
+help_provider {{$help_provider}}<br>
+main_request: {{$main_request}}<br>
+request_owner: {{$request_owner}}<br>
+logistic_partner: {{$logistic_partner}}<br>
+request_bidding_record: {{$request_bidding_record}}<br> -->
 
-  
-
-      <!--  help_provider: {{$help_provider}}<br>
-       main_request : {{$main_request}}<br>
-       request_bidder: {{$request_bidder}}<br> 
-       logistic_partner: {{$logistic_partner}}<br> 
-       request_bidding_record: {{$request_bidding_record}}<br> -->
                
                 </div>
               </div>
@@ -273,3 +272,6 @@
     </div>
 </body>
 </html>
+
+
+
