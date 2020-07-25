@@ -29,7 +29,6 @@
 				</div>
 				  </div>
 				  <div class="card-body">
-				    <!-- <blockquote class="blockquote mb-0"> -->
                   <dl class="row">
   <dt class="col-sm-3">Full Name</dt>
   <dd class="col-sm-9">
@@ -241,36 +240,6 @@
 @endsection
 
 
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-request_bid:{{$request_bid}}
-<br>
-<br>
-<br>
-request_bidder:{{$request_bidder}}
-<br>
-<br>
-<br>
-
-request:{{$request}}
-<br>
-<br>
-<br>
-logistic_partner{{$logistic_partner}}
-
-help_provider:{{$help_provider}}
-</body>
-</html> -->
-
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
