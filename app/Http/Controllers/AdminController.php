@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\LockdownRequest;
+use App\RequestBidders;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -13,8 +14,8 @@ class AdminController extends Controller
 {
 
 	public function dashboard(Request $request) {
-    	
-    return view('admin.dashboard');
+    	 $data['all_requests'] = LockdownRequest::orderBy('created_at','desc')->get();
+    return view('admin.dashboard',$data);
     
 }
 	
@@ -34,9 +35,23 @@ class AdminController extends Controller
     $data['request_details'] = LockdownRequest::where([
         ['id',$id],
     ])->with(['user'])->first();
+
+    $data['help_request_bidders']= $data['request_details']->request_bidders;
         
     return view('admin.requests.show',$data);
 }
+
+
+    public function request_summary($id){
+       $data['request_bid'] = RequestBidders::find($id);
+       $data['request_bidder'] =  $data['request_bid']->bidder;
+       $data['request'] =  $data['request_bid']->request;
+       $data['help_provider'] =  $data['request_bid']->requester;
+       $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
+
+       return view('admin.requests.request_summary',$data);
+
+    }
 
    public function logisticEgents(Request $request) {
    	$data['logistics'] = User::where([

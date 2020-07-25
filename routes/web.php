@@ -105,6 +105,8 @@ Route::group([
     Route::get('all_requests', 'AdminController@allRequest')->name('admin.all.requests');
     Route::get('request_details/{id}', 'AdminController@requestDetails')->name('admin.request.show');
 
+    Route::get('/request_summary/{id}', 'AdminController@request_summary')->name('request.summary');
+
 });
 
 Route::group([
