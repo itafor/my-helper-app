@@ -1,8 +1,17 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
 
+@extends('admin.layouts.master', ['pageSlug' => 'admin_dashboard'])
+
+
+
+@section('title')
+
+Request | Summary
+
+@endsection
 
 @section('content')
 
+ 
  <!-- Grid -->
         <div class="row">
 
@@ -19,16 +28,17 @@
                 <div class="table-responsive">
 
 
-				            <div class="card">
-				  <div class="card-header">
-				<div class="float-left">Help seeker details (Receiver)</div>
-				<div class="float-right">
-					@if($request_bid->status == 'Pending')
-					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
-					@endif
-				</div>
-				  </div>
-				  <div class="card-body">
+                    <div class="card">
+          <div class="card-header">
+        <div class="float-left">Help seeker details (Receiver)</div>
+        <div class="float-right">
+          @if($request_bid->status == 'Pending')
+          <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+          @endif
+        </div>
+          </div>
+          <div class="card-body">
+            <br>
                   <dl class="row">
   <dt class="col-sm-3">Full Name</dt>
   <dd class="col-sm-9">
@@ -69,63 +79,16 @@
   </dd>
   
 </dl>
-				   <hr>
-				   <div class="col-sm-6">
-				   @if($request_bid->status == 'Pending')
+           <hr>
+           <div class="col-sm-6">
+           @if($request_bid->status == 'Pending')
                     Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
-
-					<form class="form" method="post" action="{{ route('request.approve.store') }}">
-                            @csrf
-                          <div class="form-group">
-                            <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
-                          </div>
-
-                          <div class="form-group">
-                            <input type="hidden" name="request_bid_id" class="form-control" id="request_id" value="{{$request_bid->id}}" >
-                          </div>
-
-                           <div class="form-group">
-                            <input type="hidden" name="bidder_id" class="form-control" id="request_id" value="{{$request_bidder->id}}" >
-                          </div>
-
-                           <div class="form-group">
-                            <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
-                          </div>
-
-                            <div class="form-group">
-                            <!-- <label for="exampleInputEmail1">Logistic Partner</label> -->
-                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
-                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
-                                        <option value="">Choose logistic partner </option>
-                                        @foreach(getLogisticPartners() as $logistic)
-                                            <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>
-                                        @endforeach
-                                    </select>
-                                    
-                    @error('logistic_partner_id')
-                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
-                    @enderror
-                          </div>
-
-                     <div class="form-group">
-                            <label for="exampleInputEmail1">Delivery cost</label>
-                            <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
-                          </div>
-                     <div class="form-group">
-                            <label for="exampleInputEmail1">Comment (Optional)</label>
-                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
-                          </div>
-                         
-                          <button type="submit" class="btn btn-primary float-left">Approve request</button>
-					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
-
-                        </form>
                     @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary"> {{$request_bid->status}}</span>
+                    Request Status:<span class=" text-primary"><strong> {{$request_bid->status}}</strong></span>
                     @elseif($request_bid->status == 'Rejected')
-                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+                    Request Status: <span class=" text-danger"> <strong>{{$request_bid->status}}</strong></span>
                      @elseif($request_bid->status == 'Delivered')
-                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+                    Request Status:<span class=" text-success"> <strong>{{$request_bid->status}}</strong></span>
                   @endif
                     </div>
 
@@ -133,13 +96,13 @@
 
 
 
-				  </div>
-				</div>
+          </div>
+        </div>
 
            
              <div class="card">
               <div class="card-header">
-              Your Request (Help provided)
+              Request (Help provided)
               </div>
               <div class="card-body">
                       <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>
@@ -162,7 +125,7 @@
                                 
                             </div>
 
-                  <footer class="blockquote-footer">Here is your request <cite title="Source Title">to provide help</cite></footer>
+                  <footer class="blockquote-footer">Request <cite title="Source Title">to provide help</cite></footer>
               </div>
             </div>
 
@@ -172,7 +135,7 @@
                 Logistic partner details
               </div>
               <div class="card-body">
-              	@if($logistic_partner != '')
+                @if($logistic_partner != '')
                   
                   <dl class="row">
   <dt class="col-sm-3">Company Name</dt>
@@ -235,6 +198,12 @@
         </div>
         <!-- /grid -->
 
+
+
+@endsection
+
+
+@section('scripts')
 
 
 @endsection

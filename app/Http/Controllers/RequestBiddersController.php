@@ -131,7 +131,7 @@ class RequestBiddersController extends Controller
 
         $help_provider= authUser(); //The user that want to provide help
         $main_request = LockdownRequest::find($data['request_id']);// the help (request)
-        $request_owner = User::find($data['requester_id']); // the user bidding to get help 
+        $request_owner = User::find($data['bidder_id']); // the user bidding to get help 
         $logistic_partner = User::find($data['logistic_partner_id']); 
 
        $logistic_partner_job = (new SendhelpSeekerInfoToLogisticPartner($help_provider,$main_request,$request_owner,$logistic_partner,$request_bidding_record))->delay(5);

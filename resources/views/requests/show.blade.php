@@ -90,7 +90,7 @@
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
                             @elseif($bid->status =='Pending')
                            <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
-                           @elseif($bid->status == 'Delievered')
+                           @elseif($bid->status == 'Delivered')
                            <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
                             @elseif($bid->status == 'Rejected')
                            <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
@@ -109,13 +109,7 @@
                     </tbody>
                   </table>
                 </div>
-                        
-
-
                         @endif 
-
-
-
 
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
                                 <p style="color:red">You have previously contacted this user 
@@ -150,7 +144,7 @@
                     @enderror
                           </div>
                          <div class="form-group">
-                            <label for="exampleInputEmail1">Commet (Optional)</label>
+                            <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
                           <button type="submit" class="btn btn-primary btn-header">
@@ -163,7 +157,7 @@
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="#" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
 
                             </div>
                         @endif 

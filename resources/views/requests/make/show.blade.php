@@ -88,7 +88,7 @@
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
                             @elseif($bid->status =='Pending')
                            <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
-                           @elseif($bid->status == 'Delievered')
+                           @elseif($bid->status == 'Delivered')
                            <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
                             @elseif($bid->status == 'Rejected')
                            <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
@@ -111,7 +111,7 @@
            @endif
                                    <!-- Check if the person is logged in -->
                         @if(auth()->check())
-                            @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Get Help'))
+                @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help'))
                                 <p style="color:red">You have previously contacted this user</p>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
@@ -125,11 +125,11 @@
                           </div>
 
                            <div class="form-group">
-                            <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{$getRequest->user_id}}" >
+                            <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
                             <div class="form-group">
-                            <input type="hidden" name="bidder_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
+                            <input type="hidden" name="bidder_id" class="form-control" id="request_id" value="{{$getRequest->user_id}}" >
                           </div>
 
                           <div class="form-group">
@@ -138,7 +138,7 @@
 
                             <div class="form-group">
                             <!-- <label for="exampleInputEmail1">Logistic Partner</label> -->
-                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
+                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliver this product to the beneficiary</small>
                              <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
                                         <option value="">Choose logistic partner </option>
                                         @foreach(getLogisticPartners() as $logistic)
@@ -168,7 +168,7 @@
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{ route('send.requestDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
 
                             </div>
                         @endif 

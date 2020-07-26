@@ -1,11 +1,11 @@
 
-@extends('admin.layouts.master')
+@extends('logisticPartner.layouts.master',['pageSlug' => 'logisticPartner_profile'])
 
 
 
 @section('title')
 
-Admin | Profile
+My | Profile
 
 @endsection
 
@@ -103,14 +103,14 @@ Admin | Profile
                 <div class="author">
                   <a href="#">
                     <img class="avatar border-gray" src="../admin_dashboard_assets/img/mike.jpg" alt="...">
-                    <h5 class="title">{{$admin_profile->name}} - {{$admin_profile->last_name}}</h5>
+                    <h5 class="title">{{$logistics_profile->name}}</h5>
                   </a>
                   <p class="description">
-                   Username: {{$admin_profile->username}}
+                   Username: {{$logistics_profile->username}}
                   </p>
                 </div>
                 <p class="description text-center">
-                 {{$admin_profile->street}}
+                 {{$logistics_profile->street}}
                 </p>
               </div>
               <hr>

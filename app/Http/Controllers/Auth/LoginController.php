@@ -34,12 +34,16 @@ class LoginController extends Controller
 
         return 'admin/dashboard';
 
+    }elseif (authUser()->userType == 'Logistic') {
+
+        return 'logistic_partner/dashboard';
+
     }else{
 
         return ('/home');
 
     }
-    }
+}
 
     /**
      * Create a new controller instance.

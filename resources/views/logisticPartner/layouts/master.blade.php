@@ -46,7 +46,7 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="orange">
+    <div class="sidebar" data-color="pink">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -58,28 +58,17 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li @if (isset($pageSlug) && $pageSlug == 'admin_dashboard') class="active " @endif>
-            <a href="{{route('admin.dashboard')}}">
-              <i class="now-ui-icons design_app"></i>
-              <p>Dashboard</p>
+          <li @if (isset($pageSlug) && $pageSlug == 'logisticPartner_dashboard') class="active"  @endif>
+            <a href="{{route('logistic_partner.dashboard')}}" >
+              <i class="now-ui-icons design_app" @if (isset($pageSlug) && $pageSlug == 'logisticPartner_dashboard') style="color: #000000;" @endif></i>
+              <p  @if (isset($pageSlug) && $pageSlug == 'logisticPartner_dashboard') style="color: #000000;" @endif>Dashboard</p>
             </a>
           </li>
-          <!-- <li @if (isset($pageSlug) && $pageSlug == 'all_requests') class="active " @endif>
-            <a href="{{route('admin.all.requests')}}">
-              <i class="now-ui-icons education_atom"></i>
-              <p>All Requests</p>
-            </a>
-          </li> -->
-          <li @if (isset($pageSlug) && $pageSlug == 'logistic') class="active " @endif>
-            <a href="{{route('admin.logistic.agent')}}">
-              <i class="now-ui-icons education_atom"></i>
-              <p>Logistic Agents</p>
-            </a>
-          </li>
-          <li @if (isset($pageSlug) && $pageSlug == 'products_services') class="active " @endif>
-            <a href="{{route('admin.product.index')}}">
-              <i class="now-ui-icons location_map-big"></i>
-              <p>Products and Services</p>
+         
+          <li @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') class="active"  @endif>
+            <a href="{{route('logistic_partner.requests')}}" >
+              <i class="now-ui-icons education_atom" @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') style="color: #000000;" @endif></i>
+              <p  @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') style="color: #000000;" @endif>Requests/Provisions</p>
             </a>
           </li>
           <li>
@@ -88,7 +77,8 @@
               <p>Notifications</p>
             </a>
           </li>
-          
+        
+       
          
         </ul>
       </div>
@@ -108,7 +98,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Welcome to Admin Dashboard</a>
+            <a class="navbar-brand" href="#pablo">Welcome to Logistic Partner Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -148,7 +138,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{{route('admin.profile')}}">
+                  <a class="dropdown-item" href="{{route('logistic_partner.profile')}}">
                   <i class="now-ui-icons users_single-02" title="View Profile"></i>
                 View Profile</a>
 
@@ -164,7 +154,7 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.profile')}}">
+                <a class="nav-link" href="{{route('logistic_partner.profile')}}">
                   <i class="now-ui-icons users_single-02" title="View Profile"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Account</span>

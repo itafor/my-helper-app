@@ -105,6 +105,8 @@ Route::group([
     Route::get('all_requests', 'AdminController@allRequest')->name('admin.all.requests');
     Route::get('request_details/{id}', 'AdminController@requestDetails')->name('admin.request.show');
 
+    Route::get('/request_summary/{id}', 'AdminController@request_summary')->name('request.summary');
+
 });
 
 Route::group([
@@ -113,6 +115,19 @@ Route::group([
     Route::get('admin/products', 'ProductsController@index')->name('admin.product.index');
     Route::get('/admin/add_new_product', 'ProductsController@create')->name('admin.product.create');
     Route::post('/store_product', 'ProductsController@storeLogisticEgent')->name('admin.product.store');
+});
+
+Route::group([
+    'middleware' => ['auth','logistic_partner'],
+], function () {
+    Route::get('logistic_partner/profile', 'LogisticPartnerController@profile')->name('logistic_partner.profile');
+    Route::get('logistic_partner/dashboard', 'LogisticPartnerController@dashboard')->name('logistic_partner.dashboard');
+
+    Route::get('logistic_partner/requests', 'LogisticPartnerController@requests')->name('logistic_partner.requests');
+
+    Route::get('logistic_partner_requests/{id}', 'LogisticPartnerController@initialRequestConfirmationByLogisticPartner')->name('logistic_partner.request.initialconfirmation');
+
+    Route::post('logistic_partner_requests', 'LogisticPartnerController@finalRequestConfirmationByLogisticPartner')->name('logistic_partner.request.finalconfirmation');
 });
 
 	Route::group([

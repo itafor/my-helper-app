@@ -43,8 +43,8 @@ public static function createNew($data)
 
         $request_bid = self::create([
             'request_id' => $data['request_id'],
-            'requester_id' => $data['requester_id'],
-            'bidder_id' => authUser()->id,
+            'requester_id' => $data['requester_id'],//help provider
+            'bidder_id' => authUser()->id,//help receiver
             'request_type' =>  $data['request_type'],
             'status' =>  'Pending',
             'logistic_partner_id' =>  $logistic,
@@ -96,8 +96,8 @@ public static function createNew($data)
 
         $grantRequest = self::create([
             'request_id' => $data['request_id'],
-            'requester_id' => $data['requester_id'],
-            'bidder_id' => $data['bidder_id'],
+            'requester_id' => $data['requester_id'],//help provider
+            'bidder_id' => $data['bidder_id'],//help receiver
             'request_type' =>  $data['request_type'],
             'status' =>  'Approved',
             'logistic_partner_id' =>  $logistic,
@@ -107,5 +107,22 @@ public static function createNew($data)
         ]); 
         
         return $grantRequest;
+    }
+
+
+    public static function confirmProductDelivery($data){
+    
+    $confirm =  self::where([
+        ['bidder_id',$data['bidder_id']],
+        ['id',$data['request_bid_id']],
+        ['confirmation_code',$data['confirmation_code']],
+        ['logistic_partner_id',authUser()->id],
+    ])->first();
+//dd($confirm);
+     if($confirm){
+    $confirm->status = 'Delivered';
+    $confirm->save();
+    }
+    return $confirm;
     }
 }
