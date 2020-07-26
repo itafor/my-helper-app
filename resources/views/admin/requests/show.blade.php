@@ -145,9 +145,10 @@ Admin | Logistic Agents
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> {{$request_details->request_type == 2 ? 'Users that applied to get your help' : 'Users interested to provide the above request'}}</h4>
+                <h4 class="card-title"> {{$request_details->request_type == 2 ? 'Users that applied to receive the above help' : 'Users interested to provide the above request'}}</h4>
               </div>
               <div class="card-body">
+                 <div class="table-responsive">
                   <table class="table tablesorter" id="requests">
                     <thead class=" text-primary">
                        <tr>
@@ -188,6 +189,7 @@ Admin | Logistic Agents
                      @endforeach
                     </tbody>
                   </table>
+                </div>
               </div>
             </div>
           </div>

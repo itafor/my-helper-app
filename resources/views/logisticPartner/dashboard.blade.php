@@ -13,9 +13,9 @@ logistic Partner | Dashboard
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Global Sales</h5>
-                <h4 class="card-title">Shipped Products</h4>
-                <div class="dropdown">
+                <h5 class="card-category">Total Requests (<strong>{{$count_all_request}}</strong>)</h5>
+                <h4 class="card-title">All Requests</h4>
+              <!--   <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                     <i class="now-ui-icons loader_gear"></i>
                   </button>
@@ -25,11 +25,60 @@ logistic Partner | Dashboard
                     <a class="dropdown-item" href="#">Something else here</a>
                     <a class="dropdown-item text-danger" href="#">Remove Data</a>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="lineChartExample"></canvas>
+                 <div class="table-responsive">
+                <table class="table tablesorter" id="requests#" style="width: 100px;">
+                   @if($count_all_request >=1)
+                    <thead class=" text-primary">
+                       <tr>
+                      <th> Details </th>
+                      <th> Status </th>
+                      <th> Actions </th>
+                        </tr>
+                     
+                    </thead>
+                    <tbody>
+                       @php
+                          $i = 1;
+                      @endphp
+                      @foreach($all_requests as $req)
+                      <tr>
+
+                        <td>{{ Str::limit($req->request->description, 10) }}</td>
+                       
+                        <td>
+                            @if($req->status == 'Approved')
+                           <span style="color: green; font-size: 14px;">{{$req->status}}</span>  
+                            @elseif($req->status =='Pending')
+                           <span style="color: brown; font-size: 14px;">{{$req->status}}</span>
+                           @elseif($req->status == 'Delivered')
+                           <span style="color: blue; font-size: 14px;">{{$req->status}}</span>  
+                            @elseif($req->status == 'Rejected')
+                           <span style="color: red; font-size: 14px;">{{$req->status}}</span>  
+                           @endif
+
+                        </td>
+                     
+                     <td>
+                     <a href="{{route('logistic_partner.request.initialconfirmation',[$req->id])}}">
+                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+                        </td>
+                       
+                      </tr>
+                       @php
+                       $i++;
+                    @endphp  
+                     @endforeach
+                    </tbody>
+                      @else
+                     <tr>
+                     <span style="margin-left: 20px;">No request found</span>
+                     </tr>
+                     @endif
+                  </table>
                 </div>
               </div>
               <div class="card-footer">
@@ -42,9 +91,9 @@ logistic Partner | Dashboard
           <div class="col-lg-4 col-md-6">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">2018 Sales</h5>
-                <h4 class="card-title">All products</h4>
-                <div class="dropdown">
+                <h5 class="card-category">Confirmed Requests (<strong>{{$count_confirmed_requests}}</strong>)</h5>
+                <h4 class="card-title">Confirmed requests</h4>
+               <!--  <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                     <i class="now-ui-icons loader_gear"></i>
                   </button>
@@ -54,11 +103,60 @@ logistic Partner | Dashboard
                     <a class="dropdown-item" href="#">Something else here</a>
                     <a class="dropdown-item text-danger" href="#">Remove Data</a>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+                 <div class="table-responsive">
+                <table class="table tablesorter" id="requests#" style="width: 100px;">
+                   @if($count_confirmed_requests >=1)
+                    <thead class=" text-primary">
+                       <tr>
+                      <th> Details </th>
+                      <th> Status </th>
+                      <th> Actions </th>
+                        </tr>
+                     
+                    </thead>
+                    <tbody>
+                       @php
+                          $i = 1;
+                      @endphp
+                      @foreach($confirmed_requests as $req)
+                      <tr>
+
+                        <td>{{ Str::limit($req->request->description, 10) }}</td>
+                       
+                        <td>
+                            @if($req->status == 'Approved')
+                           <span style="color: green; font-size: 14px;">{{$req->status}}</span>  
+                            @elseif($req->status =='Pending')
+                           <span style="color: brown; font-size: 14px;">{{$req->status}}</span>
+                           @elseif($req->status == 'Delivered')
+                           <span style="color: blue; font-size: 14px;">{{$req->status}}</span>  
+                            @elseif($req->status == 'Rejected')
+                           <span style="color: red; font-size: 14px;">{{$req->status}}</span>  
+                           @endif
+
+                        </td>
+                     
+                     <td>
+                     <a href="{{route('logistic_partner.request.initialconfirmation',[$req->id])}}">
+                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+                        </td>
+                       
+                      </tr>
+                       @php
+                       $i++;
+                    @endphp  
+                     @endforeach
+                    </tbody>
+                     @else
+                     <tr>
+                     <span style="margin-left: 20px;">No confirmed request found</span>
+                     </tr>
+                     @endif
+                  </table>
                 </div>
               </div>
               <div class="card-footer">
@@ -71,23 +169,74 @@ logistic Partner | Dashboard
           <div class="col-lg-4 col-md-6">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Email Statistics</h5>
-                <h4 class="card-title">24 Hours Performance</h4>
+                <h5 class="card-category">Unconfirmed Requests (<strong>{{$count_unconfirmed_requests}}</strong>)</h5>
+                <h4 class="card-title">Unconfirmed requests</h4>
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="barChartSimpleGradientsNumbers"></canvas>
+                  <div class="table-responsive">
+                <table class="table tablesorter" id="requests#" style="width: 100px;">
+                  @if($count_unconfirmed_requests >=1)
+                    <thead class=" text-primary">
+                       <tr>
+                      <th> Details </th>
+                      <th> Status </th>
+                      <th> Actions </th>
+                        </tr>
+                     
+                    </thead>
+                    <tbody>
+                       @php
+                          $i = 1;
+                      @endphp
+                      
+                      @foreach($unconfirmed_requests as $req)
+                      <tr>
+
+                        <td>{{ Str::limit($req->request->description, 10) }}</td>
+                       
+                        <td>
+                            @if($req->status == 'Approved')
+                           <span style="color: green; font-size: 14px;">{{$req->status}}</span>  
+                            @elseif($req->status =='Pending')
+                           <span style="color: brown; font-size: 14px;">{{$req->status}}</span>
+                           @elseif($req->status == 'Delivered')
+                           <span style="color: blue; font-size: 14px;">{{$req->status}}</span>  
+                            @elseif($req->status == 'Rejected')
+                           <span style="color: red; font-size: 14px;">{{$req->status}}</span>  
+                           @endif
+
+                        </td>
+                     
+                     <td>
+                     <a href="{{route('logistic_partner.request.initialconfirmation',[$req->id])}}">
+                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+                        </td>
+                       
+                      </tr>
+                       @php
+                       $i++;
+                    @endphp  
+                     @endforeach
+                     @else
+                     <tr>
+                     <span style="margin-left: 20px;">No unconfirmed request found</span>
+                     </tr>
+                     @endif
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+                  <i class="now-ui-icons ui-2_time-alarm"></i> Just Updated
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-6">
             <div class="card  card-tasks">
               <div class="card-header ">
@@ -268,7 +417,7 @@ logistic Partner | Dashboard
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 @endsection
 
 

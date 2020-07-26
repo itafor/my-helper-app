@@ -102,7 +102,7 @@ Request | Summary
            
              <div class="card">
               <div class="card-header">
-              Your Request (Help provided)
+              Request (Help provided)
               </div>
               <div class="card-body">
                       <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>
@@ -125,7 +125,7 @@ Request | Summary
                                 
                             </div>
 
-                  <footer class="blockquote-footer">Here is your request <cite title="Source Title">to provide help</cite></footer>
+                  <footer class="blockquote-footer">Request <cite title="Source Title">to provide help</cite></footer>
               </div>
             </div>
 

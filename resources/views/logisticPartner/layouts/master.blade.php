@@ -67,14 +67,14 @@
          
           <li @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') class="active"  @endif>
             <a href="{{route('logistic_partner.requests')}}" >
-              <i class="now-ui-icons design_app" @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') style="color: #000000;" @endif></i>
+              <i class="now-ui-icons education_atom" @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') style="color: #000000;" @endif></i>
               <p  @if (isset($pageSlug) && $pageSlug == 'logisticPartner_request') style="color: #000000;" @endif>Requests/Provisions</p>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+            <a href="./notifications.html">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Notifications</p>
             </a>
           </li>
         
@@ -138,7 +138,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{{route('admin.profile')}}">
+                  <a class="dropdown-item" href="{{route('logistic_partner.profile')}}">
                   <i class="now-ui-icons users_single-02" title="View Profile"></i>
                 View Profile</a>
 
@@ -154,7 +154,7 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.profile')}}">
+                <a class="nav-link" href="{{route('logistic_partner.profile')}}">
                   <i class="now-ui-icons users_single-02" title="View Profile"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Account</span>

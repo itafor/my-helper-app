@@ -103,16 +103,14 @@ Admin | Profile
                 <div class="author">
                   <a href="#">
                     <img class="avatar border-gray" src="../admin_dashboard_assets/img/mike.jpg" alt="...">
-                    <h5 class="title">Mike Andrew</h5>
+                    <h5 class="title">{{$admin_profile->name}} - {{$admin_profile->last_name}}</h5>
                   </a>
                   <p class="description">
-                    michael24
+                   Username: {{$admin_profile->username}}
                   </p>
                 </div>
                 <p class="description text-center">
-                  "Lamborghini Mercy <br>
-                  Your chick she so thirsty <br>
-                  I'm in that two seat Lambo"
+                 {{$admin_profile->street}}
                 </p>
               </div>
               <hr>

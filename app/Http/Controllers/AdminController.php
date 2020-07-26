@@ -21,8 +21,11 @@ class AdminController extends Controller
 	
 
     public function profile(Request $request) {
-    	
-    return view('admin.admin_profile');
+    	 $data['admin_profile'] = User::where([
+      ['id',authUser()->id],
+      ['userType','Admin']
+    ])->first();
+    return view('admin.admin_profile',$data);
 }
 
    public function allRequest(Request $request) {

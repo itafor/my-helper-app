@@ -88,19 +88,7 @@
               <p>Notifications</p>
             </a>
           </li>
-          <li>
-            <a href="/admin/profile">
-              <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
-            </a>
-          </li>
-        
-          <li>
-            <a href="./typography.html">
-              <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
-            </a>
-          </li>
+          
          
         </ul>
       </div>

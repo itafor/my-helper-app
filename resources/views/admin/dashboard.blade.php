@@ -15,15 +15,6 @@ Admin | Dashboard
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title float-left"> All Requests</h4>
-
-               <!--  <h4 class="card-title float-right">
-                  <a href="{{route('admin.logistic.agent.add')}}">
-                  <button class="btn btn-primary btn-sm">
-                  <i class="fa fa-plus"></i>
-                Add new
-              </button> 
-              </a>
-            </h4> -->
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -79,7 +70,7 @@ Admin | Dashboard
         </div>
 
 
-        <div class="row">
+     {{-- <div class="row">
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header">
@@ -156,8 +147,8 @@ Admin | Dashboard
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
+        </div>--}}
+       {{--<div class="row">
           <div class="col-md-6">
             <div class="card  card-tasks">
               <div class="card-header ">
@@ -338,7 +329,7 @@ Admin | Dashboard
               </div>
             </div>
           </div>
-        </div>
+        </div>--}}
 @endsection
 
 

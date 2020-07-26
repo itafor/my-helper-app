@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LockdownRequest;
 use App\RequestBidders;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -12,7 +13,27 @@ class LogisticPartnerController extends Controller
 {
     	
    public function dashboard(Request $request) {
-    	 $data['all_requests'] = LockdownRequest::orderBy('created_at','desc')->get();
+    	 $data['all_requests'] = RequestBidders::where([
+        ['logistic_partner_id', authUser()->id],
+       ])->orderBy('created_at','desc')->get();
+
+       $data['count_all_request'] = count($data['all_requests']);
+
+        $data['confirmed_requests'] = RequestBidders::where([
+        ['logistic_partner_id', authUser()->id],
+        ['status', 'Delivered'],
+       ])->orderBy('created_at','desc')->get();
+
+       $data['count_confirmed_requests'] = count($data['confirmed_requests']);
+
+       $data['unconfirmed_requests'] = RequestBidders::where([
+        ['logistic_partner_id', authUser()->id],
+        ['status', 'Approved'],
+       ])->orderBy('created_at','desc')->get();
+
+       $data['count_unconfirmed_requests'] = count($data['unconfirmed_requests']);
+
+
     return view('logisticPartner.dashboard',$data);
     
 }
@@ -71,8 +92,11 @@ class LogisticPartnerController extends Controller
     }
 
 public function profile(Request $request) {
-    	
-    return view('logisticPartner.profile');
+    	   $data['logistics_profile'] = User::where([
+      ['id',authUser()->id],
+      ['userType','Logistic']
+    ])->first();
+    return view('logisticPartner.profile',$data);
 	}
 
 }
