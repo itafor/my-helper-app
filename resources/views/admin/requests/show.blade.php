@@ -172,14 +172,12 @@ Admin | Logistic Agents
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
                             @elseif($bid->status =='Pending')
                            <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
-                           @elseif($bid->status == 'Delievered')
+                           @elseif($bid->status == 'Delivered')
                            <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
                             @elseif($bid->status == 'Rejected')
                            <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
                            @endif
-
                         </td>
-                     
                      <td>
                      <a href="{{route('request.summary',[$bid->id])}}">
                           <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>

@@ -108,7 +108,7 @@
                           </div>
 
                      <div class="form-group">
-                            <label for="exampleInputEmail1">Delievery cost</label>
+                            <label for="exampleInputEmail1">Delivery cost</label>
                             <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
                           </div>
                      <div class="form-group">
@@ -124,7 +124,7 @@
                     Request Status:<span class=" text-primary"> {{$request_bid->status}}</span>
                     @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
-                     @elseif($request_bid->status == 'Delievered')
+                     @elseif($request_bid->status == 'Delivered')
                     Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
                   @endif
                     </div>

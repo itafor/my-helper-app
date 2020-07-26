@@ -117,6 +117,19 @@ Route::group([
     Route::post('/store_product', 'ProductsController@storeLogisticEgent')->name('admin.product.store');
 });
 
+Route::group([
+    'middleware' => ['auth','logistic_partner'],
+], function () {
+    Route::get('logistic_partner/profile', 'LogisticPartnerController@profile')->name('logistic_partner.profile');
+    Route::get('logistic_partner/dashboard', 'LogisticPartnerController@dashboard')->name('logistic_partner.dashboard');
+
+    Route::get('logistic_partner/requests', 'LogisticPartnerController@requests')->name('logistic_partner.requests');
+
+    Route::get('logistic_partner_requests/{id}', 'LogisticPartnerController@initialRequestConfirmationByLogisticPartner')->name('logistic_partner.request.initialconfirmation');
+
+    Route::post('logistic_partner_requests', 'LogisticPartnerController@finalRequestConfirmationByLogisticPartner')->name('logistic_partner.request.finalconfirmation');
+});
+
 	Route::group([
     'prefix' => 'product'
 ], function () {

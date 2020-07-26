@@ -44,7 +44,17 @@ function user_already_contacted_help_provider($requester_id,$request_id,$user_id
         ['requester_id',$requester_id],
         ['request_id',$request_id],
         ['bidder_id',$user_id],
-        ['request_type',$request_type == 'Provide Help' ? 'Provide Help' : 'Get Help'],
+        ['request_type','Provide Help'],
+    ])->first();
+    return $result;
+}
+
+function user_already_contacted_help_seeker($requester_id,$request_id,$bidder_id,$request_type){
+    $result = RequestBidders::where([
+        ['requester_id',$requester_id],
+        ['request_id',$request_id],
+        ['bidder_id',$bidder_id],
+        ['request_type','Get Help'],
     ])->first();
     return $result;
 }
