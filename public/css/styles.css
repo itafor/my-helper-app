@@ -1040,7 +1040,7 @@ table .clickable-row:hover td {
 /* The expanding image container (positioning is needed to position the close button and the text) */
 .container {
   position: relative;
-  display: none;
+  /*display: none;*/
 }
 
 /* Expanding image text */

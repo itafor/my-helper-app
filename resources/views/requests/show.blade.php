@@ -63,7 +63,7 @@
                                 @if(isset($request_photos) && $request_photos !='')
 
                 <!--Tab Gallery: The expanding image container -->
-                  <div class="container">
+                  <div class="container" style="display: none;">
                     <!-- Close the image -->
                     <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
 

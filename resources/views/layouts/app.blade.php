@@ -37,6 +37,7 @@
         </script>
     </head>
     <body class="white-content {{ $class ?? '' }}">
+        <div id='app'></div>
         @auth()
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')
