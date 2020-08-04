@@ -123,6 +123,9 @@ class ProvideRequestController extends Controller
         $getRequest = LockdownRequest::find($id);
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
         $getRequest = LockdownRequest::find($id);
+
+         $help_request_bidders = $getRequest->request_bidders;
+         $request_photos = $getRequest->requestPhotos;
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
@@ -135,7 +138,7 @@ class ProvideRequestController extends Controller
                                         ->orderBy('created_at', 'DESC')
                                         ->get();
                                         // dd($suggestions);
-        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }
 
 
