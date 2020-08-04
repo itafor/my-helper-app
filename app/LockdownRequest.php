@@ -46,6 +46,24 @@ class LockdownRequest extends Model
     }
 
 
+//upload images to cloudinary
+      public static function addRequestPhoto($data,$lockdown_request)
+    {
+       
+        if(isset($data['photos'])){
+            foreach($data['photos'] as $photo){
+            $path = uploadImage($photo['image_url']);
+            if($path){
+                RequestPhoto::create([
+                    'request_id' => $lockdown_request->id,
+                    'image_url' => $path
+                ]);
+            }
+        }
+        }
+    }
+
+//upload image to local server
     public static function addPhotos($data,$lockdown_request)
     {
        

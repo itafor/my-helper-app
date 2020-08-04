@@ -106,7 +106,7 @@ class ProvideRequestController extends Controller
         $lockdownRequest->save();
         if($lockdownRequest){
             $lockdown_request = LockdownRequest::find($lockdownRequest->id);
-            LockdownRequest::addPhotos($request->all(),$lockdown_request);
+            LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
         }
         Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
