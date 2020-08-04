@@ -84,6 +84,7 @@ class ProvideRequestController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
 
@@ -103,6 +104,10 @@ class ProvideRequestController extends Controller
         $lockdownRequest->show_phone = $request->show_phone;
         
         $lockdownRequest->save();
+        if($lockdownRequest){
+            $lockdown_request = LockdownRequest::find($lockdownRequest->id);
+            LockdownRequest::addPhotos($request->all(),$lockdown_request);
+        }
         Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
     }
@@ -148,6 +153,7 @@ class ProvideRequestController extends Controller
         $getRequest = LockdownRequest::find($id);
 
         $help_request_bidders = $getRequest->request_bidders;
+        $request_photos = $getRequest->requestPhotos;
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
@@ -162,7 +168,7 @@ class ProvideRequestController extends Controller
                                         ->orderBy('created_at', 'DESC')
                                         ->get();
                                         // dd($suggestions);
-        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders'));
+        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }
 
     public function sendMail($req)

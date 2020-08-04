@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off">
+                        <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="request_type" value="2">
                             <h4 class="heading-small text-muted mb-4">{{ __('Provide Request') }}</h4>
@@ -174,6 +174,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+     
+                                <div class="col-md-12">
+                                    <label class="form-control-label" for="input-property_type">{{ __('Photos') }}</label>
+                                    <input type="file" name="photos[112211][image_url]"  class="form-control" required>
+                                </div>
+                            
+                                  <div style="clear:both"></div>
+                                <div id="photoContainer" class="col-md-12">
+                                </div>   
+         
+                                    </div>
+                                  <div style="clear:both"></div>
+
+                                     <div class="form-group">
+                                    <button type="button" id="addMorePhoto" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i>  Add more photo</button>
+                                </div>
                             
                                 <div style="clear:both"></div>
                                 <div class="text-center">

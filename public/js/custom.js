@@ -183,3 +183,59 @@ function rejectRequest(request_id)
   }
 })
 }
+
+  function identifier(){
+            return Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
+        }
+
+        var row = 1;
+
+        $('#addMorePhoto').click(function(e) {
+           // console.log('ok')
+            e.preventDefault();
+
+            if(row >= 5){
+                alert("You've reached the maximum limit");
+                return;
+            }
+
+            var rowId = identifier();
+
+            $("#photoContainer").append(
+                '<div>'
+                    +'<div style="float:right; margin-right:50px; margin-top: 14px;" class="remove_project_file"><span style="cursor:pointer; " class="badge badge-danger" border="2"><i class="fa fa-minus"></i> Remove</span></div>'
+                    +'<div style="clear:both"></div>'
+                              
+                                 +  '<input type="file" name="photos['+rowId+'][image_url]" class="form-control" style="margin-top: -30px;">'
+                               
+                        +'<div style="clear:both"></div>'
+                        +'<br>'
+                    +'</div>'
+
+            );
+            row++;
+            $(".select"+rowId).select2({
+                    theme: "bootstrap"
+                });
+        });
+
+        // Remove parent of 'remove' link when link is clicked.
+        $('#photoContainer').on('click', '.remove_project_file', function(e) {
+            e.preventDefault();
+            $(this).parent().remove();
+            row--;
+        });
+
+
+        function myFunction(imgs) {
+  // Get the expanded image
+  var expandImg = document.getElementById("expandedImg");
+  // Get the image text
+  var imgText = document.getElementById("imgtext");
+  // Use the same src in the expanded image as the image being clicked on from the grid
+  expandImg.src = imgs.src;
+  // Use the value of the alt attribute of the clickable image as text inside the expanded image
+  imgText.innerHTML = imgs.alt;
+  // Show the container element (hidden with CSS)
+  expandImg.parentElement.style.display = "block";
+}
