@@ -60,6 +60,7 @@ class RequestBiddersController extends Controller
        $data['request'] =  $data['request_bid']->request;
        $data['help_provider'] =  $data['request_bid']->requester;
        $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
+       $data['request_photos'] = $data['request']->requestPhotos;
 
        return view('requests.provide.approve_bidder',$data);
 
