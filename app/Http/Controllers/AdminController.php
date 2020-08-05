@@ -39,6 +39,9 @@ class AdminController extends Controller
         ['id',$id],
     ])->with(['user'])->first();
 
+  $data['request_photos'] = $data['request_details']->requestPhotos;
+
+
     $data['help_request_bidders']= $data['request_details']->request_bidders;
         
     return view('admin.requests.show',$data);
@@ -51,6 +54,7 @@ class AdminController extends Controller
        $data['request'] =  $data['request_bid']->request;
        $data['help_provider'] =  $data['request_bid']->requester;
        $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
+       $data['request_photos'] = $data['request']->requestPhotos;
 
        return view('admin.requests.request_summary',$data);
 

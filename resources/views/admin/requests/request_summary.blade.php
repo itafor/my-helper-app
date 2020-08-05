@@ -33,7 +33,7 @@ Request | Summary
         <div class="float-left">Help seeker details (Receiver)</div>
         <div class="float-right">
           @if($request_bid->status == 'Pending')
-          <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+          <!-- <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button> -->
           @endif
         </div>
           </div>
@@ -122,6 +122,32 @@ Request | Summary
                                     @if($request->show_address == 1)
                                         <p>Address: {{ $request->street }}</p>
                                     @endif
+
+
+                    @if(isset($request_photos) && $request_photos !='')
+
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:100%; height: 500px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($request_photos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
                                 
                             </div>
 

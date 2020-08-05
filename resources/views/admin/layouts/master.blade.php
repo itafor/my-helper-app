@@ -35,6 +35,8 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../admin_dashboard_assets/demo/demo.css" rel="stylesheet" />
 
+  <link href="../admin_dashboard_assets/admin_custom.css" rel="stylesheet" />
+
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
 
