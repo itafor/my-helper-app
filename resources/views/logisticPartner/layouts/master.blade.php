@@ -38,6 +38,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
 
+  <link href="../admin_dashboard_assets/admin_custom.css" rel="stylesheet" />
+
    <script>
             var baseUrl = '{{url("/")}}';
         </script>
@@ -238,6 +240,21 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 })
+    </script>
+
+        <script type="text/javascript">
+                function myFunction(imgs) {
+  // Get the expanded image
+  var expandImg = document.getElementById("expandedImg");
+  // Get the image text
+  var imgText = document.getElementById("imgtext");
+  // Use the same src in the expanded image as the image being clicked on from the grid
+  expandImg.src = imgs.src;
+  // Use the value of the alt attribute of the clickable image as text inside the expanded image
+  imgText.innerHTML = imgs.alt;
+  // Show the container element (hidden with CSS)
+  expandImg.parentElement.style.display = "block";
+}
     </script>
   @yield('scripts')
 </body>

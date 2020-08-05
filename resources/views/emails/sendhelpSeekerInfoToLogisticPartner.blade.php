@@ -82,6 +82,60 @@
 #rental_table .rent_title{
   width: 150px;
 }
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container (positioning is needed to position the close button and the text) */
+.container {
+  position: relative;
+  /*display: none;*/
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: red;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+#sample_photos{
+    width: 100px;
+    height: 100px;
+}
     @media only screen and (max-width: 600px) {
         .invoice-box table tr.top table td {
             width: 100%;
@@ -134,6 +188,34 @@
 
  Delivery Cost: &#8358; {{number_format($request_bidding_record->delievery_cost,2)}}<br><br>
 </p>
+
+@if(isset($main_request) && $main_request->requestPhotos !='')
+                <h3>Sample Photos</h3>
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:100%; height: 500px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($main_request->requestPhotos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" id="sample_photos">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
+
+<br>
+<br>
 
 <h3>Help Provider details</h3>
 
@@ -270,6 +352,7 @@ request_bidding_record: {{$request_bidding_record}}<br> -->
 
 
     </div>
+     <script src="{{ asset('js/custom.js') }}"></script>
 </body>
 </html>
 

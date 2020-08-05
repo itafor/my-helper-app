@@ -68,6 +68,75 @@
         border-top: 2px solid #eee;
         font-weight: bold;
     }
+
+    #rental_table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+
+#rental_table td{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#rental_table .rent_title{
+  width: 150px;
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container (positioning is needed to position the close button and the text) */
+.container {
+  position: relative;
+  /*display: none;*/
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: red;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+#sample_photos{
+    width: 100px;
+    height: 100px;
+}
     
     @media only screen and (max-width: 600px) {
         .invoice-box table tr.top table td {
@@ -104,23 +173,42 @@
 
         Dear <b>{{$help_provider->name}},</b><br>
 
-        <b>{{$request_bidder->name}} {{$request_bidder->last_name}}</b> is highly interested in your offer to provide help. 
+        <b>{{$request_bidder->name}} {{$request_bidder->last_name}}</b> is highly interested in your offer to provide help.  Find help requester details below.
 
-<dl class="row">
-  <dt class="col-sm-6">Phone</dt>
-  <dd class="col-sm-6">
+
+<h3>Help Requester details</h3>
+
+ <table class="table table-bordered" id="rental_table">
+           
+                    <tbody>
+
+                   <tr>
+                     <td class="rent_title">Phone</td>
+                     <td> 
     {{$request_bidder->phone}} 
-</dd>
+                        
+                      </td> 
+                   </tr>
 
-  <dt class="col-sm-6">Email</dt>
-  <dd class="col-sm-6">
+                   <tr>
+                     <td class="rent_title">Email</td>
+                     <td>  
     {{$request_bidder->email}} 
-</dd>
- <dt class="col-sm-6">User comment:</dt>
-  <dd class="col-sm-6">
+              
+                      </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">User comment:</td>
+                     <td> 
     {{$request_bidders->comment}} 
-</dd>
-</dl>
+                     </td>
+                   </tr>
+
+               
+       </tbody>
+                  </table>
+<hr>
 
 <dl class="row">
   <dt class="col-sm-6">Help detail description:</dt>
@@ -130,6 +218,35 @@
 </dd>
  
 </dl>
+<br>
+
+@if(isset($user_request) && $user_request->requestPhotos !='')
+                <h3>Sample Photos</h3>
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:100%; height: 500px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($user_request->requestPhotos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" id="sample_photos">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
+
+<br>
+<br>
 
 
 <!-- 
@@ -138,5 +255,19 @@
        user_request : {{$user_request}}<br>
        help_provider: {{$help_provider}}<br -->
     </div>
+    <script type="text/javascript">
+                function myFunction(imgs) {
+  // Get the expanded image
+  var expandImg = document.getElementById("expandedImg");
+  // Get the image text
+  var imgText = document.getElementById("imgtext");
+  // Use the same src in the expanded image as the image being clicked on from the grid
+  expandImg.src = imgs.src;
+  // Use the value of the alt attribute of the clickable image as text inside the expanded image
+  imgText.innerHTML = imgs.alt;
+  // Show the container element (hidden with CSS)
+  expandImg.parentElement.style.display = "block";
+}
+    </script>
 </body>
 </html>
