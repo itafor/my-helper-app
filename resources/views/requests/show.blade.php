@@ -78,7 +78,7 @@
                     <!-- The grid:-->
                     <div class="column">
                      <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{ asset('request_photos/'.$photo->image_url) }}" onclick="myFunction(this);" alt="Sample image">
+                      <img src="{{ asset('requestphotos/'.$photo->image_url) }}" onclick="myFunction(this);" alt="Sample image">
                     </div>
                     
                     @endforeach

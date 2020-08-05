@@ -58,7 +58,7 @@ class LockdownRequest extends Model
 
             $name=$files->getClientOriginalName();
             
-            $files->move('request_photos',$name);
+            $files->move('requestphotos',$name);
             
                 RequestPhoto::create([
                     'request_id' => $lockdown_request->id,
