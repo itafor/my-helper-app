@@ -121,23 +121,30 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left"> Request to get help approval notice</h4>
+                <h4 class="card-title float-left"> Reject or Approve Request</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
 <p>
                     Dear <strong>{{$request_owner->name}}</strong>,<br><br>
 
- We wish to notify you that your request to get help on <a href="{{url('/')}}">myhelperapp</a> have been granted by the following help provider. A logistic delivery partner has been assigned to deliver the following goods to you any moment from now. please be informed that, you are to pay for delivery cost. <br>
- Please find below the provider and logistic delivery partner information. Thanks<br><br>
+ We wish to notify you that <strong>{{$help_provider ? $help_provider->name : 'N/A'}}  {{$help_provider ? $help_provider->last_name : 'N/A'}}</strong> has indicated interest to provide the help you requested on <a href="{{url('/')}}">myhelperapp</a> .
 
-Confirmation code: <b>{{$request_bidding_record->confirmation_code}}</b> <br>
- Note: You are expected to provide the above <b>code</b> to the logistic delivery partner to confirm that the goods has been received and in good condition.<br><br>
+ <br>
 
- Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+After you have approved the request, a logistic delievery partner's details will be sent to you to deliver the request. Please be informed that, you are to pay for delivery cost. <br>
+<br>
+      <br>
+ Note: You are expected to provide a <b>confirmation code</b> that will be sent after Request Approval to the logistic delivery partner to confirm that the goods has been received and in good condition.<br><br>
+
+ Product Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Description: {{$main_request->description }}<br><br>
 
- Delivery Cost: &#8358; {{number_format($request_bidding_record->delievery_cost,2)}}<br><br>
+  Please find below the provider information. Thanks<br><br>
+
+  Please click <a href="{{route('request.approve_or_reject',[$request_bidding_record->id])}}">HERE</a> to Approve or Reject the request.
+
+<br>
 </p>
 
 <h3>Help Provider details</h3>
@@ -200,70 +207,11 @@ Confirmation code: <b>{{$request_bidding_record->confirmation_code}}</b> <br>
                   </table>
 <hr>
 
-<h3>Logistic Partner details</h3>
-
- <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-
-                   <tr>
-                     <td class="rent_title">Comany Name</td>
-                     <td> 
-                        {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
-                      </td> 
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Phone Number</td>
-                     <td>  
-                {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Email</td>
-                     <td> {{$logistic_partner ? $logistic_partner->email : 'N/A'}}</td>
-                   </tr>
-
-                     <tr>
-                     <td class="rent_title">Country</td>
-                     <td>
-    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
-                     </td>
-                   </tr>
-
-                    <tr>
-                     <td class="rent_title">State</td>
-                <td>
-    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
-                </td>           
-              </tr>
-
-                 <tr>
-                     <td class="rent_title">City</td>
-                     <td>
-    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
-                     </td>
-                </tr>
-
-                 <tr>
-                     <td class="rent_title">Street Address</td>
-                     <td>
-                      
-                    {{$logistic_partner ? $logistic_partner->street: 'N/A'}}
-                    
-                    </td>
-                </tr>
-               
-       </tbody>
-                  </table>
-
   
 
 <!-- help_provider {{$help_provider}}<br>
 main_request: {{$main_request}}<br>
 request_owner: {{$request_owner}}<br>
-logistic_partner: {{$logistic_partner}}<br>
 request_bidding_record: {{$request_bidding_record}}<br> -->
                
                 </div>

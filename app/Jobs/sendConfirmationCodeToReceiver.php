@@ -45,7 +45,7 @@ class sendConfirmationCodeToReceiver implements ShouldQueue
         Mail::send('emails.send_confirmation_code_to_receiver', ['help_provider' => $this->help_provider,'main_request'=>$this->main_request, 'request_bidder'=>$this->request_bidder, 'logistic_partner'=>$this->logistic_partner, 'request_bidding_record'=>$this->request_bidding_record], function ($message) {
 
     $message->subject('Goods delivery Confirmation code');
-    $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
+    $message->from('noreply@myhelperapp.com', 'MyHelperApp');
     $message->to($this->request_bidder->email);
   });
 

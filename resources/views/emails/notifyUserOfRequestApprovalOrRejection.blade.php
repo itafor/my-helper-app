@@ -172,109 +172,37 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left"> Goods delivery notice</h4>
+                <h4 class="card-title float-left">{{$request_bidding_record->status == 'Approved' ? 'Request Approval Notification':'Request Rejection Notification'}} </h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
 <p>
-                    Dear <strong>{{$logistic_partner->company_name}}</strong>,<br><br>
+                    Dear <strong>{{$help_provider->name}} {{$help_provider->last_name}}</strong>,<br><br>
+        
+         @if($request_bidding_record->status == 'Approved')
 
- We wish to notify you that the following goods will be taken from the provider to the receiver. Please find the provider and receiver information below. Thanks<br><br>
+ We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>approved</b> by the receiver.<br>
 
- Note: You are expected to receive a confirmation code from the receiver then proceed to your   <a href="{{url('/')}}">Myhelperapp.com</a> account to confirm that the goods have been delivered.<br><br>
+A logistic delivery partner has been assigned to deliver the goods to the receiver.<br>
+Please find the receiver and logistic delivery partner details below.
+<br>
 
- Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ Goods Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Description: {{$main_request->description }}<br><br>
 
- Delivery Cost: &#8358; {{number_format($request_bidding_record->delievery_cost,2)}}<br><br>
+ @else
+
+We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>rejected</b> by the receiver.<br>
+
+Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+Description: {{$main_request->description }}<br><br>
+
+ @endif
 </p>
 
-@if(isset($main_request) && $main_request->requestPhotos !='')
-                <h3>Sample Photos</h3>
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($main_request->requestPhotos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" id="sample_photos">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
-
 <br>
 <br>
 
-<h3>Help Provider details</h3>
-
- <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-
-                   <tr>
-                     <td class="rent_title">Full Name</td>
-                     <td> 
-                        {{$help_provider ? $help_provider->name : 'N/A'}} 
-                        {{$help_provider ? $help_provider->last_name : 'N/A'}}
-                      </td> 
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Phone Number</td>
-                     <td>  
-                {{$help_provider ? $help_provider->phone : 'N/A'}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Email</td>
-                     <td> {{$help_provider ? $help_provider->email : 'N/A'}}</td>
-                   </tr>
-
-                     <tr>
-                     <td class="rent_title">Country</td>
-                     <td>
-    {{$help_provider->country ? $help_provider->country->country_name : 'N/A'}}
-                     </td>
-                   </tr>
-
-                    <tr>
-                     <td class="rent_title">State</td>
-                <td>
-    {{$help_provider->state ? $help_provider->state->name : 'N/A'}}
-                </td>           
-              </tr>
-
-                 <tr>
-                     <td class="rent_title">City</td>
-                     <td>
-    {{$help_provider->city ? $help_provider->city->name : 'N/A'}}
-                     </td>
-                </tr>
-
-                 <tr>
-                     <td class="rent_title">Street Address</td>
-                     <td>
-                      
-                    {{$help_provider ? $help_provider->street: 'N/A'}}
-                    
-                    </td>
-                </tr>
-               
-       </tbody>
-                  </table>
 <hr>
 
 <h3>Help Receiver details</h3>
@@ -335,6 +263,72 @@
                
        </tbody>
                   </table>
+                  <br>
+<hr>
+
+                   @if($request_bidding_record->status == 'Approved')
+
+                   <h3>Logistic Partner details</h3>
+
+ <table class="table table-bordered" id="rental_table">
+           
+                    <tbody>
+
+                   <tr>
+                     <td class="rent_title">Comany Name</td>
+                     <td> 
+                        {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
+                      </td> 
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Phone Number</td>
+                     <td>  
+                {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
+                      </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Email</td>
+                     <td> {{$logistic_partner ? $logistic_partner->email : 'N/A'}}</td>
+                   </tr>
+
+                     <tr>
+                     <td class="rent_title">Country</td>
+                     <td>
+    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
+                     </td>
+                   </tr>
+
+                    <tr>
+                     <td class="rent_title">State</td>
+                <td>
+    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
+                </td>           
+              </tr>
+
+                 <tr>
+                     <td class="rent_title">City</td>
+                     <td>
+    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
+                     </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Street Address</td>
+                     <td>
+                      
+                    {{$logistic_partner ? $logistic_partner->street: 'N/A'}}
+                    
+                    </td>
+                </tr>
+               
+       </tbody>
+                  </table>
+
+
+
+                   @endif
 <!-- 
 help_provider {{$help_provider}}<br>
 main_request: {{$main_request}}<br>

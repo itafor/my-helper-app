@@ -78,11 +78,11 @@
                     <tbody>
                       @foreach($help_request_bidders as $bid)
                       <tr>
-                        <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
-                            {{$bid->bidder ? $bid->bidder->last_name : 'N/A'}}
+                        <td>{{$bid->requester ? $bid->requester->name : 'N/A'}} 
+                            {{$bid->requester ? $bid->requester->last_name : 'N/A'}}
                         </td>
-                        <td>{{$bid->bidder ? $bid->bidder->phone : 'N/A'}} </td>
-                        <td>{{$bid->bidder ? $bid->bidder->email : 'N/A'}} </td>
+                        <td>{{$bid->requester ? $bid->requester->phone : 'N/A'}} </td>
+                        <td>{{$bid->requester ? $bid->requester->email : 'N/A'}} </td>
                         <td>
                             @if($bid->status == 'Approved')
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
@@ -97,7 +97,7 @@
                         </td>
                      
                      <td>
-                     <a href="{{route('request.approve',[$bid->id])}}">
+                     <a href="{{route('request.approve_or_reject',[$bid->id])}}">
                           <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
                           </a>
                         </td>
@@ -136,8 +136,7 @@
                             <input type="hidden" name="request_type" class="form-control" id="request_type" value="Get Help" >
                           </div>
 
-                            <div class="form-group">
-                            <!-- <label for="exampleInputEmail1">Logistic Partner</label> -->
+                           <!--  <div class="form-group">
                             <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliver this product to the beneficiary</small>
                              <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
                                         <option value="">Choose logistic partner </option>
@@ -149,18 +148,18 @@
                     @error('logistic_partner_id')
                     <small style="color: red; font-size: 14px;"> {{ $message }}</small>
                     @enderror
-                          </div>
+                          </div> -->
 
-                     <div class="form-group">
+                     <!-- <div class="form-group">
                             <label for="exampleInputEmail1">Delievery cost</label>
                             <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
                           </div>
-                     <div class="form-group">
+ -->                     <div class="form-group">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
                          
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-primary">Contact {{ $getRequest->user->username }}</button>
                         </form>
                                     </div>
                                    @endif
