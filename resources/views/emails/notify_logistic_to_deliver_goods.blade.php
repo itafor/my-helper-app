@@ -181,16 +181,16 @@
 
  We wish to notify you that the following goods will be taken from the provider to the receiver. Please find the provider and receiver information below. Thanks<br><br>
 
- Note: You are expected to receive a confirmation code from the reciver then proceed to your   <a href="{{url('/')}}">myhelperapp.com</a> to confirm that the goods have been delivered.<br><br>
+ Note: You are expected to receive a confirmation code from the receiver then proceed to your   <a href="{{url('/')}}">myhelperapp.com</a> to confirm that the goods have been delivered.<br><br>
 
- Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+Product Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Description: {{$main_request->description }}<br><br>
 
  Delivery Cost: &#8358; {{number_format($request_bidding_record->delievery_cost,2)}}<br><br>
 </p>
 
          @if(isset($main_request) && $main_request->requestPhotos !='')
-                <h3>Sample Photos</h3>
+                <!-- <h3>Sample Photos</h3> -->
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
                     <!-- Close the image -->

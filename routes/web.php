@@ -72,10 +72,18 @@ Route::group([
 ], function () {
     Route::post('/apply', 'RequestBiddersController@applyTOGetHelp')->name('request.apply');
     Route::post('/provide', 'RequestBiddersController@grantSomeoneRequest')->name('request.provide');
+
     Route::get('/approve/{id}', 'RequestBiddersController@initialRequestApprovalForhelpSeekers')->name('request.approve');
+
     Route::get('/reject/{id}', 'UtilitiesController@rejectRequest')->name('request.reject');
 
  Route::post('/approve', 'RequestBiddersController@finalRequestApprovalForhelpSeekers')->name('request.approve.store');
+
+ Route::get('/approve_or_reject_request/{id}', 'RequestBiddersController@initialRequestApprovalByHelpReceiver')->name('request.approve_or_reject');
+
+ Route::post('/approve_or_reject_request_store', 'RequestBiddersController@finalRequestApprovalByHelpReceiver')->name('request.approve_or_reject.store');
+
+ Route::post('/reject_request_by_receiver', 'RequestBiddersController@rejectRequestByReceiver')->name('request.reject.by.receiver');
 });
 	
 });

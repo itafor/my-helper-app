@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Jobs\NotifyUserOfRequestApprovalOrRejection;
+use App\LockdownRequest;
 use App\RequestBidders;
 use App\User;
 use Illuminate\Http\Request;
@@ -32,17 +34,18 @@ class UtilitiesController extends Controller
 
 }
 
-public function rejectRequest($request_id){
+public function rejectRequest($request_bid_id){
         
           $reject_request  =  RequestBidders::where([
-            ['id', $request_id],
+            ['id', $request_bid_id],
         ])->update([
             'status' => 'Rejected',
         ]);
 
         if($reject_request){
-            $rejected_request = RequestBidders::find($request_id);
-            return response()->json($rejected_request);
+            $request_bidding_record = RequestBidders::find($request_bid_id);
+
+            return response()->json($request_bidding_record);
         }
 
 }

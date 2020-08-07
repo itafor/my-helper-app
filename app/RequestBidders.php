@@ -99,7 +99,7 @@ public static function createNew($data)
             'requester_id' => $data['requester_id'],//help provider
             'bidder_id' => $data['bidder_id'],//help receiver
             'request_type' =>  $data['request_type'],
-            'status' =>  'Approved',
+            'status' =>  'Pending',
             'logistic_partner_id' =>  $logistic,
             'confirmation_code' =>  mt_rand(100000, 999999).$data['bidder_id'],
             'delievery_cost' =>  $delievery_cost,
@@ -124,5 +124,37 @@ public static function createNew($data)
     $confirm->save();
     }
     return $confirm;
+    }
+
+
+
+    public static function approveRequestToReceiveHelp($data)
+    {
+
+        $comment = isset($data['comment']) ? $data['comment'] : null;
+
+     $approve_request  =  self::where([
+            ['id', $data['request_bid_id'] ],
+            ['request_id', $data['request_id'] ],
+            ['bidder_id', $data['bidder_id'] ],
+            ['requester_id', $data['requester_id'] ],
+        ])->update([
+            'logistic_partner_id' => $data['logistic_partner_id'],
+            'delievery_cost' => $data['delievery_cost'],
+            'comment' => $comment,
+            'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
+            'status' => 'Approved',
+        ]); 
+
+        if($approve_request){
+            $request_bid = self::where([
+            ['id', $data['request_bid_id'] ],
+            ['request_id', $data['request_id'] ],
+            ['bidder_id', $data['bidder_id'] ],
+            ['requester_id', $data['requester_id'] ],
+            ])->first();
+        return $request_bid;
+        }
+
     }
 }
