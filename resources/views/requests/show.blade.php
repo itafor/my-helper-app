@@ -68,7 +68,7 @@
                     <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
 
                     <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
+                    <img id="expandedImg" style="width:100%; height: 400px;">
 
                     <!-- Image text -->
                     <div id="imgtext"></div>
