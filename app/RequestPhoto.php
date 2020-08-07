@@ -9,7 +9,7 @@ class RequestPhoto extends Model
 {
      use SoftDeletes;
 
-    protected $fillable = ['request_id','image_url'];
+    protected $fillable = ['request_id','image_url','provider_id'];
 
     public function lockdown_request()
     {

@@ -57,30 +57,7 @@
                                         @endif
                                     @endif
 
-               @if(isset($request_photos) && $request_photos !='')
-
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:120px;">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:500px; height: 300px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($request_photos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
+        
                                 </div>
 
                                           <!-- Check if the person is logged in -->
@@ -196,8 +173,7 @@
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
-
+                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username ? $getRequest->user->username : $getRequest->user->company_name }}</a>
                             </div>
                         @endif 
                         </div>
