@@ -63,7 +63,7 @@ class LockdownRequest extends Model
         }
     }
 
-//upload image to local server
+//upload image to server
     public static function addPhotos($data,$lockdown_request)
     {
        

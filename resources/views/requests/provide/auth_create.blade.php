@@ -177,8 +177,8 @@
                                     <div class="row">
      
                                 <div class="col-md-12">
-                                    <label class="form-control-label" for="input-property_type">{{ __('Photos') }}</label>
-                                    <input type="file" name="photos[112211][image_url]"  class="form-control" required>
+                                    <label class="form-control-label" for="input-property_type">{{ __('Photos') }} (Optional)</label>
+                                    <input type="file" name="photos[112211][image_url]"  class="form-control">
                                 </div>
                             
                                   <div style="clear:both"></div>

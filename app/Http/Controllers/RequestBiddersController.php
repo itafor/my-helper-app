@@ -195,11 +195,10 @@ class RequestBiddersController extends Controller
         $request_owner = User::find($data['bidder_id']); // the user bidding to get help 
         // $logistic_partner = User::find($data['logistic_partner_id']); 
 
-       // $logistic_partner_job = (new SendhelpSeekerInfoToLogisticPartner($help_provider,$main_request,$request_owner,$logistic_partner,$request_bidding_record))->delay(5);
-       //  $this->dispatch($logistic_partner_job);
-
          $receiver_job = (new GrantUserRequest($help_provider,$main_request,$request_owner,$request_bidding_record))->delay(5);
         $this->dispatch($receiver_job);
+
+            LockdownRequest::addRequestPhoto($request->all(),$main_request);
 
             DB::commit();
           }

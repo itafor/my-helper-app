@@ -56,6 +56,31 @@
                                             <p>Address: {{ $getRequest->street }}</p>
                                         @endif
                                     @endif
+
+               @if(isset($request_photos) && $request_photos !='')
+
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:120px;">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:500px; height: 300px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($request_photos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
                                 </div>
 
                                           <!-- Check if the person is logged in -->
@@ -118,7 +143,7 @@
                                         @if($getRequest->request_type == 1)
                                      <div class="text-left card-btn">
                                        
-                         <form class="form" method="post" action="{{ route('request.provide') }}">
+                         <form class="form" method="post" action="{{ route('request.provide') }}" enctype="multipart/form-data">
                             @csrf
                           <div class="form-group">
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$getRequest->id}}" >
@@ -136,25 +161,29 @@
                             <input type="hidden" name="request_type" class="form-control" id="request_type" value="Get Help" >
                           </div>
 
-                           <!--  <div class="form-group">
-                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliver this product to the beneficiary</small>
-                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
-                                        <option value="">Choose logistic partner </option>
-                                        @foreach(getLogisticPartners() as $logistic)
-                                            <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>
-                                        @endforeach
-                                    </select>
-                                    
-                    @error('logistic_partner_id')
-                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
-                    @enderror
-                          </div> -->
 
-                     <!-- <div class="form-group">
-                            <label for="exampleInputEmail1">Delievery cost</label>
-                            <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
-                          </div>
- -->                     <div class="form-group">
+                          <div class="row">
+     
+                                <div class="col-md-12">
+                                    <label class="form-control-label" for="input-property_type">{{ __('Photos') }} (Optional)</label>
+                                    <input type="file" name="photos[112211][image_url]"  class="form-control">
+                                </div>
+                            
+                                  <div style="clear:both"></div>
+                                <div id="photoContainer" class="col-md-12">
+                                </div>   
+         
+                                    </div>
+                                  <div style="clear:both"></div>
+
+                                     <div class="form-group">
+                                    <button type="button" id="addMorePhoto" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more photo</button>
+                                </div>
+                            
+                            <div style="clear:both"></div>
+
+                       
+                    <div class="form-group">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>

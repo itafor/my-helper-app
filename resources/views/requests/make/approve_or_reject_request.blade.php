@@ -176,10 +176,10 @@
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
                     <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:450px;">&times;</span>
 
                     <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
+                    <img id="expandedImg" style="width:500px; height: 300px;">
 
                     <!-- Image text -->
                     <div id="imgtext"></div>
