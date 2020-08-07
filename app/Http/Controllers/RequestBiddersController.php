@@ -10,6 +10,7 @@ use App\Jobs\SendhelpSeekerInfoToLogisticPartner;
 use App\Jobs\sendConfirmationCodeToReceiver;
 use App\LockdownRequest;
 use App\RequestBidders;
+use App\RequestPhoto;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,12 +58,14 @@ class RequestBiddersController extends Controller
 
         public function initialRequestApprovalByHelpReceiver($id){
        $data['request_bid'] = RequestBidders::find($id);
-       //dd($data['request_bid']);
        $data['request_bidder'] =  $data['request_bid']->bidder;
        $data['request'] =  $data['request_bid']->request;
        $data['help_provider'] =  $data['request_bid']->requester;
        $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
-       $data['request_photos'] = $data['request']->requestPhotos;
+       $data['request_photos'] = RequestPhoto::where([
+          ['request_id', $data['request']->id],
+          ['provider_id',$data['help_provider']->id],
+       ])->get();
 
        return view('requests.make.approve_or_reject_request',$data);
 

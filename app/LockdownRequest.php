@@ -56,7 +56,8 @@ class LockdownRequest extends Model
             if($path){
                 RequestPhoto::create([
                     'request_id' => $lockdown_request->id,
-                    'image_url' => $path
+                    'image_url' => $path,
+                    'provider_id' => authUser()->id
                 ]);
             }
         }
@@ -80,7 +81,8 @@ class LockdownRequest extends Model
             
                 RequestPhoto::create([
                     'request_id' => $lockdown_request->id,
-                    'image_url' => $name
+                    'image_url' => $name,
+                    'provider_id' => authUser()->id
                 ]);
             
         }

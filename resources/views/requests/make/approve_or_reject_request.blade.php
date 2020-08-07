@@ -21,7 +21,7 @@
 
 				            <div class="card">
 				  <div class="card-header">
-				<div class="float-left">Help seeker details (Receiver) new</div>
+				<div class="float-left">Help Provider details</div>
 				<div class="float-right">
            @if(authUser()->id == $request_bid->bidder_id)
 					@if($request_bid->status == 'Pending')
@@ -43,44 +43,96 @@
                   <dl class="row">
   <dt class="col-sm-3">Full Name</dt>
   <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->name : 'N/A'}} 
-    {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
+    {{$help_provider ? $help_provider->name : 'N/A'}} 
+    {{$help_provider ? $help_provider->last_name : 'N/A'}}
   </dd>
 
   <dt class="col-sm-3">Phone Number</dt>
   <dd class="col-sm-9">
-   {{$request_bidder ? $request_bidder->phone : 'N/A'}}
+   {{$help_provider ? $help_provider->phone : 'N/A'}}
   </dd>
 
    <dt class="col-sm-3"> Email</dt>
   <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->email : 'N/A'}}
+    {{$help_provider ? $help_provider->email : 'N/A'}}
   </dd>
 
    <dt class="col-sm-3">Country</dt>
   <dd class="col-sm-9">
-    {{$request_bidder->country ? $request_bidder->country->country_name : 'N/A'}}
+    {{$help_provider->country ? $help_provider->country->country_name : 'N/A'}}
   </dd>
 
    <dt class="col-sm-3">State</dt>
   <dd class="col-sm-9">
-    {{$request_bidder->state ? $request_bidder->state->name : 'N/A'}}
+    {{$help_provider->state ? $help_provider->state->name : 'N/A'}}
   </dd>
 
    <dt class="col-sm-3">City</dt>
   <dd class="col-sm-9">
-    {{$request_bidder->city ? $request_bidder->city->name : 'N/A'}}
+    {{$help_provider->city ? $help_provider->city->name : 'N/A'}}
   </dd>
 
   <dt class="col-sm-3 text-truncate">Street Address</dt>
   <dd class="col-sm-9">
 
-     <p>{{$request_bidder ? $request_bidder->street: 'N/A'}}</p>
+     <p>{{$help_provider ? $help_provider->street: 'N/A'}}</p>
                        
   </dd>
   
 </dl>
 				   <hr>
+  <h3>REQUEST: Welcome to my page - <strong>{{ $request->user->username ? $request->user->username : $request->user->company_name }}</strong></h3>
+                                    @if($request->show_phone == 1)
+                                    <div class="user-request-card">
+                                        <p>Please call me on 
+                                        <strong>
+                                                {{ $request->user->phone }}
+                                            @else
+                                                <p>Kindly contact me through this platform
+                                            @endif
+                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->city->name }}, {{ $request->state->name }}</strong>.
+                                    
+                                    </p>
+                                    <p>Thank you</p>
+                                    <p><strong>{{ $request->user->username }}</strong></p> 
+                                    @if($request->show_address == 1)
+                                        <p>Address: {{ $request->street }}</p>
+                                    @endif
+
+                              <p>Status: <strong class="text-danger">{{$request_bid->status}}</strong></p>
+
+              @if(isset($request_photos) && $request_photos !='')
+
+              <h3>Sample photos uploaded by the provider ({{$help_provider ? $help_provider->name : 'N/A'}} 
+    {{$help_provider ? $help_provider->last_name : 'N/A'}})</h3>
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:450px;">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:500px; height: 300px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($request_photos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
+                                
+                            </div>
+
+
+
+
 				   <div class="col-sm-6">
 				   @if($request_bid->status == 'Pending')
                     Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
@@ -148,59 +200,7 @@
 				</div>
 
            
-             <div class="card">
-              <div class="card-header">
-              Your Request (Help provided)
-              </div>
-              <div class="card-body">
-                      <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>
-                                    @if($request->show_phone == 1)
-                                    <div class="user-request-card">
-                                        <p>Please call me on 
-                                        <strong>
-                                                {{ $request->user->phone }}
-                                            @else
-                                                <p>Kindly contact me through this platform
-                                            @endif
-                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->city->name }}, {{ $request->state->name }}</strong>.
-                                    
-                                    </p>
-                                    <p>Thank you</p>
-                                    <p><strong>{{ $request->user->username }}</strong></p> 
-                                    @if($request->show_address == 1)
-                                        <p>Address: {{ $request->street }}</p>
-                                    @endif
-
-              @if(isset($request_photos) && $request_photos !='')
-
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:450px;">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:500px; height: 300px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($request_photos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
-                                
-                            </div>
-
-                  <footer class="blockquote-footer">Here is your request <cite title="Source Title">to provide help</cite></footer>
-              </div>
-            </div>
+          
 
 
                   <div class="card">
