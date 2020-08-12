@@ -83,7 +83,6 @@ function uploadImage($image)
             Cloudder::upload($image->getPathname(), $filename);
             $response = Cloudder::getResult();
             $path = $response['secure_url'];
-            //$image->move(public_path("uploads"), $image->getClientOriginalName());
         }
     }
     return $path;

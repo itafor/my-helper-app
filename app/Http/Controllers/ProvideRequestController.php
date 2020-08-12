@@ -102,6 +102,7 @@ class ProvideRequestController extends Controller
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
         $lockdownRequest->show_address = $request->show_address;
         $lockdownRequest->show_phone = $request->show_phone;
+        $lockdownRequest->delivery_cost_payer = $request->delivery_cost_payer;
         
         $lockdownRequest->save();
         if($lockdownRequest){

@@ -60,6 +60,17 @@
                                     @endif
                                 @endif
 
+                                @if($getRequest->delivery_cost_payer == 'Receiver')
+                                        <p>Note: You are to pay delivery cost of N1000.<br>
+                                          Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.</p>
+                                @elseif($getRequest->delivery_cost_payer == 'Provider')
+                                        <p>Note: The provider (Supplier) will pay delivery cost of N1000.<br>
+                                          Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.
+                                        </p>
+                                    @else
+
+                                @endif
+
                                 @if(isset($request_photos) && $request_photos !='')
 
                 <!--Tab Gallery: The expanding image container -->

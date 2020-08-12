@@ -139,6 +139,18 @@ Confirmation code: <b>{{$request_bidding_record->confirmation_code}}</b> <br>
 
  Delivery Cost: &#8358; {{number_format($request_bidding_record->delievery_cost,2)}}<br><br>
 </p>
+ <br>
+
+    @if($main_request->delivery_cost_payer == 'Receiver')
+            <p>Note: You are to pay delivery cost of  &#8358;1,000.<br>
+              Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.</p>
+    @elseif($main_request->delivery_cost_payer == 'Provider')
+            <p>Note: The provider (Supplier) will pay delivery cost of  &#8358;1,000.<br>
+              Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.
+            </p>
+        @else
+
+    @endif
 
 <h3>Help Provider details</h3>
 
