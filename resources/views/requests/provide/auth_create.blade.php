@@ -200,6 +200,11 @@
                         </form>
                     </div>
                 </div>
+              <br>
+               @foreach(OnforwardingOrDeliveryTowns() as $town)
+              {!!$town['TownID']!!}
+              {!!$town['TownName']!!}
+              @endforeach
             </div>
         </div>
         

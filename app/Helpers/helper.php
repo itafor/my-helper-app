@@ -5,6 +5,8 @@ use App\Country;
 use App\RequestBidders;
 use App\State;
 use App\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use JD\Cloudder\Facades\Cloudder;
 
 
@@ -87,3 +89,116 @@ function uploadImage($image)
     }
     return $path;
 }
+
+function authToken(){
+        $client = new Client(['verify' => false]);
+
+                $res = $client->request('POST', 'http://api.clicknship.com.ng/Token', [
+                    'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'username' => 'cnsdemoapiacct',
+                'password' => 'ClickNShip$12345',
+                'grant_type' => 'password'
+            ]
+        ]);
+                
+    $res = json_decode($res->getBody()->getContents(), true);
+
+    return $res['access_token'];
+
+}
+
+function clickship_states(){
+    
+    $client = new Client(['verify' => false]);
+
+     $states = $client->get('http://api.clicknship.com.ng/clicknship/Operations/States', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+     $response = $states->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+}
+
+function clickship_cities(){
+    
+    $client = new Client(['verify' => false]);
+
+     $cities = $client->get('http://api.clicknship.com.ng/clicknship/operations/cities', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $cities->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+
+}
+
+function fetch_cities_by_state($state = 'OYO' ){
+    
+    $client = new Client(['verify' => false]);
+
+     $city = $client->get('http://api.clicknship.com.ng/clicknship/Operations/StateCities?StateName='.$state.'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+     $response = $city->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+
+}
+
+function calculate_delivery_fee(){
+    
+    $client = new Client(['verify' => false]);
+
+     $fee = $client->post('http://api.clicknship.com.ng/clicknship/Operations/DeliveryFee', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'Origin' => 'IBADAN',
+                'Destination' => 'ABUJA',
+                'Weight' => 1.5,
+                'OnforwardingTownID'=>690
+            ]
+                    ]);
+
+       $response = $fee->getBody()->getContents();
+      $values = json_decode($response, true);
+
+     return $values;
+}
+
+function OnforwardingOrDeliveryTowns($CityCode = 'ABV'){
+    
+    $client = new Client(['verify' => false]);
+
+     $fee = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTowns?CityCode='.$CityCode.'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+              
+                    ]);
+
+       $response = $fee->getBody()->getContents();
+      $values = json_decode($response, true);
+
+     return $values;
+}
+ 

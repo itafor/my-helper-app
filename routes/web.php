@@ -144,5 +144,13 @@ Route::group([
     Route::get('/services', 'ProductsController@product_services')->name('product.services');
 });
 
+ Route::group([
+    'prefix' => 'pickupRequest'
+], function () {
+    Route::get('/store', 'UtilitiesController@submittingPickupRequestInformationandGeneratingWaybillNumber')->name('pickupRequest.store');
+
+     Route::get('/print/waybill', 'UtilitiesController@printWaybill')->name('pickupRequest.printwaybill');
+});
+
 
 
