@@ -28,6 +28,8 @@ Route::get('/home', 'MakeRequestController@index')->name('home');
 Auth::routes();
 Route::get('getstates/{id}', 'AjaxController@getState');
 Route::get('getcities/{id}', 'AjaxController@getCity');
+Route::get('apigetcities/{state}', 'AjaxController@fetch_cities_by_state');
+Route::get('apigetdeliverytown/{citycode}', 'AjaxController@fetchOnforwardingOrDeliveryTowns');
 Route::get('make/req/create', ['uses' => 'MakeRequestController@create', 'as' => 'make.request'])->middleware('guest');
 Route::get('provide/req/create', ['uses' => 'ProvideRequestController@create', 'as' => 'provide.request'])->middleware('guest');
 Route::get('checkemail', 'MakeRequestController@checkEmail');

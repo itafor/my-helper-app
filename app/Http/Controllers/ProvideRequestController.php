@@ -94,9 +94,9 @@ class ProvideRequestController extends Controller
         $lockdownRequest->request_type = $request->request_type;
         $lockdownRequest->category_id = $request->category_id;
         $lockdownRequest->description = $request->description;
-        $lockdownRequest->country_id = $request->country_id;
-        $lockdownRequest->state_id = $request->state_id;
-        $lockdownRequest->city_id = $request->city_id;
+        $lockdownRequest->api_state = $request->api_state;
+        $lockdownRequest->api_city = getCityName_by_citycode($request->api_city);
+        $lockdownRequest->api_delivery_town = $request->api_delivery_town ? $request->api_delivery_town : null;
         $lockdownRequest->street = $request->street;
         $lockdownRequest->type = $request->type;
         $lockdownRequest->mode_of_contact = $request->mode_of_contact;
@@ -130,7 +130,7 @@ class ProvideRequestController extends Controller
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
-                                                    ['state_id', $getRequest->state_id],
+                                                    ['api_state', $getRequest->api_state],
                                                     // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([
@@ -161,7 +161,7 @@ class ProvideRequestController extends Controller
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
-                                                    ['state_id', $getRequest->state_id],
+                                                    ['api_state', $getRequest->api_state],
                                                     // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([

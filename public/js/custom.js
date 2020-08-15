@@ -40,6 +40,49 @@ $('#state_id').change(function(){
 });
 
 
+//Auto fill api city when aa api state has been picked
+$('#api_state_id').change(function(){
+    var state = $(this).val();
+    if(state){
+        $('#api_city_id').empty();
+        $('<option>').val('').text('Loading...').appendTo('#api_city_id');
+        $.ajax({
+            url: baseUrl+'/apigetcities/'+state,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                $('#api_city_id').empty();
+                $('<option>').val('').text('Select City').appendTo('#api_city_id');
+                $.each(data.cities, function(k, v) {
+                    $('<option>').val(v.CityCode).text(v.CityName).appendTo('#api_city_id');
+                });
+            }
+        });
+    }
+});
+
+$('#api_city_id').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#api_delivery_town').empty();
+        $('<option>').val('').text('Loading...').appendTo('#api_delivery_town');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                $('#api_delivery_town').empty();
+                $('<option>').val('').text('Select Delivery Town').appendTo('#api_delivery_town');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownName).text(v.TownName).appendTo('#api_delivery_town');
+                });
+            }
+        });
+    }
+});
+
+
 
 // hide login link
 $('.loginLink').hide();

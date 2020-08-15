@@ -145,23 +145,7 @@ function clickship_cities(){
 
 }
 
-function fetch_cities_by_state($state = 'OYO' ){
-    
-    $client = new Client(['verify' => false]);
 
-     $city = $client->get('http://api.clicknship.com.ng/clicknship/Operations/StateCities?StateName='.$state.'', [
-                        'headers' => [
-                            'Authorization' => 'Bearer '.authToken(),
-                            'Content-Type' => 'application/json'
-                        ],
-                    ]);
-
-     $response = $city->getBody()->getContents();
-     $values = json_decode($response, true);
-
-     return $values;
-
-}
 
 function calculate_delivery_fee(){
     
@@ -185,20 +169,27 @@ function calculate_delivery_fee(){
      return $values;
 }
 
-function OnforwardingOrDeliveryTowns($CityCode = 'ABV'){
+function getCityName_by_citycode($city_code){
     
     $client = new Client(['verify' => false]);
 
-     $fee = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTowns?CityCode='.$CityCode.'', [
+     $cities = $client->get('http://api.clicknship.com.ng/clicknship/operations/cities', [
                         'headers' => [
                             'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
                         ],
-              
                     ]);
 
-       $response = $fee->getBody()->getContents();
-      $values = json_decode($response, true);
+      $response = $cities->getBody()->getContents();
+     $values = json_decode($response, true);
 
-     return $values;
+     foreach ($values as $key => $city) {
+        if($city['CityCode'] == $city_code){
+            return $city['CityName'];
+        }
+     }
+
 }
+
+
  
