@@ -75,9 +75,8 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
             'username' => $data['username'] ?? null,
-            'country_id' => $data['country_id'],
-            'state_id' => $data['state_id'],
-            'city_id' => $data['city_id'],
+            'api_state' => $data['api_state'],
+            'api_city' => $data['api_city'],
             'street' => $data['street'],
             'company_name' => $data['company_name'] ?? null,
             'website' => $data['website'] ?? null,
@@ -93,6 +92,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
@@ -114,9 +114,9 @@ class RegisterController extends Controller
             $lockdownRequest->request_type = $request->request_type;
             $lockdownRequest->category_id = $request->category_id;
             $lockdownRequest->description = $request->description;
-            $lockdownRequest->country_id = $request->country_id;
-            $lockdownRequest->state_id = $request->state_id;
-            $lockdownRequest->city_id = $request->city_id;
+            $lockdownRequest->api_state = $request->api_state;
+            $lockdownRequest->api_city = getCityName_by_citycode($request->api_city);
+            $lockdownRequest->api_delivery_town = $request->api_delivery_town ? $request->api_delivery_town : null;
             $lockdownRequest->street = $request->street;
             $lockdownRequest->type = $request->type;
             $lockdownRequest->mode_of_contact = $request->mode_of_contact;
@@ -124,6 +124,12 @@ class RegisterController extends Controller
             $lockdownRequest->show_phone = $request->show_phone;
             
             $lockdownRequest->save();
+
+            if($lockdownRequest){
+            $lockdown_request = LockdownRequest::find($lockdownRequest->id);
+            LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
+        }
+        
         }
         return $request->wantsJson()
                     ? new Response('', 201)

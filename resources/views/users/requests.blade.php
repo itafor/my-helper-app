@@ -86,7 +86,7 @@
                                                             <div class="request-meta bottom-meta">
                                                                 <div class="pull-left">
                                                                     <p id="city"><i class="tim-icons icon-map-big" aria-hidden="true"></i>
-                                                                        {{ $req->city->name }} {{ $req->state->name }}, {{ $req->country->country_name }}
+                                                                        {{ $req->api_city }} {{ $req->api_state }}
                                                                     </p>
                                                                 </div>
                                                                 <div class="time pull-right">
@@ -189,7 +189,7 @@
                                                         <td class="text-left type_c_free">{{ $req->type }}</td>
                                                         @endif
 
-                                                        <td class="text-left city_c">{{ $req->city->name }}</td>
+                                                        <td class="text-left city_c">{{ $req->api_city }}</td>
                                                     </tr>
                                                 @php
                                                 $i++;
