@@ -191,5 +191,78 @@ function getCityName_by_citycode($city_code){
 
 }
 
+function payment_types(){
+    
+    $client = new Client(['verify' => false]);
+
+     $paymentType = $client->get('http://api.clicknship.com.ng/clicknship/operations/PaymentTypes', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $paymentType->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+}
+
+function delivery_types(){
+    
+    $client = new Client(['verify' => false]);
+
+     $deliverytype = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTypes', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $deliverytype->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+}
+
 
  
+function getCityCode_by_CityName($city_name){
+    
+    $client = new Client(['verify' => false]);
+
+     $cities = $client->get('http://api.clicknship.com.ng/clicknship/operations/cities', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $cities->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     foreach ($values as $key => $city) {
+        if($city['CityName'] == $city_name){
+            return getTownID($city['CityCode']);
+        }
+     }
+
+}
+
+function getTownID($city_code){
+    
+    $client = new Client(['verify' => false]);
+
+     $towns = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTowns?CityCode='.$city_code.'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+              
+                    ]);
+
+       $response = $towns->getBody()->getContents();
+      $values = json_decode($response, true);
+
+
+      return $values;
+}

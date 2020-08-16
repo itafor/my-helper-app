@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'username' => $data['username'] ?? null,
             'api_state' => $data['api_state'],
-            'api_city' => $data['api_city'],
+            'api_city' => getCityName_by_citycode($data['api_city']),
             'api_delivery_town' => isset($data['api_delivery_town']) ? $data['api_delivery_town'] : null,
             'street' => $data['street'],
             'company_name' => $data['company_name'] ?? null,

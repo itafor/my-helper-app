@@ -15,6 +15,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class RequestBiddersController extends Controller
 {
@@ -132,15 +134,47 @@ class RequestBiddersController extends Controller
     public function finalRequestApprovalForhelpSeekers(Request $request){
       
      $data = $request->all();
-   // dd($data);
-       $validator = validator::make($data,[
-            'delievery_cost'=>'required',
-    ]);
+    // dd($data);
+    //   $itemContainer = [];
+    //   foreach ($data['ShipmentItems'] as $key => $item) {
+    //      $itemContainer[] =  ['ItemName'=>$item['ItemName'],'ItemUnitCost'=>$item['ItemName'],'ItemQuantity'=>$item['ItemName'],'ItemColour'=>$item['ItemName'],'ItemSize'=>'45'];
+    //   }
 
-    if($validator->fails()){
-         return  back()->withErrors($validator)
-                        ->withInput()->with('error', 'Please fill in a required fields');
-    }
+ $client = new Client(['verify' => false]);
+
+     $pickupRequest = $client->post('http://api.clicknship.com.ng/clicknship/Operations/PickupRequest', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'OrderNo' => 'Ord-'. mt_rand(1000000, 9999999),
+                'Description' => $data['description'],
+                'Weight' => $data['weight'],
+                'SenderName'=>$data['senderName'],
+                'SenderCity'=> getCityName_by_citycode($data['senderCity']),
+                'SenderTownID'=> $data['senderTownID'],
+                'SenderAddress'=> $data['senderAddress'],
+                'SenderPhone' =>$data['senderPhone'],
+                'SenderEmail' =>$data['senderEmail'],
+                'RecipientName' =>$data['RecipientName'],
+                'RecipientCity' =>$data['RecipientCity'],
+                'RecipientTownID' =>$data['RecipientTownID'],
+                'RecipientAddress' =>$data['RecipientAddress'],
+                'RecipientPhone'=>$data['RecipientPhone'],
+                'RecipientEmail'=>$data['RecipientEmail'],
+                'PaymentType'=>$data['PaymentType'],
+                'DeliveryType'=>$data['DeliveryType'],
+                'ShipmentItems'=> $data['ShipmentItems'],
+            ]
+                    ]);
+
+       $response = $pickupRequest->getBody()->getContents();
+      $values = json_decode($response, true);
+
+     dd($values);
+
+
+
 
        DB::beginTransaction();
         try{

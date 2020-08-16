@@ -83,6 +83,48 @@ $('#api_city_id').change(function(){
 });
 
 
+$('#senderCity').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#senderTownID').empty();
+        $('<option>').val('').text('Loading...').appendTo('#senderTownID');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                $('#senderTownID').empty();
+                $('<option>').val('').text('Select sender town Id').appendTo('#senderTownID');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownID).text(v.TownName +'- Town ID:'+v.TownID).appendTo('#senderTownID');
+                });
+            }
+        });
+    }
+});
+
+$('#RecipientCity').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#RecipientTownID').empty();
+        $('<option>').val('').text('Loading...').appendTo('#RecipientTownID');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                $('#RecipientTownID').empty();
+                $('<option>').val('').text('Select sender town Id').appendTo('#RecipientTownID');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownID).text(v.TownName +'- Town ID:'+v.TownID).appendTo('#RecipientTownID');
+                });
+            }
+        });
+    }
+});
+
 
 // hide login link
 $('.loginLink').hide();
@@ -292,16 +334,20 @@ function rejectRequest(request_id)
                                  +  '<input type="text" name="ShipmentItems['+rowId+'][ItemName]" class="form-control" style="margin-top: 10px;">'
                                +'</div>'
 
-                                +'<div class="col-sm-3">'
+                                +'<div class="col-sm-2">'
                                  +  '<input type="number" name="ShipmentItems['+rowId+'][ItemUnitCost]" class="form-control" style="margin-top: 10px;">'
                                +'</div>'
 
-                                +'<div class="col-sm-3">'
+                                +'<div class="col-sm-2">'
                                  +  '<input type="number" name="ShipmentItems['+rowId+'][ItemQuantity]" class="form-control" style="margin-top: 10px;">'
                                +'</div>'
 
                                +'<div class="col-sm-3">'
                                  +  '<input type="text" name="ShipmentItems['+rowId+'][ItemColour]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                                +'<div class="col-sm-2">'
+                                 +  '<input type="text" name="ShipmentItems['+rowId+'][ItemSize]" class="form-control" style="margin-top: 10px;">'
                                +'</div>'
 
                                +'</div>'
