@@ -46,19 +46,19 @@
     {{$request_bidder ? $request_bidder->email : 'N/A'}}
   </dd>
 
-   <dt class="col-sm-3">Country</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->country ? $request_bidder->country->country_name : 'N/A'}}
-  </dd>
-
    <dt class="col-sm-3">State</dt>
   <dd class="col-sm-9">
-    {{$request_bidder->state ? $request_bidder->state->name : 'N/A'}}
+    {{$request_bidder->api_state }}
   </dd>
 
    <dt class="col-sm-3">City</dt>
   <dd class="col-sm-9">
-    {{$request_bidder->city ? $request_bidder->city->name : 'N/A'}}
+    {{$request_bidder->api_city }}
+  </dd>
+
+   <dt class="col-sm-3">Delivery Town</dt>
+  <dd class="col-sm-9">
+    {{$request_bidder->api_delivery_town ? $request_bidder->api_delivery_town : 'N/A'  }}
   </dd>
 
   <dt class="col-sm-3 text-truncate">Street Address</dt>
@@ -70,48 +70,156 @@
   
 </dl>
 				   <hr>
-				   <div class="col-sm-6">
+				   <div class="col-sm-12">
 				   @if($request_bid->status == 'Pending')
                     Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
 
 					<form class="form" method="post" action="{{ route('request.approve.store') }}">
                             @csrf
-                          <div class="form-group">
+                          <div class=">
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
                           </div>
 
-                          <div class="form-group">
+                          <div class=">
                             <input type="hidden" name="request_bid_id" class="form-control" id="request_id" value="{{$request_bid->id}}" >
                           </div>
 
-                           <div class="form-group">
+                           <div class=">
                             <input type="hidden" name="bidder_id" class="form-control" id="request_id" value="{{$request_bidder->id}}" >
                           </div>
 
-                           <div class="form-group">
+                           <div class=">
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
-                            <div class="form-group">
-                            <!-- <label for="exampleInputEmail1">Logistic Partner</label> -->
-                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
-                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
-                                        <option value="">Choose logistic partner </option>
-                                        @foreach(getLogisticPartners() as $logistic)
-                                            <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>
-                                        @endforeach
-                                    </select>
-                                    
-                    @error('logistic_partner_id')
-                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
-                    @enderror
+                        
+                     <div class="row">
+                       <div class="col-sm-4">
+                            <label for="Inputdescription">Description</label>
+                            <input type="text" name="description" class="form-control" id="description">
+                          </div>
+                           <div class="col-sm-2">
+                             <label for="inputweight">Weight</label>
+                            <input type="number" name="weight" class="form-control" id="weight" >
+                           </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">PaymentType</label>
+                            <input type="text" name="PaymentType" class="form-control" id="PaymentType" >
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="Inputdescription">DeliveryType</label>
+                            <input type="text" name="DeliveryType" class="form-control" id="DeliveryType">
+                          </div>
+                          </div>
+                          <h3>Sender Details</h3>
+                          <div class="row">
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">SenderName</label>
+                            <input type="text" name="senderName" class="form-control" id="weight" >
+                            </div>
+                             <div class="col-sm-4">
+                            <label for="inputweight">SenderPhone</label>
+                            <input type="text" name="senderPhone" class="form-control" id="senderPhone" >
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">SenderEmail</label>
+                            <input type="email" name="senderEmail" class="form-control" id="senderEmail" >
+                            </div>
                           </div>
 
-                     <div class="form-group">
-                            <label for="exampleInputEmail1">Delivery cost</label>
-                            <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">SenderCity</label>
+                            <input type="text" name="senderCity" class="form-control" id="senderCity" >
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">SenderTownID</label>
+                            <input type="number" name="senderTownID" class="form-control" id="senderTownID" >
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">SenderAddress</label>
+                            <input type="text" name="senderAddress" class="form-control" id="senderAddress">
                           </div>
-                     <div class="form-group">
+                          </div>
+
+                          <h3>Receiver Details</h3>
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">RecipientName</label>
+                            <input type="text" name="RecipientName" class="form-control" id="RecipientName" >
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">RecipientPhone</label>
+                            <input type="text" name="RecipientPhone" class="form-control" id="RecipientPhone" >
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">RecipientEmail</label>
+                            <input type="text" name="RecipientEmail" class="form-control" id="RecipientEmail">
+                          </div>
+                          </div>
+
+                            <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">RecipientCity</label>
+                            <input type="text" name="RecipientCity" class="form-control" id="RecipientCity" >
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">RecipientTownID</label>
+                            <input type="text" name="RecipientTownID" class="form-control" id="RecipientTownID" >
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">RecipientAddress</label>
+                            <input type="text" name="RecipientAddress" class="form-control" id="RecipientAddress">
+                          </div>
+                          </div>
+
+                          <h3>Shipment Items</h3>
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">ItemName</label>
+                            <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" >
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">ItemUnitCost</label>
+                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" >
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="Inputdescription">ItemQuantity</label>
+                            <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity">
+                          </div>
+
+                          <div class="col-sm-3">
+                              <label for="Inputdescription">ItemColour</label>
+                            <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour">
+                          </div>
+                          </div>
+
+
+                                <div id="shipmentItemsContainer">
+                                
+         
+                                </div>
+                                  <div style="clear:both"></div>
+
+                                     <div class="form-group">
+                                    <button type="button" id="addMoreItem" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more Item</button>
+                                </div>
+
+
+
+
+
+
+
+                          
+
+                     <div class=">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
@@ -151,7 +259,7 @@
                                             @else
                                                 <p>Kindly contact me through this platform
                                             @endif
-                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->city->name }}, {{ $request->state->name }}</strong>.
+                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->api_city }}, {{ $request->api_state }}</strong>.
                                     
                                     </p>
                                     <p>Thank you</p>
@@ -160,15 +268,19 @@
                                         <p>Address: {{ $request->street }}</p>
                                     @endif
 
+                                    {{$request->api_state}}
+                                    {{$request->api_city}}
+                                    {{$request->api_delivery_town}}
+
               @if(isset($request_photos) && $request_photos !='')
 
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
                     <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="margin-right: 400px;">&times;</span>
 
                     <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
+                    <img id="expandedImg" style="width:500px; height: 400px;">
 
                     <!-- Image text -->
                     <div id="imgtext"></div>
@@ -190,7 +302,7 @@
                   <footer class="blockquote-footer">Here is your request <cite title="Source Title">to provide help</cite></footer>
               </div>
             </div>
-
+{{$help_provider}}
 
                   <div class="card">
               <div class="card-header">

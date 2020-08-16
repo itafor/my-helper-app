@@ -117,7 +117,7 @@
                                             <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_state_id">{{ __('State') }}</label></strong>
                                                 <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
-                                                    <option value="">Select a country</option>
+                                                    <option value="">Select a state</option>
                                                     @foreach(clickship_states() as $state)
                                                         <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
                                                     @endforeach

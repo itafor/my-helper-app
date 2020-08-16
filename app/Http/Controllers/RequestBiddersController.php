@@ -134,7 +134,6 @@ class RequestBiddersController extends Controller
      $data = $request->all();
    // dd($data);
        $validator = validator::make($data,[
-            'logistic_partner_id'=>'required',
             'delievery_cost'=>'required',
     ]);
 
@@ -152,12 +151,12 @@ class RequestBiddersController extends Controller
         $help_provider= authUser(); //The user that want to provide help
         $main_request = LockdownRequest::find($data['request_id']);// the help (request)
         $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
-        $logistic_partner = User::find($data['logistic_partner_id']); 
+        // $logistic_partner = User::find($data['logistic_partner_id']); 
 
-       $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
-        $this->dispatch($logistic_partner_job);
+       // $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+       //  $this->dispatch($logistic_partner_job);
 
-         $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+         $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
         $this->dispatch($receiver_job);
 
             DB::commit();

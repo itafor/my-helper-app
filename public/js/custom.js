@@ -270,6 +270,60 @@ function rejectRequest(request_id)
         });
 
 
+
+              $('#addMoreItem').click(function(e) {
+           // console.log('ok')
+            e.preventDefault();
+
+            if(row >= 5){
+                alert("You've reached the maximum limit");
+                return;
+            }
+
+            var rowId = identifier();
+
+            $("#shipmentItemsContainer").append(
+                '<div>'
+                    +'<div style="float:right; margin-right:50px; margin-top: 30px;" class="remove_shipmentitem"><span style="cursor:pointer; " class="badge badge-danger" border="2"><i class="fa fa-minus"></i> Remove</span></div>'
+                    +'<div style="clear:both"></div>'
+                        +' <div class="row">'
+
+                              +'<div class="col-sm-3">'
+                                 +  '<input type="text" name="ShipmentItems['+rowId+'][ItemName]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                                +'<div class="col-sm-3">'
+                                 +  '<input type="number" name="ShipmentItems['+rowId+'][ItemUnitCost]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                                +'<div class="col-sm-3">'
+                                 +  '<input type="number" name="ShipmentItems['+rowId+'][ItemQuantity]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                               +'<div class="col-sm-3">'
+                                 +  '<input type="text" name="ShipmentItems['+rowId+'][ItemColour]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                               +'</div>'
+                        +'<div style="clear:both"></div>'
+                        +'<br>'
+                    +'</div>'
+
+            );
+            row++;
+            $(".select"+rowId).select2({
+                    theme: "bootstrap"
+                });
+        });
+
+        // Remove parent of 'remove' link when link is clicked.
+        $('#shipmentItemsContainer').on('click', '.remove_shipmentitem', function(e) {
+            e.preventDefault();
+            $(this).parent().remove();
+            row--;
+        });
+
+
         function myFunction(imgs) {
   // Get the expanded image
   var expandImg = document.getElementById("expandedImg");

@@ -105,11 +105,11 @@
                         </div> -->
 
                          <div class="row form-group">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_state_id">{{ __('State') }}</label></strong>
                                                 <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
-                                                    <option value="">Select a country</option>
+                                                    <option value="">Select a state</option>
                                                     @foreach(clickship_states() as $state)
                                                         <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
                                                     @endforeach
@@ -121,7 +121,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
                                                 <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
@@ -135,8 +135,22 @@
                                                 @endif
                                             </div>
                                         </div>
+
+                                              <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town') }}</label></strong>
+                                                <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                                    <option value="">Select Town</option>
+                                                </select>
+                                                @if ($errors->has('api_delivery_town'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_delivery_town') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                    
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
                                                 <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >

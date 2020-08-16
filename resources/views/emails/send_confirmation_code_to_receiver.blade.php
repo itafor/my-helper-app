@@ -212,70 +212,10 @@ Confirmation code: <b>{{$request_bidding_record->confirmation_code}}</b> <br>
                   </table>
 <hr>
 
-<h3>Logistic Partner details</h3>
-
- <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-
-                   <tr>
-                     <td class="rent_title">Comany Name</td>
-                     <td> 
-                        {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
-                      </td> 
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Phone Number</td>
-                     <td>  
-                {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Email</td>
-                     <td> {{$logistic_partner ? $logistic_partner->email : 'N/A'}}</td>
-                   </tr>
-
-                     <tr>
-                     <td class="rent_title">Country</td>
-                     <td>
-    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
-                     </td>
-                   </tr>
-
-                    <tr>
-                     <td class="rent_title">State</td>
-                <td>
-    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
-                </td>           
-              </tr>
-
-                 <tr>
-                     <td class="rent_title">City</td>
-                     <td>
-    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
-                     </td>
-                </tr>
-
-                 <tr>
-                     <td class="rent_title">Street Address</td>
-                     <td>
-                      
-                    {{$logistic_partner ? $logistic_partner->street: 'N/A'}}
-                    
-                    </td>
-                </tr>
-               
-       </tbody>
-                  </table>
-
-  
 
       <!--  help_provider: {{$help_provider}}<br>
        main_request : {{$main_request}}<br>
        request_bidder: {{$request_bidder}}<br> 
-       logistic_partner: {{$logistic_partner}}<br> 
        request_bidding_record: {{$request_bidding_record}}<br> -->
                
                 </div>

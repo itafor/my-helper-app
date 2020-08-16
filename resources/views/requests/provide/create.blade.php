@@ -27,24 +27,7 @@
     var baseUrl = '{{url("/")}}';
 </script>
 <div class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
-    <!--   Creative Tim Branding   -->
-    <!-- <a href="http://creative-tim.com">
-         <div class="logo-container">
-            <div class="logo">
-                <img src="{{ asset('assets/img/new_logo.png')}}">
-            </div>
-            <div class="brand">
-                Creative Tim
-            </div>
-        </div>
-    </a> -->
-
-	<!--  Made With Get Shit Done Kit  -->
-		<!-- <a href="http://demos.creative-tim.com/get-shit-done/index.html?ref=get-shit-done-bootstrap-wizard" class="made-with-mk">
-			<div class="brand">GK</div>
-			<div class="made-with">Made with <strong>GSDK</strong></div>
-		</a> -->
-
+    
     <!--   Big container   -->
     <div class="container">
         <div class="row">
