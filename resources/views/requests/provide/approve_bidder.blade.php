@@ -75,7 +75,10 @@
 
    @elseif($request_bid->status == 'Approved')
                     Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
-                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">View details</a>
+                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
+                        <button class="btn-sm btn-primary">View details</button>
+
+                      </a>
   @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
   @elseif($request_bid->status == 'Delivered')

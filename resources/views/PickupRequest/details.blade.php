@@ -24,11 +24,9 @@
   Pickup Request Details
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
        <table class="table table-bordered" id="rental_table">
            
                     <tbody>
-
                    <tr>
                      <td class="rent_title">Transaction Status</td>
                      <td> 
@@ -187,33 +185,91 @@
                 </tr>
 
                  <tr>
-                     <td class="rent_title">Recipient Address</td>
+                     <td class="rent_title">Recipient Email</td>
                      <td>
-                 {{$get_pickup_request->RecipientAddress}}
+                 {{$get_pickup_request->RecipientEmail}}
                     
                     </td>
                 </tr>
 
                  <tr>
-                     <td class="rent_title">Recipient Address</td>
+                     <td class="rent_title">Payment Type</td>
                      <td>
-                 {{$get_pickup_request->RecipientAddress}}
+                 {{$get_pickup_request->PaymentType}}
                     
                     </td>
                 </tr>
 
                  <tr>
-                     <td class="rent_title">Recipient Address</td>
+                     <td class="rent_title">DeliveryType</td>
                      <td>
-                 {{$get_pickup_request->RecipientAddress}}
+                 {{$get_pickup_request->DeliveryType}}
                     
                     </td>
                 </tr>
                
+                <tr>
+                     <td class="rent_title">Provider</td>
+                     <td>
+                 {{$get_pickup_request->provider ? $get_pickup_request->provider->name : 'N/A'}}
+                 {{$get_pickup_request->provider ? $get_pickup_request->provider->last_name : 'N/A'}},
+                 {{$get_pickup_request->provider ? $get_pickup_request->provider->email : 'N/A'}},
+                 {{$get_pickup_request->provider ? $get_pickup_request->provider->phone : 'N/A'}}
+                    
+                    </td>
+                </tr>
+                  <tr>
+                     <td class="rent_title">Receiver</td>
+                     <td>
+                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->name : 'N/A'}}
+                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->last_name : 'N/A'}},
+                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->email : 'N/A'}},
+                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->phone : 'N/A'}} 
+                    
+                    </td>
+                </tr>
        </tbody>
                   </table>
     
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h4>Shipment Items</h4>
+    @if(count($get_pickup_request->shipment_items) >= 1)
+    <div class="table-responsive">
+                 <table class="table tablesorter" id="requests">
+                    <thead class=" text-primary">
+                       <tr>
+                      <th> S/N </th>
+                      <th> ItemName </th>
+                      <th> ItemUnitCost </th>
+                      <th> ItemQuantity </th>
+                      <th> ItemColour </th>
+                      <th> ItemSize </th>
+                        </tr>
+                     
+                    </thead>
+                    <tbody>
+                       @php
+                          $i = 1;
+                      @endphp
+                      @foreach($get_pickup_request->shipment_items as $item)
+                      <tr>
+                        <td>{{$i}} </td>
+                        <td>{{$item->ItemName}} </td>
+                        <td>{{$item->ItemUnitCost}} </td>
+                        <td>{{$item->ItemQuantity}} </td>
+                        <td>{{$item->ItemColour}} </td>
+                        <td>{{$item->ItemSize}} </td>
+                      </tr>
+                       @php
+                       $i++;
+                    @endphp  
+                     @endforeach
+                    </tbody>
+                  </table>
+                </div>
+    @else
+    <span>No Item found</span>
+
+    @endif
   </div>
 </div>
         </div>
