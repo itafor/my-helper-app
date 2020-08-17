@@ -25,6 +25,7 @@
 				<div class="float-right">
 					@if($request_bid->status == 'Pending')
 					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+
 					@endif
 				</div>
 				  </div>
@@ -69,26 +70,37 @@
   </dd>
   
 </dl> -->
+ @if($request_bid->status == 'Pending')
+   Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+
+   @elseif($request_bid->status == 'Approved')
+                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">View details</a>
+  @elseif($request_bid->status == 'Rejected')
+                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+  @elseif($request_bid->status == 'Delivered')
+                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+  @endif
+
 				   <hr>
 				   <div class="col-sm-12">
-				   @if($request_bid->status == 'Pending')
-                    Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+				  
 
 					<form class="form" method="post" action="{{ route('request.approve.store') }}">
                             @csrf
-                          <div class=">
+                          <div>
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
                           </div>
 
-                          <div class=">
+                          <div>
                             <input type="hidden" name="request_bid_id" class="form-control" id="request_id" value="{{$request_bid->id}}" >
                           </div>
 
-                           <div class=">
+                           <div>
                             <input type="hidden" name="bidder_id" class="form-control" id="request_id" value="{{$request_bidder->id}}" >
                           </div>
 
-                           <div class=">
+                           <div >
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
@@ -96,7 +108,7 @@
                      <div class="row">
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
-                            <input type="text" name="description" class="form-control" id="description" value="{{ $request->description }}">
+                            <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
                           </div>
                            <div class="col-sm-2">
                              <label for="inputweight">Weight</label>
@@ -251,29 +263,25 @@
                                 </div>
 
 
-
-
-
-
-
-                          
-
                      <div class=">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
-                         
+
+                           @if($request_bid->status == 'Pending')
                           <button type="submit" class="btn btn-primary float-left">Approve and Submit Pickup Request</button>
 					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
-                        </form>
-                    @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary"> {{$request_bid->status}}</span>
-                    @elseif($request_bid->status == 'Rejected')
+                @elseif($request_bid->status == 'Approved')
+                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
-                     @elseif($request_bid->status == 'Delivered')
+                @elseif($request_bid->status == 'Delivered')
                     Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
-                  @endif
+                @endif
+
+                        </form>
+                    
                     </div>
 
 
@@ -306,10 +314,6 @@
                                     @if($request->show_address == 1)
                                         <p>Address: {{ $request->street }}</p>
                                     @endif
-
-                                    {{$request->api_state}}
-                                    {{$request->api_city}}
-                                    {{$request->api_delivery_town}}
 
               @if(isset($request_photos) && $request_photos !='')
 

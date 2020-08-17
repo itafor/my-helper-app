@@ -68,7 +68,6 @@ public static function createNew($data)
             ['bidder_id', $data['bidder_id'] ],
             ['requester_id', $data['requester_id'] ],
         ])->update([
-            'delievery_cost' => $data['delievery_cost'],
             'comment' => $comment,
             'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
             'status' => 'Approved',

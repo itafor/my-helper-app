@@ -152,6 +152,8 @@ Route::group([
     Route::get('/store', 'UtilitiesController@submittingPickupRequestInformationandGeneratingWaybillNumber')->name('pickupRequest.store');
 
      Route::get('/print/waybill', 'UtilitiesController@printWaybill')->name('pickupRequest.printwaybill');
+
+     Route::get('/details/{request_id}/{provider_id}/{receiver_id}', 'UtilitiesController@pickupRequestDetail')->name('pickupRequest.details');
 });
 
 
