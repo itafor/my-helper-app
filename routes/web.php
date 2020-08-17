@@ -154,6 +154,11 @@ Route::group([
      Route::get('/print/waybill', 'UtilitiesController@printWaybill')->name('pickupRequest.printwaybill');
 
      Route::get('/details/{request_id}/{provider_id}/{receiver_id}', 'UtilitiesController@pickupRequestDetail')->name('pickupRequest.details');
+
+     Route::get('/track_shipment', 'PickupRequestController@showShipmentTrackingForm')->name('pickupRequest.shipmenttracker');
+
+     Route::post('/track/shipment', 'PickupRequestController@trackShipment')->name('pickupRequest.trackshipment.store');
+
 });
 
 

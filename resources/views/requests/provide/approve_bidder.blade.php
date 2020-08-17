@@ -30,46 +30,7 @@
 				</div>
 				  </div>
 				  <div class="card-body">
-                  <!-- <dl class="row">
-  <dt class="col-sm-3">Full Name</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->name : 'N/A'}} 
-    {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
-  </dd>
-
-  <dt class="col-sm-3">Phone Number</dt>
-  <dd class="col-sm-9">
-   {{$request_bidder ? $request_bidder->phone : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3"> Email</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->email : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">State</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->api_state }}
-  </dd>
-
-   <dt class="col-sm-3">City</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->api_city }}
-  </dd>
-
-   <dt class="col-sm-3">Delivery Town</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->api_delivery_town ? $request_bidder->api_delivery_town : 'N/A'  }}
-  </dd>
-
-  <dt class="col-sm-3 text-truncate">Street Address</dt>
-  <dd class="col-sm-9">
-
-     <p>{{$request_bidder ? $request_bidder->street: 'N/A'}}</p>
-                       
-  </dd>
-  
-</dl> -->
+ 
  @if($request_bid->status == 'Pending')
    Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
 
@@ -266,7 +227,7 @@
                                 </div>
 
 
-                     <div class=">
+                     <div>
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
