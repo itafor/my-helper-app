@@ -3,6 +3,7 @@
 use App\City;
 use App\Country;
 use App\RequestBidders;
+use App\ShipmentItem;
 use App\State;
 use App\User;
 use GuzzleHttp\Client;
@@ -265,4 +266,16 @@ function getTownID($city_code){
 
 
       return $values;
+}
+
+function shippmentItems($pickupRequest_id,$request_id,$provider_id,$receiver_id){
+      $items = ShipmentItem::where([
+        ['pickupRequest_id',$pickupRequest_id],
+        ['request_id',$request_id],
+        ['provider_id',$provider_id],
+        ['receiver_id',$receiver_id],
+      ])->get();
+  if($items){
+    return $items;
+  }
 }

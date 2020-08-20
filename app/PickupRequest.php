@@ -82,6 +82,9 @@ public function receiver()
         foreach($data['ShipmentItems'] as $item){
             ShipmentItem::create([
                 'pickupRequest_id' => $pickupRequest->id,
+                'request_id'=>$data['request_id'],
+                'provider_id'=>$data['requester_id'],
+                'receiver_id'=>$data['bidder_id'],
                 'ItemName' => $item['ItemName'],
                 'ItemUnitCost' => $item['ItemUnitCost'],
                 'ItemQuantity' => $item['ItemQuantity'],

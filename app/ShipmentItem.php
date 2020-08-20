@@ -9,8 +9,8 @@ class ShipmentItem extends Model
 {
      use SoftDeletes;
 
-    protected $fillable = ['pickupRequest_id','ItemName','ItemUnitCost','ItemQuantity',
-						   'ItemColour','ItemSize'
+    protected $fillable = ['pickupRequest_id','request_id','provider_id','receiver_id',
+    					'ItemName','ItemUnitCost','ItemQuantity','ItemColour','ItemSize'
 						];
 
 	public function Pickup_request()

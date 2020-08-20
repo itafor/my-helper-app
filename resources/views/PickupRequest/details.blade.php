@@ -207,32 +207,11 @@
                     
                     </td>
                 </tr>
-               
-                <tr>
-                     <td class="rent_title">Provider</td>
-                     <td>
-                 {{$get_pickup_request->provider ? $get_pickup_request->provider->name : 'N/A'}}
-                 {{$get_pickup_request->provider ? $get_pickup_request->provider->last_name : 'N/A'}},
-                 {{$get_pickup_request->provider ? $get_pickup_request->provider->email : 'N/A'}},
-                 {{$get_pickup_request->provider ? $get_pickup_request->provider->phone : 'N/A'}}
-                    
-                    </td>
-                </tr>
-                  <tr>
-                     <td class="rent_title">Receiver</td>
-                     <td>
-                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->name : 'N/A'}}
-                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->last_name : 'N/A'}},
-                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->email : 'N/A'}},
-                 {{$get_pickup_request->receiver ? $get_pickup_request->receiver->phone : 'N/A'}} 
-                    
-                    </td>
-                </tr>
        </tbody>
                   </table>
-    
+  
     <h4>Shipment Items</h4>
-    @if(count($get_pickup_request->shipment_items) >= 1)
+    @if(count(shippmentItems($get_pickup_request->id,$get_pickup_request->request_id,$get_pickup_request->provider_id,$get_pickup_request->receiver_id)) >= 1)
     <div class="table-responsive">
                  <table class="table tablesorter" id="requests">
                     <thead class=" text-primary">

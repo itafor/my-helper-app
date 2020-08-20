@@ -60,27 +60,26 @@
                                     @endif
                                 @endif
 
-                                @if($getRequest->delivery_cost_payer == 'Receiver')
+                                @if($getRequest->delivery_cost_payer == 'pay on delivery')
                                          
-                                    @if($getRequest->weight == 5.0)
+                                    @if($getRequest->weight == 3.5)
                                        Item Size: Small, Weight:{{$getRequest->weight}}
-                                    @elseif($getRequest->weight == 10.0)
+                                    @elseif($getRequest->weight == 7.5)
                                        Item Size: Medium, Weight:{{$getRequest->weight}}
                                     @else
                                        Item Size: Large, Weight:{{$getRequest->weight}}
                                     @endif
-                                        <p>Note: You are to pay <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">delivery fee</a>.<br>
-                                          Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.</p>
-                                @elseif($getRequest->delivery_cost_payer == 'Provider')
-                                  @if($getRequest->weight == 5.0)
+                                        <p><a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}} <br>
+                                          </p>
+                                @elseif($getRequest->delivery_cost_payer == 'prepaid')
+                                  @if($getRequest->weight == 3.5)
                                        Item Size: Small, Weight:{{$getRequest->weight}}
-                                    @elseif($getRequest->weight == 10.0)
+                                    @elseif($getRequest->weight == 7.5)
                                        Item Size: Medium, Weight:{{$getRequest->weight}}
                                     @else
                                        Item Size: Large, Weight:{{$getRequest->weight}}
                                     @endif
-                                        <p>Note: The provider (Supplier) will pay <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">delivery fee</a>.<br>
-                                          Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.
+                                        <p> <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}}<br>
                                         </p>
                                     @else
 

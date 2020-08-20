@@ -76,14 +76,15 @@
                           </div>
                            <div class="col-sm-2">
                              <label for="inputweight">Weight</label>
-                            <input type="text" name="weight" class="form-control" id="weight" >
+                            <input type="text" name="weight" class="form-control" id="weight" value="{{$request->weight}}" >
                            </div>
                             <div class="col-sm-3">
                                 <label for="exampleInputEmail1">PaymentType</label>
                             <select name="PaymentType" id="PaymentType" class="form-control" required >
                                                     <option value="">Select payment type</option>
                                                     @foreach(payment_types() as $paymentype)
-                                                        <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] }}</option>
+                                                        <option  value="{{ $paymentype['PaymentType'] }}" {{$request->delivery_cost_payer ==
+                                                          $paymentype['PaymentType'] ? 'selected':''}}>{{ $paymentype['PaymentType'] }}</option>
                                                     @endforeach
                                                 </select>
                             </div>
@@ -129,7 +130,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <label for="exampleInputEmail1">SenderTownID</label>
-                            <select name="senderTownID" id="senderTownID" class="form-control">
+                            <select name="senderTownID" id="senderTownID" class="form-control" required>
                                                     <option value="">Select sender town Id</option>
                                   @if(isset($help_provider->api_city))
                                @foreach(getCityCode_by_CityName($help_provider->api_city) as $city)
@@ -175,7 +176,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <label for="exampleInputEmail1">RecipientTownID</label>
-                             <select name="RecipientTownID" id="RecipientTownID" class="form-control">
+                             <select name="RecipientTownID" id="RecipientTownID" class="form-control" required>
                                                     <option value="">Select Recipient Town Id</option>
                                       @if(isset($request_bidder->api_city))
                                @foreach(getCityCode_by_CityName($request_bidder->api_city) as $city)
@@ -196,24 +197,24 @@
                           <div class="row">
                             <div class="col-sm-3">
                             <label for="inputweight">ItemName</label>
-                            <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" >
+                            <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
                             </div>
                             <div class="col-sm-2">
                                 <label for="exampleInputEmail1">ItemUnitCost</label>
-                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" >
+                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="1">
                             </div>
                             <div class="col-sm-2">
                               <label for="Inputdescription">ItemQuantity</label>
-                            <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity">
+                            <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity" value="0">
                           </div>
 
                           <div class="col-sm-3">
                               <label for="Inputdescription">ItemColour</label>
-                            <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour">
+                            <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
                           </div>
                           <div class="col-sm-2">
                               <label for="Inputdescription">ItemSize</label>
-                            <input type="text" name="ShipmentItems[112211][ItemSize]" class="form-control" id="ItemColour">
+                            <input type="text" name="ShipmentItems[112211][ItemSize]" class="form-control" id="ItemColour" value="0">
                           </div>
                           </div>
 
@@ -229,10 +230,10 @@
                                 </div>
 
 
-                     <div>
+                     {{--<div>
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
-                          </div>
+                          </div>--}}
 
                            @if($request_bid->status == 'Pending')
                           <button type="submit" class="btn btn-primary float-left">Approve and Submit Pickup Request</button>

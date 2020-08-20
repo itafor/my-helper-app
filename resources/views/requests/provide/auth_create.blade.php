@@ -148,7 +148,7 @@
                                     <div class="row"> -->
                                         <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town') }}</label></strong>
+                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town (Optional)') }}</label></strong>
                                                 <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
                                                     <option value="">Select Town</option>
                                                 </select>
@@ -207,11 +207,12 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Who will pay for delivery cost?') }}</label></strong>
+                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Delivery fee Payment Type') }}</label></strong>
                                                 <select name="delivery_cost_payer" id="delivery_cost_payer" class="form-control form-control-alternative{{ $errors->has('delivery_cost_payer') ? ' is-invalid' : '' }}" value="{{ old('delivery_cost_payer') }}" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Provider">Provider (Me)</option>
-                                                    <option value="Receiver">Receiver</option>
+                                                    <option value="">Select delivey fee payment type</option>
+                                                    @foreach(payment_types() as $paymentype)
+                                                        <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @if ($errors->has('delivery_cost_payer'))
                                                     <span class="invalid-feedback" role="alert">
@@ -239,20 +240,20 @@
                              <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="5.0">
-                                            <label class="form-check-label" for="weight1"><b>SMALL:</b> Items that can fit into a box on a motorcycle (e.g. small-sized electronics) <b>Assumed Weight:</b> 5.0 kg</label>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5">
+                                            <label class="form-check-label" for="weight1"><b>SMALL:</b> Items that can fit into a box on a motorcycle (e.g. small-sized electronics) <b>Assumed Weight:</b> 3.5 kg</label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="15.0">
-                                                <label class="form-check-label" for="weight2"><b>MEDIUM:</b> Items that are heavy and may be transported with vans. <b>Assumed Weight:</b> 15.0 kg</label>
+                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5">
+                                                <label class="form-check-label" for="weight2"><b>MEDIUM:</b> Items that are heavy and may be transported with vans. <b>Assumed Weight:</b> 7.5.0 kg</label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="20.0">
-                                            <label class="form-check-label" for="weight3"><b>LARGE:</b> Items that are large like pieces of furniture and large electronics. <b>Assumed Weight:</b> 20.0 kg</label>
+                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0">
+                                            <label class="form-check-label" for="weight3"><b>LARGE:</b> Items that are large like pieces of furniture and large electronics. <b>Assumed Weight:</b> 10.0 kg</label>
                                             </div>
                                         </div>
                                     </div>
