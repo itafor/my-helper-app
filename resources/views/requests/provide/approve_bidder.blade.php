@@ -81,7 +81,7 @@
                             <div class="col-sm-3">
                                 <label for="exampleInputEmail1">PaymentType</label>
                             <select name="PaymentType" id="PaymentType" class="form-control" required >
-                                                    <option value="">Select paymen type</option>
+                                                    <option value="">Select payment type</option>
                                                     @foreach(payment_types() as $paymentype)
                                                         <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] }}</option>
                                                     @endforeach
@@ -90,7 +90,7 @@
                             <div class="col-sm-3">
                               <label for="Inputdescription">DeliveryType</label>
                              <select name="DeliveryType" id="DeliveryType" class="form-control" required >
-                                                    <option value="">Select paymen type</option>
+                                                    <option value="">Select delivery type</option>
                                                     @foreach(delivery_types() as $deliverytype)
                                                         <option  value="{{ $deliverytype['DeliveryTypeName'] }}">{{ $deliverytype['DeliveryTypeName'] }}</option>
                                                     @endforeach
@@ -131,10 +131,11 @@
                                 <label for="exampleInputEmail1">SenderTownID</label>
                             <select name="senderTownID" id="senderTownID" class="form-control">
                                                     <option value="">Select sender town Id</option>
-
+                                  @if(isset($help_provider->api_city))
                                @foreach(getCityCode_by_CityName($help_provider->api_city) as $city)
                                                         <option  value="{{ $city['TownID'] }}">{{ $city['TownName'] }} -{{ $city['TownID'] }}</option>
                                                     @endforeach
+                                          @endif
                                                 </select>
                             </div>
                             <div class="col-sm-6">
@@ -176,10 +177,11 @@
                                 <label for="exampleInputEmail1">RecipientTownID</label>
                              <select name="RecipientTownID" id="RecipientTownID" class="form-control">
                                                     <option value="">Select Recipient Town Id</option>
-
+                                      @if(isset($request_bidder->api_city))
                                @foreach(getCityCode_by_CityName($request_bidder->api_city) as $city)
                                                         <option  value="{{ $city['TownID'] }}">{{ $city['TownName'] }} -{{ $city['TownID'] }}</option>
                                                     @endforeach
+                                                    @endif
                                                 </select>
                             </div>
                             <div class="col-sm-6">
@@ -310,7 +312,7 @@
               </div>
             </div>
 
-                  <div class="card">
+                  {{--<div class="card">
               <div class="card-header">
                 Logistic partner details
               </div>
@@ -361,7 +363,7 @@
 
                   <footer class="blockquote-footer">Logistic partner <cite title="Source Title">details</cite></footer>
               </div>
-            </div>
+            </div>--}}
 
                 </div>
                 <!-- /tables -->

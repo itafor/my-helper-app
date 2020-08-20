@@ -118,7 +118,7 @@ $('#RecipientCity').change(function(){
                 $('#RecipientTownID').empty();
                 $('<option>').val('').text('Select sender town Id').appendTo('#RecipientTownID');
                 $.each(data.towns, function(k, v) {
-                    $('<option>').val(v.TownID).text(v.TownName +'- Town ID:'+v.TownID).appendTo('#RecipientTownID');
+                    $('<option>').val(v.TownID).text(v.TownName +' - Town ID:'+v.TownID).appendTo('#RecipientTownID');
                 });
             }
         });

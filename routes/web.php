@@ -159,6 +159,10 @@ Route::group([
 
      Route::post('/track/shipment', 'PickupRequestController@trackShipment')->name('pickupRequest.trackshipment.store');
 
+    Route::get('/calculate/deliveryfee', 'PickupRequestController@calculateDeliveryFeeForm')->name('pickupRequest.calculate.deliveryfee');
+    
+    Route::post('/calculate_deliveryfee', 'PickupRequestController@calculateDeliveryFeeOperation')->name('pickupRequest.calculate.deliveryfeeOperation');
+
 });
 
 

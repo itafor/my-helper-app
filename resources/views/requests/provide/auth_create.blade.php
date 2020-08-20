@@ -235,6 +235,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <h3>Item Size IN Weight</h3>
+                             <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="5.0">
+                                            <label class="form-check-label" for="weight1"><b>SMALL:</b> Items that can fit into a box on a motorcycle (e.g. small-sized electronics) <b>Assumed Weight:</b> 5.0 kg</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="15.0">
+                                                <label class="form-check-label" for="weight2"><b>MEDIUM:</b> Items that are heavy and may be transported with vans. <b>Assumed Weight:</b> 15.0 kg</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
+                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="20.0">
+                                            <label class="form-check-label" for="weight3"><b>LARGE:</b> Items that are large like pieces of furniture and large electronics. <b>Assumed Weight:</b> 20.0 kg</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
      
                                 <div class="col-md-12">

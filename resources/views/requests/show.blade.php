@@ -61,10 +61,25 @@
                                 @endif
 
                                 @if($getRequest->delivery_cost_payer == 'Receiver')
-                                        <p>Note: You are to pay delivery cost of N1000.<br>
+                                         
+                                    @if($getRequest->weight == 5.0)
+                                       Item Size: Small, Weight:{{$getRequest->weight}}
+                                    @elseif($getRequest->weight == 10.0)
+                                       Item Size: Medium, Weight:{{$getRequest->weight}}
+                                    @else
+                                       Item Size: Large, Weight:{{$getRequest->weight}}
+                                    @endif
+                                        <p>Note: You are to pay <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">delivery fee</a>.<br>
                                           Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.</p>
                                 @elseif($getRequest->delivery_cost_payer == 'Provider')
-                                        <p>Note: The provider (Supplier) will pay delivery cost of N1000.<br>
+                                  @if($getRequest->weight == 5.0)
+                                       Item Size: Small, Weight:{{$getRequest->weight}}
+                                    @elseif($getRequest->weight == 10.0)
+                                       Item Size: Medium, Weight:{{$getRequest->weight}}
+                                    @else
+                                       Item Size: Large, Weight:{{$getRequest->weight}}
+                                    @endif
+                                        <p>Note: The provider (Supplier) will pay <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">delivery fee</a>.<br>
                                           Onforwarding locations like Epe, Ikorodu, Badagry etc. will attract extra charge of N1,000 per item.
                                         </p>
                                     @else

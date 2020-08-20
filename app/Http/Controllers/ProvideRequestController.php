@@ -103,6 +103,7 @@ class ProvideRequestController extends Controller
         $lockdownRequest->show_address = $request->show_address;
         $lockdownRequest->show_phone = $request->show_phone;
         $lockdownRequest->delivery_cost_payer = $request->delivery_cost_payer;
+        $lockdownRequest->weight = $request->weight;
         
         $lockdownRequest->save();
         if($lockdownRequest){
