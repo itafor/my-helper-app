@@ -21,8 +21,18 @@
             <div class="col-xl-12 order-xl-1">
                <div class="card">
   <div class="card-header">
+<div class="float-left">
   Pickup Request Details
+</div>
+<div class="float-right">
+   <a  href="{{ route('pickupRequest.shipmenttracker') }}"><button class="btn btn-warning btn-sm">Track Shippment Status 
+  </button>
+    </a>
+</div>
   </div>
+  
+   
+
   <div class="card-body">
        <table class="table table-bordered" id="rental_table">
            

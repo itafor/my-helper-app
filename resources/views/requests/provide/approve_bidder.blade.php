@@ -201,7 +201,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <label for="exampleInputEmail1">ItemUnitCost</label>
-                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="1">
+                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
                             </div>
                             <div class="col-sm-2">
                               <label for="Inputdescription">ItemQuantity</label>
