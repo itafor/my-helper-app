@@ -28,6 +28,8 @@ Route::get('/home', 'MakeRequestController@index')->name('home');
 Auth::routes();
 Route::get('getstates/{id}', 'AjaxController@getState');
 Route::get('getcities/{id}', 'AjaxController@getCity');
+Route::get('apigetcities/{state}', 'AjaxController@fetch_cities_by_state');
+Route::get('apigetdeliverytown/{citycode}', 'AjaxController@fetchOnforwardingOrDeliveryTowns');
 Route::get('make/req/create', ['uses' => 'MakeRequestController@create', 'as' => 'make.request'])->middleware('guest');
 Route::get('provide/req/create', ['uses' => 'ProvideRequestController@create', 'as' => 'provide.request'])->middleware('guest');
 Route::get('checkemail', 'MakeRequestController@checkEmail');
@@ -142,6 +144,25 @@ Route::group([
     'prefix' => 'product'
 ], function () {
     Route::get('/services', 'ProductsController@product_services')->name('product.services');
+});
+
+ Route::group([
+    'prefix' => 'pickupRequest'
+], function () {
+    Route::get('/store', 'UtilitiesController@submittingPickupRequestInformationandGeneratingWaybillNumber')->name('pickupRequest.store');
+
+     Route::get('/print/waybill', 'UtilitiesController@printWaybill')->name('pickupRequest.printwaybill');
+
+     Route::get('/details/{request_id}/{provider_id}/{receiver_id}', 'UtilitiesController@pickupRequestDetail')->name('pickupRequest.details');
+
+     Route::get('/track_shipment', 'PickupRequestController@showShipmentTrackingForm')->name('pickupRequest.shipmenttracker');
+
+     Route::post('/track/shipment', 'PickupRequestController@trackShipment')->name('pickupRequest.trackshipment.store');
+
+    Route::get('/calculate/deliveryfee', 'PickupRequestController@calculateDeliveryFeeForm')->name('pickupRequest.calculate.deliveryfee');
+    
+    Route::post('/calculate_deliveryfee', 'PickupRequestController@calculateDeliveryFeeOperation')->name('pickupRequest.calculate.deliveryfeeOperation');
+
 });
 
 

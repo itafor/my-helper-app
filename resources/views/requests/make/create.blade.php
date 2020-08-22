@@ -269,32 +269,30 @@
                                     
                                     <div class="col-sm-6">
                                          <div class="form-group">
-                                            <label>Country</label><br>
-                                             <select name="country_id" class="form-control" id="country_id">
-                                                <option value=""> Please Select a Country </option>
-                                                @foreach($countries as $country)
-                                                    <option {{ $country->sortname == $location ? "selected" : "" }} value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label>State</label><br>
+                                            <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
+                                                    @endforeach
+                                                </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                          <div class="form-group">
-                                            <label>State</label><br>
-                                             <select name="state_id" class="form-control" id="state_id" required>
-                                                <option value=""> Select a State </option>
-                                                @foreach($states as $state)
-                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label>City</label><br>
+                                              <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
                                           </div>
                                     </div>
                                     <div class="col-sm-6">
                                          <div class="form-group">
-                                            <label>City</label><br>
-                                             <select name="city_id" class="form-control" id="city_id" required>
-                                                <option value="">Select a city</option>
-                                            </select>
+                                             <label>Delivery Town</label><br>
+                                              <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                                    <option value="">Select Town</option>
+                                                </select>
                                           </div>
                                     </div>
                                     <div class="col-sm-6 ">

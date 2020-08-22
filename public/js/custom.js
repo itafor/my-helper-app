@@ -40,6 +40,91 @@ $('#state_id').change(function(){
 });
 
 
+//Auto fill api city when aa api state has been picked
+$('#api_state_id').change(function(){
+    var state = $(this).val();
+    if(state){
+        $('#api_city_id').empty();
+        $('<option>').val('').text('Loading...').appendTo('#api_city_id');
+        $.ajax({
+            url: baseUrl+'/apigetcities/'+state,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                $('#api_city_id').empty();
+                $('<option>').val('').text('Select City').appendTo('#api_city_id');
+                $.each(data.cities, function(k, v) {
+                    $('<option>').val(v.CityCode).text(v.CityName).appendTo('#api_city_id');
+                });
+            }
+        });
+    }
+});
+
+$('#api_city_id').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#api_delivery_town').empty();
+        $('<option>').val('').text('Loading...').appendTo('#api_delivery_town');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                $('#api_delivery_town').empty();
+                $('<option>').val('').text('Select Delivery Town').appendTo('#api_delivery_town');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownName).text(v.TownName).appendTo('#api_delivery_town');
+                });
+            }
+        });
+    }
+});
+
+
+$('#senderCity').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#senderTownID').empty();
+        $('<option>').val('').text('Loading...').appendTo('#senderTownID');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                $('#senderTownID').empty();
+                $('<option>').val('').text('Select sender town Id').appendTo('#senderTownID');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownID).text(v.TownName +'- Town ID:'+v.TownID).appendTo('#senderTownID');
+                });
+            }
+        });
+    }
+});
+
+$('#RecipientCity').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#RecipientTownID').empty();
+        $('<option>').val('').text('Loading...').appendTo('#RecipientTownID');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                $('#RecipientTownID').empty();
+                $('<option>').val('').text('Select sender town Id').appendTo('#RecipientTownID');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownID).text(v.TownName +' - Town ID:'+v.TownID).appendTo('#RecipientTownID');
+                });
+            }
+        });
+    }
+});
+
 
 // hide login link
 $('.loginLink').hide();
@@ -221,6 +306,64 @@ function rejectRequest(request_id)
 
         // Remove parent of 'remove' link when link is clicked.
         $('#photoContainer').on('click', '.remove_project_file', function(e) {
+            e.preventDefault();
+            $(this).parent().remove();
+            row--;
+        });
+
+
+
+              $('#addMoreItem').click(function(e) {
+           // console.log('ok')
+            e.preventDefault();
+
+            if(row >= 5){
+                alert("You've reached the maximum limit");
+                return;
+            }
+
+            var rowId = identifier();
+
+            $("#shipmentItemsContainer").append(
+                '<div>'
+                    +'<div style="float:right; margin-right:50px; margin-top: 30px;" class="remove_shipmentitem"><span style="cursor:pointer; " class="badge badge-danger" border="2"><i class="fa fa-minus"></i> Remove</span></div>'
+                    +'<div style="clear:both"></div>'
+                        +' <div class="row">'
+
+                              +'<div class="col-sm-3">'
+                                 +  '<input type="text" name="ShipmentItems['+rowId+'][ItemName]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                                +'<div class="col-sm-2">'
+                                 +  '<input type="number" name="ShipmentItems['+rowId+'][ItemUnitCost]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                                +'<div class="col-sm-2">'
+                                 +  '<input type="number" name="ShipmentItems['+rowId+'][ItemQuantity]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                               +'<div class="col-sm-3">'
+                                 +  '<input type="text" name="ShipmentItems['+rowId+'][ItemColour]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                                +'<div class="col-sm-2">'
+                                 +  '<input type="text" name="ShipmentItems['+rowId+'][ItemSize]" class="form-control" style="margin-top: 10px;">'
+                               +'</div>'
+
+                               +'</div>'
+                        +'<div style="clear:both"></div>'
+                        +'<br>'
+                    +'</div>'
+
+            );
+            row++;
+            $(".select"+rowId).select2({
+                    theme: "bootstrap"
+                });
+        });
+
+        // Remove parent of 'remove' link when link is clicked.
+        $('#shipmentItemsContainer').on('click', '.remove_shipmentitem', function(e) {
             e.preventDefault();
             $(this).parent().remove();
             row--;

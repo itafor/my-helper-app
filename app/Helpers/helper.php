@@ -3,8 +3,11 @@
 use App\City;
 use App\Country;
 use App\RequestBidders;
+use App\ShipmentItem;
 use App\State;
 use App\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use JD\Cloudder\Facades\Cloudder;
 
 
@@ -83,8 +86,196 @@ function uploadImage($image)
             Cloudder::upload($image->getPathname(), $filename);
             $response = Cloudder::getResult();
             $path = $response['secure_url'];
-            //$image->move(public_path("uploads"), $image->getClientOriginalName());
         }
     }
     return $path;
+}
+
+function authToken(){
+        $client = new Client(['verify' => false]);
+
+                $res = $client->request('POST', 'http://api.clicknship.com.ng/Token', [
+                    'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'username' => 'cnsdemoapiacct',
+                'password' => 'ClickNShip$12345',
+                'grant_type' => 'password'
+            ]
+        ]);
+                
+    $res = json_decode($res->getBody()->getContents(), true);
+
+    return $res['access_token'];
+
+}
+
+function clickship_states(){
+    
+    $client = new Client(['verify' => false]);
+
+     $states = $client->get('http://api.clicknship.com.ng/clicknship/Operations/States', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+     $response = $states->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+}
+
+function clickship_cities(){
+    
+    $client = new Client(['verify' => false]);
+
+     $cities = $client->get('http://api.clicknship.com.ng/clicknship/operations/cities', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $cities->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+
+}
+
+
+
+function calculate_delivery_fee(){
+    
+    $client = new Client(['verify' => false]);
+
+     $fee = $client->post('http://api.clicknship.com.ng/clicknship/Operations/DeliveryFee', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'Origin' => 'IBADAN',
+                'Destination' => 'ABUJA',
+                'Weight' => 1.5,
+                'OnforwardingTownID'=>690
+            ]
+                    ]);
+
+       $response = $fee->getBody()->getContents();
+      $values = json_decode($response, true);
+
+     return $values;
+}
+
+function getCityName_by_citycode($city_code){
+    
+    $client = new Client(['verify' => false]);
+
+     $cities = $client->get('http://api.clicknship.com.ng/clicknship/operations/cities', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $cities->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     foreach ($values as $key => $city) {
+        if($city['CityCode'] == $city_code){
+            return $city['CityName'];
+        }
+     }
+
+}
+
+function payment_types(){
+    
+    $client = new Client(['verify' => false]);
+
+     $paymentType = $client->get('http://api.clicknship.com.ng/clicknship/operations/PaymentTypes', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $paymentType->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+}
+
+function delivery_types(){
+    
+    $client = new Client(['verify' => false]);
+
+     $deliverytype = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTypes', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $deliverytype->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     return $values;
+}
+
+
+ 
+function getCityCode_by_CityName($city_name){
+    
+    $client = new Client(['verify' => false]);
+
+     $cities = $client->get('http://api.clicknship.com.ng/clicknship/operations/cities', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+      $response = $cities->getBody()->getContents();
+     $values = json_decode($response, true);
+
+     foreach ($values as $key => $city) {
+        if($city['CityName'] == $city_name){
+            return getTownID($city['CityCode']);
+        }
+     }
+
+}
+
+function getTownID($city_code){
+    
+    $client = new Client(['verify' => false]);
+
+     $towns = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTowns?CityCode='.$city_code.'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+              
+                    ]);
+
+       $response = $towns->getBody()->getContents();
+      $values = json_decode($response, true);
+
+
+      return $values;
+}
+
+function shippmentItems($pickupRequest_id,$request_id,$provider_id,$receiver_id){
+      $items = ShipmentItem::where([
+        ['pickupRequest_id',$pickupRequest_id],
+        ['request_id',$request_id],
+        ['provider_id',$provider_id],
+        ['receiver_id',$receiver_id],
+      ])->get();
+  if($items){
+    return $items;
+  }
 }

@@ -32,7 +32,7 @@
                                                 @else
                                                     Kindly contact me through this platform
                                                 @endif
-                                             for <b>sale </b>of <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                             for <b>sale </b>of <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->api_city }}, {{ $getRequest->api_state }}</strong>.
                                         </p>
                                         <p>Thank you for your patronage</p>
                                         <p><strong>{{ $getRequest->user->username }}</strong></p> 
@@ -50,7 +50,7 @@
                                             @else
                                                 <p>Kindly contact me through this platform
                                             @endif
-                                        </strong>for <b>free</b> <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->city->name }}, {{ $getRequest->state->name }}</strong>.
+                                        </strong>for <b>free</b> <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->api_city }}, {{ $getRequest->api_state }}</strong>.
                                     
                                     </p>
                                     <p>Thank you</p>
@@ -58,6 +58,31 @@
                                     @if($getRequest->show_address == 1)
                                         <p>Address: {{ $getRequest->street }}</p>
                                     @endif
+                                @endif
+
+                                @if($getRequest->delivery_cost_payer == 'pay on delivery')
+                                         
+                                    @if($getRequest->weight == 3.5)
+                                       Item Size: Small, Weight:{{$getRequest->weight}}
+                                    @elseif($getRequest->weight == 7.5)
+                                       Item Size: Medium, Weight:{{$getRequest->weight}}
+                                    @else
+                                       Item Size: Large, Weight:{{$getRequest->weight}}
+                                    @endif
+                                        <p><a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}} <br>
+                                          </p>
+                                @elseif($getRequest->delivery_cost_payer == 'prepaid')
+                                  @if($getRequest->weight == 3.5)
+                                       Item Size: Small, Weight:{{$getRequest->weight}}
+                                    @elseif($getRequest->weight == 7.5)
+                                       Item Size: Medium, Weight:{{$getRequest->weight}}
+                                    @else
+                                       Item Size: Large, Weight:{{$getRequest->weight}}
+                                    @endif
+                                        <p> <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}}<br>
+                                        </p>
+                                    @else
+
                                 @endif
 
                                 @if(isset($request_photos) && $request_photos !='')
@@ -203,7 +228,7 @@
                                             <a href="{{ route('auth_view.make.request', [$id=$suggestion->id]) }}">
                                                 <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category ? $suggestion->category->title : '' }} </span></h4>                                            
                                                 <div class="memo desc">{{ $suggestion->description }} </div>
-                                                <div class="desc">State: <span>{{ $suggestion->state->name }} </span></div>
+                                                <div class="desc">State: <span>{{ $suggestion->api_state }} </span></div>
                                             </a>
                                         </div>
                                         <br>
@@ -211,26 +236,7 @@
                                 </div>
                             </div>
                         @endif
-                        <!-- </div> -->
-                    <!--     @if(auth()->check())
-                            @if(in_array(auth()->user()->id, $checkIfContacted))
-                                <p style="color:red">You have previously contacted this user</p>
-                            @else
-                                @if($getRequest->user_id != auth()->user()->id)
-                                    <div class="text-left card-btn">
-                                    <a onclick="disableButton()" id="email" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
-                                    </div>
-                                @endif
-                            @endif
-                        @else
-                            <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{ route('send.provideDetails', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">Contact {{ $getRequest->user->username }}</a>
-                            </div>
-                        @endif   -->
-                    <!-- </div>                     -->
-                        <!-- <div class="col-4 text-right">
-                            <a href="{{ route('show.request', $id=[$getRequest->id]) }}" class="btn btn-sm btn-primary btn-header">{{ __('Contact By Email') }}</a>
-                        </div> -->
+               
                     </div>
                 </div>
             </div>

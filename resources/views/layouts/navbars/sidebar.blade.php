@@ -17,6 +17,21 @@
                     <p>{{ _('My Requests') }}</p>
                 </a>
             </li>
+
+            <li @if ($pageSlug == 'shipment_tracker') class="active " @endif>
+                <a href="{{ route('pickupRequest.shipmenttracker') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('Shipments Tracker') }}</p>
+                </a>
+            </li>
+
+             <li @if ($pageSlug == 'calculate_deliveryfee') class="active " @endif>
+                <a href="{{ route('pickupRequest.calculate.deliveryfee') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('Calculate Delivery Fee') }}</p>
+                </a>
+            </li>
+
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="tim-icons icon-single-02"></i>

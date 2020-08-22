@@ -21,112 +21,234 @@
 
 				            <div class="card">
 				  <div class="card-header">
-				<div class="float-left">Help seeker details (Receiver)</div>
+				<div class="float-left">Submitting Pickup Request Information and Generation of Waybill Number</div>
 				<div class="float-right">
 					@if($request_bid->status == 'Pending')
 					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+
 					@endif
 				</div>
 				  </div>
 				  <div class="card-body">
-                  <dl class="row">
-  <dt class="col-sm-3">Full Name</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->name : 'N/A'}} 
-    {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
-  </dd>
+ 
+ @if($request_bid->status == 'Pending')
+   Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
 
-  <dt class="col-sm-3">Phone Number</dt>
-  <dd class="col-sm-9">
-   {{$request_bidder ? $request_bidder->phone : 'N/A'}}
-  </dd>
+   @elseif($request_bid->status == 'Approved')
+                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
+                        <button class="btn-sm btn-primary">View details</button>
 
-   <dt class="col-sm-3"> Email</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->email : 'N/A'}}
-  </dd>
+                      </a>
+  @elseif($request_bid->status == 'Rejected')
+                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+  @elseif($request_bid->status == 'Delivered')
+                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+  @endif
 
-   <dt class="col-sm-3">Country</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->country ? $request_bidder->country->country_name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">State</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->state ? $request_bidder->state->name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">City</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->city ? $request_bidder->city->name : 'N/A'}}
-  </dd>
-
-  <dt class="col-sm-3 text-truncate">Street Address</dt>
-  <dd class="col-sm-9">
-
-     <p>{{$request_bidder ? $request_bidder->street: 'N/A'}}</p>
-                       
-  </dd>
-  
-</dl>
 				   <hr>
-				   <div class="col-sm-6">
-				   @if($request_bid->status == 'Pending')
-                    Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+				   <div class="col-sm-12">
+				  
 
 					<form class="form" method="post" action="{{ route('request.approve.store') }}">
                             @csrf
-                          <div class="form-group">
+                          <div>
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
                           </div>
 
-                          <div class="form-group">
+                          <div>
                             <input type="hidden" name="request_bid_id" class="form-control" id="request_id" value="{{$request_bid->id}}" >
                           </div>
 
-                           <div class="form-group">
+                           <div>
                             <input type="hidden" name="bidder_id" class="form-control" id="request_id" value="{{$request_bidder->id}}" >
                           </div>
 
-                           <div class="form-group">
+                           <div >
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
-                            <div class="form-group">
-                            <!-- <label for="exampleInputEmail1">Logistic Partner</label> -->
-                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
-                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
-                                        <option value="">Choose logistic partner </option>
-                                        @foreach(getLogisticPartners() as $logistic)
-                                            <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>
-                                        @endforeach
-                                    </select>
-                                    
-                    @error('logistic_partner_id')
-                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
-                    @enderror
+                        
+                     <div class="row">
+                       <div class="col-sm-4">
+                            <label for="Inputdescription">Description</label>
+                            <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
+                          </div>
+                           <div class="col-sm-2">
+                             <label for="inputweight">Weight</label>
+                            <input type="text" name="weight" class="form-control" id="weight" value="{{$request->weight}}" >
+                           </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">PaymentType</label>
+                            <select name="PaymentType" id="PaymentType" class="form-control" required >
+                                                    <option value="">Select payment type</option>
+                                                    @foreach(payment_types() as $paymentype)
+                                                        <option  value="{{ $paymentype['PaymentType'] }}" {{$request->delivery_cost_payer ==
+                                                          $paymentype['PaymentType'] ? 'selected':''}}>{{ $paymentype['PaymentType'] }}</option>
+                                                    @endforeach
+                                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="Inputdescription">DeliveryType</label>
+                             <select name="DeliveryType" id="DeliveryType" class="form-control" required >
+                                                    <option value="">Select delivery type</option>
+                                                    @foreach(delivery_types() as $deliverytype)
+                                                        <option  value="{{ $deliverytype['DeliveryTypeName'] }}">{{ $deliverytype['DeliveryTypeName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                          </div>
+                          </div>
+                          <h3>Sender Details</h3>
+                          <div class="row">
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">SenderName</label>
+                            <input type="text" name="senderName" class="form-control" id="weight" value="{{$help_provider->name}} {{$help_provider->last_name}}">
+                            </div>
+                             <div class="col-sm-4">
+                            <label for="inputweight">SenderPhone</label>
+                            <input type="text" name="senderPhone" class="form-control" id="senderPhone" value="{{$help_provider->phone}}" >
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">SenderEmail</label>
+                            <input type="email" name="senderEmail" class="form-control" id="senderEmail" value="{{$help_provider->email}}">
+                            </div>
                           </div>
 
-                     <div class="form-group">
-                            <label for="exampleInputEmail1">Delivery cost</label>
-                            <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">SenderCity</label>
+
+                            <select name="senderCity" id="senderCity" class="form-control" required >
+                                                    <option value="">Select sender city</option>
+                                                    @foreach(clickship_cities() as $city)
+                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $help_provider->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
+                                                    @endforeach
+                                                </select>
+
+
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">SenderTownID</label>
+                            <select name="senderTownID" id="senderTownID" class="form-control" required>
+                                                    <option value="">Select sender town Id</option>
+                                  @if(isset($help_provider->api_city))
+                               @foreach(getCityCode_by_CityName($help_provider->api_city) as $city)
+                                                        <option  value="{{ $city['TownID'] }}">{{ $city['TownName'] }} -{{ $city['TownID'] }}</option>
+                                                    @endforeach
+                                          @endif
+                                                </select>
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">SenderAddress</label>
+                            <input type="text" name="senderAddress" class="form-control" id="senderAddress" value="{{$help_provider->street}}">
                           </div>
-                     <div class="form-group">
+                          </div>
+
+                          <h3>Receiver Details</h3>
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">RecipientName</label>
+                            <input type="text" name="RecipientName" class="form-control" id="RecipientName" value="{{$request_bidder ? $request_bidder->name : 'N/A'}} {{$request_bidder ? $request_bidder->last_name : 'N/A'}}" >
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">RecipientPhone</label>
+                            <input type="text" name="RecipientPhone" class="form-control" id="RecipientPhone" value="{{$request_bidder->phone}}" >
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">RecipientEmail</label>
+                            <input type="text" name="RecipientEmail" class="form-control" id="RecipientEmail" value="{{$request_bidder->email}}">
+                          </div>
+                          </div>
+
+                            <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">RecipientCity</label>
+                              <select name="RecipientCity" id="RecipientCity" class="form-control" required >
+                                                    <option value="">Select Recipient City</option>
+                                                    @foreach(clickship_cities() as $city)
+                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $request_bidder->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">RecipientTownID</label>
+                             <select name="RecipientTownID" id="RecipientTownID" class="form-control" required>
+                                                    <option value="">Select Recipient Town Id</option>
+                                      @if(isset($request_bidder->api_city))
+                               @foreach(getCityCode_by_CityName($request_bidder->api_city) as $city)
+                                                        <option  value="{{ $city['TownID'] }}">{{ $city['TownName'] }} -{{ $city['TownID'] }}</option>
+                                                    @endforeach
+                                                    @endif
+                                                </select>
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">RecipientAddress</label>
+                            <input type="text" name="RecipientAddress" class="form-control" id="RecipientAddress" value="{{$request_bidder ? $request_bidder->street : 'N/A'}}">
+                          </div>
+                          </div>
+
+                          <h3>Shipment Items</h3>
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">ItemName</label>
+                            <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="exampleInputEmail1">ItemUnitCost</label>
+                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
+                            </div>
+                            <div class="col-sm-2">
+                              <label for="Inputdescription">ItemQuantity</label>
+                            <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity" value="0">
+                          </div>
+
+                          <div class="col-sm-3">
+                              <label for="Inputdescription">ItemColour</label>
+                            <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
+                          </div>
+                          <div class="col-sm-2">
+                              <label for="Inputdescription">ItemSize</label>
+                            <input type="text" name="ShipmentItems[112211][ItemSize]" class="form-control" id="ItemColour" value="0">
+                          </div>
+                          </div>
+
+
+                                <div id="shipmentItemsContainer">
+                                
+         
+                                </div>
+                                  <div style="clear:both"></div>
+
+                                     <div class="form-group">
+                                    <button type="button" id="addMoreItem" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more Item</button>
+                                </div>
+
+
+                     {{--<div>
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
-                          </div>
-                         
-                          <button type="submit" class="btn btn-primary float-left">Approve request</button>
+                          </div>--}}
+
+                           @if($request_bid->status == 'Pending')
+                          <button type="submit" class="btn btn-primary float-left">Approve and Submit Pickup Request</button>
 					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
-                        </form>
-                    @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary"> {{$request_bid->status}}</span>
-                    @elseif($request_bid->status == 'Rejected')
+                @elseif($request_bid->status == 'Approved')
+                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
-                     @elseif($request_bid->status == 'Delivered')
+                @elseif($request_bid->status == 'Delivered')
                     Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
-                  @endif
+                @endif
+
+                        </form>
+                    
                     </div>
 
 
@@ -151,7 +273,7 @@
                                             @else
                                                 <p>Kindly contact me through this platform
                                             @endif
-                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->city->name }}, {{ $request->state->name }}</strong>.
+                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->api_city }}, {{ $request->api_state }}</strong>.
                                     
                                     </p>
                                     <p>Thank you</p>
@@ -165,10 +287,10 @@
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
                     <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn" style="margin-right: 400px;">&times;</span>
 
                     <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
+                    <img id="expandedImg" style="width:500px; height: 400px;">
 
                     <!-- Image text -->
                     <div id="imgtext"></div>
@@ -191,8 +313,7 @@
               </div>
             </div>
 
-
-                  <div class="card">
+                  {{--<div class="card">
               <div class="card-header">
                 Logistic partner details
               </div>
@@ -243,7 +364,7 @@
 
                   <footer class="blockquote-footer">Logistic partner <cite title="Source Title">details</cite></footer>
               </div>
-            </div>
+            </div>--}}
 
                 </div>
                 <!-- /tables -->
