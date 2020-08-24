@@ -122,7 +122,7 @@
                             <select name="senderCity" id="senderCity" class="form-control" required >
                                                     <option value="">Select sender city</option>
                                                     @foreach(clickship_cities() as $city)
-                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $help_provider->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
+                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $request->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
                                                     @endforeach
                                                 </select>
 
@@ -142,7 +142,7 @@
                             <div class="col-sm-6">
 
                               <label for="Inputdescription">SenderAddress</label>
-                            <input type="text" name="senderAddress" class="form-control" id="senderAddress" value="{{$help_provider->street}}">
+                            <input type="text" name="senderAddress" class="form-control" id="senderAddress" value="{{$request->street}}">
                           </div>
                           </div>
 
