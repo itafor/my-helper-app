@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ProfileRequest;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {

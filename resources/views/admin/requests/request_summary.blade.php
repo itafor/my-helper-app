@@ -29,62 +29,211 @@ Request | Summary
 
 
                     <div class="card">
-          <div class="card-header">
-        <div class="float-left">Help seeker details (Receiver)</div>
-        <div class="float-right">
-          @if($request_bid->status == 'Pending')
-          <!-- <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button> -->
-          @endif
-        </div>
-          </div>
+         <div class="card-header">
+<div class="float-left">
+  Pickup Request Details
+</div>
+<div class="float-right">
+   <a  href="{{ route('admin.pickupRequest.shipmenttracker') }}"><button class="btn btn-warning btn-sm">Track Shippment Status 
+  </button>
+    </a>
+</div>
+  </div>
           <div class="card-body">
             <br>
-                  <dl class="row">
-  <dt class="col-sm-3">Full Name</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->name : 'N/A'}} 
-    {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
-  </dd>
-
-  <dt class="col-sm-3">Phone Number</dt>
-  <dd class="col-sm-9">
-   {{$request_bidder ? $request_bidder->phone : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3"> Email</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder ? $request_bidder->email : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">Country</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->country ? $request_bidder->country->country_name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">State</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->state ? $request_bidder->state->name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">City</dt>
-  <dd class="col-sm-9">
-    {{$request_bidder->city ? $request_bidder->city->name : 'N/A'}}
-  </dd>
-
-  <dt class="col-sm-3 text-truncate">Street Address</dt>
-  <dd class="col-sm-9">
-
-     <p>{{$request_bidder ? $request_bidder->street: 'N/A'}}</p>
-                       
-  </dd>
-  
-</dl>
            <hr>
            <div class="col-sm-6">
            @if($request_bid->status == 'Pending')
                     Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
                     @elseif($request_bid->status == 'Approved')
                     Request Status:<span class=" text-primary"><strong> {{$request_bid->status}}</strong></span>
+                    <hr>
+                           <table class="table table-bordered" id="rental_table">
+           
+                    <tbody>
+                   <tr>
+                     <td class="rent_title">Transaction Status</td>
+                     <td> 
+                        {{$get_pickup_request->TransStatus}} 
+                       
+                      </td> 
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Transaction Status Details</td>
+                     <td>  
+                {{$get_pickup_request->TransStatusDetails}}
+                      </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Order No.</td>
+                     <td>
+                {{$get_pickup_request->OrderNo}}
+                     </td>
+                   </tr>
+
+                     <tr>
+                     <td class="rent_title">Way Bill Number</td>
+                     <td>
+                {{$get_pickup_request->WaybillNumber}}
+ 
+                     </td>
+                   </tr>
+
+                    <tr>
+                     <td class="rent_title">Delivery Fee</td>
+                <td>
+                &#8358;{{$get_pickup_request->DeliveryFee}}
+                </td>           
+              </tr>
+
+                 <tr>
+                     <td class="rent_title">Vat Amount</td>
+                     <td>
+                 &#8358;{{$get_pickup_request->VatAmount}}
+                     </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Total Amount</td>
+                     <td>
+                 &#8358;{{$get_pickup_request->TotalAmount}}
+                    
+                    </td>
+                </tr>
+
+                <tr>
+                     <td class="rent_title">Description</td>
+                     <td>
+                 {{$get_pickup_request->Description}}
+                    
+                    </td>
+                </tr>
+
+                  <tr>
+                     <td class="rent_title">Weight</td>
+                     <td>
+                 {{$get_pickup_request->Weight}}
+                    
+                    </td>
+                </tr>
+
+                  <tr>
+                     <td class="rent_title">Sender Name</td>
+                     <td>
+                 {{$get_pickup_request->SenderName}}
+                    
+                    </td>
+                </tr>
+
+                  <tr>
+                     <td class="rent_title">Sender City</td>
+                     <td>
+                 {{$get_pickup_request->SenderCity}}
+                    
+                    </td>
+                </tr>
+
+                  <tr>
+                     <td class="rent_title">Sender Town ID</td>
+                     <td>
+                 {{$get_pickup_request->SenderTownID}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Sender Address</td>
+                     <td>
+                 {{$get_pickup_request->SenderAddress}}
+                    
+                    </td>
+                </tr>
+
+
+                 <tr>
+                     <td class="rent_title">Sender Phone</td>
+                     <td>
+                 {{$get_pickup_request->SenderPhone}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Sender Email</td>
+                     <td>
+                 {{$get_pickup_request->SenderEmail}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Recipient Name</td>
+                     <td>
+                 {{$get_pickup_request->RecipientName}}
+                    
+                    </td>
+                </tr>
+
+                <tr>
+                     <td class="rent_title">Recipient City</td>
+                     <td>
+                 {{$get_pickup_request->RecipientCity}}
+                    
+                    </td>
+                </tr>
+
+                <tr>
+                     <td class="rent_title">Recipient Town ID</td>
+                     <td>
+                 {{$get_pickup_request->RecipientTownID}}
+                    
+                    </td>
+                </tr>
+
+                <tr>
+                     <td class="rent_title">Recipient Address</td>
+                     <td>
+                 {{$get_pickup_request->RecipientAddress}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">RecipientPhone</td>
+                     <td>
+                 {{$get_pickup_request->RecipientPhone}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Recipient Email</td>
+                     <td>
+                 {{$get_pickup_request->RecipientEmail}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">Payment Type</td>
+                     <td>
+                 {{$get_pickup_request->PaymentType}}
+                    
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td class="rent_title">DeliveryType</td>
+                     <td>
+                 {{$get_pickup_request->DeliveryType}}
+                    
+                    </td>
+                </tr>
+       </tbody>
+                  </table>
+                    <hr>
                     @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> <strong>{{$request_bid->status}}</strong></span>
                      @elseif($request_bid->status == 'Delivered')
@@ -114,7 +263,7 @@ Request | Summary
                                             @else
                                                 <p>Kindly contact me through this platform
                                             @endif
-                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->city->name }}, {{ $request->state->name }}</strong>.
+                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->api_city }}, {{ $request->api_state }}</strong>.
                                     
                                     </p>
                                     <p>Thank you</p>
@@ -151,61 +300,6 @@ Request | Summary
                                 
                             </div>
 
-                  <footer class="blockquote-footer">Request <cite title="Source Title">to provide help</cite></footer>
-              </div>
-            </div>
-
-
-                  <div class="card">
-              <div class="card-header">
-                Logistic partner details
-              </div>
-              <div class="card-body">
-                @if($logistic_partner != '')
-                  
-                  <dl class="row">
-  <dt class="col-sm-3">Company Name</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
-  </dd>
-
-  <dt class="col-sm-3">Phone Number</dt>
-  <dd class="col-sm-9">
-   {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3"> Email</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner ? $logistic_partner->email : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">Country</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">State</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">City</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
-  </dd>
-
-  <dt class="col-sm-3 text-truncate">Street Address</dt>
-  <dd class="col-sm-9">
-
-     <p>{{$logistic_partner ? $logistic_partner->street: 'N/A'}}</p>
-                       
-  </dd>
-</dl>
-                  @else
-          <small class="text-danger">No logistic partner choosen yet</small>
-                  @endif
-
-                  <footer class="blockquote-footer">Logistic partner <cite title="Source Title">details</cite></footer>
               </div>
             </div>
 

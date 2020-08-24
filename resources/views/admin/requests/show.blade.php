@@ -143,20 +143,16 @@ Admin | Logistic Agents
    {{ $request_details->user ? $request_details->user->email : 'N/A' }}
   </dd>
 
-  <dt class="col-sm-6">Country</dt>
-  <dd class="col-sm-6">
-   {{ $request_details->user ? $request_details->user->country->country_name : 'N/A' }}
-  </dd>
 
   <dt class="col-sm-6">State</dt>
   <dd class="col-sm-6">
-   {{ $request_details->user ? $request_details->user->state->name : 'N/A' }}
+   {{ $request_details->user ? $request_details->user->api_state : 'N/A' }}
   </dd>
 
 
   <dt class="col-sm-6">City</dt>
   <dd class="col-sm-6">
-   {{ $request_details->user ? $request_details->user->state->name : 'N/A' }}
+   {{ $request_details->user ? $request_details->user->api_city : 'N/A' }}
   </dd>
 </dl>
               </div>

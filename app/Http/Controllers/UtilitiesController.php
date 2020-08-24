@@ -133,7 +133,6 @@ public function rejectRequest($request_bid_id){
         $data['get_pickup_request'] = PickupRequest::where([
             ['request_id',$request_id],
             ['provider_id',$provider_id],
-            ['provider_id',$provider_id],
             ['receiver_id',$receiver_id],
         ])->first();
 
