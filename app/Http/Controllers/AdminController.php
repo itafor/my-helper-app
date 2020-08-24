@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\LockdownRequest;
+use App\PickupRequest;
 use App\RequestBidders;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class AdminController extends Controller
 {
@@ -55,6 +58,13 @@ class AdminController extends Controller
        $data['help_provider'] =  $data['request_bid']->requester;
        $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
        $data['request_photos'] = $data['request']->requestPhotos;
+
+        $data['get_pickup_request'] = PickupRequest::where([
+            ['request_id', $data['request']->id],
+            ['provider_id', $data['help_provider']->id],
+            ['receiver_id',$data['request_bidder']->id],
+        ])->first();
+
 
        return view('admin.requests.request_summary',$data);
 
@@ -161,6 +171,34 @@ public function storeLogisticEgent(Request $request) {
         }
 
         return back()->with('success', 'Logistic agent details updated successfully');
+    }
+
+      public function showShipmentTrackingForm(){
+
+       return view('admin.PickupRequest.trackshipment');
+    }
+
+    public function trackShipment(Request $request){
+
+      $waybillno = $request->WayBillNumber;
+
+        $client = new Client(['verify' => false]);
+
+     $result = $client->get('http://api.clicknship.com.ng/clicknship/Operations/TrackShipment?waybillno= '.$waybillno.'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                            'Content-Type' => 'application/json'
+                        ],
+                    ]);
+
+     $response = $result->getBody()->getContents();
+     $data['tracking_responses'] = json_decode($response, true);
+
+     if($data['tracking_responses'] == []){
+      return  back()->withInput()->with('error', 'No tracking response found!!');
+     }
+
+       return view('admin.PickupRequest.trackshipment',$data);
     }
     
     }

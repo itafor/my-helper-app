@@ -103,6 +103,10 @@ Route::group([
 
     Route::post('/store_logistic', 'AdminController@storeLogisticEgent')->name('admin.logistic.agent.store');
     Route::get('/{item}/{id}', 'UtilitiesController@destroyItem')->name('admin.del_items');
+
+     Route::get('/track_shipment', 'AdminController@showShipmentTrackingForm')->name('admin.pickupRequest.shipmenttracker');
+
+     Route::post('/track/shipment', 'AdminController@trackShipment')->name('admin.pickupRequest.trackshipment.store');
 });
 
 Route::group([
