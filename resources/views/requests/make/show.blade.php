@@ -138,6 +138,41 @@
                             <input type="hidden" name="request_type" class="form-control" id="request_type" value="Get Help" >
                           </div>
 
+                           <h3>Item Size IN Weight</h3>
+                             <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5">
+                                            <label class="form-check-label" for="weight1"><b>SMALL:</b> Items that can fit into a box on a motorcycle (e.g. small-sized electronics) <b>Assumed Weight:</b> 3.5 kg</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5">
+                                                <label class="form-check-label" for="weight2"><b>MEDIUM:</b> Items that are heavy and may be transported with vans. <b>Assumed Weight:</b> 7.5.0 kg</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
+                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0">
+                                            <label class="form-check-label" for="weight3"><b>LARGE:</b> Items that are large like pieces of furniture and large electronics. <b>Assumed Weight:</b> 10.0 kg</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                         <div class="col-md-12">
+                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Delivery fee Payment Type') }}</label></strong>
+                                                <select name="delivery_cost_payer" id="delivery_cost_payer" class="form-control" required>
+                                                    <option value="">Select delivey fee payment type</option>
+                                                    @foreach(payment_types() as $paymentype)
+                                                        <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
 
                           <div class="row">
      

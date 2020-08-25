@@ -52,32 +52,30 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="country_id">{{ __('Country') }}</label></strong>
-                                                <select name="country_id" id="country_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
-                                                    <option value="">Select a country</option>
-                                                    @foreach(getCountries() as $country)
-                                                        <option {{ $country->sortname == $location ? "selected" : "" }} value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                                <strong><label class="form-control-label" for="api_state_id">{{ __('State') }}</label></strong>
+                                                <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('country'))
+                                                @if ($errors->has('api_state'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('country') }}</strong>
+                                                        <strong>{{ $errors->first('api_state_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="state_id">{{ __('State') }}</label></strong>
-                                                <select name="state_id" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
-                                                    <option value="">Select State</option>
-                                                    @foreach($states as $state)
-                                                        <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                                    @endforeach
+                                            <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
+                                                <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
+                                                    <option value="">Select City</option>
+                                                   
                                                 </select>
-                                                @if ($errors->has('state'))
+                                                @if ($errors->has('api_city'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('state') }}</strong>
+                                                        <strong>{{ $errors->first('api_city_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -86,15 +84,14 @@
 
                                     <div class="row"> -->
                                         <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('city') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="city_id">{{ __('City') }}</label></strong>
-                                                <select name="city_id" id="city_id" class="form-control form-control-alternative{{ $errors->has('city') ? ' is-invalid' : '' }}" placeholder="{{ __('City') }}" value="{{ old('street') }}" required >
-                                                    <option value="">Select City</option>
-                                                    
+                                            <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town (Optional)') }}</label></strong>
+                                                <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                                    <option value="">Select Town</option>
                                                 </select>
-                                                @if ($errors->has('city'))
+                                                @if ($errors->has('api_delivery_town'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('city') }}</strong>
+                                                        <strong>{{ $errors->first('api_delivery_town') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>

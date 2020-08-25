@@ -98,11 +98,12 @@ public static function createNew($data)
             'bidder_id' => $data['bidder_id'],//help receiver
             'request_type' =>  $data['request_type'],
             'status' =>  'Pending',
-            'logistic_partner_id' =>  $logistic,
-            'confirmation_code' =>  mt_rand(100000, 999999).$data['bidder_id'],
-            'delievery_cost' =>  $delievery_cost,
             'comment' =>  $comment,
         ]); 
+
+        if($grantRequest){
+            self::updateRequest($data);
+        }
         
         return $grantRequest;
     }
@@ -153,6 +154,20 @@ public static function createNew($data)
             ])->first();
         return $request_bid;
         }
+
+    }
+
+       public static function updateRequest($data)
+    {
+
+     $update_request  =  LockdownRequest::where([
+            ['id', $data['request_id'] ],
+        ])->update([
+            'delivery_cost_payer' => $data['delivery_cost_payer'],
+            'weight' => $data['weight'],
+        ]); 
+
+        return $update_request;
 
     }
 }

@@ -183,12 +183,18 @@
 
  We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>approved</b> by the receiver.<br>
 
-A logistic delivery partner has been assigned to deliver the goods to the receiver.<br>
-Please find the receiver and logistic delivery partner details below.
-<br>
 
- Goods Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
- Description: {{$main_request->description }}<br><br>
+
+ Product Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ Product Description: {{$main_request->description }}<br><br>
+
+ Product Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
+  <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$main_request->delivery_cost_payer}}<br><br>
+
+  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a><br>  
+
+Please find the receiver details below.
+<br>
 
  @else
 
@@ -196,6 +202,8 @@ We wish to notify you that your request to provide help on <a href="{{url('/')}}
 
 Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
 Description: {{$main_request->description }}<br><br>
+
+  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
 
  @endif
 </p>
@@ -231,24 +239,17 @@ Description: {{$main_request->description }}<br><br>
                      <td> {{$request_owner ? $request_owner->email : 'N/A'}}</td>
                    </tr>
 
-                     <tr>
-                     <td class="rent_title">Country</td>
-                     <td>
-    {{$request_owner->country ? $request_owner->country->country_name : 'N/A'}}
-                     </td>
-                   </tr>
-
                     <tr>
                      <td class="rent_title">State</td>
                 <td>
-    {{$request_owner->state ? $request_owner->state->name : 'N/A'}}
+    {{$request_owner->api_state ? $request_owner->api_state : 'N/A'}}
                 </td>           
               </tr>
 
                  <tr>
                      <td class="rent_title">City</td>
                      <td>
-    {{$request_owner->city ? $request_owner->city->name : 'N/A'}}
+    {{$request_owner->api_city ? $request_owner->api_city : 'N/A'}}
                      </td>
                 </tr>
 
@@ -266,75 +267,7 @@ Description: {{$main_request->description }}<br><br>
                   <br>
 <hr>
 
-                   @if($request_bidding_record->status == 'Approved')
-
-                   <h3>Logistic Partner details</h3>
-
- <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-
-                   <tr>
-                     <td class="rent_title">Comany Name</td>
-                     <td> 
-                        {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
-                      </td> 
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Phone Number</td>
-                     <td>  
-                {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Email</td>
-                     <td> {{$logistic_partner ? $logistic_partner->email : 'N/A'}}</td>
-                   </tr>
-
-                     <tr>
-                     <td class="rent_title">Country</td>
-                     <td>
-    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
-                     </td>
-                   </tr>
-
-                    <tr>
-                     <td class="rent_title">State</td>
-                <td>
-    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
-                </td>           
-              </tr>
-
-                 <tr>
-                     <td class="rent_title">City</td>
-                     <td>
-    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
-                     </td>
-                </tr>
-
-                 <tr>
-                     <td class="rent_title">Street Address</td>
-                     <td>
-                      
-                    {{$logistic_partner ? $logistic_partner->street: 'N/A'}}
-                    
-                    </td>
-                </tr>
-               
-       </tbody>
-                  </table>
-
-
-
-                   @endif
-<!-- 
-help_provider {{$help_provider}}<br>
-main_request: {{$main_request}}<br>
-request_owner: {{$request_owner}}<br>
-logistic_partner: {{$logistic_partner}}<br>
-request_bidding_record: {{$request_bidding_record}}<br> -->
+             
 
                
                 </div>

@@ -21,7 +21,7 @@
 
 				            <div class="card">
 				  <div class="card-header">
-				<div class="float-left">Help Provider details</div>
+				<div class="float-left">Approve or Reject Request to Get Help</div>
 				<div class="float-right">
            @if(authUser()->id == $request_bid->bidder_id)
 					@if($request_bid->status == 'Pending')
@@ -40,6 +40,7 @@
 				</div>
 				  </div>
 				  <div class="card-body">
+            <h3>Help Provider details</h3>
                   <dl class="row">
   <dt class="col-sm-3">Full Name</dt>
   <dd class="col-sm-9">
@@ -57,19 +58,14 @@
     {{$help_provider ? $help_provider->email : 'N/A'}}
   </dd>
 
-   <dt class="col-sm-3">Country</dt>
-  <dd class="col-sm-9">
-    {{$help_provider->country ? $help_provider->country->country_name : 'N/A'}}
-  </dd>
-
    <dt class="col-sm-3">State</dt>
   <dd class="col-sm-9">
-    {{$help_provider->state ? $help_provider->state->name : 'N/A'}}
+    {{$help_provider->api_state}}
   </dd>
 
    <dt class="col-sm-3">City</dt>
   <dd class="col-sm-9">
-    {{$help_provider->city ? $help_provider->city->name : 'N/A'}}
+    {{$help_provider->api_city }}
   </dd>
 
   <dt class="col-sm-3 text-truncate">Street Address</dt>
@@ -90,7 +86,7 @@
                                             @else
                                                 <p>Kindly contact me through this platform
                                             @endif
-                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->city->name }}, {{ $request->state->name }}</strong>.
+                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->api_city }}, {{ $request->api_state }}</strong>.
                                     
                                     </p>
                                     <p>Thank you</p>
@@ -155,7 +151,7 @@
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{$help_provider->id}}" >
                           </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                             <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
                              <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
                                         <option value="">Choose logistic partner </option>
@@ -172,7 +168,7 @@
                      <div class="form-group">
                             <label for="exampleInputEmail1">Delivery cost</label>
                             <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
-                          </div>
+                          </div> -->
                      <div class="form-group">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
@@ -182,6 +178,8 @@
 					     
 
                         </form>
+                        @else
+                        <span class="text-danger"> <br>You are not the owner of this request, hence you are not allowed to approve or reject it</span>
                         @endif
                     @elseif($request_bid->status == 'Approved')
                     Request Status:<span class=" text-primary"> {{$request_bid->status}}</span>
@@ -198,63 +196,6 @@
 
 				  </div>
 				</div>
-
-           
-          
-
-
-                  <div class="card">
-              <div class="card-header">
-                Logistic partner details
-              </div>
-              <div class="card-body">
-              	@if($logistic_partner != '')
-                  
-                  <dl class="row">
-  <dt class="col-sm-3">Company Name</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner ? $logistic_partner->company_name : 'N/A'}} 
-  </dd>
-
-  <dt class="col-sm-3">Phone Number</dt>
-  <dd class="col-sm-9">
-   {{$logistic_partner ? $logistic_partner->phone : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3"> Email</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner ? $logistic_partner->email : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">Country</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner->country ? $logistic_partner->country->country_name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">State</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner->state ? $logistic_partner->state->name : 'N/A'}}
-  </dd>
-
-   <dt class="col-sm-3">City</dt>
-  <dd class="col-sm-9">
-    {{$logistic_partner->city ? $logistic_partner->city->name : 'N/A'}}
-  </dd>
-
-  <dt class="col-sm-3 text-truncate">Street Address</dt>
-  <dd class="col-sm-9">
-
-     <p>{{$logistic_partner ? $logistic_partner->street: 'N/A'}}</p>
-                       
-  </dd>
-</dl>
-                  @else
-          <small class="text-danger">No logistic partner choosen yet</small>
-                  @endif
-
-                  <footer class="blockquote-footer">Logistic partner <cite title="Source Title">details</cite></footer>
-              </div>
-            </div>
 
                 </div>
                 <!-- /tables -->

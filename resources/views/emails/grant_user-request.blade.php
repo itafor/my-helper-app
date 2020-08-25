@@ -132,17 +132,19 @@
 
  <br>
 
-After you have approved the request, a logistic delievery partner's details will be sent to you to deliver the request. Please be informed that, you are to pay for delivery cost. <br>
+After you have approved the request, the help provider will contact Red Star Express  Allied Services Ltd. to deliver to product. <br>
 <br>
-      <br>
- Note: You are expected to provide a <b>confirmation code</b> that will be sent after Request Approval to the logistic delivery partner to confirm that the goods has been received and in good condition.<br><br>
+<br>
 
  Product Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
- Description: {{$main_request->description }}<br><br>
+ Product Description: {{$main_request->description }}<br><br>
+
+ Product Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
+  <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$main_request->delivery_cost_payer}}<br><br>
 
   Please find below the provider information. Thanks<br><br>
 
-  Please click <a href="{{route('request.approve_or_reject',[$request_bidding_record->id])}}">HERE</a> to Approve or Reject the request.
+  Click <a href="{{route('request.approve_or_reject',[$request_bidding_record->id])}}">HERE</a> to Approve or Reject the request.
 
 <br>
 </p>
@@ -173,46 +175,39 @@ After you have approved the request, a logistic delievery partner's details will
                      <td> {{$help_provider ? $help_provider->email : 'N/A'}}</td>
                    </tr>
 
-                     <tr>
-                     <td class="rent_title">Country</td>
-                     <td>
-    {{$help_provider->country ? $help_provider->country->country_name : 'N/A'}}
-                     </td>
-                   </tr>
-
                     <tr>
                      <td class="rent_title">State</td>
                 <td>
-    {{$help_provider->state ? $help_provider->state->name : 'N/A'}}
+    {{ $help_provider->api_state }}
                 </td>           
               </tr>
 
                  <tr>
                      <td class="rent_title">City</td>
                      <td>
-    {{$help_provider->city ? $help_provider->city->name : 'N/A'}}
+    {{ $help_provider->api_city }}
                      </td>
                 </tr>
-
-                 <tr>
-                     <td class="rent_title">Street Address</td>
+            <tr>
+            <td class="rent_title">Delivery Town</td>
                      <td>
-                      
-                    {{$help_provider ? $help_provider->street: 'N/A'}}
-                    
-                    </td>
-                </tr>
+    {{ $help_provider->api_delivery_town ? $help_provider->api_delivery_town : 'N/A'  }}
+                     </td>
+         </tr>
+
+       <tr>
+           <td class="rent_title">Street Address</td>
+           <td>
+            
+          {{$help_provider ? $help_provider->street: 'N/A'}}
+          
+          </td>
+      </tr>
                
        </tbody>
                   </table>
 <hr>
 
-  
-
-<!-- help_provider {{$help_provider}}<br>
-main_request: {{$main_request}}<br>
-request_owner: {{$request_owner}}<br>
-request_bidding_record: {{$request_bidding_record}}<br> -->
                
                 </div>
               </div>
