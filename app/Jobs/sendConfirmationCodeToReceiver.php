@@ -19,7 +19,6 @@ class sendConfirmationCodeToReceiver implements ShouldQueue
     public $help_provider;
     public $main_request;
     public $request_bidder;
-    // public $logistic_partner;
     public $request_bidding_record;
     /**
      * Create a new job instance.
