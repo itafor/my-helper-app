@@ -43,7 +43,7 @@ class GrantUserRequest implements ShouldQueue
          Mail::send('emails.grant_user-request', ['help_provider' => $this->help_provider,'main_request'=>$this->main_request, 'request_owner'=>$this->request_owner, 'request_bidding_record'=>$this->request_bidding_record], function ($message) {
 
     $message->subject('Approve or Reject Request to Get Help');
-    $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
+    $message->from('noreply@myhelperapp.com', 'MyHelperApp');
     $message->to($this->request_owner->email);
   });
     }

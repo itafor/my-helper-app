@@ -335,12 +335,6 @@
                
        </tbody>
                   </table>
-<!-- 
-help_provider {{$help_provider}}<br>
-main_request: {{$main_request}}<br>
-request_owner: {{$request_owner}}<br>
-logistic_partner: {{$logistic_partner}}<br>
-request_bidding_record: {{$request_bidding_record}}<br> -->
 
                
                 </div>
