@@ -191,17 +191,16 @@
  Product Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
   <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$main_request->delivery_cost_payer}}<br><br>
 
-  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a><br>  
-
+  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request </a> and submit pickup request <br>  
+ <p>Receiver Comment: {{$request_bidding_record->comment ? $request_bidding_record->comment : 'N/A'}}</p><br>
 Please find the receiver details below.
-<br>
 
  @else
 
 We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>rejected</b> by the receiver.<br>
 
-Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
-Description: {{$main_request->description }}<br><br>
+Product Category:: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+Product Description: {{$main_request->description }}<br><br>
 
   <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
 

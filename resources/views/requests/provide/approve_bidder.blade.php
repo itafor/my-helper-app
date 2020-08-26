@@ -34,7 +34,7 @@
  @if($request_bid->status == 'Pending')
    Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
 
-   @elseif($request_bid->status == 'Approved')
+   @elseif($request_bid->status == 'Approved' ||  $request_bid->pickup_status == 'Success')
                     Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
                       <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
                         <button class="btn-sm btn-primary">View details</button>

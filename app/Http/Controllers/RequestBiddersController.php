@@ -79,7 +79,10 @@ class RequestBiddersController extends Controller
      $data = $request->all();
     //dd($data);
        $validator = validator::make($data,[
-            'logistic_partner_id'=>'required',
+            'request_id'=>'required',
+            'request_bid_id'=>'required',
+            'bidder_id'=>'required',
+            'requester_id'=>'required',
     ]);
 
     if($validator->fails()){
@@ -96,16 +99,16 @@ class RequestBiddersController extends Controller
         $main_request = LockdownRequest::find($data['request_id']);// the help (request)
         $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
         $help_provider= User::find($data['requester_id']);
-        $logistic_partner = User::find($data['logistic_partner_id']); 
+        // $logistic_partner = User::find($data['logistic_partner_id']); 
 
-       $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
-        $this->dispatch($logistic_partner_job);
+       // $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+       //  $this->dispatch($logistic_partner_job);
 
-         $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
-        $this->dispatch($receiver_job);
+        //  $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+        // $this->dispatch($receiver_job);
 
 
-        $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+        $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$help_provider,$request_bidding_record))->delay(5);
         $this->dispatch($approve_or_reject_noty);
 
             DB::commit();

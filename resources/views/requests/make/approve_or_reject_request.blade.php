@@ -32,7 +32,7 @@
                           <div class="form-group">
                             <input type="hidden" name="request_bid_id" class="form-control" id="request_bid_id" value="{{$request_bid->id}}" >
                           </div>
-                          <button type="submit" class="btn btn-primary float-left btn-sm">Reject Request</button>
+                          <button type="submit" class="btn btn-danger float-left btn-sm">Reject Request</button>
 
                         </form>
           @endif
@@ -151,24 +151,6 @@
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{$help_provider->id}}" >
                           </div>
 
-                            <!-- <div class="form-group">
-                            <small id="emailHelp" class="form-text text-muted">Please choose a logistic company to deliever this product to the beneficiary</small>
-                             <select name="logistic_partner_id" id="logistic_partner_id" class="form-control productCategory" required >
-                                        <option value="">Choose logistic partner </option>
-                                        @foreach(getLogisticPartners() as $logistic)
-                                            <option value="{{ $logistic->id }}">{{ $logistic->company_name }} | {{ $logistic->city ? $logistic->city->name : 'N/A' }}</option>
-                                        @endforeach
-                                    </select>
-                                    
-                    @error('logistic_partner_id')
-                    <small style="color: red; font-size: 14px;"> {{ $message }}</small>
-                    @enderror
-                          </div>
-
-                     <div class="form-group">
-                            <label for="exampleInputEmail1">Delivery cost</label>
-                            <input type="number" name="delievery_cost" class="form-control" id="delievery_cost" value="3500" >
-                          </div> -->
                      <div class="form-group">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>

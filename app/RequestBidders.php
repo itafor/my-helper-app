@@ -11,7 +11,7 @@ class RequestBidders extends Model
 
     protected $fillable = ['request_id','requester_id','bidder_id',
 						   'logistic_partner_id','request_type','status',
-						   'confirmation_code','delievery_cost','comment'
+						   'confirmation_code','delievery_cost','comment','pickup_status'
 						];
 
  public function request()
@@ -71,6 +71,7 @@ public static function createNew($data)
             'comment' => $comment,
             'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
             'status' => 'Approved',
+            'pickup_status' => 'Success',
         ]); 
 
         if($approve_request){
@@ -138,10 +139,10 @@ public static function createNew($data)
             ['bidder_id', $data['bidder_id'] ],
             ['requester_id', $data['requester_id'] ],
         ])->update([
-            'logistic_partner_id' => $data['logistic_partner_id'],
-            'delievery_cost' => $data['delievery_cost'],
+            // 'logistic_partner_id' => $data['logistic_partner_id'],
+            // 'delievery_cost' => $data['delievery_cost'],
             'comment' => $comment,
-            'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
+            // 'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
             'status' => 'Approved',
         ]); 
 

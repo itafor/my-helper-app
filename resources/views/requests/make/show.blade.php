@@ -57,7 +57,30 @@
                                         @endif
                                     @endif
 
-        
+                  @if(isset($request_photos) && $request_photos !='')
+
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:100%; height: 400px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($request_photos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
                                 </div>
 
                                           <!-- Check if the person is logged in -->
@@ -115,6 +138,11 @@
                         @if(auth()->check())
                 @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help'))
                                 <p style="color:red">You have previously contacted this user</p>
+                                <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}}</strong>
+                              @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved')
+                                <a href="{{route('request.approve',[user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['id']])}}">Submit pickup request</a>
+                              @endif
+                                </span>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
                                         @if($getRequest->request_type == 1)
