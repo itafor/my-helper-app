@@ -140,7 +140,7 @@
                                 <p style="color:red">You have previously contacted this user</p>
                                 <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}}</strong>
                               @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved')
-                                <a href="{{route('request.approve',[user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['id']])}}">Submit pickup request</a>
+                                <a href="{{route('pickupRequest.approve',[user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['id']])}}">Submit pickup request</a>
                               @endif
                                 </span>
                             @else
