@@ -43,7 +43,7 @@ class NotifyUserOfRequestApprovalOrRejection implements ShouldQueue
         Mail::send('emails.notifyUserOfRequestApprovalOrRejection', ['help_provider' => $this->help_provider,'main_request'=>$this->main_request, 'request_owner'=>$this->request_owner, 'request_bidding_record'=>$this->request_bidding_record], function ($message) {
 
     $message->subject($this->request_bidding_record->status == 'Approved' ? 'Request Approval Notification':'Request Rejection Notification');
-    $message->from('noreply@myhelperapp.com', 'MyHelperApp');
+    $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
     $message->to($this->help_provider->email);
   });
 
