@@ -99,16 +99,8 @@ class RequestBiddersController extends Controller
         $main_request = LockdownRequest::find($data['request_id']);// the help (request)
         $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
         $help_provider= User::find($data['requester_id']);
-        // $logistic_partner = User::find($data['logistic_partner_id']); 
 
-       // $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
-       //  $this->dispatch($logistic_partner_job);
-
-        //  $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
-        // $this->dispatch($receiver_job);
-
-
-        $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$help_provider,$request_bidding_record))->delay(5);
+        $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
         $this->dispatch($approve_or_reject_noty);
 
             DB::commit();
@@ -198,10 +190,6 @@ class RequestBiddersController extends Controller
         $help_provider= authUser(); //The user that want to provide help
         $main_request = LockdownRequest::find($data['request_id']);// the help (request)
         $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
-        // $logistic_partner = User::find($data['logistic_partner_id']); 
-
-       // $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
-       //  $this->dispatch($logistic_partner_job);
 
          $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
         $this->dispatch($receiver_job);
@@ -220,16 +208,7 @@ class RequestBiddersController extends Controller
      public function grantSomeoneRequest(Request $request){
       
      $data = $request->all();
-    //dd($data);
-    //    $validator = validator::make($data,[
-    //         'logistic_partner_id'=>'required',
-    //         'delievery_cost'=>'required',
-    // ]);
-
-    // if($validator->fails()){
-    //      return  back()->withErrors($validator)
-    //                     ->withInput()->with('error', 'Please fill in a required fields');
-    // }
+   
 
        DB::beginTransaction();
         try{
@@ -274,9 +253,8 @@ class RequestBiddersController extends Controller
                 $main_request = LockdownRequest::find($request_bidding_record->request_id);// the help (request)
                 $help_receiver = User::find($request_bidding_record->bidder_id); // the user bidding to get help 
                 $help_provider= User::find($request_bidding_record->requester_id);
-                $logistic_partner = User::find($request_bidding_record->logistic_partner_id);
 
-         $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$help_receiver,$help_provider,$request_bidding_record))->delay(5);
+         $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$help_receiver,$request_bidding_record))->delay(5);
            $this->dispatch($approve_or_reject_noty);
 
             }

@@ -19,7 +19,6 @@ class GrantUserRequest implements ShouldQueue
     public $help_provider;
     public $main_request;
     public $request_owner;
-    // public $logistic_partner;
     public $request_bidding_record;
     /**
      * Create a new job instance.
@@ -31,7 +30,6 @@ class GrantUserRequest implements ShouldQueue
         $this->help_provider = $help_provider;
         $this->main_request = $main_request;
         $this->request_owner = $request_owner;
-        // $this->logistic_partner = $logistic_partner;
         $this->request_bidding_record = $request_bidding_record;
     }
 
