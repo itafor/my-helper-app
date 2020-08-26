@@ -45,7 +45,7 @@ class NotifyLogisticToDeliverGoods implements ShouldQueue
                 Mail::send('emails.notify_logistic_to_deliver_goods', ['help_provider' => $this->help_provider,'main_request'=>$this->main_request, 'request_bidder'=>$this->request_bidder, 'logistic_partner'=>$this->logistic_partner, 'request_bidding_record'=>$this->request_bidding_record], function ($message) {
 
     $message->subject('Request to deliver goods');
-    $message->from('noreply@myhelperapp.com', 'MyHelperApp');
+    $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
     $message->to($this->logistic_partner->email)->cc($this->help_provider->email);
   });
 
