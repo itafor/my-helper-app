@@ -23,8 +23,8 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
          <!-- select2 css -->
-        <link rel="stylesheet" type="text/css" href="/css/app.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"> -->
       
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -265,14 +265,18 @@
         </script>
          
         @stack('js')
-        <script type="text/javascript" src="/js/app.js"></script>
+       <!--  <script type="text/javascript" src="/js/app.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-         $('.productCategory').select2();
+            $(document).ready(function(){
+                    $(document).ready(function () {
+         $('#productCategory').select2();
+
      })
-        </script>
+            })
+        
+        </script> -->
             <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
         
           <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

@@ -167,6 +167,10 @@ Route::group([
     
     Route::post('/calculate_deliveryfee', 'PickupRequestController@calculateDeliveryFeeOperation')->name('pickupRequest.calculate.deliveryfeeOperation');
 
+     Route::get('/approve/{id}', 'MakeRequestController@initialRequestApprovalForhelpSeekers')->name('pickupRequest.approve');
+
+ Route::post('/approve', 'MakeRequestController@finalRequestApprovalForhelpSeekers')->name('pickupRequest.approve.store');
+
 });
 
 

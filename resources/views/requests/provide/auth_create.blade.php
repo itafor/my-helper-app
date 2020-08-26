@@ -22,7 +22,7 @@
                                     <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('category') ? ' has-danger' : '' }}">
                                             <strong><label class="form-control-label" for="input-category">{{ __('Category') }}</label></strong>
-                                            <select name="category_id" id="input-category" class="form-control form-control-alternative{{ $errors->has('category') ? ' is-invalid' : '' }} productCategory" value="{{ old('category') }}" required>
+                                            <select name="category_id" id="productCategory" class="form-control" value="{{ old('category') }}" required>
                                                 <option value="">Select a Category</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -69,7 +69,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="state_id">{{ __('State') }}</label></strong>
-                                                <select name="state_id" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
+                                                <select name="state_id" id="state_id" class="form-control" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
                                                     <option value="">Select State</option>
                                                     @foreach($states as $state)
                                                         <option value="{{ $state->id }}">{{ $state->name }}</option>
