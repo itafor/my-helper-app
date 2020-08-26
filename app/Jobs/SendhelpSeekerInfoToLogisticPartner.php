@@ -46,7 +46,7 @@ class SendhelpSeekerInfoToLogisticPartner implements ShouldQueue
          Mail::send('emails.sendhelpSeekerInfoToLogisticPartner', ['help_provider' => $this->help_provider,'main_request'=>$this->main_request, 'request_owner'=>$this->request_owner, 'logistic_partner'=>$this->logistic_partner, 'request_bidding_record'=>$this->request_bidding_record], function ($message) {
 
     $message->subject('Request to deliver goods');
-    $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
+    $message->from('noreply@myhelperapp.com', 'MyHelperApp');
     $message->to($this->logistic_partner->email);
   });
     }

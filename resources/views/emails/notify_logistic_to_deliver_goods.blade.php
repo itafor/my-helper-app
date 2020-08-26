@@ -338,12 +338,6 @@ Product Category: {{$main_request->category ? $main_request->category->title : '
 
   
 
-      <!--  help_provider: {{$help_provider}}<br>
-       main_request : {{$main_request}}<br>
-       request_bidder: {{$request_bidder}}<br> 
-       logistic_partner: {{$logistic_partner}}<br> 
-       request_bidding_record: {{$request_bidding_record}}<br> -->
-               
                 </div>
               </div>
             </div>

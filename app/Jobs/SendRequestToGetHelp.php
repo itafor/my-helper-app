@@ -44,7 +44,7 @@ class SendRequestToGetHelp implements ShouldQueue
 
     $message->subject('Indication of interest to get help');
 
-    $message->from('itaforfrancis@gmail.com', 'MyHelperApp');
+    $message->from('noreply@myhelperapp.com', 'MyHelperApp');
 
     $message->to($this->help_provider->email)->cc('admin@myhelperapp.com');
   });

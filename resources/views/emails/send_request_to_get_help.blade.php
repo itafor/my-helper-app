@@ -248,12 +248,6 @@
 <br>
 <br>
 
-
-<!-- 
-
-       request_bidder: {{$request_bidder}}<br>
-       user_request : {{$user_request}}<br>
-       help_provider: {{$help_provider}}<br -->
     </div>
     <script type="text/javascript">
                 function myFunction(imgs) {
