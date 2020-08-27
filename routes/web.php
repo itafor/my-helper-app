@@ -15,12 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ['uses' => 'LandingPageController@landing_page', 'as'=>'home.landingpage']);
 
-Route::get('reg_type', function() {
-	return view('auth.select_registration_type');
-})->name('selectReg');
-Route::get('/corporate/register', function() {
-	return view('auth.corporate_reg');
-});
+// Route::get('reg_type', function() {
+// 	return view('auth.select_registration_type');
+// })->name('selectReg');
+
+// Route::get('/corporate/register', function() {
+// 	return view('auth.corporate_reg');
+// });
+
+Route::get('/corporate/register', 'LandingPageController@corporateRegistration');
+Route::get('/reg_type', 'LandingPageController@registrationType')->name('selectReg');
+
 
 Auth::routes();
 
@@ -98,8 +103,8 @@ Route::group([
     Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     Route::get('/logistic', 'AdminController@logisticEgents')->name('admin.logistic.agent');
     Route::get('/add_new_logistic_agent', 'AdminController@add_new_logistic_agent')->name('admin.logistic.agent.add');
-    Route::get('edit_logistic/{id}', 'AdminController@edit_logistic')->name('admin.logistic.agent.edit');
-    Route::post('/update_logistic/', 'AdminController@update_logistic')->name('admin.logistic.agent.update');
+    // Route::get('edit_logistic/{id}', 'AdminController@edit_logistic')->name('admin.logistic.agent.edit');
+    // Route::post('/update_logistic/', 'AdminController@update_logistic')->name('admin.logistic.agent.update');
 
     Route::post('/store_logistic', 'AdminController@storeLogisticEgent')->name('admin.logistic.agent.store');
     Route::get('/{item}/{id}', 'UtilitiesController@destroyItem')->name('admin.del_items');
