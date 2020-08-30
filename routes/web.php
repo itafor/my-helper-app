@@ -122,9 +122,14 @@ Route::group([
     Route::get('show_logistic_agent_details/{id}', 'AdminController@show_logistic')->name('admin.logistic.agent.show');
 
     Route::get('all_requests', 'AdminController@allRequest')->name('admin.all.requests');
-    Route::get('request_details/{id}', 'AdminController@requestDetails')->name('admin.request.show');
 
-    Route::get('/request_summary/{id}', 'AdminController@request_summary')->name('request.summary');
+    Route::get('request_details/{id}', 'AdminController@provideHelprequestDetails')->name('admin.request.show');
+
+    Route::get('/request_summary/{id}', 'AdminController@provide_helprequest_summary')->name('request.summary');
+
+     Route::get('get_help_request_details/{id}', 'AdminController@getHelprequestDetails')->name('admin.get.request.show');
+
+    Route::get('/get_help_request_summary/{id}', 'AdminController@get_helprequest_summary')->name('admin.get.request.summary');
 
 });
 

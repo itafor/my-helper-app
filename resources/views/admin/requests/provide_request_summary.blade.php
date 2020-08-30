@@ -48,6 +48,7 @@ Request | Summary
                     @elseif($request_bid->status == 'Approved')
                     Request Status:<span class=" text-primary"><strong> {{$request_bid->status}}</strong></span>
                     <hr>
+                    @if($get_pickup_request)
                            <table class="table table-bordered" id="rental_table">
            
                     <tbody>
@@ -233,6 +234,9 @@ Request | Summary
                 </tr>
        </tbody>
                   </table>
+                  @else
+                  <span>Pickup request not yet submitted</span>
+                  @endif
                     <hr>
                     @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> <strong>{{$request_bid->status}}</strong></span>
