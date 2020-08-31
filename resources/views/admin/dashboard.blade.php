@@ -49,11 +49,21 @@ Admin | Dashboard
                        <!--  <td>{{$request->type}} </td>
                         <td>{{ $request->city ? $request->city->name : '' }}</td> -->
                       
+                          @if($request->request_type == 2)
                         <td>
                            <a href="{{route('admin.request.show',[$request->id])}}">
                           <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
                           </a>
                         </td>
+                      @elseif($request->request_type == 1)
+                       <td>
+                           <a href="{{route('admin.get.request.show',[$request->id])}}">
+                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          </a>
+                        </td>
+                        @else
+                        
+                      @endif
                     </tr>
                     @php
                        $i++;

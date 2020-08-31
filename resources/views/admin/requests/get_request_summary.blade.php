@@ -1,42 +1,55 @@
-@extends('layouts.app', ['pageSlug' => 'Requests'])
-<style type="text/css">
-      #rental_table {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 12px;
-}
 
-#rental_table td{
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-#rental_table .rent_title{
-  width: 150px;
-}
-</style>
+@extends('admin.layouts.master', ['pageSlug' => 'admin_dashboard'])
+
+
+
+@section('title')
+
+Request | Summary
+
+@endsection
+
 @section('content')
-    <div class="container-fluid mt--7">
+
+ 
+ <!-- Grid -->
         <div class="row">
-            <div class="col-xl-12 order-xl-1">
-               <div class="card">
-  <div class="card-header">
+
+          <!-- Grid Item -->
+          <div class="col-xl-12">
+
+            <!-- Card -->
+            <div class="dt-card">
+
+              <!-- Card Body -->
+              <div class="dt-card__body">
+
+                <!-- Tables -->
+                <div class="table-responsive">
+
+
+                    <div class="card">
+         <div class="card-header">
 <div class="float-left">
   Pickup Request Details
 </div>
 <div class="float-right">
-   <a  href="{{ route('pickupRequest.shipmenttracker') }}"><button class="btn btn-warning btn-sm">Track Shippment Status 
+   <a  href="{{ route('admin.pickupRequest.shipmenttracker') }}"><button class="btn btn-warning btn-sm">Track Shippment Status 
   </button>
     </a>
 </div>
   </div>
-  
-   
-
-  <div class="card-body">
-                    @if($get_pickup_request)
-
-       <table class="table table-bordered" id="rental_table">
+          <div class="card-body">
+            <br>
+           <hr>
+           <div class="col-sm-6">
+           @if($request_bid->status == 'Pending')
+                    Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+                    @elseif($request_bid->status == 'Approved')
+                    Request Status:<span class=" text-primary"><strong> {{$request_bid->status}}</strong></span>
+                    <hr>
+                      @if($get_pickup_request)
+                           <table class="table table-bordered" id="rental_table">
            
                     <tbody>
                    <tr>
@@ -224,49 +237,97 @@
                   @else
                   <span>Pickup request not yet submitted</span>
                   @endif
-  <hr>
-    <h4>Shipment Items</h4>
-    @if(count(shippmentItems($get_pickup_request->id,$get_pickup_request->request_id,$get_pickup_request->provider_id,$get_pickup_request->receiver_id)) >= 1)
-    <div class="table-responsive">
-                 <table class="table tablesorter" id="requests">
-                    <thead class=" text-primary">
-                       <tr>
-                      <th> S/N </th>
-                      <th> ItemName </th>
-                      <th> ItemUnitCost </th>
-                      <th> ItemQuantity </th>
-                      <th> ItemColour </th>
-                      <th> ItemSize </th>
-                        </tr>
-                     
-                    </thead>
-                    <tbody>
-                       @php
-                          $i = 1;
-                      @endphp
-                      @foreach($get_pickup_request->shipment_items as $item)
-                      <tr>
-                        <td>{{$i}} </td>
-                        <td>{{$item->ItemName}} </td>
-                        <td>{{$item->ItemUnitCost}} </td>
-                        <td>{{$item->ItemQuantity}} </td>
-                        <td>{{$item->ItemColour}} </td>
-                        <td>{{$item->ItemSize}} </td>
-                      </tr>
-                       @php
-                       $i++;
-                    @endphp  
-                     @endforeach
-                    </tbody>
-                  </table>
-                </div>
-    @else
-    <span>No Item found</span>
+                    <hr>
+                    @elseif($request_bid->status == 'Rejected')
+                    Request Status: <span class=" text-danger"> <strong>{{$request_bid->status}}</strong></span>
+                     @elseif($request_bid->status == 'Delivered')
+                    Request Status:<span class=" text-success"> <strong>{{$request_bid->status}}</strong></span>
+                  @endif
+                    </div>
 
-    @endif
-  </div>
-</div>
+
+
+
+
+          </div>
         </div>
-    </div>
-    
+
+           
+             <div class="card">
+              <div class="card-header">
+              Request (Help provided)
+              </div>
+              <div class="card-body">
+                      <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>
+                                    @if($request->show_phone == 1)
+                                    <div class="user-request-card">
+                                        <p>Please call me on 
+                                        <strong>
+                                                {{ $request->user->phone }}
+                                            @else
+                                                <p>Kindly contact me through this platform
+                                            @endif
+                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->api_city }}, {{ $request->api_state }}</strong>.
+                                    
+                                    </p>
+                                    <p>Thank you</p>
+                                    <p><strong>{{ $request->user->username }}</strong></p> 
+                                    @if($request->show_address == 1)
+                                        <p>Address: {{ $request->street }}</p>
+                                    @endif
+
+
+                    @if(isset($request_photos) && $request_photos !='')
+
+                <!--Tab Gallery: The expanding image container -->
+                  <div class="container" style="display: none;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                    <!-- Expanded image -->
+                    <img id="expandedImg" style="width:100%; height: 500px;">
+
+                    <!-- Image text -->
+                    <div id="imgtext"></div>
+                  </div>
+                                @foreach($request_photos as $photo)
+
+                    <!-- The grid:-->
+                    <div class="column">
+                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                    </div>
+                    
+                    @endforeach
+                  
+               @endif
+                                
+                            </div>
+
+              </div>
+            </div>
+
+                </div>
+                <!-- /tables -->
+
+              </div>
+              <!-- /card body -->
+
+            </div>
+            <!-- /card -->
+
+          </div>
+          <!-- /grid item -->
+
+        </div>
+        <!-- /grid -->
+
+
+
+@endsection
+
+
+@section('scripts')
+
+
 @endsection

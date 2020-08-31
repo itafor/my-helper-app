@@ -37,7 +37,7 @@ class AdminController extends Controller
     return view('admin.requests.index',$data);
 }
 
-   public function requestDetails($id) {
+   public function provideHelprequestDetails($id) {
     $data['request_details'] = LockdownRequest::where([
         ['id',$id],
     ])->with(['user'])->first();
@@ -47,11 +47,11 @@ class AdminController extends Controller
 
     $data['help_request_bidders']= $data['request_details']->request_bidders;
         
-    return view('admin.requests.show',$data);
+    return view('admin.requests.show_provide_request',$data);
 }
 
 
-    public function request_summary($id){
+    public function provide_helprequest_summary($id){
        $data['request_bid'] = RequestBidders::find($id);
        $data['request_bidder'] =  $data['request_bid']->bidder;
        $data['request'] =  $data['request_bid']->request;
@@ -66,7 +66,40 @@ class AdminController extends Controller
         ])->first();
 
 
-       return view('admin.requests.request_summary',$data);
+       return view('admin.requests.provide_request_summary',$data);
+
+    }
+
+    public function getHelprequestDetails($id) {
+    $data['request_details'] = LockdownRequest::where([
+        ['id',$id],
+    ])->with(['user'])->first();
+
+  $data['request_photos'] = $data['request_details']->requestPhotos;
+
+
+    $data['help_request_bidders']= $data['request_details']->request_bidders;
+        
+    return view('admin.requests.show_get_request',$data);
+}
+
+
+    public function get_helprequest_summary($id){
+       $data['request_bid'] = RequestBidders::find($id);
+       $data['request_bidder'] =  $data['request_bid']->bidder;
+       $data['request'] =  $data['request_bid']->request;
+       $data['help_provider'] =  $data['request_bid']->requester;
+       $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
+       $data['request_photos'] = $data['request']->requestPhotos;
+
+        $data['get_pickup_request'] = PickupRequest::where([
+            ['request_id', $data['request']->id],
+            ['provider_id', $data['help_provider']->id],
+            ['receiver_id',$data['request_bidder']->id],
+        ])->first();
+
+
+       return view('admin.requests.get_request_summary',$data);
 
     }
 
