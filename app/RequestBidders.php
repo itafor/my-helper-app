@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ProviderLocation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -104,6 +105,7 @@ public static function createNew($data)
 
         if($grantRequest){
             self::updateRequest($data);
+            self::addProviderLocation($data);
         }
         
         return $grantRequest;
@@ -170,5 +172,19 @@ public static function createNew($data)
 
         return $update_request;
 
+    }
+
+    public static function addProviderLocation($data)
+    {
+        $location = ProviderLocation::create([
+            'request_id' => $data['request_id'],
+            'provider_id' => authUser()->id,//help provider
+            'api_state' => $data['api_state'],
+            'api_city' => getCityName_by_citycode($data['api_city']),
+            'api_delivery_town' => isset($data['api_delivery_town']) ? $data['api_delivery_town'] : null,
+            'providerAddress' => $data['street'],
+        ]); 
+        
+        return $location;
     }
 }

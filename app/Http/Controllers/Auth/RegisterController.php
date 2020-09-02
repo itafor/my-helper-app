@@ -120,9 +120,9 @@ class RegisterController extends Controller
             $lockdownRequest->api_delivery_town = $request->api_delivery_town ? $request->api_delivery_town : null;
             $lockdownRequest->street = $request->street;
             $lockdownRequest->type = $request->type;
-            $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-            $lockdownRequest->show_address = $request->show_address;
-            $lockdownRequest->show_phone = $request->show_phone;
+            // $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+            // $lockdownRequest->show_address = $request->show_address;
+            // $lockdownRequest->show_phone = $request->show_phone;
             
             $lockdownRequest->save();
 

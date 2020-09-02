@@ -93,13 +93,13 @@
                                                 <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
+                                        <!-- <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
                                                 <select name="show_phone" class="form-control">
@@ -107,7 +107,7 @@
                                                     <option value="1">Yes</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
@@ -200,7 +200,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-10 col-sm-offset-1">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Category</label><br>
                                                     <select name="category_id" class="form-control">
@@ -210,7 +210,7 @@
                                                     </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-5">
+                                        <!-- <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label>Type</label><br>
                                                 <select name="type" class="form-control">
@@ -219,7 +219,7 @@
                                                     <option value="Paid">Paid</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                       
                                       
                                         <div class="tab-pane" id="description">
@@ -286,7 +286,7 @@
                                             <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
                                           </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                  <!--   <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Show Street Address</label><br>
                                              <select name="show_address" class="form-control" id="show_address">
@@ -294,7 +294,7 @@
                                                 <option value="1">Yes</option>
                                             </select>
                                           </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

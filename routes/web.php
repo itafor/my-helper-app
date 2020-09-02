@@ -15,13 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ['uses' => 'LandingPageController@landing_page', 'as'=>'home.landingpage']);
 
-// Route::get('reg_type', function() {
-// 	return view('auth.select_registration_type');
-// })->name('selectReg');
-
-// Route::get('/corporate/register', function() {
-// 	return view('auth.corporate_reg');
-// });
 
 Route::get('/corporate/register', 'LandingPageController@corporateRegistration');
 Route::get('/reg_type', 'LandingPageController@registrationType')->name('selectReg');
