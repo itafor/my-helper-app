@@ -19,46 +19,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body request-card column-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
-                        <div class="column-one">
-                            @if($getRequest->type == "paid" || $getRequest->type == "Paid")
-                                <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
+                    <div class="card-body request-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
+                      <div>
+                       <div class="col-md-10 float-left">
+                               
                                     <div class="user-request-card">
-                                        <p>
-                                        @if($getRequest->show_phone == 1)
-                                            Please call me on 
-                                            <strong>
-                                                    {{ $getRequest->user->phone }}</strong>
-                                                @else
-                                                    Kindly contact me through this platform
-                                                @endif
-                                             for <b>sale </b>of <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - {{ $getRequest->description }}</strong> at affordable prices around <strong>{{ $getRequest->api_city }}, {{ $getRequest->api_state }}</strong>.
-                                        </p>
-                                        <p>Thank you for your patronage</p>
-                                        <p><strong>{{ $getRequest->user->username }}</strong></p> 
-                                        @if($getRequest->show_address == 1)
-                                            <p>Address: {{ $getRequest->street }}</p>
-                                        @endif
-                                     @else
-
-                                    <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
-                                    @if($getRequest->show_phone == 1)
-                                    <div class="user-request-card">
-                                        <p>Please call me on 
-                                        <strong>
-                                                {{ $getRequest->user->phone }}
-                                            @else
-                                                <p>Kindly contact me through this platform
-                                            @endif
-                                        </strong>for <b>free</b> <strong>{{ $getRequest->category ? $getRequest->category->title : '' }} - ({{ $getRequest->description }})</strong> around <strong>{{ $getRequest->api_city }}, {{ $getRequest->api_state }}</strong>.
-                                    
-                                    </p>
-                                    <p>Thank you</p>
-                                    <p><strong>{{ $getRequest->user->username }}</strong></p> 
-                                    @if($getRequest->show_address == 1)
-                                        <p>Address: {{ $getRequest->street }}</p>
-                                    @endif
-                                @endif
+                                    <h4>Welcome to my page -{{ $getRequest->user->username }}</h4>
+                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
 
                                 @if($getRequest->delivery_cost_payer == 'pay on delivery')
                                          
@@ -86,39 +53,43 @@
                                 @endif
 
                                 @if(isset($request_photos) && $request_photos !='')
+                        <h4>Sample photos and users that applied to get your help</h4>
 
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
-                    <!-- Close the image -->
+                    
                     <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
 
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 400px;">
+                   
+                    <img id="expandedImg" style="width:500px; height: 400px;">
 
-                    <!-- Image text -->
+                  
                     <div id="imgtext"></div>
                   </div>
                                 @foreach($request_photos as $photo)
 
-                    <!-- The grid:-->
+                  
                     <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                   
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50px;">
                     </div>
                     
                     @endforeach
-                  
+                  @else
+                        <h4>Users that applied to get your help</h4>
+
                @endif
 
-
-                            </div>
-                                <!-- Check if the person is logged in -->
+                        
+                  
                         @if(auth()->check())
                         <!-- show all users that want this help -->
                          @if(authUser()->id == $getRequest->user->id)
-                        <h3 style="margin-top: 20px;">Users that applied to get your help</h3>
+
             <div class="table-responsive">
+
                   <table class="table tablesorter" id="requests">
+
                     <thead class=" text-primary">
                        <tr>
                       <th> Full name </th>
@@ -130,6 +101,7 @@
                      
                     </thead>
                     <tbody>
+
                       @foreach($help_request_bidders as $bid)
                       <tr>
                         <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
@@ -214,21 +186,22 @@
 
                             </div>
                         @endif 
-                       
-                    
-
                         </div>
-                        @if(auth()->check())
-                            <div class="column-two">
+               
+                    </div>
+
+        @if(auth()->check())
+                            <div class="col-md-2 float-right">
                                 <div class="suggestion">
                                     <h4>Suggestions</h4>
                                     @foreach($suggestions as $suggestion)
-                                        <div class="suggestion-area">
-                                        <!-- Render different URLs if they are guests or not -->
-                                        <!-- Link to the get help page -->
+                                        <div class="suggestion-area" style="width: 100%;">
+                                        
                                             <a href="{{ route('auth_view.make.request', [$id=$suggestion->id]) }}">
-                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category ? $suggestion->category->title : '' }} </span></h4>                                            
-                                                <div class="memo desc">{{ $suggestion->description }} </div>
+                                                <h4 class="name">{{ $suggestion->user->username }}<br> <span class="float-left">{{ $suggestion->category ? $suggestion->category->title : '' }} </span>
+                                                </h4>    
+                                                <br>                                        
+                                                <div class="memo desc">{{ Str::limit($suggestion->description,16) }} </div>
                                                 <div class="desc">State: <span>{{ $suggestion->api_state }} </span></div>
                                             </a>
                                         </div>
@@ -237,8 +210,8 @@
                                 </div>
                             </div>
                         @endif
-               
-                    </div>
+                        </div>
+
                 </div>
             </div>
         </div>

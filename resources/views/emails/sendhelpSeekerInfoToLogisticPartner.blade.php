@@ -188,33 +188,6 @@
 
  Delivery Cost: &#8358; {{number_format($request_bidding_record->delievery_cost,2)}}<br><br>
 </p>
-
-@if(isset($main_request) && $main_request->requestPhotos !='')
-                <h3>Sample Photos</h3>
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($main_request->requestPhotos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" id="sample_photos">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
-
-<br>
 <br>
 
 <h3>Help Provider details</h3>

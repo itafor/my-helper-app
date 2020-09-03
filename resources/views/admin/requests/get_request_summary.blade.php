@@ -277,8 +277,8 @@ Request | Summary
                                     @endif
 
 
-                    @if(isset($request_photos) && $request_photos !='')
-
+          @if($request_bid->status == 'Approved')       
+<h4>Photos uploaded by the provider</h4>
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
                     <!-- Close the image -->
@@ -290,7 +290,7 @@ Request | Summary
                     <!-- Image text -->
                     <div id="imgtext"></div>
                   </div>
-                                @foreach($request_photos as $photo)
+                                @foreach(requestPhotos($request->id,$get_pickup_request->provider->id) as $photo)
 
                     <!-- The grid:-->
                     <div class="column">
@@ -300,7 +300,7 @@ Request | Summary
                     
                     @endforeach
                   
-               @endif
+           @endif
                                 
                             </div>
 

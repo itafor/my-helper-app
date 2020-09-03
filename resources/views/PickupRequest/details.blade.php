@@ -225,7 +225,7 @@
                   <span>Pickup request not yet submitted</span>
                   @endif
   <hr>
-    <h4>Shipment Items</h4>
+    {{--<h4>Shipment Items</h4>
     @if(count(shippmentItems($get_pickup_request->id,$get_pickup_request->request_id,$get_pickup_request->provider_id,$get_pickup_request->receiver_id)) >= 1)
     <div class="table-responsive">
                  <table class="table tablesorter" id="requests">
@@ -264,6 +264,7 @@
     <span>No Item found</span>
 
     @endif
+    --}}
   </div>
 </div>
         </div>

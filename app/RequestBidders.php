@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ProviderLocation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -104,6 +105,7 @@ public static function createNew($data)
 
         if($grantRequest){
             self::updateRequest($data);
+            self::addProviderLocation($data);
         }
         
         return $grantRequest;
@@ -139,11 +141,9 @@ public static function createNew($data)
             ['bidder_id', $data['bidder_id'] ],
             ['requester_id', $data['requester_id'] ],
         ])->update([
-            // 'logistic_partner_id' => $data['logistic_partner_id'],
-            // 'delievery_cost' => $data['delievery_cost'],
             'comment' => $comment,
-            // 'confirmation_code' => mt_rand(100000, 999999).$data['bidder_id'],
             'status' => 'Approved',
+            'pickup_status' => 'Success',
         ]); 
 
         if($approve_request){
@@ -170,5 +170,25 @@ public static function createNew($data)
 
         return $update_request;
 
+    }
+
+    public static function addProviderLocation($data)
+    {
+
+         $onforwardingTown= isset($data['api_onforwarding_town_id']) ? explode('-', $data['api_onforwarding_town_id']) : '-testing';
+
+       $trimmedonforwardingTown=trim($onforwardingTown[1]);
+
+        $location = ProviderLocation::create([
+            'request_id' => $data['request_id'],
+            'provider_id' => authUser()->id,//help provider
+            'api_state' => $data['api_state'],
+            'api_city' => getCityName_by_citycode($data['api_city']),
+            'api_delivery_town' => $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown,
+            'api_delivery_town_id' => isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null,
+            'providerAddress' => $data['street'],
+        ]); 
+        
+        return $location;
     }
 }

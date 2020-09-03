@@ -51,7 +51,7 @@ public function receiver()
                 'Description' => $data['description'],
                 'Weight' => $data['weight'],
                 'SenderName'=>$data['senderName'],
-                'SenderCity'=> getCityName_by_citycode($data['senderCity']),
+                'SenderCity'=> $data['senderCity'],
                 'SenderTownID'=> $data['senderTownID'],
                 'SenderAddress'=> $data['senderAddress'],
                 'SenderPhone' =>$data['senderPhone'],

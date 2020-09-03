@@ -26,25 +26,7 @@
     var baseUrl = '{{url("/")}}';
 </script>
 <div class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
-    <!--   Creative Tim Branding   -->
-    <!-- <a href="http://creative-tim.com">
-         <div class="logo-container">
-            <div class="logo">
-                <img src="{{ asset('assets/img/new_logo.png')}}">
-            </div>
-            <div class="brand">
-                Creative Tim
-            </div>
-        </div>
-    </a> -->
-
-	<!--  Made With Get Shit Done Kit  -->
-		<!-- <a href="http://demos.creative-tim.com/get-shit-done/index.html?ref=get-shit-done-bootstrap-wizard" class="made-with-mk">
-			<div class="brand">GK</div>
-			<div class="made-with">Made with <strong>GSDK</strong></div>
-		</a> -->
-
-    <!--   Big container   -->
+   
     <div class="container">
         <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
@@ -120,7 +102,7 @@
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
+                                       <!--  <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
                                                 <select name="show_phone" class="form-control">
@@ -128,7 +110,7 @@
                                                     <option value="1">Yes</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
@@ -221,7 +203,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-10 col-sm-offset-1">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Category</label><br>
                                                     <select name="category_id" class="form-control">
@@ -231,25 +213,7 @@
                                                     </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-5">
-                                            <div class="form-group">
-                                                <label>Type</label><br>
-                                                <select name="type" class="form-control">
-                                                    <option value=""> Type </option>
-                                                    <option value="Free">Free</option>
-                                                    <option value="Paid">Paid</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>How would you like to be contacted?</label><br>
-                                                <select name="mode_of_contact" class="form-control">
-                                                    <option value="Email">Email</option>
-                                                    <option value="Phone">Phone</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
+                                      
                                         <div class="tab-pane" id="description">
                                             <!-- <div class="row"> -->
                                                 <div class="col-sm-12">
@@ -290,7 +254,7 @@
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                              <label>Delivery Town</label><br>
-                                              <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                              <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}">
                                                     <option value="">Select Town</option>
                                                 </select>
                                           </div>
@@ -301,17 +265,10 @@
                                             <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
                                           </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Show Street Address</label><br>
-                                             <select name="show_address" class="form-control" id="show_address">
-                                                <option value="0">No</option>
-                                                <option value="1">Yes</option>
-                                            </select>
-                                          </div>
-                                    </div>
-                                    
+                                 
                                 </div>
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+
                             </div>
                         </div>
                         <div class="wizard-footer height-wizard">

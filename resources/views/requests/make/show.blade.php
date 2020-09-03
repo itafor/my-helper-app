@@ -21,80 +21,24 @@
                         </div>
                     </div>
                     <div class="card-body request-card column-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
-                        <div class="column-one">
-                            @if($getRequest->type == "paid" || $getRequest->type == "Paid")
-                                <!-- <h1>Requesting for paid service</h1> -->
-                                <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
+                      <div>
+                        <div class="col-md-10 float-left">
                                 <div class="user-request-card">
-                                    <p>I require <strong>{{ $getRequest->category ? $getRequest->category->title : '' }}</strong> around <strong>{{ $getRequest->api_city }}, {{ $getRequest->api_state }}</strong>. I am willing to pay for it.</p>
-                                        @if($getRequest->show_phone == 1)
-                                            <p>Kindly call me on <i>
-                                                <strong>{{ $getRequest->user->phone }}</strong></i></p>
-                                        @else
-                                            <p>Kindly contact me through this platform
-                                        @endif
-                                             for <b>sale of</b> <b>{{ $getRequest->category ? $getRequest->category->title : '' }}({{ $getRequest->description }})</b> at affordable prices around <i>{{ $getRequest->api_city}}, {{ $getRequest->api_state}}</i>.
-                                        </p>
-                                        <p> <strong>{{ $getRequest->user->username }}</strong></p> 
-                                        @if($getRequest->show_address == 1)
-                                            <p>Address: {{ $getRequest->street }}</p>
-                                        @endif
-                                    @else
-                                    <!-- <h1>Requesting for free service</h1> -->
+
                                 <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
-                                <div class="user-request-card">
-                                        <p>I require <strong>{{ $getRequest->category ? $getRequest->category->title : '' }}({{$getRequest->description}})</strong> around <strong>{{ $getRequest->api_city }}, {{ $getRequest->api_state }}</strong> for free.</p>
-                                        @if($getRequest->show_phone == 1)
-                                            <p>Kindly call me on
-                                                <strong>{{ $getRequest->user->phone }}</strong>  
-                                        @else
-                                            <p>Kindly contact me through this platform
-                                        @endif
-                                        </p>
-                                        <p><strong>{{ $getRequest->user->username }}</strong></p> 
-                                        @if($getRequest->show_address == 1)
-                                            <p>Address: {{ $getRequest->street }}</p>
-                                        @endif
-                                    @endif
-
-                  @if(isset($request_photos) && $request_photos !='')
-
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 400px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($request_photos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
-                                </div>
-
-                                          <!-- Check if the person is logged in -->
+                                 <label>
+                                I need {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                       </label>   
                         @if(auth()->check())
-                        <!-- show all users that want this help -->
                          @if(authUser()->id == $getRequest->user->id)
-                        <h3 style="margin-top: 20px;">Users interested to provide the above request</h3>
+                        <h4 style="margin-top: 20px;">Users interested to provide the above request</h4>
             <div class="table-responsive">
                   <table class="table tablesorter" id="requests">
                     <thead class=" text-primary">
                        <tr>
                       <th> Full name </th>
-                      <th> Phone </th>
-                      <th> Email </th>
+                      <th> City </th>
+                      <th> Delivery Cost </th>
                       <th> Status </th>
                       <th> Actions </th>
                         </tr>
@@ -106,8 +50,15 @@
                         <td>{{$bid->requester ? $bid->requester->name : 'N/A'}} 
                             {{$bid->requester ? $bid->requester->last_name : 'N/A'}}
                         </td>
-                        <td>{{$bid->requester ? $bid->requester->phone : 'N/A'}} </td>
-                        <td>{{$bid->requester ? $bid->requester->email : 'N/A'}} </td>
+                        <td>{{$bid->requester ? providerDetail($getRequest->id,$bid->requester->id)['api_city'] : 'N/A'}} </td>
+                        <td>
+
+                          @if($bid->requester) 
+                          @foreach(deliveryFee($getRequest->api_city,providerDetail($getRequest->id,$bid->requester->id)['api_city'],$getRequest->weight,providerDetail($getRequest->id,$bid->requester->id)['api_delivery_town_id']) as $fee)
+                             &#8358;{{$fee['TotalAmount']}}
+                          @endforeach
+                            @endif
+                        </td>
                         <td>
                             @if($bid->status == 'Approved')
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
@@ -137,10 +88,12 @@
                                    <!-- Check if the person is logged in -->
                         @if(auth()->check())
                 @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help'))
-                                <p style="color:red">You have previously contacted this user</p>
-                                <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}}</strong>
+                                <p style="color:red"></p>
+                                <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}} </strong>
                               @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved')
-                                <a href="{{route('pickupRequest.approve',[user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['id']])}}">Submit pickup request</a>
+                              and pickup request sent.
+                               <a href="{{URL::route('pickupRequest.details', [$getRequest->id, authUser()->id, $getRequest->user->id] )}}">
+                       View and track shipment status</a>
                               @endif
                                 </span>
                             @else
@@ -166,35 +119,116 @@
                             <input type="hidden" name="request_type" class="form-control" id="request_type" value="Get Help" >
                           </div>
 
-                           <h3>Item Size IN Weight</h3>
+                           <h4>Item Size In Weight</h4>
                              <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5">
-                                            <label class="form-check-label" for="weight1"><b>SMALL:</b> Items that can fit into a box on a motorcycle (e.g. small-sized electronics) <b>Assumed Weight:</b> 3.5 kg</label>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
+                                            <label class="form-check-label" for="weight1" style="margin-left: 20px;"><b>SMALL (3.5 kg)</b>
+                                            <br>
+                                            N800
+                                            <br>
+                                              </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5">
-                                                <label class="form-check-label" for="weight2"><b>MEDIUM:</b> Items that are heavy and may be transported with vans. <b>Assumed Weight:</b> 7.5.0 kg</label>
+                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
+                                                <label class="form-check-label" for="weight2" style="margin-left: 20px;"><b>MEDIUM (7.5.0 kg)</b>
+                                                 <br>
+                                          N1,500
+                                            <br>
+                                              </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0">
-                                            <label class="form-check-label" for="weight3"><b>LARGE:</b> Items that are large like pieces of furniture and large electronics. <b>Assumed Weight:</b> 10.0 kg</label>
+                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
+                                            <label class="form-check-label" for="weight3" style="margin-left: 20px;"><b>LARGE (10.0 kg)</b>
+                                             <br>
+                                           N2,000
+                                            <br>
+                                            </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="margin-top: -20px;">
+                                        <div class="col-md-12">
+                                       <label>Please note that pickup or delivery in outskirt locations will attract extral charges</label>
+                                    </div>
+                                    </div>
+                           <h4>Pickup Location</h4>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-check-label" for="api_state_id">{{ __('State') }}</label></strong>
+                                                <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('api_state'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_state_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
+                                                <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
+                                                @if ($errors->has('api_city'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_city_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    <!-- </div>
+
+                                    <div class="row"> -->
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('api_onforwarding_town_id') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
+                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
+                                                    <option value="">Select Town</option>
+                                                </select>
+                                                @if ($errors->has('api_onforwarding_town_id'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_onforwarding_town_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
+                                                <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
+
+                                                @if ($errors->has('street'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('street') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+                                    <input type="hidden" name="receiver_state" id="receiver_state" value="{{$getRequest->api_state}}">
                                     <div class="row">
                                          <div class="col-md-12">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Delivery fee Payment Type') }}</label></strong>
+                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Who will pay delivery cost') }}</label></strong>
                                                 <select name="delivery_cost_payer" id="delivery_cost_payer" class="form-control" required>
-                                                    <option value="">Select delivey fee payment type</option>
+                                                    <option value="">Select delivey fee payer</option>
                                                     @foreach(payment_types() as $paymentype)
-                                                        <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] }}</option>
+                                                        <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] =='pay on delivery' ? 'Receiver will pay for shipping cost':'Sender will pay for shipping cost' }}</option>
                                                     @endforeach
                                                 </select>
                                                
@@ -240,31 +274,32 @@
                             </div>
                         @endif 
                         </div>
-                        <!-- Render suggestion if authenticated -->
+
+                    </div> 
+
+                          <!-- Render suggestion if authenticated -->
                         @if(auth()->check())
-                            <div class="column-two">
+                            <div class="col-md-2 float-right">
                                 <div class="suggestion">
                                     <h4>Suggestions</h4>
                                     @foreach($suggestions as $suggestion)
-                                        <div class="suggestion-area">
+                                        <div class="suggestion-area" style="width: 100%;">
                                         
                                             <a href="{{ route('auth_view.provide.request', [$id=$suggestion->id]) }}">
-                                        
-                                                <h4 class="name">{{ $suggestion->user->username }} <span class="cat memo memo2">{{ $suggestion->category ? $suggestion->category->title : ''}} </span></h4>                                            
-                                                <div class="memo desc">{{ $suggestion->description }} </div>
+                                        <label>
+                                                <h4 class="name">{{ $suggestion->user->username }}<br> <span class="float-left">{{ $suggestion->category ? $suggestion->category->title : ''}} </span></h4>
+                                                <br>                                            
+                                                <div class="memo desc">{{Str::limit( $suggestion->description,16) }} </div>
                                                 <div class="desc">State: <span>{{ $suggestion->api_state }} </span></div>
+                                              </label>
                                             </a>
                                         </div>
                                         <br>
                                     @endforeach
                                 </div>
                             </div>
-                        @endif
-
-             
-
-
-                    </div>                       
+                        @endif   
+                        </div>                   
                 </div>
             </div>
         </div>

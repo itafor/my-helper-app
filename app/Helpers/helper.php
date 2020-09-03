@@ -2,7 +2,9 @@
 
 use App\City;
 use App\Country;
+use App\ProviderLocation;
 use App\RequestBidders;
+use App\RequestPhoto;
 use App\ShipmentItem;
 use App\State;
 use App\User;
@@ -278,4 +280,46 @@ function shippmentItems($pickupRequest_id,$request_id,$provider_id,$receiver_id)
   if($items){
     return $items;
   }
+}
+
+function providerDetail($request_id,$provider_id){
+    $detail = ProviderLocation::where([
+        ['request_id',$request_id],
+        ['provider_id',$provider_id],
+      ])->first();
+  if($detail){
+    return $detail;
+  }
+}
+
+ function deliveryFee($origin,$destination,$weight,$OnforwardingTownID=null){
+
+
+           $client = new Client(['verify' => false]);
+
+     $fee = $client->post('http://api.clicknship.com.ng/clicknship/Operations/DeliveryFee', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'Origin' => $origin,
+                'Destination' => $destination,
+                'Weight' => $weight,
+                'OnforwardingTownID'=> $OnforwardingTownID,
+            ]
+                    ]);
+
+       $response = $fee->getBody()->getContents();
+     $delivery_cost = json_decode($response, true);
+
+       return $delivery_cost;
+
+}
+
+function requestPhotos($request_id,$provider_id){
+   $request_photos= RequestPhoto::where([
+          ['request_id', $request_id],
+          ['provider_id',$provider_id],
+       ])->get();
+   return $request_photos;
 }
