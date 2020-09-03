@@ -40,7 +40,8 @@
 				</div>
 				  </div>
 				  <div class="card-body">
-            <h3>Help Provider details</h3>
+            <label>
+            <h4>Help Provider details</h4>
                   <dl class="row">
   <dt class="col-sm-3">Full Name</dt>
   <dd class="col-sm-9">
@@ -81,8 +82,9 @@
   </dd>
   
 </dl>
+</label>
 				   <hr>
-  <h3>REQUEST: Welcome to my page - <strong>{{ $request->user->username ? $request->user->username : $request->user->company_name }}</strong></h3>
+  <h4>REQUEST: Welcome to my page - <strong>{{ $request->user->username ? $request->user->username : $request->user->company_name }}</strong></h4>
                                     <div class="user-request-card">
                                           <label>
                                 I need {{ $request->category ? $request->category->title : '' }} ({{ $request->description }}) around {{ ucfirst(Str::lower($request->api_city))}}, {{ ucfirst(Str::lower($request->api_state))}} ({{ $request->street }})
@@ -159,7 +161,7 @@
                           @endforeach
 
 				   @if($request_bid->status == 'Pending')
-                    <!-- Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span> -->
+               
                   @if(authUser()->id == $request_bid->bidder_id)
 					<form class="form" method="post" action="{{ route('request.approve_or_reject.store') }}">
                             @csrf
@@ -178,6 +180,159 @@
                            <div class="form-group">
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{$help_provider->id}}" >
                           </div>
+                          <!-- shipment form -->
+
+
+                     <div class="row">
+                       <div class="col-sm-4">
+                            <label for="Inputdescription">Description</label>
+                            <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
+                          </div>
+                           <div class="col-sm-2">
+                             <label for="inputweight">Weight</label>
+                            <input type="text" name="weight" class="form-control" id="weight" value="{{$request->weight}}" >
+                           </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">PaymentType</label>
+                            <select name="PaymentType" id="PaymentType" class="form-control" required >
+                                                    <option value="">Select payment type</option>
+                                                    @foreach(payment_types() as $paymentype)
+                                                        <option  value="{{ $paymentype['PaymentType'] }}" {{$request->delivery_cost_payer ==
+                                                          $paymentype['PaymentType'] ? 'selected':''}}>{{ $paymentype['PaymentType'] }}</option>
+                                                    @endforeach
+                                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="Inputdescription">DeliveryType</label>
+                             <select name="DeliveryType" id="DeliveryType" class="form-control" required >
+                                                    <option value="">Select delivery type</option>
+                                                    @foreach(delivery_types() as $deliverytype)
+                                                        <option  value="{{ $deliverytype['DeliveryTypeName'] }}" {{ $deliverytype['DeliveryTypeName'] =='Normal Delivery' ? 'selected' : ''}}>{{ $deliverytype['DeliveryTypeName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                          </div>
+                          </div>
+                          <h3>Sender Details</h3>
+                          <div class="row">
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">SenderName</label>
+                            <input type="text" name="senderName" class="form-control" id="weight" value="{{$help_provider->name}} {{$help_provider->last_name}}">
+                            </div>
+                             <div class="col-sm-4">
+                            <label for="inputweight">SenderPhone</label>
+                            <input type="text" name="senderPhone" class="form-control" id="senderPhone" value="{{$help_provider->phone}}" >
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">SenderEmail</label>
+                            <input type="email" name="senderEmail" class="form-control" id="senderEmail" value="{{$help_provider->email}}">
+                            </div>
+                          </div>
+
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">SenderCity</label>
+
+                            <select name="senderCity" id="senderCity" class="form-control" required >
+                                                    <option value=" {{providerDetail($request->id,$help_provider->id)['api_city']}}" selected="selected"> {{providerDetail($request->id,$help_provider->id)['api_city']}}</option>
+                                                </select>
+
+
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">SenderTownID</label>
+                            <select name="senderTownID" id="senderTownID" class="form-control" required>
+                                                    <option value="{{providerDetail($request->id,$help_provider->id)['api_delivery_town_id']}}" selected="selected">{{providerDetail($request->id,$help_provider->id)['api_delivery_town_id']}}</option>
+                                  
+                                                </select>
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">SenderAddress</label>
+                            <input type="text" name="senderAddress" class="form-control" id="senderAddress" value="{{providerDetail($request->id,$help_provider->id)['providerAddress']}}">
+                          </div>
+                          </div>
+
+                          <h3>Receiver Details</h3>
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">RecipientName</label>
+                            <input type="text" name="RecipientName" class="form-control" id="RecipientName" value="{{$request->user ? $request->user->name : 'N/A'}} {{$request->user ? $request->user->last_name : 'N/A'}}" >
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">RecipientPhone</label>
+                            <input type="text" name="RecipientPhone" class="form-control" id="RecipientPhone" value="{{$request->user->phone}}" >
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">RecipientEmail</label>
+                            <input type="text" name="RecipientEmail" class="form-control" id="RecipientEmail" value="{{$request->user->email}}">
+                          </div>
+                          </div>
+
+                            <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">RecipientCity</label>
+                              <select name="RecipientCity" id="RecipientCity" class="form-control" required >
+                                                    <option value="{{$request->api_city}}" selected="selected">{{$request->api_city}}</option>
+                                                   
+                                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">RecipientTownID</label>
+                             <select name="RecipientTownID" id="RecipientTownID" class="form-control" required>
+                                                    <option value="{{$request->api_delivery_town_id}}">{{$request->api_delivery_town_id}}</option>
+                                     
+                                                </select>
+                            </div>
+                            <div class="col-sm-6">
+
+                              <label for="Inputdescription">RecipientAddress</label>
+                            <input type="text" name="RecipientAddress" class="form-control" id="RecipientAddress" value="{{$request->street}}">
+                          </div>
+                          </div>
+
+                          <h3>Shipment Items</h3>
+
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <label for="inputweight">ItemName</label>
+                            <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="exampleInputEmail1">ItemUnitCost</label>
+                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
+                            </div>
+                            <div class="col-sm-2">
+                              <label for="Inputdescription">ItemQuantity</label>
+                            <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity" value="0">
+                          </div>
+
+                          <div class="col-sm-3">
+                              <label for="Inputdescription">ItemColour</label>
+                            <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
+                          </div>
+                          <div class="col-sm-2">
+                              <label for="Inputdescription">ItemSize</label>
+                            <input type="text" name="ShipmentItems[112211][ItemSize]" class="form-control" id="ItemColour" value="0">
+                          </div>
+                          </div>
+
+
+                                <div id="shipmentItemsContainer">
+                                
+         
+                                </div>
+                                  <div style="clear:both"></div>
+
+                                     <div class="form-group">
+                                    <button type="button" id="addMoreItem" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more Item</button>
+                                </div>
+
+                          <!-- shipment form end -->
+
+
 
                          <div class="form-group">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
@@ -199,10 +354,6 @@
                     Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
                   @endif
                     </div>
-
-
-
-
 
 				  </div>
 				</div>

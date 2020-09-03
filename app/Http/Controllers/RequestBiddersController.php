@@ -90,9 +90,62 @@ class RequestBiddersController extends Controller
                         ->withInput()->with('error', 'Please fill in a required fields');
     }
 
-       DB::beginTransaction();
-        try{
-       $request_bidding_record = RequestBidders::approveRequestToReceiveHelp($data);
+      $shipmentItemsContainer = [];
+      foreach ($data['ShipmentItems'] as $key => $item) {
+         $shipmentItemsContainer[] =  ['ItemName'=>$item['ItemName'],'ItemUnitCost'=>$item['ItemUnitCost'],'ItemQuantity'=>$item['ItemQuantity'],'ItemColour'=>$item['ItemColour'],'ItemSize'=>$item['ItemSize']];
+      }
+
+
+    $client = new Client(['verify' => false]);
+
+      $pickupRequest = $client->post('http://api.clicknship.com.ng/clicknship/Operations/PickupRequest', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'OrderNo' => 'Ord-'. mt_rand(1000000, 9999999),
+                'Description' => $data['description'],
+                'Weight' => $data['weight'],
+                'SenderName'=>$data['senderName'],
+                'SenderCity'=> $data['senderCity'],
+                'SenderTownID'=> $data['senderTownID'],
+                'SenderAddress'=> $data['senderAddress'],
+                'SenderPhone' =>$data['senderPhone'],
+                'SenderEmail' =>$data['senderEmail'],
+                'RecipientName' =>$data['RecipientName'],
+                'RecipientCity' =>$data['RecipientCity'],
+                'RecipientTownID' =>$data['RecipientTownID'],
+                'RecipientAddress' =>$data['RecipientAddress'],
+                'RecipientPhone'=>$data['RecipientPhone'],
+                'RecipientEmail'=>$data['RecipientEmail'],
+                'PaymentType'=>$data['PaymentType'],
+                'DeliveryType'=>$data['DeliveryType'],
+                'ShipmentItems'=> $shipmentItemsContainer,
+            ]
+                    ]);
+
+       $response = $pickupRequest->getBody()->getContents();
+      $values = json_decode($response, true);
+
+
+     if($values['TransStatus'] == 'Successful'){
+
+      $data['OrderNo'] = $values['OrderNo'];
+      $data['TransStatus'] = $values['TransStatus'];
+      $data['WaybillNumber'] = $values['WaybillNumber'];
+      $data['DeliveryFee'] = $values['DeliveryFee'];
+      $data['TransStatusDetails'] = $values['TransStatusDetails'];
+      $data['VatAmount'] = $values['VatAmount'];
+      $data['TotalAmount'] = $values['TotalAmount'];
+      
+     // dd($data);
+
+       $request_bidding_record = RequestBidders::approveHelpSeekersRequest($data);
+        
+        $request_bidding_record = RequestBidders::approveRequestToReceiveHelp($data);
+
+
+       $savePickupRequest = PickupRequest::createNewPickupRequest($data);
 
        if($request_bidding_record){
 
@@ -100,20 +153,23 @@ class RequestBiddersController extends Controller
         $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
         $help_provider= User::find($data['requester_id']);
 
+         $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
+        $this->dispatch($receiver_job);
+
+
         $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
         $this->dispatch($approve_or_reject_noty);
 
-            DB::commit();
           }
-        }
-        catch(Exception $e){
-            DB::rollback();
-            return back()->withInput()->with('error', 'An attempt to approve user request failed. Please try again');
-        }
 
-        return back()->with('success', 'User request successfully approved');
+        return back()->with('success', $values['TransStatusDetails']);
+          
+          }
 
-    }
+        return back()->withInput()->with('error', $values['TransStatusDetails']);
+    
+        }
+        
 
     public function initialRequestApprovalForhelpSeekers($id){
        $data['request_bid'] = RequestBidders::find($id);
