@@ -48,9 +48,9 @@
                                         </div>
                                     </div>                                                         
                                 </div>
-                                <h3>Location:</h3>
+                                <h3>Delivery Location:</h3>
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_state_id">{{ __('State') }}</label></strong>
                                                 <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
@@ -66,7 +66,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
                                                 <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
@@ -80,23 +80,25 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    <!-- </div>
-
-                                    <div class="row"> -->
-                                        <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town (Optional)') }}</label></strong>
-                                                <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                       
+                                    </div>
+                                      <div class="row">
+                                     
+                                   
+                                        <div class="col-md-6">
+                                            <div class="form-group{{ $errors->has('api_onforwarding_town_id') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
+                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}">
                                                     <option value="">Select Town</option>
                                                 </select>
-                                                @if ($errors->has('api_delivery_town'))
+                                                @if ($errors->has('api_onforwarding_town_id'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('api_delivery_town') }}</strong>
+                                                        <strong>{{ $errors->first('api_onforwarding_town_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
                                                 <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
@@ -109,8 +111,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+
                                 <!-- </div> -->
-                                    <div class="row">
+                                 <!--    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="input-show_address">{{ __('Show Street Address') }}</label></strong>
@@ -142,21 +146,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <!-- <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('mode_of_contact') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="mode_of_contact">{{ __('How would you like to be contacted?') }}</label></strong>
-                                                <select name="mode_of_contact" id="mode_of_contact" class="form-control form-control-alternative{{ $errors->has('mode_of_contact') ? ' is-invalid' : '' }}" value="{{ old('mode_of_contact') }}" >
-                                                    <option value="">Select</option>
-                                                    <option value="phone">Phone</option>
-                                                    <option value="email">Email</option>
-                                                </select>
-                                                @if ($errors->has('state'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('state') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div> -->
+                                   
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_phone') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="show_phone">{{ __('Show Phone Number') }}<small>(If No, you would be contacted via mail)</small></label></strong>
@@ -171,7 +161,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                             
                                 <div style="clear:both"></div>
                                 <div class="text-center">

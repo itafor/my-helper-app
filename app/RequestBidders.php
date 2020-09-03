@@ -176,12 +176,18 @@ public static function createNew($data)
 
     public static function addProviderLocation($data)
     {
+
+         $onforwardingTown= isset($data['api_onforwarding_town_id']) ? explode('-', $data['api_onforwarding_town_id']) : '-testing';
+
+       $trimmedonforwardingTown=trim($onforwardingTown[1]);
+
         $location = ProviderLocation::create([
             'request_id' => $data['request_id'],
             'provider_id' => authUser()->id,//help provider
             'api_state' => $data['api_state'],
             'api_city' => getCityName_by_citycode($data['api_city']),
-            'api_delivery_town' => isset($data['api_delivery_town']) ? $data['api_delivery_town'] : null,
+            'api_delivery_town' => $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown,
+            'api_delivery_town_id' => isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null,
             'providerAddress' => $data['street'],
         ]); 
         

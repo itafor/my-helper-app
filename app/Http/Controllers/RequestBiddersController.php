@@ -208,7 +208,15 @@ class RequestBiddersController extends Controller
      public function grantSomeoneRequest(Request $request){
       
      $data = $request->all();
-   
+   // dd($data);
+       $validator = validator::make($data,[
+            'weight'=>'required',
+    ]);
+
+    if($validator->fails()){
+         return  back()->withErrors($validator)
+                        ->withInput()->with('error', 'Please fill in a required fields');
+    }
 
        DB::beginTransaction();
         try{

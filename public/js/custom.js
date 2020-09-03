@@ -43,6 +43,13 @@ $('#state_id').change(function(){
 //Auto fill api city when aa api state has been picked
 $('#api_state_id').change(function(){
     var state = $(this).val();
+
+    let receiver_state = $('#receiver_state').val();
+
+    if(receiver_state && state !=receiver_state){
+        alert('Help Provider and Receiver must come from the same state')
+    }
+
     if(state){
         $('#api_city_id').empty();
         $('<option>').val('').text('Loading...').appendTo('#api_city_id');
@@ -71,7 +78,7 @@ $('#api_city_id').change(function(){
             type: "GET",
             dataType: 'json',
             success: function(data) {
-                console.log(data)
+                console.log('cities',data)
                 $('#api_delivery_town').empty();
                 $('<option>').val('').text('Select Delivery Town').appendTo('#api_delivery_town');
                 $.each(data.towns, function(k, v) {
@@ -81,6 +88,40 @@ $('#api_city_id').change(function(){
         });
     }
 });
+
+$('#api_city_id').change(function(){
+    var citycode = $(this).val();
+    if(citycode){
+        $('#api_onforwarding_town_id').empty();
+        $('<option>').val('').text('Loading...').appendTo('#api_onforwarding_town_id');
+        $.ajax({
+            url: baseUrl+'/apigetdeliverytown/'+citycode,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                console.log('cities',data)
+                $('#api_onforwarding_town_id').empty();
+                $('<option>').val('').text('Select Delivery Town').appendTo('#api_onforwarding_town_id');
+                $.each(data.towns, function(k, v) {
+                    $('<option>').val(v.TownID+'-'+v.TownName).text(v.TownName).appendTo('#api_onforwarding_town_id');
+                });
+            }
+        });
+    }
+});
+
+  $('#api_onforwarding_town_id').change(function(){
+            var api_delivery_town_id = $(this).val();
+            var pos = api_delivery_town_id.indexOf("-");
+            var onforwarding_town_id = api_delivery_town_id.slice(0, pos);
+           console.log('position, onforwarding_town_id',pos + '-'+onforwarding_town_id)
+            if(api_delivery_town_id){
+                $('#api_delivery_town_id').val(onforwarding_town_id);
+            }
+            else{
+                $('#api_delivery_town_id').val('');
+            }
+        });
 
 
 $('#senderCity').change(function(){
@@ -93,7 +134,7 @@ $('#senderCity').change(function(){
             type: "GET",
             dataType: 'json',
             success: function(data) {
-                console.log(data)
+                //console.log(data)
                 $('#senderTownID').empty();
                 $('<option>').val('').text('Select sender town Id').appendTo('#senderTownID');
                 $.each(data.towns, function(k, v) {

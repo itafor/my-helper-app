@@ -93,19 +93,26 @@ class MakeRequestController extends Controller
     {
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
+        
+        $data= $request->all();
+
+        $onforwardingTown= isset($data['api_onforwarding_town_id']) ? explode('-', $data['api_onforwarding_town_id']) : '-testing';
+
+       $trimmedonforwardingTown=trim($onforwardingTown[1]);
 
         $lockdownRequest->user_id = $userId;
         $lockdownRequest->request_type = $request->request_type;
         $lockdownRequest->category_id = $request->category_id;
         $lockdownRequest->description = $request->description;
-         $lockdownRequest->api_state = $request->api_state;
+        $lockdownRequest->api_state = $request->api_state;
         $lockdownRequest->api_city = getCityName_by_citycode($request->api_city);
-        $lockdownRequest->api_delivery_town = $request->api_delivery_town ? $request->api_delivery_town : null;
+        $lockdownRequest->api_delivery_town =  $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown;
+        $lockdownRequest->api_delivery_town_id = isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null;
         $lockdownRequest->street = $request->street;
-        $lockdownRequest->type = $request->type;
-        $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-        $lockdownRequest->show_address = $request->show_address;
-        $lockdownRequest->show_phone = $request->show_phone;
+        // $lockdownRequest->type = $request->type;
+        // $lockdownRequest->mode_of_contact = $request->mode_of_contact;
+        // $lockdownRequest->show_address = $request->show_address;
+        // $lockdownRequest->show_phone = $request->show_phone;
         
         $lockdownRequest->save();
         Session::flash('status', 'Request has been successfully registered');

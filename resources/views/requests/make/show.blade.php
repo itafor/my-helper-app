@@ -37,8 +37,8 @@
                     <thead class=" text-primary">
                        <tr>
                       <th> Full name </th>
-                      <th> Phone </th>
-                      <th> Email </th>
+                      <th> City </th>
+                      <th> Delivery Cost </th>
                       <th> Status </th>
                       <th> Actions </th>
                         </tr>
@@ -50,8 +50,15 @@
                         <td>{{$bid->requester ? $bid->requester->name : 'N/A'}} 
                             {{$bid->requester ? $bid->requester->last_name : 'N/A'}}
                         </td>
-                        <td>{{$bid->requester ? $bid->requester->phone : 'N/A'}} </td>
-                        <td>{{$bid->requester ? $bid->requester->email : 'N/A'}} </td>
+                        <td>{{$bid->requester ? providerDetail($getRequest->id,$bid->requester->id)['api_city'] : 'N/A'}} </td>
+                        <td>
+
+                          @if($bid->requester) 
+                          @foreach(deliveryFee($getRequest->api_city,providerDetail($getRequest->id,$bid->requester->id)['api_city'],$getRequest->weight,providerDetail($getRequest->id,$bid->requester->id)['api_delivery_town_id']) as $fee)
+                             &#8358;{{$fee['TotalAmount']}}
+                          @endforeach
+                            @endif
+                        </td>
                         <td>
                             @if($bid->status == 'Approved')
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
@@ -81,7 +88,7 @@
                                    <!-- Check if the person is logged in -->
                         @if(auth()->check())
                 @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help'))
-                                <p style="color:red">You have previously contacted this user</p>
+                                <p style="color:red"></p>
                                 <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}}</strong>
                               @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved')
                                 <a href="{{route('pickupRequest.approve',[user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['id']])}}">Submit pickup request</a>
@@ -114,7 +121,7 @@
                              <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;">
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
                                             <label class="form-check-label" for="weight1" style="margin-left: 20px;"><b>SMALL (3.5 kg)</b>
                                             <br>
                                             N800
@@ -124,7 +131,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;">
+                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
                                                 <label class="form-check-label" for="weight2" style="margin-left: 20px;"><b>MEDIUM (7.5.0 kg)</b>
                                                  <br>
                                           N1,500
@@ -134,7 +141,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;">
+                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
                                             <label class="form-check-label" for="weight3" style="margin-left: 20px;"><b>LARGE (10.0 kg)</b>
                                              <br>
                                            N2,000
@@ -185,14 +192,14 @@
 
                                     <div class="row"> -->
                                         <div class="col-md-3">
-                                            <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town (Optional)') }}</label></strong>
-                                                <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                            <div class="form-group{{ $errors->has('api_onforwarding_town_id') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
+                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
                                                     <option value="">Select Town</option>
                                                 </select>
-                                                @if ($errors->has('api_delivery_town'))
+                                                @if ($errors->has('api_onforwarding_town_id'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('api_delivery_town') }}</strong>
+                                                        <strong>{{ $errors->first('api_onforwarding_town_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -210,12 +217,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+                                    <input type="hidden" name="receiver_state" id="receiver_state" value="{{$getRequest->api_state}}">
                                     <div class="row">
                                          <div class="col-md-12">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Delivery fee Payment Type') }}</label></strong>
+                                                <strong><label class="form-control-label" for="delivery_cost_payer">{{ __('Who will pay delivery cost') }}</label></strong>
                                                 <select name="delivery_cost_payer" id="delivery_cost_payer" class="form-control" required>
-                                                    <option value="">Select delivey fee payment type</option>
+                                                    <option value="">Select delivey fee payer</option>
                                                     @foreach(payment_types() as $paymentype)
                                                         <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] =='pay on delivery' ? 'Receiver will pay for shipping cost':'Sender will pay for shipping cost' }}</option>
                                                     @endforeach
