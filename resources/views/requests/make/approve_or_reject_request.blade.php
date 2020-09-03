@@ -77,11 +77,31 @@
   <dt class="col-sm-3 text-truncate">Pickup Address</dt>
   <dd class="col-sm-9">
 
-     <p>{{$help_provider ? $help_provider->street: 'N/A'}}</p>
+     <p>
+    {{providerDetail($request->id,$help_provider->id)['providerAddress']}}
+     </p>
                        
   </dd>
+
+
+  <dt class="col-sm-3 text-truncate">Pickup Status</dt>
+  <dd class="col-sm-9">
+    @if($request_bid->pickup_status == 'Success')
+     <p>
+    <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request->user->id] )}}">
+                       View and track shipment status</a>
+     </p>
+       @else
+       <span>N/A</span>
+       @endif                
+  </dd>
+
+   
   
 </dl>
+
+
+
 </label>
 				   <hr>
   <h4>REQUEST: Welcome to my page - <strong>{{ $request->user->username ? $request->user->username : $request->user->company_name }}</strong></h4>
@@ -138,7 +158,7 @@
                    <tr>
                      <td class="rent_title">Delivery Fee</td>
                      <td> 
-                         &#8358;{{$fee['DeliveryFee']}} 
+                         &#8358;{{number_format($fee['DeliveryFee'],2)}} 
                        
                       </td> 
                    </tr>
@@ -146,14 +166,14 @@
                    <tr>
                      <td class="rent_title">Vat Amount</td>
                      <td>  
-                 &#8358;{{$fee['VatAmount']}}
+                 &#8358;{{number_format($fee['VatAmount'],2)}}
                       </td>
                    </tr>
 
                    <tr>
                      <td class="rent_title">Total Amount</td>
                      <td>
-                 &#8358;{{$fee['TotalAmount']}}
+                 &#8358;{{number_format($fee['TotalAmount'],2)}}
                      </td>
                    </tr>
 </tbody>
@@ -183,7 +203,7 @@
                           <!-- shipment form -->
 
 
-                     <div class="row">
+                     <div class="row" style="display: none;">
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
                             <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
@@ -212,8 +232,8 @@
                                                 </select>
                           </div>
                           </div>
-                          <h3>Sender Details</h3>
-                          <div class="row">
+                          <!-- <h3>Sender Details</h3> -->
+                          <div class="row" style="display: none;">
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">SenderName</label>
                             <input type="text" name="senderName" class="form-control" id="weight" value="{{$help_provider->name}} {{$help_provider->last_name}}">
@@ -229,7 +249,7 @@
                           </div>
 
 
-                          <div class="row">
+                          <div class="row" style="display: none;">
                             <div class="col-sm-3">
                             <label for="inputweight">SenderCity</label>
 
@@ -253,9 +273,9 @@
                           </div>
                           </div>
 
-                          <h3>Receiver Details</h3>
+                          <!-- <h3>Receiver Details</h3> -->
 
-                          <div class="row">
+                          <div class="row" style="display: none;">
                             <div class="col-sm-3">
                             <label for="inputweight">RecipientName</label>
                             <input type="text" name="RecipientName" class="form-control" id="RecipientName" value="{{$request->user ? $request->user->name : 'N/A'}} {{$request->user ? $request->user->last_name : 'N/A'}}" >
@@ -271,7 +291,7 @@
                           </div>
                           </div>
 
-                            <div class="row">
+                            <div class="row" style="display: none;">
                             <div class="col-sm-3">
                             <label for="inputweight">RecipientCity</label>
                               <select name="RecipientCity" id="RecipientCity" class="form-control" required >
@@ -293,9 +313,9 @@
                           </div>
                           </div>
 
-                          <h3>Shipment Items</h3>
+                          <!-- <h3>Shipment Items</h3> -->
 
-                          <div class="row">
+                          <div class="row" style="display: none;">
                             <div class="col-sm-3">
                             <label for="inputweight">ItemName</label>
                             <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
@@ -326,7 +346,7 @@
                                 </div>
                                   <div style="clear:both"></div>
 
-                                     <div class="form-group">
+                                     <div class="form-group" style="display: none;">
                                     <button type="button" id="addMoreItem" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more Item</button>
                                 </div>
 

@@ -143,6 +143,7 @@ public static function createNew($data)
         ])->update([
             'comment' => $comment,
             'status' => 'Approved',
+            'pickup_status' => 'Success',
         ]); 
 
         if($approve_request){

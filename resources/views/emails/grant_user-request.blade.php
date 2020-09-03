@@ -121,7 +121,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left"> Reject or Approve Request</h4>
+                <h4 class="card-title float-left"> Reject or Accept Request</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -132,20 +132,22 @@
 
  <br>
 
-After you have approved the request, the help provider will contact Red Star Express  Allied Services Ltd. to deliver the product. <br>
+After you have accepted the request, Red Star Express  Allied Services Ltd. will be contacted to deliver the product. <br>
 
  Product Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Product Description: {{$main_request->description }}<br>
 
  Product Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
-  <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$main_request->delivery_cost_payer}}<br><br>
+
+
+  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
 
 
    <p> Helper Comment: {{$request_bidding_record->comment ? $request_bidding_record->comment : 'N/A'}} </p><br>
 
   Please find below the provider information. Thanks<br>
 
-  Click <a href="{{route('request.approve_or_reject',[$request_bidding_record->id])}}">HERE</a> to Approve or Reject the request.
+  Click <a href="{{route('request.approve_or_reject',[$request_bidding_record->id])}}">HERE</a> to Accept or Reject the request.
 
 <br>
 </p>
@@ -175,35 +177,28 @@ After you have approved the request, the help provider will contact Red Star Exp
                      <td class="rent_title">Email</td>
                      <td> {{$help_provider ? $help_provider->email : 'N/A'}}</td>
                    </tr>
-
                     <tr>
                      <td class="rent_title">State</td>
                 <td>
-    {{ $help_provider->api_state }}
+    {{providerDetail($main_request->id,$help_provider->id)['api_state']}}
                 </td>           
               </tr>
 
                  <tr>
                      <td class="rent_title">City</td>
                      <td>
-    {{ $help_provider->api_city }}
+    {{providerDetail($main_request->id,$help_provider->id)['api_city']}}
+    
                      </td>
                 </tr>
-            <tr>
-            <td class="rent_title">Delivery Town</td>
-                     <td>
-    {{ $help_provider->api_delivery_town ? $help_provider->api_delivery_town : 'N/A'  }}
-                     </td>
-         </tr>
 
-       <tr>
-           <td class="rent_title">Street Address</td>
-           <td>
-            
-          {{$help_provider ? $help_provider->street: 'N/A'}}
-          
-          </td>
-      </tr>
+                 <tr>
+                     <td class="rent_title">Street Address</td>
+                     <td>
+    {{providerDetail($main_request->id,$help_provider->id)['providerAddress']}}
+                      
+                    </td>
+                </tr>
                
        </tbody>
                   </table>

@@ -181,67 +181,53 @@
 <p>
                     Dear <strong>{{$request_bidder->name}}</strong>,<br><br>
 
- We wish to notify you that your application to get help from the following help provider has been approved. A logistic delivery partner has been assigned to deliver the following goods to you any moment from now. <br>
+ We wish to notify you that your application to get help from the following help provider has been approved. An Express Delivery Service (Red Star Express Delivery Service) has been notified to deliver the requested items to you any moment from now. <br>
+
  Please find below the provider information. Thanks<br><br>
 
  <br>
 
- Goods: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
- Description: {{$main_request->description }}<br><br>
+ Items Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ Items Description: {{$main_request->description }}<br><br>
 
 </p>
  <br>
 
-    @if($main_request->delivery_cost_payer == 'pay on delivery')
-           @if($main_request->weight == 3.5)
-                                       Item Size: Small, Weight:{{$main_request->weight}}
-                                    @elseif($main_request->weight == 7.5)
-                                       Item Size: Medium, Weight:{{$main_request->weight}}
-                                    @else
-                                       Item Size: Large, Weight:{{$main_request->weight}}
-                                    @endif
-                                        <p><a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$main_request->delivery_cost_payer}} <br>
-                                          </p>
-    @elseif($main_request->delivery_cost_payer == 'prepaid')
-            @if($main_request->weight == 3.5)
-                                       Item Size: Small, Weight:{{$main_request->weight}}
-                                    @elseif($main_request->weight == 7.5)
-                                       Item Size: Medium, Weight:{{$main_request->weight}}
-                                    @else
-                                       Item Size: Large, Weight:{{$main_request->weight}}
-                                    @endif
-                                        <p> <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$main_request->delivery_cost_payer}}<br>
-                                        </p>
-        @else
+  Items Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
 
-    @endif
+   @foreach(deliveryFee($main_request->api_city,providerDetail($main_request->id,$help_provider->id)['api_city'],$main_request->weight,providerDetail($main_request->id,$help_provider->id)['api_delivery_town_id']) as $fee)
+            <table class="table table-bordered" id="rental_table">
+           
+                    <tbody>
+                      <br>
+                      <h5>Delivery fee detail</h5>
+                   <tr>
+                     <td class="rent_title">Delivery Fee</td>
+                     <td> 
+                         &#8358;{{number_format($fee['DeliveryFee'],2)}} 
+                       
+                      </td> 
+                   </tr>
 
+                   <tr>
+                     <td class="rent_title">Vat Amount</td>
+                     <td>  
+                 &#8358;{{number_format($fee['VatAmount'],2)}}
+                      </td>
+                   </tr>
 
-    @if(isset($main_request) && $main_request->requestPhotos !='')
-                <h3>Sample Photos</h3>
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($main_request->requestPhotos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" id="sample_photos">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
+                   <tr>
+                     <td class="rent_title">Total Amount</td>
+                     <td>
+                 &#8358;{{number_format($fee['TotalAmount'],2)}}
+                     </td>
+                   </tr>
+</tbody>
+</table>
+                          @endforeach
 <br>
+  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
+
 <br>
 <h3>Help Provider details</h3>
 
@@ -271,29 +257,31 @@
                     <tr>
                      <td class="rent_title">State</td>
                 <td>
-    {{$help_provider->api_state ? $help_provider->api_state : 'N/A'}}
+    {{providerDetail($main_request->id,$help_provider->id)['api_state']}}
                 </td>           
               </tr>
 
                  <tr>
                      <td class="rent_title">City</td>
                      <td>
-    {{$help_provider->api_city ? $help_provider->api_city : 'N/A'}}
+    {{providerDetail($main_request->id,$help_provider->id)['api_city']}}
+    
                      </td>
                 </tr>
 
                  <tr>
                      <td class="rent_title">Street Address</td>
                      <td>
+    {{providerDetail($main_request->id,$help_provider->id)['providerAddress']}}
                       
-                    {{$help_provider ? $help_provider->street: 'N/A'}}
-                    
                     </td>
                 </tr>
                
        </tbody>
                   </table>
 <hr>
+  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
+
                
                 </div>
               </div>

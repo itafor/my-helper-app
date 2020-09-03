@@ -4,6 +4,7 @@ use App\City;
 use App\Country;
 use App\ProviderLocation;
 use App\RequestBidders;
+use App\RequestPhoto;
 use App\ShipmentItem;
 use App\State;
 use App\User;
@@ -313,4 +314,12 @@ function providerDetail($request_id,$provider_id){
 
        return $delivery_cost;
 
+}
+
+function requestPhotos($request_id,$provider_id){
+   $request_photos= RequestPhoto::where([
+          ['request_id', $request_id],
+          ['provider_id',$provider_id],
+       ])->get();
+   return $request_photos;
 }

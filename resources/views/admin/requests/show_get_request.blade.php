@@ -64,39 +64,20 @@ Admin | Logistic Agents
 {{$request_details->type}}
   </dd>
 
+<dt class="col-sm-3 text-truncate">State</dt>
+  <dd class="col-sm-9">
+
+     {{ $request_details->api_state ? $request_details->api_state : 'N/A' }}
+                       
+  </dd>
   <dt class="col-sm-3 text-truncate">City</dt>
   <dd class="col-sm-9">
 
-     {{ $request_details->city ? $request_details->city->name : 'N/A' }}
+     {{ $request_details->api_city ? $request_details->api_city : 'N/A' }}
                        
   </dd>
 </dl>
-                <!-- </div> -->
-
-               @if(isset($request_photos) && $request_photos !='')
-
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    <!-- Close the image -->
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-
-                    <!-- Expanded image -->
-                    <img id="expandedImg" style="width:100%; height: 500px;">
-
-                    <!-- Image text -->
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($request_photos as $photo)
-
-                    <!-- The grid:-->
-                    <div class="column">
-                     <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
-                    </div>
-                    
-                    @endforeach
-                  
-               @endif
+       
               </div>
             </div>
           </div>
@@ -106,7 +87,7 @@ Admin | Logistic Agents
 
 
 
-        <div class="row">
+        {{--<div class="row">
      
           <div class="col-md-12">
             <div class="card">
@@ -158,7 +139,7 @@ Admin | Logistic Agents
               </div>
             </div>
           </div>
-        </div>
+        </div>--}}
 
 
 <div class="row">

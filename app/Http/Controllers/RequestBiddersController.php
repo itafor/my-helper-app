@@ -137,10 +137,8 @@ class RequestBiddersController extends Controller
       $data['TransStatusDetails'] = $values['TransStatusDetails'];
       $data['VatAmount'] = $values['VatAmount'];
       $data['TotalAmount'] = $values['TotalAmount'];
-      
-     // dd($data);
 
-       $request_bidding_record = RequestBidders::approveHelpSeekersRequest($data);
+       // $request_bidding_record = RequestBidders::approveHelpSeekersRequest($data);
         
         $request_bidding_record = RequestBidders::approveRequestToReceiveHelp($data);
 
@@ -150,15 +148,15 @@ class RequestBiddersController extends Controller
        if($request_bidding_record){
 
         $main_request = LockdownRequest::find($data['request_id']);// the help (request)
-        $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
+        $request_bidder = User::find($data['bidder_id']); // help receiver
         $help_provider= User::find($data['requester_id']);
 
          $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
         $this->dispatch($receiver_job);
 
 
-        $approve_or_reject_noty = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
-        $this->dispatch($approve_or_reject_noty);
+        $approve_or_reject_noty_senderjob = (new NotifyUserOfRequestApprovalOrRejection($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
+        $this->dispatch($approve_or_reject_noty_senderjob);
 
           }
 
@@ -272,6 +270,10 @@ class RequestBiddersController extends Controller
     if($validator->fails()){
          return  back()->withErrors($validator)
                         ->withInput()->with('error', 'Please fill in a required fields');
+    }
+
+    if($data['receiver_state'] != $data['api_state']){
+      return back()->withInput()->with('error', 'Help Provider and Receiver must be from the same state');
     }
 
        DB::beginTransaction();

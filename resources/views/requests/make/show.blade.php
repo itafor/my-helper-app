@@ -89,9 +89,11 @@
                         @if(auth()->check())
                 @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help'))
                                 <p style="color:red"></p>
-                                <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}}</strong>
+                                <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}} </strong>
                               @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved')
-                                <a href="{{route('pickupRequest.approve',[user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['id']])}}">Submit pickup request</a>
+                              and pickup request sent.
+                               <a href="{{URL::route('pickupRequest.details', [$getRequest->id, authUser()->id, $getRequest->user->id] )}}">
+                       View and track shipment status</a>
                               @endif
                                 </span>
                             @else
