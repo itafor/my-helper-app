@@ -275,7 +275,7 @@
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                             <label>Delivery Town</label><br>
-                                              <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                              <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}">
                                                     <option value="">Select Town</option>
                                                 </select>
                                           </div>
@@ -296,6 +296,10 @@
                                           </div>
                                     </div> -->
                                 </div>
+
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+
+
                             </div>
                         </div>
                         <div class="wizard-footer height-wizard">

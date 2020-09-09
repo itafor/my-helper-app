@@ -24,36 +24,15 @@
                        <div class="col-md-10 float-left">
                                
                                     <div class="user-request-card">
+                                      <label>
                                     <h4>Welcome to my page -{{ $getRequest->user->username }}</h4>
-                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})<br><br>
+                                      Weight: {{$getRequest->weight}}kg<br><br>
 
-                                @if($getRequest->delivery_cost_payer == 'pay on delivery')
-                                         
-                                    @if($getRequest->weight == 3.5)
-                                       Item Size: Small, Weight:{{$getRequest->weight}}
-                                    @elseif($getRequest->weight == 7.5)
-                                       Item Size: Medium, Weight:{{$getRequest->weight}}
-                                    @else
-                                       Item Size: Large, Weight:{{$getRequest->weight}}
-                                    @endif
-                                        <p><a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}} <br>
-                                          </p>
-                                @elseif($getRequest->delivery_cost_payer == 'prepaid')
-                                  @if($getRequest->weight == 3.5)
-                                       Item Size: Small, Weight:{{$getRequest->weight}}
-                                    @elseif($getRequest->weight == 7.5)
-                                       Item Size: Medium, Weight:{{$getRequest->weight}}
-                                    @else
-                                       Item Size: Large, Weight:{{$getRequest->weight}}
-                                    @endif
-                                        <p> <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}}<br>
-                                        </p>
-                                    @else
+                    Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
+                    </label>
 
-                                @endif
-
-                                @if(isset($request_photos) && $request_photos !='')
-                        <h4>Sample photos and users that applied to get your help</h4>
+                        <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
 
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
@@ -75,10 +54,7 @@
                     </div>
                     
                     @endforeach
-                  @else
-                        <h4>Users that applied to get your help</h4>
-
-               @endif
+                 
 
                         
                   
@@ -136,7 +112,7 @@
                         @endif 
 
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
-                                <p style="color:red">You have previously contacted this user 
+                                <p style="color:red"> 
                                 </p>
                                 <span>Request Status: <strong>{{user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status']}}</strong></span>
                             @else
@@ -169,8 +145,8 @@
                     @enderror
                           </div>
                          <div class="form-group">
-                            <label for="exampleInputEmail1">Comment (Optional)</label>
-                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
+                            <!-- <label for="exampleInputEmail1">Comment (Optional)</label> -->
+                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="Type a comment (Optional)" ></textarea>
                           </div>
                           <button type="submit" class="btn btn-primary btn-header">
                               Contact  {{ $getRequest->user->username }}
