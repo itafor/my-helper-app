@@ -284,12 +284,25 @@
     <!-- sweetalert script -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+
   <script>
         $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 })
+
+ $('#approveRequest').on('submit', function() 
+    {
+     return confirm('Do you really want to approve this request? Approving this request will also submit Pickup Request to the Logistic Delivery partner for shippment!! ');
+     });
+
+ $('#rejectRequest').on('submit', function() 
+    {
+     return confirm('Do you really want to reject this request? You cannot undo this action!! ');
+     });
+
     </script>
     </body>
 </html>

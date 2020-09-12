@@ -25,7 +25,7 @@ class RequestBiddersController extends Controller
     public function applyTOGetHelp(Request $request) {
 
 	  $data = $request->all();
-	 // dd($data);
+	 //dd($data);
        $validator = validator::make($data,[
             'request_id'=>'required',
             'requester_id'=>'required',
@@ -35,6 +35,10 @@ class RequestBiddersController extends Controller
     if($validator->fails()){
          return  back()->withErrors($validator)
                         ->withInput()->with('error', 'Please fill in a required fields');
+    }
+
+    if($data['receiver_state'] != $data['api_state']){
+      return back()->withInput()->with('error', 'Help Provider and Receiver must be from the same state');
     }
 
     	 DB::beginTransaction();
@@ -202,7 +206,7 @@ class RequestBiddersController extends Controller
                 'Description' => $data['description'],
                 'Weight' => $data['weight'],
                 'SenderName'=>$data['senderName'],
-                'SenderCity'=> getCityName_by_citycode($data['senderCity']),
+                'SenderCity'=> $data['senderCity'],
                 'SenderTownID'=> $data['senderTownID'],
                 'SenderAddress'=> $data['senderAddress'],
                 'SenderPhone' =>$data['senderPhone'],

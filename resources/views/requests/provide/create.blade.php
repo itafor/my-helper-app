@@ -221,7 +221,8 @@
                                                     </div>
                                                 </div>
 
-                                     <h4>Item Size In Weight</h4>
+                                     <h4>Item Size In Weight <small>(and Pickup/delivery price)</small>
+                                     </h4>
 
                                                  <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
