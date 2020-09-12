@@ -53,7 +53,11 @@ public static function createNew($data)
             'delievery_cost' =>  $delievery_cost,
             'comment' =>  $comment,
         ]); 
-        
+
+        if($request_bid){
+            self::addProviderLocation($data);
+        }
+
         return $request_bid;
     }
 

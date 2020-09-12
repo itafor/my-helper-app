@@ -30,12 +30,43 @@
 				</div>
 				  </div>
 				  <div class="card-body">
+             @foreach(deliveryFee($request->api_city,providerDetail($request->id,$request_bidder->id)['api_city'],$request->weight,providerDetail($request->id,$request_bidder->id)['api_delivery_town_id']) as $fee)
+            <table class="table table-bordered" id="rental_table">
+           
+                    <tbody>
+                      <br>
+                      <h5>Delivery fee detail</h5>
+                   <tr>
+                     <td class="rent_title">Delivery Fee</td>
+                     <td> 
+                         &#8358;{{number_format($fee['DeliveryFee'],2)}} 
+                       
+                      </td> 
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Vat Amount</td>
+                     <td>  
+                 &#8358;{{number_format($fee['VatAmount'],2)}}
+                      </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Total Amount</td>
+                     <td>
+                 &#8358;{{number_format($fee['TotalAmount'],2)}}
+                     </td>
+                   </tr>
+</tbody>
+</table>
+                          @endforeach
+            <hr>
  
  @if($request_bid->status == 'Pending')
    Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
 
    @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                    Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
                       <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
                         <button class="btn-sm btn-primary">View details</button>
 
@@ -50,7 +81,7 @@
 				   <div class="col-sm-12">
 				  
 
-					<form class="form" method="post" action="{{ route('request.approve.store') }}">
+					<form class="form" method="post" action="{{ route('request.approve.store') }}" id="approveRequest">
                             @csrf
                           <div>
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
@@ -68,7 +99,7 @@
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
-                        
+                        <div style="display: none;">
                      <div class="row">
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
@@ -90,10 +121,10 @@
                             </div>
                             <div class="col-sm-3">
                               <label for="Inputdescription">DeliveryType</label>
-                             <select name="DeliveryType" id="DeliveryType" class="form-control" required >
+                               <select name="DeliveryType" id="DeliveryType" class="form-control" required >
                                                     <option value="">Select delivery type</option>
                                                     @foreach(delivery_types() as $deliverytype)
-                                                        <option  value="{{ $deliverytype['DeliveryTypeName'] }}">{{ $deliverytype['DeliveryTypeName'] }}</option>
+                                                        <option  value="{{ $deliverytype['DeliveryTypeName'] }}" {{$deliverytype['DeliveryTypeName'] =='Normal Delivery' ? 'selected' : ''}}>{{ $deliverytype['DeliveryTypeName'] }}</option>
                                                     @endforeach
                                                 </select>
                           </div>
@@ -106,11 +137,11 @@
                             </div>
                              <div class="col-sm-4">
                             <label for="inputweight">SenderPhone</label>
-                            <input type="text" name="senderPhone" class="form-control" id="senderPhone" value="{{$help_provider->phone}}" >
+                            <input type="text" name="senderPhone" class="form-control" id="senderPhone" value="{{$request->user->phone}}" >
                             </div>
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">SenderEmail</label>
-                            <input type="email" name="senderEmail" class="form-control" id="senderEmail" value="{{$help_provider->email}}">
+                            <input type="email" name="senderEmail" class="form-control" id="senderEmail" value="{{$request->user->email}}">
                             </div>
                           </div>
 
@@ -119,25 +150,14 @@
                             <div class="col-sm-3">
                             <label for="inputweight">SenderCity</label>
 
-                            <select name="senderCity" id="senderCity" class="form-control" required >
-                                                    <option value="">Select sender city</option>
-                                                    @foreach(clickship_cities() as $city)
-                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $request->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
-                                                    @endforeach
-                                                </select>
+                           <input name="senderCity" id="senderCity" class="form-control" value="{{$request->api_city}}" required>
+
 
 
                             </div>
                             <div class="col-sm-3">
                                 <label for="exampleInputEmail1">SenderTownID</label>
-                            <select name="senderTownID" id="senderTownID" class="form-control" required>
-                                                    <option value="">Select sender town Id</option>
-                                  @if(isset($help_provider->api_city))
-                               @foreach(getCityCode_by_CityName($help_provider->api_city) as $city)
-                                                        <option  value="{{ $city['TownID'] }}">{{ $city['TownName'] }} -{{ $city['TownID'] }}</option>
-                                                    @endforeach
-                                          @endif
-                                                </select>
+                                 <input name="senderTownID" id="senderTownID" class="form-control" value="{{$request->api_delivery_town_id}}" required>
                             </div>
                             <div class="col-sm-6">
 
@@ -167,28 +187,18 @@
                             <div class="row">
                             <div class="col-sm-3">
                             <label for="inputweight">RecipientCity</label>
-                              <select name="RecipientCity" id="RecipientCity" class="form-control" required >
-                                                    <option value="">Select Recipient City</option>
-                                                    @foreach(clickship_cities() as $city)
-                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $request_bidder->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <input name="RecipientCity" id="RecipientCity" class="form-control" value="{{providerDetail($request->id,$request_bidder->id)['api_city']}}" required >
+                                                
                             </div>
                             <div class="col-sm-3">
                                 <label for="exampleInputEmail1">RecipientTownID</label>
-                             <select name="RecipientTownID" id="RecipientTownID" class="form-control" required>
-                                                    <option value="">Select Recipient Town Id</option>
-                                      @if(isset($request_bidder->api_city))
-                               @foreach(getCityCode_by_CityName($request_bidder->api_city) as $city)
-                                                        <option  value="{{ $city['TownID'] }}">{{ $city['TownName'] }} -{{ $city['TownID'] }}</option>
-                                                    @endforeach
-                                                    @endif
-                                                </select>
+                                <input name="RecipientTownID" id="RecipientTownID" class="form-control" value="{{providerDetail($request->id,$request_bidder->id)['api_delivery_town_id']}}" required>
+                            
                             </div>
                             <div class="col-sm-6">
 
                               <label for="Inputdescription">RecipientAddress</label>
-                            <input type="text" name="RecipientAddress" class="form-control" id="RecipientAddress" value="{{$request_bidder ? $request_bidder->street : 'N/A'}}">
+                            <input type="text" name="RecipientAddress" class="form-control" id="RecipientAddress" value="{{providerDetail($request->id,$request_bidder->id)['providerAddress']}}">
                           </div>
                           </div>
 
@@ -228,7 +238,7 @@
                                      <div class="form-group">
                                     <button type="button" id="addMoreItem" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more Item</button>
                                 </div>
-
+                                </div>
 
                      {{--<div>
                             <label for="exampleInputEmail1">Comment (Optional)</label>
@@ -240,7 +250,7 @@
 					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
                 @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                    <!-- Request Status:<span class=" text-primary">{{$request_bid->status}}</span> -->
                 @elseif($request_bid->status == 'Rejected')
                     Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
                 @elseif($request_bid->status == 'Delivered')
@@ -377,10 +387,10 @@
 
           </div>
           <!-- /grid item -->
-
         </div>
         <!-- /grid -->
 
 
 
 @endsection
+

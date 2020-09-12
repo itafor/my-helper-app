@@ -27,7 +27,7 @@
 					@if($request_bid->status == 'Pending')
 					<!-- <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button> -->
 
-              <form class="form" method="post" action="{{ route('request.reject.by.receiver') }}">
+              <form class="form" method="post" action="{{ route('request.reject.by.receiver') }}" id="rejectRequest">
                             @csrf
                           <div class="form-group">
                             <input type="hidden" name="request_bid_id" class="form-control" id="request_bid_id" value="{{$request_bid->id}}" >
@@ -120,7 +120,7 @@
               <h4>Sample photos uploaded by the provider ({{$help_provider ? $help_provider->name : 'N/A'}} 
     {{$help_provider ? $help_provider->last_name : 'N/A'}})</h4>
                 <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
+                  <div class="container" >
                     <!-- Close the image -->
                     <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:450px;">&times;</span>
 
@@ -183,7 +183,7 @@
 				   @if($request_bid->status == 'Pending')
                
                   @if(authUser()->id == $request_bid->bidder_id)
-					<form class="form" method="post" action="{{ route('request.approve_or_reject.store') }}">
+					<form class="form" method="post" action="{{ route('request.approve_or_reject.store') }}" id="approveRequest">
                             @csrf
                           <div class="form-group">
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
@@ -202,8 +202,8 @@
                           </div>
                           <!-- shipment form -->
 
-
-                     <div class="row" style="display: none;">
+                          <div style="display: none;">
+                     <div class="row" >
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
                             <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
@@ -233,7 +233,7 @@
                           </div>
                           </div>
                           <!-- <h3>Sender Details</h3> -->
-                          <div class="row" style="display: none;">
+                          <div class="row" >
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">SenderName</label>
                             <input type="text" name="senderName" class="form-control" id="weight" value="{{$help_provider->name}} {{$help_provider->last_name}}">
@@ -249,7 +249,7 @@
                           </div>
 
 
-                          <div class="row" style="display: none;">
+                          <div class="row" >
                             <div class="col-sm-3">
                             <label for="inputweight">SenderCity</label>
 
@@ -275,7 +275,7 @@
 
                           <!-- <h3>Receiver Details</h3> -->
 
-                          <div class="row" style="display: none;">
+                          <div class="row" >
                             <div class="col-sm-3">
                             <label for="inputweight">RecipientName</label>
                             <input type="text" name="RecipientName" class="form-control" id="RecipientName" value="{{$request->user ? $request->user->name : 'N/A'}} {{$request->user ? $request->user->last_name : 'N/A'}}" >
@@ -291,7 +291,7 @@
                           </div>
                           </div>
 
-                            <div class="row" style="display: none;">
+                            <div class="row" >
                             <div class="col-sm-3">
                             <label for="inputweight">RecipientCity</label>
                               <select name="RecipientCity" id="RecipientCity" class="form-control" required >
@@ -315,7 +315,7 @@
 
                           <!-- <h3>Shipment Items</h3> -->
 
-                          <div class="row" style="display: none;">
+                          <div class="row" >
                             <div class="col-sm-3">
                             <label for="inputweight">ItemName</label>
                             <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
@@ -346,20 +346,20 @@
                                 </div>
                                   <div style="clear:both"></div>
 
-                                     <div class="form-group" style="display: none;">
+                                     <div class="form-group" >
                                     <button type="button" id="addMoreItem" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more Item</button>
                                 </div>
 
                           <!-- shipment form end -->
 
-
+                          </div>
 
                          <div class="form-group">
                             <label for="exampleInputEmail1">Comment (Optional)</label>
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
                          
-                          <button type="submit" class="btn btn-primary float-left">Accept Request</button>
+                          <button type="submit" class="btn btn-primary">Accept Request</button>
 					     
 
                         </form>

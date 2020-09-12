@@ -24,36 +24,15 @@
                        <div class="col-md-10 float-left">
                                
                                     <div class="user-request-card">
+                                      <label>
                                     <h4>Welcome to my page -{{ $getRequest->user->username }}</h4>
-                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})<br><br>
+                                      Weight: {{$getRequest->weight}}kg<br><br>
 
-                                @if($getRequest->delivery_cost_payer == 'pay on delivery')
-                                         
-                                    @if($getRequest->weight == 3.5)
-                                       Item Size: Small, Weight:{{$getRequest->weight}}
-                                    @elseif($getRequest->weight == 7.5)
-                                       Item Size: Medium, Weight:{{$getRequest->weight}}
-                                    @else
-                                       Item Size: Large, Weight:{{$getRequest->weight}}
-                                    @endif
-                                        <p><a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}} <br>
-                                          </p>
-                                @elseif($getRequest->delivery_cost_payer == 'prepaid')
-                                  @if($getRequest->weight == 3.5)
-                                       Item Size: Small, Weight:{{$getRequest->weight}}
-                                    @elseif($getRequest->weight == 7.5)
-                                       Item Size: Medium, Weight:{{$getRequest->weight}}
-                                    @else
-                                       Item Size: Large, Weight:{{$getRequest->weight}}
-                                    @endif
-                                        <p> <a href="{{route('pickupRequest.calculate.deliveryfee')}}" target="_blank">Delivery fee</a> payment type : {{$getRequest->delivery_cost_payer}}<br>
-                                        </p>
-                                    @else
+                    Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
+                    </label>
 
-                                @endif
-
-                                @if(isset($request_photos) && $request_photos !='')
-                        <h4>Sample photos and users that applied to get your help</h4>
+                        <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
 
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
@@ -75,10 +54,7 @@
                     </div>
                     
                     @endforeach
-                  @else
-                        <h4>Users that applied to get your help</h4>
-
-               @endif
+                 
 
                         
                   
@@ -93,8 +69,8 @@
                     <thead class=" text-primary">
                        <tr>
                       <th> Full name </th>
-                      <th> Phone </th>
-                      <th> Email </th>
+                      <th> City </th>
+                      <th> Delivery Cost </th>
                       <th> Status </th>
                       <th> Actions </th>
                         </tr>
@@ -107,8 +83,15 @@
                         <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
                             {{$bid->bidder ? $bid->bidder->last_name : 'N/A'}}
                         </td>
-                        <td>{{$bid->bidder ? $bid->bidder->phone : 'N/A'}} </td>
-                        <td>{{$bid->bidder ? $bid->bidder->email : 'N/A'}} </td>
+                        <td>{{$bid->bidder ? providerDetail($getRequest->id,$bid->bidder->id)['api_city'] : 'N/A'}} </td>
+                        <td>
+
+                          @if($bid->bidder) 
+                          @foreach(deliveryFee($getRequest->api_city,providerDetail($getRequest->id,$bid->bidder->id)['api_city'],$getRequest->weight,providerDetail($getRequest->id,$bid->bidder->id)['api_delivery_town_id']) as $fee)
+                             &#8358;{{$fee['TotalAmount']}}
+                          @endforeach
+                            @endif
+                         </td>
                         <td>
                             @if($bid->status == 'Approved')
                            <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
@@ -136,7 +119,7 @@
                         @endif 
 
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
-                                <p style="color:red">You have previously contacted this user 
+                                <p style="color:red"> 
                                 </p>
                                 <span>Request Status: <strong>{{user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status']}}</strong></span>
                             @else
@@ -161,16 +144,81 @@
                     <small style="color: red; font-size: 14px;"> {{ $message }}</small>
                     @enderror
                           </div>
-
+<br>
                           <div class="form-group">
                             <input type="hidden" name="request_type" class="form-control" id="request_type" value="Provide Help" >
                                @error('request_type')
                     <small style="color: red; font-size: 14px;"> {{ $message }}</small>
                     @enderror
                           </div>
+<br>
+                           <h4 style="margin-left: 200px;">Pickup Location</h4>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <strong><label class="form-check-label" for="api_state_id">{{ __('State') }}</label></strong>
+                                                <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('api_state'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_state_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
+                                                <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
+                                                @if ($errors->has('api_city'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_city_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    <!-- </div>
+
+                                    <div class="row"> -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
+                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
+                                                    <option value="">Select Town</option>
+                                                </select>
+                                                @if ($errors->has('api_onforwarding_town_id'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_onforwarding_town_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
+                                                <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
+
+                                                @if ($errors->has('street'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('street') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+                                    <input type="hidden" name="receiver_state" id="receiver_state" value="{{$getRequest->api_state}}">
+
                          <div class="form-group">
-                            <label for="exampleInputEmail1">Comment (Optional)</label>
-                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
+                            <!-- <label for="exampleInputEmail1">Comment (Optional)</label> -->
+                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="Type a comment (Optional)" ></textarea>
                           </div>
                           <button type="submit" class="btn btn-primary btn-header">
                               Contact  {{ $getRequest->user->username }}

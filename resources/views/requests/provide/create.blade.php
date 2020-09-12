@@ -210,16 +210,7 @@
                                                     </select>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-sm-5">
-                                            <div class="form-group">
-                                                <label>Type</label><br>
-                                                <select name="type" class="form-control">
-                                                    <option value=""> Type </option>
-                                                    <option value="Free">Free</option>
-                                                    <option value="Paid">Paid</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
+                                     
                                       
                                       
                                         <div class="tab-pane" id="description">
@@ -229,6 +220,60 @@
                                                         <textarea name="description" class="form-control" placeholder="" rows="9"></textarea>
                                                     </div>
                                                 </div>
+
+                                     <h4>Item Size In Weight <small>(and Pickup/delivery price)</small>
+                                     </h4>
+
+                                                 <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
+                                            <label class="form-check-label" for="weight1" style="margin-left: 20px;"><b>SMALL (3.5 kg)</b>
+                                            <br>
+                                            N800
+                                            <br>
+                                              </label>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
+                                                <label class="form-check-label" for="weight2" style="margin-left: 20px;"><b>MEDIUM (7.5.0 kg)</b>
+                                                 <br>
+                                          N1,500
+                                            <br>
+                                              </label>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
+                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
+                                            <label class="form-check-label" for="weight3" style="margin-left: 20px;"><b>LARGE (10.0 kg)</b>
+                                             <br>
+                                           N2,000
+                                            <br>
+                                            </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                       <label> <small>Please note that pickup or delivery in outskirt locations will attract extral charges</small> </label>
+                                    </div>
+                                    
+                                     <div class="col-md-12">
+                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="delivery_cost_payer"><strong>{{ __('Who will pay delivery cost') }}</strong></label>
+                                                <select name="delivery_cost_payer" id="delivery_cost_payer" class="form-control" required>
+                                                    <option value="">Select delivey fee payer</option>
+                                                    @foreach(payment_types() as $paymentype)
+                                                        <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] =='pay on delivery' ? 'Receiver will pay for shipping cost':'Sender will pay for shipping cost' }}</option>
+                                                    @endforeach
+                                                </select>
+                                               
+                                            </div>
+                                        </div>
+
 
      
                                 <div class="col-md-12">
@@ -248,6 +293,11 @@
                                 </div>
                                         </div>
                                     </div>
+
+                            
+
+
+
 
                             </div>
                             <div class="tab-pane" id="address">
@@ -275,7 +325,7 @@
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                             <label>Delivery Town</label><br>
-                                              <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                              <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}">
                                                     <option value="">Select Town</option>
                                                 </select>
                                           </div>
@@ -296,6 +346,10 @@
                                           </div>
                                     </div> -->
                                 </div>
+
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+
+
                             </div>
                         </div>
                         <div class="wizard-footer height-wizard">
