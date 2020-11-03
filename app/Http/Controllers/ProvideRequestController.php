@@ -11,6 +11,7 @@ use App\LockdownRequest;
 use Stevebauman\Location\Facades\Location;
 use Session;
 use App\Notifications\ProvideRequestDetails;
+use Validator;
 
 class ProvideRequestController extends Controller
 {
@@ -85,6 +86,17 @@ class ProvideRequestController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+         $data = $request->all();
+
+        $validator =validator::make($data,[
+            'description'=>'required',
+            'category_id'=>'required',
+        ]);
+
+         if($validator->fails()){
+         return  back()->withErrors($validator)
+                        ->withInput()->with('error', 'Please fill in a required fields');
+    }
 
           $data= $request->all();
 

@@ -18,6 +18,7 @@ use Session;
 use Stevebauman\Location\Facades\Location;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Validator;
 
 class MakeRequestController extends Controller
 {
@@ -91,6 +92,18 @@ class MakeRequestController extends Controller
      */
     public function store(Request $request)
     {
+
+        $data = $request->all();
+
+        $validator =validator::make($data,[
+            'description'=>'required',
+            'category_id' =>'required',
+        ]);
+
+         if($validator->fails()){
+         return  back()->withErrors($validator)
+                        ->withInput()->with('error', 'Please fill in a required fields');
+    }
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
         
@@ -109,10 +122,6 @@ class MakeRequestController extends Controller
         $lockdownRequest->api_delivery_town =  $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown;
         $lockdownRequest->api_delivery_town_id = isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null;
         $lockdownRequest->street = $request->street;
-        // $lockdownRequest->type = $request->type;
-        // $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-        // $lockdownRequest->show_address = $request->show_address;
-        // $lockdownRequest->show_phone = $request->show_phone;
         
         $lockdownRequest->save();
         Session::flash('status', 'Request has been successfully registered');

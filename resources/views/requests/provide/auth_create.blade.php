@@ -38,7 +38,7 @@
                                     <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('company_name') ? ' has-danger' : '' }}">
                                             <strong><label class="form-control-label" for="input-company">{{ __('Description') }}</label></strong>
-                                            <textarea name="description" id="input-description" class="form-control form-control-alternative{{ $errors->has('company_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Description') }}" value="{{ old('description') }}"></textarea>
+                                            <textarea name="description" id="input-description" class="form-control" placeholder="{{ __('Description') }}" value="{{ old('description') }}" required></textarea>
 
                                             @if ($errors->has('company_name'))
                                                 <span class="invalid-feedback" role="alert">

@@ -189,7 +189,6 @@
                                                 <th class="text-left category">Category</th>
                                                 <th class="text-left name">Display Name</th>
                                                 <th class="text-left details">Details</th>
-                                                <th class="text-left type">Type</th>
                                                 <th class="text-left city">City</th>
                                             </tr>
                                         </thead>
@@ -231,11 +230,6 @@
                                                     <td class="text-left name_c">{{ $req->user->username }}</td>
                                                     <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
 
-                                                    @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
-                                                    <td class="text-left type_c_paid">{{ $req->type }}</td>
-                                                    @else
-                                                    <td class="text-left type_c_free">{{ $req->type }}</td>
-                                                    @endif
 
                                                     <td class="text-left city_c">{{ $req->api_city }}</td>
                                                 </tr>
