@@ -93,22 +93,14 @@
                                                 <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">     
+                                        <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
                                             </div>
                                         </div>
-                                        <!-- <div class="col-sm-6">     
-                                            <div class="form-group">
-                                                <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
-                                                <select name="show_phone" class="form-control">
-                                                    <option value="0"> No </option>
-                                                    <option value="1">Yes</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
-                                        <div class="col-sm-6">     
+                                       
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
                                                 <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username">
@@ -165,16 +157,8 @@
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
-                                            <div class="form-group">
-                                                <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
-                                                <select name="show_phone" class="form-control">
-                                                    <option value="0"> No </option>
-                                                    <option value="1">Yes</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">     
+                                      
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
                                                 <input name="username" type="text" class="form-control" placeholder="Username" class="username" onblur="duplicateUserName(this)">
@@ -203,7 +187,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Category</label><br>
-                                                    <select name="category_id" class="form-control">
+                                                    <select name="category_id" class="form-control" required>
                                                 @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>        
                                                 @endforeach
@@ -217,7 +201,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <textarea name="description" class="form-control" placeholder="" rows="9"></textarea>
+                                                        <textarea name="description" class="form-control" placeholder="" rows="9" required></textarea>
                                                     </div>
                                                 </div>
 
@@ -305,8 +289,8 @@
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                             <label>State</label><br>
-                                               <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
-                                                    <option value="">Select a country</option>
+                                               <select name="api_state" id="api_state_id" class="form-control" placeholder="{{ __('api_state') }}" value="{{ old('api_state') }}" required >
+                                                    <option value="">Select a state</option>
                                                     @foreach(clickship_states() as $state)
                                                         <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
                                                     @endforeach
@@ -336,15 +320,7 @@
                                             <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
                                           </div>
                                     </div>
-                                  <!--   <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Show Street Address</label><br>
-                                             <select name="show_address" class="form-control" id="show_address">
-                                                <option value="0">No</option>
-                                                <option value="1">Yes</option>
-                                            </select>
-                                          </div>
-                                    </div> -->
+                                  
                                 </div>
 
                                     <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">

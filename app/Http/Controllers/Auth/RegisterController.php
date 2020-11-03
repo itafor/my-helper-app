@@ -112,7 +112,7 @@ class RegisterController extends Controller
 
        $trimmedonforwardingTown=trim($onforwardingTown[1]);
         
-        if($request->has('category_id') || $request->has('description') || $request->type) {
+        if($request->has('category_id') || $request->has('description')) {
             $lockdownRequest = new LockdownRequest;
             $userId = $user->id;
     
@@ -126,7 +126,6 @@ class RegisterController extends Controller
             $lockdownRequest->api_delivery_town =  $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown;
         $lockdownRequest->api_delivery_town_id = isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null;
             $lockdownRequest->street = $request->street;
-            $lockdownRequest->type = $request->type;
             $lockdownRequest->delivery_cost_payer = isset($data['delivery_cost_payer']) ? $data['delivery_cost_payer'] : null;
             $lockdownRequest->weight = isset($data['weight']) ? $data['weight'] : null;
             $lockdownRequest->save();

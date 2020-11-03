@@ -111,7 +111,7 @@
                                                 </select>
                                             </div>
                                         </div> -->
-                                        <div class="col-sm-6">     
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
                                                 <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username">
@@ -168,7 +168,7 @@
                                                 <input name="phone" type="tel" class="form-control" placeholder="Phone">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
+                                        <!-- <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
                                                 <select name="show_phone" class="form-control">
@@ -176,8 +176,8 @@
                                                     <option value="1">Yes</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">     
+                                        </div> -->
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
                                                 <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
@@ -219,7 +219,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <textarea name="description" class="form-control" placeholder="" rows="9"></textarea>
+                                                        <textarea name="description" class="form-control" placeholder="" rows="9" required></textarea>
                                                     </div>
                                                 </div>
                                             <!-- </div> -->

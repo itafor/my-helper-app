@@ -22,7 +22,7 @@
                                     <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('category') ? ' has-danger' : '' }}">
                                             <strong><label class="form-control-label" for="input-category">{{ __('Category') }}</label></strong>
-                                            <select name="category_id" id="input-category" class="form-control form-control-alternative{{ $errors->has('category') ? ' is-invalid' : '' }} productCategory" value="{{ old('category') }}" required>
+                                            <select name="category_id" id="input-category" class="form-control  productCategory" value="{{ old('category') }}" required>
                                                 <option value="">Select a Category</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -38,7 +38,7 @@
                                     <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('company_name') ? ' has-danger' : '' }}">
                                             <strong><label class="form-control-label" for="input-company">{{ __('Description') }}</label></strong>
-                                            <textarea name="description" id="input-description" class="form-control form-control-alternative{{ $errors->has('company_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Description') }}" value="{{ old('description') }}"></textarea>
+                                            <textarea name="description" id="input-description" class="form-control" placeholder="{{ __('Description') }}" value="{{ old('description') }}" required></textarea>
 
                                             @if ($errors->has('company_name'))
                                                 <span class="invalid-feedback" role="alert">
