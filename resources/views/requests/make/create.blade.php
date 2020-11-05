@@ -78,20 +78,20 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>First Name <small>(required)</small></label>
-                                                <input name="name" type="text" class="form-control" placeholder="Andrew...">
+                                                <input name="name" type="text" class="form-control" placeholder="Andrew..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Last Name <small>(required)</small></label>
-                                                <input name="last_name" type="text" class="form-control" placeholder="Smith...">
+                                                <input name="last_name" type="text" class="form-control" placeholder="Smith..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Email <small>(required)</small></label>
                                                 <a href="{{ route('login') }}" class="loginLink"><span><small class="loginText" >Click here to login</small></span></a>
-                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
+                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)" required>
                                             </div>
                                             <!-- <div class="form-group">
                                             </div> -->
@@ -99,7 +99,7 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
-                                                <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
+                                                <input name="phone" type="tel" class="form-control" placeholder="Phone No." required>
                                             </div>
                                         </div>
                                        <!--  <div class="col-sm-6">     
@@ -114,19 +114,19 @@
                                         <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username">
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="Password" id="password">
+                                                <input name="password" type="password" class="form-control" placeholder="Password" id="password" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Confirm Password <small>(required)</small></label>
-                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password." id="password_confirmation">
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password." id="password_confirmation" required>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Company Name <small>(required)</small></label>
-                                                <input name="company_name" type="text" class="form-control" placeholder="John Doe Ltd...">
+                                                <input name="company_name" type="text" class="form-control" placeholder="John Doe Ltd..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
@@ -146,26 +146,26 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Contact First Name <small>(required)</small></label>
-                                                <input name="name" type="text" class="form-control" placeholder="Andrew...">
+                                                <input name="name" type="text" class="form-control" placeholder="Andrew..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Contact Last Name <small>(required)</small></label>
-                                                <input name="last_name" type="text" class="form-control" placeholder="Smith...">
+                                                <input name="last_name" type="text" class="form-control" placeholder="Smith..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Contact Email <small>(required)</small></label>
                                                 <a href="{{ route('login') }}" class="loginLink"><span><small >Click here to login</small></span></a>
-                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
+                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
-                                                <input name="phone" type="tel" class="form-control" placeholder="Phone">
+                                                <input name="phone" type="tel" class="form-control" placeholder="Phone" required>
                                             </div>
                                         </div>
                                         <!-- <div class="col-sm-6">     
@@ -180,19 +180,19 @@
                                         <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="Password...">
+                                                <input name="password" type="password" class="form-control" placeholder="Password..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Confirm Password <small>(required)</small></label>
-                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password" required>
                                             </div>
                                         </div>
                                     </div> 
@@ -206,7 +206,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Category</label><br>
-                                                    <select name="category_id" class="form-control">
+                                                    <select name="category_id" class="form-control" required>
                                                 @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>        
                                                 @endforeach
@@ -254,7 +254,7 @@
                                     <div class="col-sm-6">
                                          <div class="form-group">
                                              <label>Delivery Town</label><br>
-                                              <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}">
+                                              <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}" required>
                                                     <option value="">Select Town</option>
                                                 </select>
                                           </div>
@@ -262,7 +262,7 @@
                                     <div class="col-sm-6 ">
                                          <div class="form-group">
                                             <label>Street Name</label>
-                                            <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
+                                            <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue " required>
                                           </div>
                                     </div>
                                  

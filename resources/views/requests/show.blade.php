@@ -31,9 +31,9 @@
 
                     Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
                     </label>
-
+                    @auth
                         <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
-
+                    @endauth
                 <!--Tab Gallery: The expanding image container -->
                   <div class="container" style="display: none;">
                     
