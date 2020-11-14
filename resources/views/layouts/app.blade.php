@@ -22,6 +22,11 @@
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
+        <!-- for get/provide help page -->
+        <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/gsdk-bootstrap-wizard.css')}}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/demo.css') }}" rel="stylesheet" />
+
 
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 

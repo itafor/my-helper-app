@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-8 offset-md-2 welcome-cards">
             <div class="card card-register card-white">
                 <div class="card-header">
                     <!-- <img class="card-img" src="{{ asset('white') }}/img/card-primary.png" alt="Card image"> -->
