@@ -46,6 +46,11 @@
                             <i class="fas fa-cog"></i> {{ _('How it works') }}
                         </a>
                     </li>
+                     <li class="nav-item ">
+                        <a href="{{ route('product.services') }}" class="nav-link">
+                            <i class="fa fa-product-hunt" aria-hidden="true"></i> {{ _('Products & Services') }}
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a href="{{ url('reg_type') }}" class="nav-link">
                             <i class="tim-icons icon-laptop"></i> {{ _('Register') }}

@@ -11,10 +11,38 @@
                     <p>{{ _('All Requests') }}</p>
                 </a>
             </li>
+              <li @if ($pageSlug == 'user_requests') class="active " @endif>
+                <a href="{{ route('user.request') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('My Requests') }}</p>
+                </a>
+            </li>
+
+            <li @if ($pageSlug == 'shipment_tracker') class="active " @endif>
+                <a href="{{ route('pickupRequest.shipmenttracker') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('Shipments Tracker') }}</p>
+                </a>
+            </li>
+
+             <li @if ($pageSlug == 'calculate_deliveryfee') class="active " @endif>
+                <a href="{{ route('pickupRequest.calculate.deliveryfee') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('Calculate Delivery Fee') }}</p>
+                </a>
+            </li>
+
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="tim-icons icon-single-02"></i>
                     <p>{{ _('User Profile') }}</p>
+                </a>
+            </li>
+
+         <li @if ($pageSlug == 'productServices') class="active " @endif>
+                <a href="{{ route('user.product.services')  }}">
+                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    <p>{{ _('Products & Services') }}</p>
                 </a>
             </li>
             <!-- <li>

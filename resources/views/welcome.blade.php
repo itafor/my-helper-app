@@ -110,7 +110,7 @@
 
                                                                 <p id="req_type" class="type"><i class="tim-icons icon-basket-simple" aria-hidden="true"></i>{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</p>
 
-                                                                <p id="category" class="type"><i class="tim-icons icon-tag" aria-hidden="true"></i>{{ $req->category->title }}</p>
+                                                                <p id="category" class="type"><i class="tim-icons icon-tag" aria-hidden="true"></i>{{ $req->category ? $req->category->title : '' }}</p>
 
                                                                 @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
                                                                 <p id="price" class="type type_c_paid"><i class="tim-icons icon-money-coins" aria-hidden="true"></i>{{ $req->type }}</p>
@@ -131,7 +131,7 @@
                                                             <div class="request-meta bottom-meta">
                                                                 <div class="pull-left">
                                                                     <p id="city"><i class="tim-icons icon-map-big" aria-hidden="true"></i>
-                                                                        {{ $req->city->name }} {{ $req->state->name }}, {{ $req->country->country_name }}
+                                                                        {{ $req->api_city }} {{ $req->api_state }}
                                                                     </p>
                                                                 </div>
                                                                 <div class="time pull-right">
@@ -189,7 +189,6 @@
                                                 <th class="text-left category">Category</th>
                                                 <th class="text-left name">Display Name</th>
                                                 <th class="text-left details">Details</th>
-                                                <th class="text-left type">Type</th>
                                                 <th class="text-left city">City</th>
                                             </tr>
                                         </thead>
@@ -227,17 +226,12 @@
                                                     @endif
 
                                                     <td class="text-left req_type_c">{{ $req->request_type == 1 ? 'Request' : 'Supply' }}</td>
-                                                    <td class="text-left category_c">{{ $req->category->title }}</td>
+                                                    <td class="text-left category_c">{{ $req->category ? $req->category->title : '' }}</td>
                                                     <td class="text-left name_c">{{ $req->user->username }}</td>
                                                     <td class="text-left details_c">{{ Str::limit($req->description, 30) }}</td>
 
-                                                    @if( ( $req->type == 'Paid' ) || ( $req->type == 'paid' ) )
-                                                    <td class="text-left type_c_paid">{{ $req->type }}</td>
-                                                    @else
-                                                    <td class="text-left type_c_free">{{ $req->type }}</td>
-                                                    @endif
 
-                                                    <td class="text-left city_c">{{ $req->city->name }}</td>
+                                                    <td class="text-left city_c">{{ $req->api_city }}</td>
                                                 </tr>
                                              @php
                                             $i++;

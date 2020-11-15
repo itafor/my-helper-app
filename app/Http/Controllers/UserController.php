@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Category;
 use App\Http\Requests\UserRequest;
+use App\LockdownRequest;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -18,4 +21,18 @@ class UserController extends Controller
     {
         return view('users.index', ['users' => $model->paginate(15)]);
     }
+
+    public function user_requests(Request $request){
+
+              $data['userRequests'] = LockdownRequest::where([
+                ['user_id',authUser()->id]
+              ])->orderBy('created_at', 'DESC')->get();
+
+        return view('users.requests', $data);
+    }
+
+public function product_services(Request $request) {
+    $data['products'] = Category::orderBy('title','desc')->get();
+    return view('users.products.index',$data);
+}
 }
