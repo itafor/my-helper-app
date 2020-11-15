@@ -34,9 +34,11 @@
                                             <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
-                                    <input type="text" name="last_name" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ _('Last Name') }}" value="{{ old('lastname') }}">
-                                    @include('alerts.feedback', ['field' => 'lastname'])
+                                    <input type="text" name="last_name" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" placeholder="{{ _('Last Name') }}" value="{{ old('last_name') }}">
                                 </div>
+                                      @error('last_name')
+                                    <small class="text-danger">{{$message}}</small>
+                                        @enderror
                             </div>
                         </div>
 
@@ -73,73 +75,73 @@
                                 <div class="input-group{{ $errors->has('username') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="tim-icons icon-email-85"></i>
+                                            <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
                                     <input onblur="duplicateUserName(this)" type="text" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" placeholder="{{ _('Username') }}" value="{{ old('username') }}">
-                                    @include('alerts.feedback', ['field' => 'username'])
+                                   
                                 </div>
+
                             </div>
+                            @error('username')
+                                    <small class="text-danger">{{$message}}</small>
+                                        @enderror
                         </div>
 
                         <div class="row form-group">
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="country_id">{{ __('Country') }}</label>
-                                    <select name="country_id" id="country_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
-                                        <option value="">Select a country</option>
-                                        @foreach(getCountries() as $country)
-                                            <option value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('country'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('country') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="state_id">{{ __('State') }}</label>
-                                    <select name="state_id" id="state_id" class="form-control form-control-alternative{{ $errors->has('state') ? ' is-invalid' : '' }}" placeholder="{{ __('State') }}" value="{{ old('state') }}" required >
-                                        <option value="">Select State</option>
-                                    </select>
-                                    @if ($errors->has('state'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('state') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('city') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="city_id">{{ __('City') }}</label>
-                                    <select name="city_id" id="city_id" class="form-control form-control-alternative{{ $errors->has('city') ? ' is-invalid' : '' }}" placeholder="{{ __('City') }}" value="{{ old('street') }}" required >
-                                        <option value="">Select City</option>
-                                    </select>
-                                    @if ($errors->has('city'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('city') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-street">{{ __('Street') }}</label>
-                                    <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_state_id">{{ __('State') }}</label></strong>
+                                                <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                   @error('api_state')
+                                    <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
+                                                <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}"  >
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
+                                               @error('api_city')
+                                    <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                            </div>
+                                        </div>
 
-                                    @if ($errors->has('street'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('street') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div> 
+                                         <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town') }} (Optional)</label></strong>
+                                                <select name="api_delivery_town" id="api_delivery_town" class="form-control form-control-alternative{{ $errors->has('api_delivery_town') ? ' is-invalid' : '' }}" placeholder="{{ __('api_delivery_town') }}" value="{{ old('street') }}">
+                                                    <option value="">Select Town</option>
+                                                </select>
+                                               @error('api_delivery_town')
+                                    <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                            </div>
+                                        </div>
+                                   
+                                        <div class="col-md-3">
+                                            <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
+                                                <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" >
+                                                 @error('street')
+                                    <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                     
 
+
+ 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">
