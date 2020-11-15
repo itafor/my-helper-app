@@ -11,6 +11,7 @@ use App\LockdownRequest;
 use Stevebauman\Location\Facades\Location;
 use Session;
 use App\Notifications\ProvideRequestDetails;
+use Validator;
 
 class ProvideRequestController extends Controller
 {
@@ -84,25 +85,45 @@ class ProvideRequestController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
+         $data = $request->all();
+
+        $validator =validator::make($data,[
+            'description'=>'required',
+            'category_id'=>'required',
+        ]);
+
+         if($validator->fails()){
+         return  back()->withErrors($validator)
+                        ->withInput()->with('error', 'Please fill in a required fields');
+    }
+
+          $data= $request->all();
+
+        $onforwardingTown= isset($data['api_onforwarding_town_id']) ? explode('-', $data['api_onforwarding_town_id']) : '-testing';
+
+       $trimmedonforwardingTown=trim($onforwardingTown[1]);
+
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
-
-
 
         $lockdownRequest->user_id = $userId;
         $lockdownRequest->request_type = $request->request_type;
         $lockdownRequest->category_id = $request->category_id;
         $lockdownRequest->description = $request->description;
-        $lockdownRequest->country_id = $request->country_id;
-        $lockdownRequest->state_id = $request->state_id;
-        $lockdownRequest->city_id = $request->city_id;
+        $lockdownRequest->api_state = $request->api_state;
+        $lockdownRequest->api_city = getCityName_by_citycode($request->api_city);
+        $lockdownRequest->api_delivery_town =  $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown;
+        $lockdownRequest->api_delivery_town_id = isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null;
         $lockdownRequest->street = $request->street;
-        $lockdownRequest->type = $request->type;
-        $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-        $lockdownRequest->show_address = $request->show_address;
-        $lockdownRequest->show_phone = $request->show_phone;
+        $lockdownRequest->delivery_cost_payer = $request->delivery_cost_payer;
+        $lockdownRequest->weight = $request->weight;
         
         $lockdownRequest->save();
+        if($lockdownRequest){
+            $lockdown_request = LockdownRequest::find($lockdownRequest->id);
+            LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
+        }
         Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
     }
@@ -118,10 +139,13 @@ class ProvideRequestController extends Controller
         $getRequest = LockdownRequest::find($id);
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
         $getRequest = LockdownRequest::find($id);
+
+         $help_request_bidders = $getRequest->request_bidders;
+         $request_photos = $getRequest->requestPhotos;
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
-                                                    ['state_id', $getRequest->state_id],
+                                                    ['api_state', $getRequest->api_state],
                                                     // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([
@@ -130,7 +154,7 @@ class ProvideRequestController extends Controller
                                         ->orderBy('created_at', 'DESC')
                                         ->get();
                                         // dd($suggestions);
-        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }
 
 
@@ -146,10 +170,13 @@ class ProvideRequestController extends Controller
         $userId = auth()->user()->id;
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
         $getRequest = LockdownRequest::find($id);
+
+        $help_request_bidders = $getRequest->request_bidders;
+        $request_photos = $getRequest->requestPhotos;
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
-                                                    ['state_id', $getRequest->state_id],
+                                                    ['api_state', $getRequest->api_state],
                                                     // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([
@@ -160,7 +187,7 @@ class ProvideRequestController extends Controller
                                         ->orderBy('created_at', 'DESC')
                                         ->get();
                                         // dd($suggestions);
-        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+        return view('requests.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }
 
     public function sendMail($req)

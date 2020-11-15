@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'last_name', 'phone', 'username',
-        'country_id', 'state_id', 'city_id', 'street', 'company_name', 'website', 'user_type'
+        'country_id', 'state_id', 'city_id', 'street','api_state', 'api_city','api_delivery_town', 'company_name', 'website', 'user_type','userType'
     ];
 
     /**
@@ -56,5 +56,38 @@ class User extends Authenticatable
     public function lockdownRequests()
     {
         return $this->belongsToMany('App\LockdownRequest');
+    }
+
+    public function requesters(){
+        return $this->hasMany(RequestBidders::class,'requester_id','id');
+    }
+
+    public function bidders(){
+        return $this->hasMany(RequestBidders::class,'bidder_id','id');
+    }
+
+     public function logistic_partners(){
+        return $this->hasMany(RequestBidders::class,'logistic_partner_id','id');
+    }
+
+
+    public static function updateLogistic($data)
+    {
+     $logistic  =  self::where([
+            ['id', $data['logistic_id'] ],
+            ['userType', 'Logistic']
+        ])->update([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'company_name' => $data['company_name'],
+            'country_id' => $data['country_id'],
+            'state_id' => $data['state_id'],
+            'city_id' => $data['city_id'],
+            'street' => $data['street'],
+          
+        ]); 
+
+        return $logistic;
     }
 }

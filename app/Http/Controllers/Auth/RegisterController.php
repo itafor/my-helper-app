@@ -54,9 +54,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            // 'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:245'],
+            'api_state' => ['required', 'string', 'max:255'],
+            'api_city' => ['required', 'string', 'max:255'],
+            'street' => ['required', 'string', 'max:300'],
+            'phone' => ['required', 'string', 'max:300'],
+            'username' => ['required', 'string', 'max:300'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
             // 'agree_terms_and_conditions' => ['required'],
         ]);
     }
@@ -75,9 +81,9 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
             'username' => $data['username'] ?? null,
-            'country_id' => $data['country_id'],
-            'state_id' => $data['state_id'],
-            'city_id' => $data['city_id'],
+            'api_state' => $data['api_state'],
+            'api_city' => getCityName_by_citycode($data['api_city']),
+            'api_delivery_town' => isset($data['api_delivery_town']) ? $data['api_delivery_town'] : null,
             'street' => $data['street'],
             'company_name' => $data['company_name'] ?? null,
             'website' => $data['website'] ?? null,
@@ -93,6 +99,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
@@ -104,8 +111,14 @@ class RegisterController extends Controller
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
+
+          $data= $request->all();
+
+        $onforwardingTown= isset($data['api_onforwarding_town_id']) ? explode('-', $data['api_onforwarding_town_id']) : '-testing';
+
+       $trimmedonforwardingTown=trim($onforwardingTown[1]);
         
-        if($request->has('category_id') || $request->has('description') || $request->type) {
+        if($request->has('category_id') || $request->has('description')) {
             $lockdownRequest = new LockdownRequest;
             $userId = $user->id;
     
@@ -114,16 +127,20 @@ class RegisterController extends Controller
             $lockdownRequest->request_type = $request->request_type;
             $lockdownRequest->category_id = $request->category_id;
             $lockdownRequest->description = $request->description;
-            $lockdownRequest->country_id = $request->country_id;
-            $lockdownRequest->state_id = $request->state_id;
-            $lockdownRequest->city_id = $request->city_id;
+            $lockdownRequest->api_state = $request->api_state;
+            $lockdownRequest->api_city = getCityName_by_citycode($request->api_city);
+            $lockdownRequest->api_delivery_town =  $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown;
+        $lockdownRequest->api_delivery_town_id = isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null;
             $lockdownRequest->street = $request->street;
-            $lockdownRequest->type = $request->type;
-            $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-            $lockdownRequest->show_address = $request->show_address;
-            $lockdownRequest->show_phone = $request->show_phone;
-            
+            $lockdownRequest->delivery_cost_payer = isset($data['delivery_cost_payer']) ? $data['delivery_cost_payer'] : null;
+            $lockdownRequest->weight = isset($data['weight']) ? $data['weight'] : null;
             $lockdownRequest->save();
+
+            if($lockdownRequest){
+            $lockdown_request = LockdownRequest::find($lockdownRequest->id);
+            LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
+        }
+        
         }
         return $request->wantsJson()
                     ? new Response('', 201)

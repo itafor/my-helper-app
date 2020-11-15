@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\LockdownRequest;
 use App\Category;
-use App\Country;
-use App\State;
 use App\City;
-use App\User;
-use Stevebauman\Location\Facades\Location;
-use Session;
+use App\Country;
+use App\Jobs\sendConfirmationCodeToReceiver;
+use App\LockdownRequest;
 use App\Notifications\SendRequestDetails;
+use App\PickupRequest;
+use App\RequestBidders;
+use App\RequestPhoto;
+use App\State;
+use App\User;
+use Illuminate\Http\Request;
+use Session;
+use Stevebauman\Location\Facades\Location;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use Validator;
 
 class MakeRequestController extends Controller
 {
@@ -85,21 +92,36 @@ class MakeRequestController extends Controller
      */
     public function store(Request $request)
     {
+
+        $data = $request->all();
+
+        $validator =validator::make($data,[
+            'description'=>'required',
+            'category_id' =>'required',
+        ]);
+
+         if($validator->fails()){
+         return  back()->withErrors($validator)
+                        ->withInput()->with('error', 'Please fill in a required fields');
+    }
         $lockdownRequest = new LockdownRequest;
         $userId = auth()->user()->id;
+        
+        $data= $request->all();
+
+        $onforwardingTown= isset($data['api_onforwarding_town_id']) ? explode('-', $data['api_onforwarding_town_id']) : '-testing';
+
+       $trimmedonforwardingTown=trim($onforwardingTown[1]);
 
         $lockdownRequest->user_id = $userId;
         $lockdownRequest->request_type = $request->request_type;
         $lockdownRequest->category_id = $request->category_id;
         $lockdownRequest->description = $request->description;
-        $lockdownRequest->country_id = $request->country_id;
-        $lockdownRequest->state_id = $request->state_id;
-        $lockdownRequest->city_id = $request->city_id;
+        $lockdownRequest->api_state = $request->api_state;
+        $lockdownRequest->api_city = getCityName_by_citycode($request->api_city);
+        $lockdownRequest->api_delivery_town =  $trimmedonforwardingTown =='t' ? null : $trimmedonforwardingTown;
+        $lockdownRequest->api_delivery_town_id = isset($data['api_delivery_town_id']) ? $data['api_delivery_town_id'] : null;
         $lockdownRequest->street = $request->street;
-        $lockdownRequest->type = $request->type;
-        $lockdownRequest->mode_of_contact = $request->mode_of_contact;
-        $lockdownRequest->show_address = $request->show_address;
-        $lockdownRequest->show_phone = $request->show_phone;
         
         $lockdownRequest->save();
         Session::flash('status', 'Request has been successfully registered');
@@ -138,7 +160,12 @@ class MakeRequestController extends Controller
         $userId = auth()->user()->id;
         $getRequest = LockdownRequest::find($id);
         // dd($getRequest);
-        
+        $request_photos= RequestPhoto::where([
+          ['request_id', $getRequest->id],
+          ['provider_id',authUser() ? authUser()->id : ''],
+       ])->get();
+
+         $help_request_bidders = $getRequest->request_bidders;
         // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
         // times of contacts by the same person
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
@@ -158,7 +185,7 @@ class MakeRequestController extends Controller
                                         ->get();
         
         
-        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }
 
     /**
@@ -172,6 +199,13 @@ class MakeRequestController extends Controller
         
         $getRequest = LockdownRequest::find($id);
         // dd($getRequest);
+
+        $help_request_bidders = $getRequest->request_bidders;
+
+          $request_photos= RequestPhoto::where([
+          ['request_id', $getRequest->id],
+          ['provider_id',authUser() ? authUser()->id : ''],
+       ])->get();
         
         // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
         // times of contacts by the same person
@@ -191,7 +225,7 @@ class MakeRequestController extends Controller
                                         ->get();
         
         // dd($suggestions);
-        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions'));
+        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }
 
     public function sendMail($req)
@@ -215,6 +249,7 @@ class MakeRequestController extends Controller
             return redirect()->route('requests');
         }
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -249,4 +284,104 @@ class MakeRequestController extends Controller
     {
         //
     }
+
+
+    public function initialRequestApprovalForhelpSeekers($id){
+       $data['request_bid'] = RequestBidders::find($id);
+       $data['request_bidder'] =  $data['request_bid']->bidder;
+       $data['request'] =  $data['request_bid']->request;
+       $data['help_provider'] =  $data['request_bid']->requester;
+       $data['logistic_partner'] =  $data['request_bid']->logistic_partner;
+
+       $data['request_photos']= RequestPhoto::where([
+          ['request_id', $data['request']->id],
+          ['provider_id',$data['help_provider']->id],
+       ])->get();
+
+       return view('requests.make.submit_pickup_request',$data);
+
+    }
+
+    public function finalRequestApprovalForhelpSeekers(Request $request){
+      
+     $data = $request->all();
+    //dd($data);
+      $shipmentItemsContainer = [];
+      foreach ($data['ShipmentItems'] as $key => $item) {
+         $shipmentItemsContainer[] =  ['ItemName'=>$item['ItemName'],'ItemUnitCost'=>$item['ItemUnitCost'],'ItemQuantity'=>$item['ItemQuantity'],'ItemColour'=>$item['ItemColour'],'ItemSize'=>$item['ItemSize']];
+      }
+
+
+ $client = new Client(['verify' => false]);
+
+     $pickupRequest = $client->post('http://api.clicknship.com.ng/clicknship/Operations/PickupRequest', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'OrderNo' => 'Ord-'. mt_rand(1000000, 9999999),
+                'Description' => $data['description'],
+                'Weight' => $data['weight'],
+                'SenderName'=>$data['senderName'],
+                'SenderCity'=> getCityName_by_citycode($data['senderCity']),
+                'SenderTownID'=> $data['senderTownID'],
+                'SenderAddress'=> $data['senderAddress'],
+                'SenderPhone' =>$data['senderPhone'],
+                'SenderEmail' =>$data['senderEmail'],
+                'RecipientName' =>$data['RecipientName'],
+                'RecipientCity' =>$data['RecipientCity'],
+                'RecipientTownID' =>$data['RecipientTownID'],
+                'RecipientAddress' =>$data['RecipientAddress'],
+                'RecipientPhone'=>$data['RecipientPhone'],
+                'RecipientEmail'=>$data['RecipientEmail'],
+                'PaymentType'=>$data['PaymentType'],
+                'DeliveryType'=>$data['DeliveryType'],
+                'ShipmentItems'=> $shipmentItemsContainer,
+            ]
+                    ]);
+
+       $response = $pickupRequest->getBody()->getContents();
+      $values = json_decode($response, true);
+
+
+     if($values['TransStatus'] == 'Successful'){
+
+      $data['OrderNo'] = $values['OrderNo'];
+      $data['TransStatus'] = $values['TransStatus'];
+      $data['WaybillNumber'] = $values['WaybillNumber'];
+      $data['DeliveryFee'] = $values['DeliveryFee'];
+      $data['TransStatusDetails'] = $values['TransStatusDetails'];
+      $data['VatAmount'] = $values['VatAmount'];
+      $data['TotalAmount'] = $values['TotalAmount'];
+      
+     // dd($data);
+
+       $request_bidding_record = RequestBidders::approveHelpSeekersRequest($data);
+
+       $savePickupRequest = PickupRequest::createNewPickupRequest($data);
+
+       if($request_bidding_record){
+
+        $help_provider= authUser(); //The user that want to provide help
+        $main_request = LockdownRequest::find($data['request_id']);// the help (request)
+        $request_bidder = User::find($data['bidder_id']); // the user bidding to get help 
+        // $logistic_partner = User::find($data['logistic_partner_id']); 
+
+       // $logistic_partner_job = (new NotifyLogisticToDeliverGoods($help_provider,$main_request,$request_bidder,$logistic_partner,$request_bidding_record))->delay(5);
+       //  $this->dispatch($logistic_partner_job);
+
+         $receiver_job = (new sendConfirmationCodeToReceiver($help_provider,$main_request,$request_bidder,$request_bidding_record))->delay(5);
+        $this->dispatch($receiver_job);
+
+          }
+
+        return back()->with('success', $values['TransStatusDetails']);
+          
+          }
+
+        return back()->withInput()->with('error', $values['TransStatusDetails']);
+
+    }
+
+
 }

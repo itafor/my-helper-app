@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ProfileRequest;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -15,7 +16,9 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        $user = User::find(authUser()->id);
+
+        return view('profile.edit',compact('user'));
     }
 
     /**
@@ -26,7 +29,9 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        auth()->user()->update($request->all());
+        $data = $request->all();
+         $data['api_city'] = getCityName_by_citycode($data['api_city']);
+        auth()->user()->update($data);
 
         return back()->withStatus(__('Profile successfully updated.'));
     }

@@ -7,27 +7,178 @@
                 <div class="card-header">
                     <h5 class="title text-white">{{ _('Edit Profile') }}</h5>
                 </div>
-                <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
-                    <div class="card-body">
-                        @csrf
-                        @method('put')
+                <form class="form" method="post" action="{{ route('profile.update') }}">
+                    @csrf
+                    <input type="hidden" name="user_type" value="1">
+                    <div class="card-body form-wrap">
+                        <!-- row -->
 
-                        @include('alerts.success')
+                         <div class="row form-group">
+                            <div class="col-md-6">
+                                <div class="input-group{{ $errors->has('company_name') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="company_name" class="form-control" value="{{ $user->company_name}}" placeholder="Company Name">
+                                    @include('alerts.feedback', ['field' => 'company_name'])
+                                </div>
+                            </div>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                            <label>{{ _('Name') }}</label>
-                            <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ _('Name') }}" value="{{ old('name', auth()->user()->name) }}">
-                            @include('alerts.feedback', ['field' => 'name'])
+                            <div class="col-md-6">
+                                <div class="input-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="website" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ _('Company website') }}" value="{{ $user->website }}">
+                                    @include('alerts.feedback', ['field' => 'website'])
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                            <label>{{ _('Email address') }}</label>
-                            <input readonly type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Email address') }}" value="{{ old('email', auth()->user()->email) }}">
-                            @include('alerts.feedback', ['field' => 'email'])
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ _('First Name') }}" value="{{ $user->name}}">
+                                    @include('alerts.feedback', ['field' => 'name'])
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="last_name" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ _('Last Name') }}" value="{{ $user->last_name }}">
+                                    @include('alerts.feedback', ['field' => 'lastname'])
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- row -->
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-email-85"></i>
+                                        </div>
+                                    </div>
+                                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Email') }}" value="{{ $user->email }}" readonly>
+                                    @include('alerts.feedback', ['field' => 'email'])
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-mobile"></i>
+                                        </div>
+                                    </div>
+                                    <input type="tel" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ _('Phone No') }}" value="{{ $user->phone }}">
+                                    @include('alerts.feedback', ['field' => 'phone'])
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- row -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <div class="input-group{{ $errors->has('username') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" placeholder="{{ _('Username') }}" value="{{ $user->username }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_state_id">{{ __('State') }}</label></strong>
+                                                <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}" {{$state['StateName'] == $user->api_state ? 'selected' :''}}>{{ $state['StateName'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('api_state'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_state_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
+                                            <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
+                                    <select name="api_city" id="api_city_id" class="form-control" required >
+                                                   <option value="">Select city</option>
+                                                    @foreach(clickship_cities() as $city)
+                                                        <option  value="{{ $city['CityCode'] }}" {{$city['CityName'] == $user->api_city ? 'selected' : ''}}>{{ $city['CityName'] }}</option>
+                                                    @endforeach
+                                                   
+                                                </select>
+                                                @if ($errors->has('api_city'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_city_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                         <div class="col-md-4">
+                                            <div class="form-group{{ $errors->has('api_delivery_town') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="api_delivery_town">{{ __('Delivery Town') }}</label></strong>
+                                                <select name="api_delivery_town" id="api_delivery_town" class="form-control">
+                                                    <option value="" {{$user->api_delivery_town !='' ? 'selected':''}}>{{$user->api_delivery_town}}</option>
+                                                    
+                                                </select>
+                                                @if ($errors->has('api_delivery_town'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('api_delivery_town') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                   
+                                      
+                                    </div>
+
+                                      <div class="row form-group">
+                                          <div class="col-md-12">
+                                            <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
+                                                <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
+                                                <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{$user->street}}" required >
+
+                                                @if ($errors->has('street'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('street') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                      </div>
+ 
+                        
+                        
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-red">{{ _('Save') }}</button>
+                    <div class="card-footer text-center mb-20">
+                        <button type="submit" class="btn btn-round btn-lg btn-lg-pd btn-custom">{{ _('Submit') }}</button>
                     </div>
                 </form>
             </div>

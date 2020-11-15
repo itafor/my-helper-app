@@ -26,25 +26,7 @@
     var baseUrl = '{{url("/")}}';
 </script>
 <div class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
-    <!--   Creative Tim Branding   -->
-    <!-- <a href="http://creative-tim.com">
-         <div class="logo-container">
-            <div class="logo">
-                <img src="{{ asset('assets/img/new_logo.png')}}">
-            </div>
-            <div class="brand">
-                Creative Tim
-            </div>
-        </div>
-    </a> -->
-
-	<!--  Made With Get Shit Done Kit  -->
-		<!-- <a href="http://demos.creative-tim.com/get-shit-done/index.html?ref=get-shit-done-bootstrap-wizard" class="made-with-mk">
-			<div class="brand">GK</div>
-			<div class="made-with">Made with <strong>GSDK</strong></div>
-		</a> -->
-
-    <!--   Big container   -->
+   
     <div class="container">
         <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
@@ -96,20 +78,20 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>First Name <small>(required)</small></label>
-                                                <input name="name" type="text" class="form-control" placeholder="Andrew...">
+                                                <input name="name" type="text" class="form-control" placeholder="Andrew..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Last Name <small>(required)</small></label>
-                                                <input name="last_name" type="text" class="form-control" placeholder="Smith...">
+                                                <input name="last_name" type="text" class="form-control" placeholder="Smith..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Email <small>(required)</small></label>
                                                 <a href="{{ route('login') }}" class="loginLink"><span><small class="loginText" >Click here to login</small></span></a>
-                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
+                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)" required>
                                             </div>
                                             <!-- <div class="form-group">
                                             </div> -->
@@ -117,10 +99,10 @@
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
-                                                <input name="phone" type="tel" class="form-control" placeholder="Phone No.">
+                                                <input name="phone" type="tel" class="form-control" placeholder="Phone No." required>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
+                                       <!--  <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
                                                 <select name="show_phone" class="form-control">
@@ -128,23 +110,23 @@
                                                     <option value="1">Yes</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">     
+                                        </div> -->
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username">
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" class="username" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="Password" id="password">
+                                                <input name="password" type="password" class="form-control" placeholder="Password" id="password" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Confirm Password <small>(required)</small></label>
-                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password." id="password_confirmation">
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password." id="password_confirmation" required>
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +134,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Company Name <small>(required)</small></label>
-                                                <input name="company_name" type="text" class="form-control" placeholder="John Doe Ltd...">
+                                                <input name="company_name" type="text" class="form-control" placeholder="John Doe Ltd..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
@@ -164,29 +146,29 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Contact First Name <small>(required)</small></label>
-                                                <input name="name" type="text" class="form-control" placeholder="Andrew...">
+                                                <input name="name" type="text" class="form-control" placeholder="Andrew..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Contact Last Name <small>(required)</small></label>
-                                                <input name="last_name" type="text" class="form-control" placeholder="Smith...">
+                                                <input name="last_name" type="text" class="form-control" placeholder="Smith..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
                                                 <label>Contact Email <small>(required)</small></label>
                                                 <a href="{{ route('login') }}" class="loginLink"><span><small >Click here to login</small></span></a>
-                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)">
+                                                <input name="email" type="email" class="form-control" placeholder="johndoe@email.com" onblur="duplicateEmail(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Phone <small>(required)</small></label>
-                                                <input name="phone" type="tel" class="form-control" placeholder="Phone">
+                                                <input name="phone" type="tel" class="form-control" placeholder="Phone" required>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">     
+                                        <!-- <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Show Phone Number<small>(If No, you would be contacted via mail)</small></label>
                                                 <select name="show_phone" class="form-control">
@@ -194,23 +176,23 @@
                                                     <option value="1">Yes</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">     
+                                        </div> -->
+                                        <div class="col-sm-12">     
                                             <div class="form-group">
                                                 <label>Username <small>(required)</small></label>
-                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)">
+                                                <input name="username" type="text" class="form-control" placeholder="Username" onblur="duplicateUserName(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Password <small>(required)</small></label>
-                                                <input name="password" type="password" class="form-control" placeholder="Password...">
+                                                <input name="password" type="password" class="form-control" placeholder="Password..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">     
                                             <div class="form-group">
                                                 <label>Confirm Password <small>(required)</small></label>
-                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
+                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password" required>
                                             </div>
                                         </div>
                                     </div> 
@@ -221,41 +203,23 @@
                                 <div class="row">
 
                                     <div class="col-sm-10 col-sm-offset-1">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Category</label><br>
-                                                    <select name="category_id" class="form-control">
+                                                    <select name="category_id" class="form-control" required>
                                                 @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>        
                                                 @endforeach
                                                     </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-5">
-                                            <div class="form-group">
-                                                <label>Type</label><br>
-                                                <select name="type" class="form-control">
-                                                    <option value=""> Type </option>
-                                                    <option value="Free">Free</option>
-                                                    <option value="Paid">Paid</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>How would you like to be contacted?</label><br>
-                                                <select name="mode_of_contact" class="form-control">
-                                                    <option value="Email">Email</option>
-                                                    <option value="Phone">Phone</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
+                                      
                                         <div class="tab-pane" id="description">
                                             <!-- <div class="row"> -->
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <textarea name="description" class="form-control" placeholder="" rows="9"></textarea>
+                                                        <textarea name="description" class="form-control" placeholder="" rows="9" required></textarea>
                                                     </div>
                                                 </div>
                                             <!-- </div> -->
@@ -269,51 +233,42 @@
                                     
                                     <div class="col-sm-6">
                                          <div class="form-group">
-                                            <label>Country</label><br>
-                                             <select name="country_id" class="form-control" id="country_id">
-                                                <option value=""> Please Select a Country </option>
-                                                @foreach($countries as $country)
-                                                    <option {{ $country->sortname == $location ? "selected" : "" }} value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label>State</label><br>
+                                            <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
+                                                    <option value="">Select a state</option>
+                                                    @foreach(clickship_states() as $state)
+                                                        <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
+                                                    @endforeach
+                                                </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                          <div class="form-group">
-                                            <label>State</label><br>
-                                             <select name="state_id" class="form-control" id="state_id" required>
-                                                <option value=""> Select a State </option>
-                                                @foreach($states as $state)
-                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label>City</label><br>
+                                              <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
                                           </div>
                                     </div>
                                     <div class="col-sm-6">
                                          <div class="form-group">
-                                            <label>City</label><br>
-                                             <select name="city_id" class="form-control" id="city_id" required>
-                                                <option value="">Select a city</option>
-                                            </select>
+                                             <label>Delivery Town</label><br>
+                                              <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}" required>
+                                                    <option value="">Select Town</option>
+                                                </select>
                                           </div>
                                     </div>
                                     <div class="col-sm-6 ">
                                          <div class="form-group">
                                             <label>Street Name</label>
-                                            <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue ">
+                                            <input type="text" name="street" class="form-control" placeholder="16 Maitama Avenue " required>
                                           </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Show Street Address</label><br>
-                                             <select name="show_address" class="form-control" id="show_address">
-                                                <option value="0">No</option>
-                                                <option value="1">Yes</option>
-                                            </select>
-                                          </div>
-                                    </div>
-                                    
+                                 
                                 </div>
+                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+
                             </div>
                         </div>
                         <div class="wizard-footer height-wizard">
