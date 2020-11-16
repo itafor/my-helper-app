@@ -1,7 +1,11 @@
 @extends('layouts.app', ['pageSlug' => ''])
 
 @section('content')
+@if($user = Auth::user())
+    <div class="header header-logged-in py-7 py-lg-8">
+@else 
     <div class="header py-7 py-lg-8">
+@endif
         <div class="container-fluid">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">

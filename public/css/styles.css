@@ -372,7 +372,12 @@ textarea.form-control {
 	overflow:hidden;
 	margin:0 0 15px;
 }
-
+.full-page .header.py-7{
+	margin-top: -75px;
+}
+.header-logged-in{
+	margin-top: 55px !important;
+}
 group-text, .form-group .input-group-append .input-group-text, .input-group .input-group-prepend .input-group-text, .input-group .input-group-append .input-group-text {
     padding: 13px 0 13px 18px;
     width: 39px;
