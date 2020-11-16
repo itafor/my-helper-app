@@ -1,30 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png')}}">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>MyHelperApp</title>
+@extends('layouts.app', ['pageSlug' => ''])
 
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+@section('content')
 
-	<!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200;300;400;600;700&display=swap" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
-
-	<!-- CSS Files -->
-    <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-	<link href="{{ asset('assets/css/gsdk-bootstrap-wizard.css')}}" rel="stylesheet" />
-
-	<link href="{{ asset('assets/css/demo.css') }}" rel="stylesheet" />
-</head>
-
-<body class="white-content">
-<script>
-    var baseUrl = '{{url("/")}}';
-</script>
 <div class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
    
     <div class="container">
@@ -39,26 +16,28 @@
                     @csrf
                 <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
                     <input type="hidden" name="request_type" value="1">
-                    	<div class="wizard-header">
-                        	<h3>
-                        	   Let us get to know <b>you</b> <br>
-                        	   <!-- <small>This information will let us know more about you.</small> -->
-                        	</h3>
-                    	</div>
+                        <div class="wizard-header">
+                            <h3>
+                               Let us get to know <b>you</b> <br>
+                               <!-- <small>This information will let us know more about you.</small> -->
+                            </h3>
+                        </div>
 
-						<div class="wizard-navigation">
-							<ul>
-	                            <li><a href="#account" data-toggle="tab">Requests</a></li>
-	                            <li><a href="#address" data-toggle="tab">Location</a></li>
-	                            <li><a href="#about" data-toggle="tab">Personal Info</a></li>
-	                        </ul>
+                        <div class="wizard-navigation">
+                            <ul>
+                                <li><a href="#account" data-toggle="tab">Requests</a></li>
+                                <li><a href="#address" data-toggle="tab">Location</a></li>
+                                <li><a href="#about" data-toggle="tab">Personal Info</a></li>
+                            </ul>
 
-						</div>
+                        </div>
 
                         <div class="tab-content">
                             <div class="tab-pane" id="about">
                                 <div class="row">
-                                    <h4 class="info-text"> Basic information</h4>
+                                   <div class="col-md-12">
+                                        <h4 class="info-text"> Basic information</h4>
+                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group radio-group">
                                             <label>Individual</label>
@@ -308,22 +287,4 @@
     </div> -->
 
 </div>
-
-</body>
-
-	<!--   Core JS Files   -->
-    <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
-        <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
-        <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
-	<script src="{{ asset('assets/js/jquery-2.2.4.min.js')}}" type="text/javascript"></script>
-	<script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
-	<script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
-
-	<!--  Plugin for the Wizard -->
-	<script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
-
-	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-	<script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
-
-</html>
+@endsection

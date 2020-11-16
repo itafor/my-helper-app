@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'login-page', 'page' => _('Login Page'), 'contentClass' => 'login-page'])
 
 @section('content')
-    <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+    <div class="col-lg-4 col-md-6 col-lg-offset-4 col-md-offset-3 welcome-cards">
         <form class="form" method="post" action="{{ route('login') }}">
             @csrf
 

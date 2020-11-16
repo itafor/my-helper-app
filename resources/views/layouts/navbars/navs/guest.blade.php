@@ -5,24 +5,7 @@
                 <img src="{{ asset('white') }}/img/lc_logo.png" alt="MyHelperApp Logo">
             </a>
         </div>
-        <!--
-        <div class="logo-col-2">
-            <div class="logo-group">
-                <a href="https://sterling.ng" target="_blank">
-                    <img src="{{ asset('white') }}/img/sterling_logo.png" alt="Sterling Bank">
-                </a>
-                <a href="https://giving.ng" target="_blank">
-                    <img src="{{ asset('white') }}/img/giving_logo.png" alt="Giving">
-                </a>
-                <a href="https://digitalwebglobal.com" target="_blank">
-                    <img src="{{ asset('white') }}/img/dw_logo.png" alt="Digitalweb">
-                </a>
-            </div>
-            <div class="sponsor-info">
-                Free service provided by Sterling Bank, Giving and Digitalweb
-            </div>
-        </div>
-    -->
+        
     </div>
     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent fixed-top">
         <div class="container-fluid">
