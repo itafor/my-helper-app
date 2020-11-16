@@ -74,6 +74,24 @@
             </div>
         @endauth
        
+       @if ( (\Request::is('make/req/*') ) || (\Request::is('provide/req/*') ) ){ 
+        <!--   Core JS Files   -->
+        <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
+        <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
+        <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery-2.2.4.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+
+        <!--  Plugin for the Wizard -->
+        <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
+
+        <!--  More information about jquery.validate here: http://jqueryvalidation.org/  -->
+        <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
+    
+      
+       @else 
          
 
                                 <!-- Jquery -->
@@ -310,4 +328,7 @@
 
     </script>
     </body>
+
+    @endif
+
 </html>

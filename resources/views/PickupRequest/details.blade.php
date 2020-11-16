@@ -16,20 +16,23 @@
 }
 </style>
 @section('content')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7 header-body">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
-               <div class="card">
-  <div class="card-header">
-<div class="float-left">
-  Pickup Request Details
-</div>
-<div class="float-right">
-   <a  href="{{ route('pickupRequest.shipmenttracker') }}"><button class="btn btn-warning btn-sm">Track Shippment Status 
-  </button>
-    </a>
-</div>
-  </div>
+                <div class="welcome-cards track-cards">
+                  <div id="card" class="card">                      
+                      <div class="card-header">
+                          <div class="col-md-8">
+                              <h4 class="card-title">Pickup Request Details</h4>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="float-right">
+                                <a  href="{{ route('pickupRequest.shipmenttracker') }}">
+                                  <button class="btn btn-warning btn-sm">Track Shippment Status</button>
+                                </a>
+                              </div>
+                          </div>
+                      </div>
   
    
 

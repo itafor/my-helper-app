@@ -316,7 +316,7 @@ textarea.form-control {
 .welcome-cards .card-header{
 	display: inline-block;
     line-height: 40px;
-    padding: 20px 0 !important;
+    padding: 20px 15px !important;
 }
 .how-it-works .content-box{
 	width: 100%;
@@ -388,8 +388,84 @@ group-text, .form-group .input-group-append .input-group-text, .input-group .inp
 .btn-round.btn-lg {
     padding: 10px 35px;
 }
+.form-control.error{
+	outline-color: red;
+	border-color: red !important;
+}
+label.error{
+	color: red !important;
+	padding: 1px 4px;
+    border: 1px solid red;
+    border-radius: 3px;
+}
+.req-description{
+	padding-left: 10px;
+}
+.req-description label span{
+	display: block;
+	margin:0 0 5px;
+	padding-left: 5px;
+	line-height: 1.1;
+}
+.req-description label span.desc{
+	font-weight: 600;
+}
+.req-description .form-group{
+	position: relative;
+}
+.req-description label.error{
+	display: inline-block;
+    position: absolute;
+    bottom: -25px;
+    left: 20px;
+}
+.req-description .form-group {
+    margin-bottom: 25px;
+}
+.header-body{
+	padding-top: 100px;
+}
+.track-cards{
+	margin-top: 35px;
+}
+.sidebar .nav li.active>a:not([data-toggle="collapse"]):before, .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]):before{
+	left: -5px;
+}
+.sidebar .nav i, .off-canvas-sidebar .nav i {
+    font-size: 15px;
+    float: left;
+    margin-right: 5px;
+    line-height: 30px;
+    width: 23px;
+    text-align: left;
+}
+.sidebar .nav p, .off-canvas-sidebar .nav p{
+	font-size: 14.5px;
+}
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .btn-danger:active:focus, .btn-danger:active:hover, .btn-danger.active:focus, .btn-danger.active:hover {
+    background-color: #59bfce !important;
+    background-image: linear-gradient(to bottom left, #3ea6b5, #59bfce, #3097a7) !important;
+}
+.dropdown-menu .dropdown-item, .bootstrap-select .dropdown-menu.inner li a {
+    font-size: 14px;
+}
 
-
+.white-content .form-control[disabled], .white-content .form-control[readonly], .white-content fieldset[disabled] .form-control {
+    background: #ceeef3;
+    border-color: rgb(89 191 206) !important;
+    color: #0c535f;
+}
+.white-content .input-group-prepend .input-group-text {
+    border-color: #e3e3e3;
+}
+.sidebar, .off-canvas-sidebar{
+	z-index: 99;
+}
+.req-description h4{
+	display:inline-block;
+	width: 100%;
+}
 
 .search-filter input{
 	width:90%;
@@ -1188,4 +1264,11 @@ table .clickable-row:hover td {
   color: red;
   font-size: 35px;
   cursor: pointer;
+}
+
+@media (min-width: 992px){
+	.navbar-expand-lg .navbar-nav .dropdown-menu {
+	    position: absolute;
+	    left: -39px;
+	}
 }

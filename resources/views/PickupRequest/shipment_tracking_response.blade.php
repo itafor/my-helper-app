@@ -16,13 +16,14 @@
 }
 </style>
 @section('content')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7 header-body">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
-               <div class="card">
-  <div class="card-header">
-   Shipments Tracking Responses
-  </div>
+                <div class="welcome-cards track-cards">
+                  <div id="card" class="card">
+                      <div class="card-header">
+                          <h4 class="card-title">Shipment Tracking Response</h4>
+                      </div>
   <div class="card-body">
 
     @if(isset($tracking_responses) && count($tracking_responses) >= 1)
@@ -64,10 +65,12 @@
     @endif
     
                 </div>
+              </div>
     
   </div>
 </div>
         </div>
+@endsection
+
     </div>
     
-@endsection
