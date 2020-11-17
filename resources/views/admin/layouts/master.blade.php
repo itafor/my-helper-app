@@ -66,31 +66,19 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <!-- <li @if (isset($pageSlug) && $pageSlug == 'all_requests') class="active " @endif>
-            <a href="{{route('admin.all.requests')}}">
-              <i class="now-ui-icons education_atom"></i>
-              <p>All Requests</p>
-            </a>
-          </li> -->
-          <li @if (isset($pageSlug) && $pageSlug == 'logistic') class="active " @endif>
+     
+         <!--  <li @if (isset($pageSlug) && $pageSlug == 'logistic') class="active " @endif>
             <a href="{{route('admin.logistic.agent')}}">
               <i class="now-ui-icons education_atom"></i>
               <p>Logistic Agents</p>
             </a>
-          </li>
+          </li> -->
           <li @if (isset($pageSlug) && $pageSlug == 'products_services') class="active " @endif>
             <a href="{{route('admin.product.index')}}">
               <i class="now-ui-icons location_map-big"></i>
               <p>Products and Services</p>
             </a>
           </li>
-          <li>
-            <a href="./notifications.html">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-          
          
         </ul>
       </div>

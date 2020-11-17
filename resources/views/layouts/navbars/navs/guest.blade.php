@@ -26,11 +26,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="navbar-nav ml-auto">
-                    <!-- <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link text-primary">
-                            <i class="tim-icons icon-minimal-left"></i> {{ _('Back to Dashboard') }}
-                        </a>
-                    </li> -->
+                   
                     <li class="nav-item ">
                         <a href="{{ route('make.request') }}" class="nav-link">
                             <i class="fa fa-bookmark-o"></i> {{ _('Get Help') }}
@@ -46,11 +42,7 @@
                             <i class="fas fa-cog"></i> {{ _('How it works') }}
                         </a>
                     </li>
-                     <li class="nav-item ">
-                        <a href="{{ route('product.services') }}" class="nav-link">
-                            <i class="fa fa-product-hunt" aria-hidden="true"></i> {{ _('Products & Services') }}
-                        </a>
-                    </li>
+                     
                     <li class="nav-item ">
                         <a href="{{ url('reg_type') }}" class="nav-link">
                             <i class="tim-icons icon-laptop"></i> {{ _('Register') }}
