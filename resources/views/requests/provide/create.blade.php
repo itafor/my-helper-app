@@ -17,7 +17,7 @@
                     <input type="hidden" name="request_type" value="2">
                         <div class="wizard-header">
                             <h3>
-                               What do you want to provide <br />for the <b>Lock down</b> ? <br>
+                               Provide Help<br>
                                <!-- <small>This information will let us know more about you.</small> -->
                             </h3>
                         </div>
@@ -182,41 +182,40 @@
                                                     </div>
                                                 </div>
 
-                                     <h4>Item Size In Weight <small>(and Pickup/delivery price)</small>
-                                     </h4>
+                                                <div class="col-md-12">
+                                                    <h4>Item Size In Weight <small>(and Pickup/delivery price)</small></h4>
+                                                </div>
+                                                <div class="row req-description">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                                            <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
+                                                            <label class="form-check-label" for="weight1" style="margin-left: 20px;">
+                                                                <span class="desc">SMALL (3.5 kg)</span>
+                                                                <span class="desc-price">N800</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
 
-                                                 <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
-                                            <label class="form-check-label" for="weight1" style="margin-left: 20px;"><b>SMALL (3.5 kg)</b>
-                                            <br>
-                                            N800
-                                            <br>
-                                              </label>
-                                            </div>
-                                        </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                                            <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
+                                                            <label class="form-check-label" for="weight2" style="margin-left: 20px;">
+                                                                <span class="desc">MEDIUM (7.5.0 kg)</span>
+                                                                <span class="desc-price">N1,500</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
 
-                                         <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
-                                                <label class="form-check-label" for="weight2" style="margin-left: 20px;"><b>MEDIUM (7.5.0 kg)</b>
-                                                 <br>
-                                          N1,500
-                                            <br>
-                                              </label>
-                                            </div>
-                                        </div>
-
-                                         <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
-                                            <label class="form-check-label" for="weight3" style="margin-left: 20px;"><b>LARGE (10.0 kg)</b>
-                                             <br>
-                                           N2,000
-                                            <br>
-                                            </label>
-                                            </div>
-                                        </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
+                                                            <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
+                                                            <label class="form-check-label" for="weight3" style="margin-left: 20px;">
+                                                                <span class="desc">LARGE (10.0 kg)</span>
+                                                                <span class="desc-price">N2,000</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                         <div class="col-md-12">
                                        <label> <small>Please note that pickup or delivery in outskirt locations will attract extral charges</small> </label>

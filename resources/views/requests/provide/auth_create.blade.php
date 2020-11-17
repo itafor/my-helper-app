@@ -1,16 +1,12 @@
 @extends('layouts.app', ['pageSlug' => 'requests'])
 @section('content')
 
-<div class="container-fluid mt--7">
+<div class="container-fluid mt--7 header-body track-cards">
         <div class="row">
-            <div class="col-xl-12 order-xl-1">
+            <div class="col-xl-12 order-xl-1 welcome-cards">
                 <div class="card">
-                    <div class="card-header list-header bg-white border-0">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="text-white">{{ __('What do you want to provide?') }}</h3>
-                            </div>
-                        </div>
+                    <div class="card-header">
+                        <h4 class="card-title">{{ __('Provide Help') }}</h4>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off" enctype="multipart/form-data">
@@ -130,55 +126,56 @@
                                         </div>
                                       
                                     </div>
-                                    <h3>Item Size IN Weight</h3>
-                             <div class="row">
+                                    
+                                    <div class="row req-description">
+                                        <div class="col-md-12">
+                                            <h3>Item Size IN Weight</h3>
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
                                                 <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
-                                            <label class="form-check-label" for="weight1" style="margin-left: 20px;"><b>SMALL (3.5 kg)</b>
-                                            <br>
-                                            N800
-                                            <br>
+                                                <label class="form-check-label" for="weight1" style="margin-left: 20px;">
+                                                    <span class="desc">SMALL (3.5 kg)</span>
+                                                    <span class="desc-price">N800</span>                                           
                                               </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
-                                                <label class="form-check-label" for="weight2" style="margin-left: 20px;"><b>MEDIUM (7.5.0 kg)</b>
-                                                 <br>
-                                          N1,500
-                                            <br>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
+                                                <label class="form-check-label" for="weight2" style="margin-left: 20px;">
+                                                    <span class="desc">MEDIUM (7.5.0 kg)</span>
+                                                    <span class="desc-price">N1,500</span>
                                               </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
-                                            <label class="form-check-label" for="weight3" style="margin-left: 20px;"><b>LARGE (10.0 kg)</b>
-                                             <br>
-                                           N2,000
-                                            <br>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
+                                                <label class="form-check-label" for="weight3" style="margin-left: 20px;">
+                                                    <span class="desc">LARGE (10.0kg)</span>
+                                                    <span class="desc-price">N2,000</span>
                                             </label>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="row" style="margin-top: -20px;">
+
+                                    <div class="row" style="margin-top: 0px;">
                                         <div class="col-md-12">
-                                       <label>Please note that pickup or delivery in outskirt locations will attract extral charges</label>
+                                            <label>Please note that pickup or delivery in outskirt locations will attract extral charges</label>
+                                        </div>
                                     </div>
-                                    </div>
+
                                     <div class="row">
      
-                                <div class="col-md-12">
-                                    <label class="form-control-label" for="input-property_type">{{ __('Photos') }} (Optional)</label>
-                                    <input type="file" name="photos[112211][image_url]"  class="form-control">
-                                </div>
+                                        <div class="col-md-12">
+                                            <label class="form-control-label" for="input-property_type">{{ __('Photos') }} (Optional)</label>
+                                            <input type="file" name="photos[112211][image_url]"  class="form-control">
+                                        </div>
                             
-                                  <div style="clear:both"></div>
-                                <div id="photoContainer" class="col-md-12">
-                                </div>   
+                                        <div style="clear:both"></div>
+                                        <div id="photoContainer" class="col-md-12"></div>   
          
                                     </div>
                                   <div style="clear:both"></div>

@@ -1,11 +1,13 @@
 @extends('layouts.app', ['page' => __('User Profile'), 'pageSlug' => 'profile'])
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8">
+<div class="header-body">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="welcome-cards track-cards">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title text-white">{{ _('Edit Profile') }}</h5>
+                    <h4 class="card-title">{{ _('Edit Profile') }}</h4>
                 </div>
                 <form class="form" method="post" action="{{ route('profile.update') }}">
                     @csrf
@@ -182,10 +184,13 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="welcome-cards">
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title text-white">{{ _('Password') }}</h5>
+                    <h4 class="card-title">{{ _('Password') }}</h4>
                 </div>
                 <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
                     <div class="card-body">
@@ -216,6 +221,7 @@
                 </form>
             </div>
         </div>
+    </div>
         <!-- <div class="col-md-4">
             <div class="card card-user">
                 <div class="card-body">
@@ -254,4 +260,5 @@
             </div>
         </div> -->
     </div>
+</div>
 @endsection

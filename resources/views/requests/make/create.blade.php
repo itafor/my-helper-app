@@ -18,11 +18,10 @@
                     <input type="hidden" name="request_type" value="1">
                         <div class="wizard-header">
                             <h3>
-                               Let us get to know <b>you</b> <br>
+                               Get Help</b><br>
                                <!-- <small>This information will let us know more about you.</small> -->
                             </h3>
                         </div>
-
                         <div class="wizard-navigation">
                             <ul>
                                 <li><a href="#account" data-toggle="tab">Requests</a></li>
@@ -218,7 +217,7 @@
                                                     @foreach(clickship_states() as $state)
                                                         <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
                                                     @endforeach
-                                                </select>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -279,12 +278,6 @@
         </div>
         </div><!-- end row -->
     </div> <!--  big container -->
-
-    <!-- <div class="footer">
-        <div class="container">
-             Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/bootstrap-wizard">here.</a>
-        </div>
-    </div> -->
 
 </div>
 @endsection

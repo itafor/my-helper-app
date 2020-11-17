@@ -1,16 +1,12 @@
 @extends('layouts.app', ['pageSlug' => 'requests'])
 @section('content')
 
-<div class="container-fluid mt--7">
+<div class="container-fluid mt--7 header-body track-cards">
         <div class="row">
-            <div class="col-xl-12 order-xl-1">
+            <div class="col-xl-12 order-xl-1 welcome-cards">
                 <div class="card">
-                    <div class="card-header bg-white border-0 list-header">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="text-white">{{ __('What do you need?') }}</h3>
-                            </div>
-                        </div>
+                    <div class="card-header">
+                        <h4 class="card-title">{{ __('Get Help') }}</h4>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('store.make.request') }}" autocomplete="off">

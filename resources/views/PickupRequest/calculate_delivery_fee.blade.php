@@ -16,13 +16,14 @@
 }
 </style>
 @section('content')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7 header-body">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
-               <div class="card">
-  <div class="card-header">
-  Delivery Fee Calculator
-  </div>
+                <div class="welcome-cards track-cards">
+                  <div id="card" class="card">
+                      <div class="card-header">
+                          <h4 class="card-title">Delivery Fee Calculator</h4>
+                      </div>
   <div class="card-body">
     <form action="{{ route('pickupRequest.calculate.deliveryfeeOperation') }}" method="post">
                             @csrf
@@ -106,5 +107,6 @@
 </div>
         </div>
     </div>
+  </div>
     
 @endsection
