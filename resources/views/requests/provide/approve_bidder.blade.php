@@ -3,32 +3,30 @@
 
 @section('content')
 
- <!-- Grid -->
-        <div class="row">
+ d -->
+        <div class="row header-body">
 
           <!-- Grid Item -->
-          <div class="col-xl-12">
+          <div class="col-xl-12 track-cards">
 
-            <!-- Card -->
-            <div class="dt-card">
+            <div class="welcome-cards">
+              <!-- Card -->
+              <div class="card" id="card">
+                
+                <div class="card-header">
+                   <div class="col-md-8">
+                      <h4 class="card-title">Submitting Pickup Request Information and Generation of Waybill Number</h4>                       
+                    </div>
+                    <div class="col-md-4">
+                      <div class="float-right">				
+              					@if($request_bid->status == 'Pending')
+              					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
 
-              <!-- Card Body -->
-              <div class="dt-card__body">
+              					@endif
+				              </div>
+				            </div>
+                </div>
 
-                <!-- Tables -->
-                <div class="table-responsive">
-
-
-				            <div class="card">
-				  <div class="card-header">
-				<div class="float-left">Submitting Pickup Request Information and Generation of Waybill Number</div>
-				<div class="float-right">
-					@if($request_bid->status == 'Pending')
-					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
-
-					@endif
-				</div>
-				  </div>
 				  <div class="card-body">
              @foreach(deliveryFee($request->api_city,providerDetail($request->id,$request_bidder->id)['api_city'],$request->weight,providerDetail($request->id,$request_bidder->id)['api_delivery_town_id']) as $fee)
             <table class="table table-bordered" id="rental_table">
@@ -271,7 +269,7 @@
            
              <div class="card">
               <div class="card-header">
-              Your Request (Help provided)
+                <h4 class="card-title">Your Request (Help provided)</h4>
               </div>
               <div class="card-body">
                       <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>
