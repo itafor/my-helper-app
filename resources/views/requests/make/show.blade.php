@@ -1,15 +1,15 @@
 @extends('layouts.app', ['pageSlug' => 'Requests'])
 
 @section('content')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7 header-body ">
         <div class="row">
-            <div class="col-xl-12 order-xl-1">
+            <div class="col-xl-12 order-xl-1 welcome-cards track-cards">
                 <div class="card">
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">    
 
-                                <h3 class="text-white">Request for  {{ $getRequest->category ? $getRequest->category->title : '' }}</h3>  
+                                <h4 class="card-title">Request for  {{ $getRequest->category ? $getRequest->category->title : '' }}</h4>  
                             </div>
                             <div class="col-4 text-right">
                                 @if(auth()->check())
@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body request-card column-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
                       <div>
-                        <div class="col-md-10 float-left">
+                        <div class="col-md-9 float-left">
                                 <div class="user-request-card">
 
                                 <h3>Welcome to my page - <strong>{{ $getRequest->user->username }}</strong></h3>
@@ -119,48 +119,47 @@
                             <input type="hidden" name="request_type" class="form-control" id="request_type" value="Get Help" >
                           </div>
 
-                           <h4>Item Size In Weight <small>(and Pickup/delivery price)</h4>
-                             <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
-                                            <label class="form-check-label" for="weight1" style="margin-left: 20px;"><b>SMALL (3.5 kg)</b>
-                                            <br>
-                                            N800
-                                            <br>
-                                              </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                             <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
-                                                <label class="form-check-label" for="weight2" style="margin-left: 20px;"><b>MEDIUM (7.5.0 kg)</b>
-                                                 <br>
-                                          N1,500
-                                            <br>
-                                              </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                               <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
-                                            <label class="form-check-label" for="weight3" style="margin-left: 20px;"><b>LARGE (10.0 kg)</b>
-                                             <br>
-                                           N2,000
-                                            <br>
-                                            </label>
-                                            </div>
-                                        </div>
+                           
+                            <div class="row req-description">
+                              <h4>Item Size In Weight <small>(and Pickup/delivery price)</small></h4>
+                                  <div class="col-md-4">
+                                      <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                          <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
+                                          <label class="form-check-label" for="weight1" style="margin-left: 20px;">
+                                            <span class="desc">SMALL (3.5 kg)</span>
+                                            <span class="desc-price">N800</span>                                     
+                                        </label>
+                                      </div>
+                                  </div>
 
-                                    </div>
-                                    <div class="row" style="margin-top: -20px;">
+                                  <div class="col-md-4">
+                                      <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                          <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
+                                          <label class="form-check-label" for="weight2" style="margin-left: 20px;">
+                                            <span class="desc">MEDIUM (7.5 kg)</span>
+                                            <span class="desc-price">N1,500</span>                                     
+                                        </label>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                      <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
+                                          <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
+                                          <label class="form-check-label" for="weight3" style="margin-left: 20px;">
+                                            <span class="desc">LARGE (10.0 kg)</span>
+                                            <span class="desc-price">N2,00</span>                                     
+                                        </label>
+                                      </div>
+                                  </div>
+                                </div>
+                                    <div class="row" style="margin-top: 0px;">
                                         <div class="col-md-12">
                                        <label><small> Please note that pickup or delivery in outskirt locations will attract extral charges</small></label>
                                     </div>
                                     </div>
-                           <h4>Pickup Location</h4>
+                                   <h4>Pickup Location</h4>
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-check-label" for="api_state_id">{{ __('State') }}</label></strong>
                                                 <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
@@ -176,7 +175,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('api_city_id') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
                                                 <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
@@ -193,7 +192,7 @@
                                     <!-- </div>
 
                                     <div class="row"> -->
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('api_onforwarding_town_id') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
                                                 <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
@@ -206,7 +205,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
                                                 <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
                                                 <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
@@ -251,7 +250,7 @@
                                   <div style="clear:both"></div>
 
                                      <div class="form-group">
-                                    <button type="button" id="addMorePhoto" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>  Add more photo</button>
+                                    <button type="button" id="addMorePhoto" class="btn btn-success btn-custom"><i class="fa fa-plus-circle"></i>  Add more photo</button>
                                 </div>
                             
                             <div style="clear:both"></div>
@@ -262,7 +261,7 @@
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="type a comment" ></textarea>
                           </div>
                          
-                          <button type="submit" class="btn btn-primary">Contact {{ $getRequest->user->username }}</button>
+                          <button type="submit" class="btn btn-primary btn-custom">Contact {{ $getRequest->user->username }}</button>
                         </form>
                                     </div>
                                    @endif
@@ -270,7 +269,7 @@
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username ? $getRequest->user->username : $getRequest->user->company_name }}</a>
+                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-custom">Contact  {{ $getRequest->user->username ? $getRequest->user->username : $getRequest->user->company_name }}</a>
                             </div>
                         @endif 
                         </div>
@@ -279,7 +278,7 @@
 
                           <!-- Render suggestion if authenticated -->
                         @if(auth()->check())
-                            <div class="col-md-2 float-right">
+                            <div class="col-md-3 float-right">
                                 <div class="suggestion">
                                     <h4>Suggestions</h4>
                                     @foreach($suggestions as $suggestion)

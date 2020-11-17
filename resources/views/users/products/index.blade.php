@@ -1,7 +1,7 @@
 @extends('layouts.app', ['pageSlug' => ''])
 
 @section('content')
-    <div class="header py-7 py-lg-8">
+    <div class="header py-7 py-lg-8 track-cards">
         <div class="container-fluid">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">

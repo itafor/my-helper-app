@@ -4,47 +4,46 @@
 @section('content')
 
  <!-- Grid -->
-        <div class="row">
+        <div class="row header-body">
 
           <!-- Grid Item -->
-          <div class="col-xl-12">
+          <div class="col-xl-12 track-cards">
 
-            <!-- Card -->
-            <div class="dt-card">
+            <div class="welcome-cards">
+              <!-- Card -->
+              <div class="card" id="card">
+                
+                <div class="card-header">
 
-              <!-- Card Body -->
-              <div class="dt-card__body">
+                    <div class="col-md-8">
+                      <h4 class="card-title">Submitting Pickup Request Information and Generation of Waybill Number</h4>           
+                    </div>
+                    <div class="col-md-4">
+                      <div class="float-right">
 
-                <!-- Tables -->
-                <div class="table-responsive">
+                        @if($request_bid->status == 'Pending')
+                        <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>@endif
+				
+				              </div>
+				            </div>
+                </div>
 
-
-				            <div class="card">
-				  <div class="card-header">
-				<div class="float-left">Submitting Pickup Request Information and Generation of Waybill Number</div>
-				<div class="float-right">
-					@if($request_bid->status == 'Pending')
-					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
-
-					@endif
-				</div>
-				  </div>
-				  <div class="card-body">
+                <div class="card-body">
  
- @if($request_bid->status == 'Pending')
-   Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+                 @if($request_bid->status == 'Pending')
+                   Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
 
-   @elseif($request_bid->pickup_status == 'Success')
-                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
-                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
-                        <button class="btn-sm btn-primary">View details</button>
+                   @elseif($request_bid->pickup_status == 'Success')
+                                    Request Status:<span class=" text-primary">Request {{$request_bid->status}} and pickup request sent</span>
+                                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
+                                        <button class="btn-sm btn-primary">View details</button>
 
-                      </a>
-  @elseif($request_bid->status == 'Rejected')
-                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
-  @elseif($request_bid->status == 'Delivered')
-                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
-  @endif
+                                      </a>
+                  @elseif($request_bid->status == 'Rejected')
+                                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+                  @elseif($request_bid->status == 'Delivered')
+                                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+                  @endif
 
 				   <hr>
 				   <div class="col-sm-12">
@@ -261,7 +260,7 @@
            
              <div class="card">
               <div class="card-header">
-              Your Request (Help provided)
+              <h4 class="card-title">Your Request (Help provided)</h4>
               </div>
               <div class="card-body">
                       <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>

@@ -1,14 +1,14 @@
 @extends('layouts.app', ['pageSlug' => ''])
 
 @section('content')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7 header-body track-cards">
         <div class="row">
-            <div class="col-xl-12 order-xl-1">
+            <div class="col-xl-12 order-xl-1 welcome-cards">
                 <div class="card">
                     <div class="card-header list-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="text-white">Supply of {{ $getRequest->category ? $getRequest->category->title : ''}}</h3>
+                                <h3 class="card-title">Supply of {{ $getRequest->category ? $getRequest->category->title : ''}}</h3>
                             </div>
                             <div class="col-4 text-right">
                                 @if(auth()->check())
@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body request-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
                       <div>
-                       <div class="col-md-10 float-left">
+                       <div class="col-md-9 float-left">
                                
                                     <div class="user-request-card">
                                       <label>
@@ -107,7 +107,7 @@
                      
                      <td>
                      <a href="{{route('request.approve',[$bid->id])}}">
-                          <button class="btn btn-sm btn-success"><i class="fa fa-eye" title="View"></i></button>
+                          <button class="btn btn-sm btn-success btn-custom"><i class="fa fa-eye" title="View"></i></button>
                           </a>
                         </td>
                        
@@ -154,7 +154,7 @@
 <br>
                            <h4 style="margin-left: 200px;">Pickup Location</h4>
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <strong><label class="form-check-label" for="api_state_id">{{ __('State') }}</label></strong>
                                                 <select name="api_state" id="api_state_id" class="form-control form-control-alternative{{ $errors->has('country') ? ' is-invalid' : '' }}" placeholder="{{ __('Country') }}" value="{{ old('country') }}" required >
@@ -170,7 +170,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <strong><label class="form-control-label" for="api_city_id">{{ __('City') }}</label></strong>
                                                 <select name="api_city" id="api_city_id" class="form-control form-control-alternative{{ $errors->has('api_city_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_city_id') }}" value="{{ old('api_city_id') }}" required >
@@ -187,7 +187,7 @@
                                     <!-- </div>
 
                                     <div class="row"> -->
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
                                                 <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
@@ -200,7 +200,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
                                                 <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
@@ -220,7 +220,7 @@
                             <!-- <label for="exampleInputEmail1">Comment (Optional)</label> -->
                             <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="Type a comment (Optional)" ></textarea>
                           </div>
-                          <button type="submit" class="btn btn-primary btn-header">
+                          <button type="submit" class="btn btn-primary btn-custom">
                               Contact  {{ $getRequest->user->username }}
                           </button>
                         </form>
@@ -239,7 +239,7 @@
                     </div>
 
         @if(auth()->check())
-                            <div class="col-md-2 float-right">
+                            <div class="col-md-3 float-right">
                                 <div class="suggestion">
                                     <h4>Suggestions</h4>
                                     @foreach($suggestions as $suggestion)

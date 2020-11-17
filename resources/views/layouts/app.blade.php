@@ -22,9 +22,14 @@
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
-         <!-- select2 css -->
+        <!-- select2 css -->
         <!-- <link rel="stylesheet" type="text/css" href="/css/app.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"> -->
+
+        <!-- for get/provide help page -->
+        <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/gsdk-bootstrap-wizard.css')}}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/demo.css') }}" rel="stylesheet" />
       
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -69,6 +74,24 @@
             </div>
         @endauth
        
+       @if ( (\Request::is('make/req/*') ) || (\Request::is('provide/req/*') ) ){ 
+        <!--   Core JS Files   -->
+        <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
+        <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
+        <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery-2.2.4.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+
+        <!--  Plugin for the Wizard -->
+        <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
+
+        <!--  More information about jquery.validate here: http://jqueryvalidation.org/  -->
+        <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
+    
+      
+       @else 
          
 
                                 <!-- Jquery -->
@@ -305,4 +328,7 @@
 
     </script>
     </body>
+
+    @endif
+
 </html>
