@@ -19,7 +19,7 @@
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('Welcome to MyHelperApp')}}</h4>
-                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods and services for free or at a fee.') }}
+                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods and services.') }}
                                             <br /><a href="{{ route('make.request') }}">{{ __('Get Started') }}</a></p>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('How It Works') }}</h4>
-                                         <p>{{ __('Whether free or paid, learn how you can be helped or how you can help others.')}}  
+                                         <p>{{ __('Learn how you can be helped or how you can help others.')}}  
                                             <br /><a href="{{ route('how_it_works') }}">{{ __('Learn more') }}</a></p>
                                     </div>
                                 </div>
