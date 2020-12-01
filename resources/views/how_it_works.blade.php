@@ -16,7 +16,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="content-box">                     
-                                                    <h3>Requesting for Help (Free or Paid)</h3>
+                                                    <h3>Requesting for Help</h3>
                                                     <ol class="basic-list">
                                                         <li>Click Get Help</li>
                                                         <li>Fill the Request form </li>
@@ -30,7 +30,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="content-box">    
-                                                    <h3>Providing Help (Paid or Free)</h3>
+                                                    <h3>Providing Help</h3>
                                                     <ol class="basic-list">
                                                         <li>Click Get Help</li>
                                                         <li>Fill the Request form </li>
@@ -45,12 +45,12 @@
                                             <div class="col-md-6">
                                                 <div class="content-box content-box-bottom social">
                                                     <h3>Support</h3> 
-                                                        <span>
-                                                            <i class="fas fa-phone"></i> +234 703 410 4040 (Whatsapp Chat and SMS Only)
-                                                        </span>
-                                                        <span>
-                                                            <i class="fas fa-envelope"></i> help@myhelperapp.com
-                                                        </span>
+                                                    <span>
+                                                        <i class="fas fa-phone"></i> +234 703 410 4040 (Whatsapp Chat and SMS Only)
+                                                    </span>
+                                                    <span>
+                                                        <i class="fas fa-envelope"></i> help@myhelperapp.com
+                                                    </span>
                                                    
                                                 </div>
                                             </div>
