@@ -4,7 +4,7 @@
             Copyright &copy; {{ now()->year }} {{ _( 'All rights reserved.') }}            
         </div>
         <div class="copyright">
-            {{ _('This is a free service provided by ' )}}
+            {{ _('This service is provided by ' )}}
             <a href="https://sterling.ng" target="_blank">
                 {{ _( 'Sterling Bank PLC,' ) }}<img src="{{ asset('white') }}/img/brand/sterling_bank.svg" alt="Sterling Bank">
             </a>
