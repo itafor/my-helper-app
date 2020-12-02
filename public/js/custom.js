@@ -80,7 +80,7 @@ $('#api_city_id').change(function(){
             success: function(data) {
                 console.log('cities',data)
                 $('#api_delivery_town').empty();
-                $('<option>').val('').text('Select Delivery Town').appendTo('#api_delivery_town');
+                $('<option>').val('').text('Select Town').appendTo('#api_delivery_town');
                 $.each(data.towns, function(k, v) {
                     $('<option>').val(v.TownName).text(v.TownName).appendTo('#api_delivery_town');
                 });
@@ -101,7 +101,7 @@ $('#api_city_id').change(function(){
             success: function(data) {
                 console.log('cities',data)
                 $('#api_onforwarding_town_id').empty();
-                $('<option>').val('').text('Select Delivery Town').appendTo('#api_onforwarding_town_id');
+                $('<option>').val('').text('Select Town').appendTo('#api_onforwarding_town_id');
                 $.each(data.towns, function(k, v) {
                     $('<option>').val(v.TownID+'-'+v.TownName).text(v.TownName).appendTo('#api_onforwarding_town_id');
                 });

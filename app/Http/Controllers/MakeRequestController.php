@@ -159,7 +159,7 @@ class MakeRequestController extends Controller
     {
         $userId = auth()->user()->id;
         $getRequest = LockdownRequest::find($id);
-        // dd($getRequest);
+        //dd($getRequest);
         $request_photos= RequestPhoto::where([
           ['request_id', $getRequest->id],
           ['provider_id',authUser() ? authUser()->id : ''],
@@ -174,8 +174,7 @@ class MakeRequestController extends Controller
         // Suggest leads to requests
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
-                                                    ['state_id', $getRequest->state_id],
-                                                    // ['street', 'LIKE', '%'.$getRequest->street. '%'],
+                                                    ['api_state', $getRequest->api_state],
                                                     ])
                                         ->where([
                                                     ['user_id', '!=', $userId],
@@ -183,7 +182,6 @@ class MakeRequestController extends Controller
                                             ])
                                         ->orderBy('created_at', 'DESC')
                                         ->get();
-        
         
         return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
     }

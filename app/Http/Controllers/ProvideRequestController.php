@@ -177,11 +177,9 @@ class ProvideRequestController extends Controller
         $suggestions = LockdownRequest::orWhere([
                                                     ['category_id', $getRequest->category_id],
                                                     ['api_state', $getRequest->api_state],
-                                                    // ['street', 'LIKE', '%'.$getRequest->street. '%'],
                                                     ])
                                         ->where([
                                                     ['user_id', '!=', $userId],
-                                                    // ['request_type', 2 ]
                                                     ['request_type', '!=', $getRequest->request_type ]
                                             ])
                                         ->orderBy('created_at', 'DESC')
