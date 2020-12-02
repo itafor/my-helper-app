@@ -194,8 +194,8 @@
                                     <div class="row"> -->
                                         <div class="col-md-6">
                                             <div class="form-group{{ $errors->has('api_onforwarding_town_id') ? ' has-danger' : '' }}">
-                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
-                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
+                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town') }}</label></strong>
+                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control" required>
                                                     <option value="">Select Town</option>
                                                 </select>
                                                 @if ($errors->has('api_onforwarding_town_id'))
