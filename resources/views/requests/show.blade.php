@@ -152,7 +152,7 @@
                     @enderror
                           </div>
 <br>
-                           <h4 style="margin-left: 200px;">Pickup Location</h4>
+                           <h4 style="margin-left: 200px;">Delivery Location</h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -189,8 +189,8 @@
                                     <div class="row"> -->
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town (Optional)') }}</label></strong>
-                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control">
+                                                <strong><label class="form-control-label" for="api_onforwarding_town_id">{{ __('Delivery Town') }}</label></strong>
+                                                <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control" required>
                                                     <option value="">Select Town</option>
                                                 </select>
                                                 @if ($errors->has('api_onforwarding_town_id'))
