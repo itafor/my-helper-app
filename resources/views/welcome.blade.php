@@ -344,7 +344,7 @@
 				<div class="layout_centerVertical">
 					<h3 class="ruleBottom ruleBottom_ggPrimary1 box_bottomMargin2">{{ __('Our Corporate Partners') }}</h3>
 					<div class="img-bg box_verticalPadded2">
-					   {{ __('This services is provided by Sterling Bank, Giving and 100StartApps') }}
+					   {{ __('This service is provided by Sterling Bank, Giving and 100StartApps') }}
 					</div>
 					<div class="grid-parent layout_centerVertical partners">
 						<div class="grid-4 grid-md-4 box_padded2">

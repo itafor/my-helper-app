@@ -22,8 +22,10 @@
 										<div class="photo">
 											<img src="{{ asset('blue') }}/images/user.jpg" alt="{{ __('Profile Photo') }}">
 										</div>
-										@$logged_in  Auth::user();
-										<p class="d-lg-none">{{ __('Helo, ')  $logged_in->name }}</p>
+										@php
+										$logged_in = Auth::user();
+										@endphp
+										<p class="d-lg-none">Helo, {{ $logged_in->name }}</p>
 									</a>
 									<ul class="dropdown-menu dropdown-navbar">
 										<li class="nav-link">
