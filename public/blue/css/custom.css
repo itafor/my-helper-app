@@ -369,7 +369,129 @@ button.primary.ghost {
     text-decoration: none;
 	transition: all ease-in .15s;
 }
+.dropdown.nav-item{
+	width: 200px;
+    display: inline-block;
+    padding: 0 15px;
+	position: relative;
+	vertical-align:middle;
+}
+.dropdown.nav-item .photo{
+	width: 40px;
+    height: 40px;
+    padding: 2.5px;
+    background: #fefeff;
+    border: 1px solid var(--blue);
+    border-radius: 50%;
+    display: inline-block;
+    float: left;
+}
+.dropdown.nav-item .photo img{
+	width: 100%;
+	border-radius: 50%;
+}
+.dropdown.nav-item p{
+	font-size: 15px;
+	font-weight: 400;
+	margin:0;
+	float:left;
+	padding:7px 15px 0 15px;
+}
+.dropdown.nav-item .dropdown-menu{
+	list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 0 20px -5px rgba(11,11,11,0.55);
+    position: absolute;
+    width: 190px;
+    top: -150px;
+    left: 25px;
+	opacity:0.3;
+    transition: all ease-in .15s;
+}
+.dropdown.nav-item:hover .dropdown-menu{
+	top: 50px;
+	opacity: 1;
+    transition: all ease-in .15s;
+}
+.dropdown.nav-item .dropdown-menu li{
+	padding: 10px 0;
+    margin: 0;
+	transition: all ease-in .15s;
+}
+.dropdown.nav-item .dropdown-menu li:hover{
+	background: var(--blue);
+	transition: all ease-in .15s;
+}
+.dropdown.nav-item .dropdown-menu li a{
+	display:inline-block;
+	width: 100%;
+	position:relative;
+	text-decoration: none !Important;
+	font-weight: 400;
+	padding: 0 10px;
+    line-height: 25px;
+	transition: all ease-in .15s;
+ }
+.dropdown.nav-item .dropdown-menu li:hover a{
+	background: var(--blue);
+	color: #ffffff;
+	transition: all ease-in .15s;
+}
+.dropdown.nav-item .dropdown-menu li.dropdown-divider{
+	padding:0;
+	border-top: 1px solid #fefefe;
+	width:100%;
+}
+.main .sidebar{
+	position: fixed;
+    width: 100%;
+    right: 0;
+    top: 85px;
+    z-index: 999;
+    background: #fefefe;
+    padding: 0;
+    height: 54px;
+    box-shadow: 0 0 15px -10px;
+    overflow: hidden;
+	border-top:1px solid #efefef;
+}
+.main .sidebar .logo{
+	display:none;
+}
+.main .sidebar .nav{
+	width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+	overflow:hidden;
+	padding: 0;
+	text-align: center;
+}
 
+.main .sidebar .nav li{
+	display: inline-block;
+    margin: 10px 15px;
+    padding: 0;
+	vertical-align:middle;
+}
+.main .sidebar .nav li a{
+	padding: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    display: inline-block;
+	text-decoration: none;
+}
+.main .sidebar .nav li a i{
+	display: none;
+}
+.main .sidebar .nav li a p{
+	font-size: 14px;
+	text-decoration: none;
+}
 
 
 
