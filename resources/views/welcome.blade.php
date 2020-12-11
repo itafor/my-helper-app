@@ -142,7 +142,7 @@
 								@php
 									$i = 1;
 								@endphp
-								@foreach( $allRequests as $req )
+								@foreach( $allRequests->take(12) as $req )
 								@if($req->request_type == 1) 
 																			
 								<div id="id_{{ $i }}" class="item card-container">
@@ -217,7 +217,7 @@
 								@php
 									$i = 1;
 								@endphp
-								@foreach( $allRequests as $req )
+								@foreach( $allRequests->take(12) as $req )
 								@if($req->request_type == 2) 
 																			
 								<div id="id_{{ $i }}" class="item card-container">
