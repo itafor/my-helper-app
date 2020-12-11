@@ -182,6 +182,7 @@
 								
 								@php
 								$i++;
+								if ( $i == 12 ) break;
 								@endphp
 								@endforeach		
 							</div>													
@@ -257,6 +258,7 @@
 								
 								@php
 								$i++;
+								if ( $i == 12 ) break;
 								@endphp
 								@endforeach		
 							</div>							
