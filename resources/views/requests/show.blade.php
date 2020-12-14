@@ -121,7 +121,7 @@
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
                                 <p style="color:red"> 
                                 </p>
-                                <span>Request Status: <strong>{{user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status']}}</strong></span>
+                                <span style="font-size: 20px;">Request Status: <strong>{{user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status']}}</strong></span>
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
                                 
