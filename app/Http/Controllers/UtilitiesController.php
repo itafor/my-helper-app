@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Jobs\NotifyUserOfRequestApprovalOrRejection;
+use App\Jobs\NotifyUserOfRequestRejectionByTheProvider;
 use App\LockdownRequest;
 use App\PickupRequest;
 use App\RequestBidders;
@@ -47,6 +48,16 @@ public function rejectRequest($request_bid_id){
 
         if($reject_request){
             $request_bidding_record = RequestBidders::find($request_bid_id);
+
+                  if($request_bidding_record->request_type  == 'Provide Help'){
+                $main_request = LockdownRequest::find($request_bidding_record->request_id);// the help (request)
+                $help_receiver = User::find($request_bidding_record->bidder_id); // the user bidding to get help 
+                $help_provider= User::find($request_bidding_record->requester_id);
+
+         $reject_request_noty = (new NotifyUserOfRequestRejectionByTheProvider($help_provider,$main_request,$help_receiver,$request_bidding_record))->delay(5);
+           $this->dispatch($reject_request_noty);
+
+            }
 
             return response()->json($request_bidding_record);
         }

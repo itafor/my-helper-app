@@ -89,7 +89,7 @@
                         @if(auth()->check())
                 @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help'))
                                 <p style="color:red"></p>
-                                <span>Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}} </strong>
+                                <span style="font-size: 20px;">Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}} </strong>
                               @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved')
                               and pickup request sent.
                                <a href="{{URL::route('pickupRequest.details', [$getRequest->id, authUser()->id, $getRequest->user->id] )}}">

@@ -172,79 +172,23 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left">{{$request_bidding_record->status == 'Approved' ? 'Request Acceptance Notification':'Request Rejection Notification'}} </h4>
+                <h4 class="card-title float-left">Request Rejection Notification</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
 <p>
-                    Dear <strong>{{$help_provider->name}} {{$help_provider->last_name}}</strong>,<br><br>
+                    Dear <strong>{{$request_owner->name}} {{$request_owner->last_name}}</strong>,<br><br>
         
-         @if($request_bidding_record->status == 'Approved')
 
- We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>accepted</b> by the receiver, and pickup request has been sent to Red Star Express (RSE) Delivery Service.<br>
-
- Items Category : {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
- Items Description: {{$main_request->description }}<br><br>
-
- Items Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
-
-   @foreach(deliveryFee($main_request->api_city,providerDetail($main_request->id,$help_provider->id)['api_city'],$main_request->weight,providerDetail($main_request->id,$help_provider->id)['api_delivery_town_id']) as $fee)
-            <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-                      <br>
-                      <h5>Delivery fee detail</h5>
-                   <tr>
-                     <td class="rent_title">Delivery Fee</td>
-                     <td> 
-                  &#8358;{{number_format($fee['DeliveryFee'],2)}} 
-                       
-                      </td> 
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Vat Amount</td>
-                     <td>  
-                 &#8358;{{number_format($fee['VatAmount'],2)}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Total Amount</td>
-                     <td>
-                 &#8358;{{number_format($fee['TotalAmount'],2)}}
-                     </td>
-                   </tr>
-</tbody>
-</table>
-                          @endforeach
-<br>
-  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
-
-   
- <p>Receiver Comment: {{$request_bidding_record->comment ? $request_bidding_record->comment : 'N/A'}}</p><br>
-Please find the receiver details below.
-
-  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
-
- @else
-
-We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>rejected</b> by the receiver.<br>
+We wish to notify you that your request to get help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>rejected</b> by the provider. See details below.<br><br>
 
 Items Category:: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
 Items Description: {{$main_request->description }}<br><br>
 
-  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
-
- @endif
 </p>
 
-<br>
-<br>
 
-<hr>
-
-<h3>Help Receiver details</h3>
+<h3>Help Provider details</h3>
 
  <table class="table table-bordered" id="rental_table">
            
@@ -253,21 +197,21 @@ Items Description: {{$main_request->description }}<br><br>
                    <tr>
                      <td class="rent_title">Full Name</td>
                      <td> 
-                        {{$request_owner ? $request_owner->name : 'N/A'}} 
-                        {{$request_owner ? $request_owner->last_name : 'N/A'}}
+                        {{$help_provider ? $help_provider->name : 'N/A'}} 
+                        {{$help_provider ? $help_provider->last_name : 'N/A'}}
                       </td> 
                    </tr>
 
                    <tr>
                      <td class="rent_title">Phone Number</td>
                      <td>  
-                {{$request_owner ? $request_owner->phone : 'N/A'}}
+                {{$help_provider ? $help_provider->phone : 'N/A'}}
                       </td>
                    </tr>
 
                    <tr>
                      <td class="rent_title">Email</td>
-                     <td> {{$request_owner ? $request_owner->email : 'N/A'}}</td>
+                     <td> {{$help_provider ? $help_provider->email : 'N/A'}}</td>
                    </tr>
 
                     <tr>
@@ -302,7 +246,8 @@ Items Description: {{$main_request->description }}<br><br>
                
        </tbody>
                   </table>
-                  <br>
+                  <br><br>
+    <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request</a>
 <hr>
 
              
