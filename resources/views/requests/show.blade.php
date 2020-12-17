@@ -27,7 +27,10 @@
                                       <label>
                                     <h4>Welcome to my page -{{ $getRequest->user->username }}</h4>
                                       I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})<br><br>
-                                      Weight: {{$getRequest->weight}}kg<br><br>
+
+                                      Item Size: {{itemSize($getRequest->weight)}}
+
+                                      <br><br>
 
                     Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
                     </label>

@@ -323,3 +323,20 @@ function requestPhotos($request_id,$provider_id){
        ])->get();
    return $request_photos;
 }
+
+function itemSize($size){
+  switch ($size) {
+    case 1:
+     return 'Small';
+      break;
+    case 2:
+      return 'Medium';
+       break;
+    case 4:
+      return 'Large';
+       break;
+    default:
+     return 'Size Not Specified';
+      break;
+  }
+}
