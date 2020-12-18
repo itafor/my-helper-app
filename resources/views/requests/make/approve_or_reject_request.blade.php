@@ -105,7 +105,7 @@
                             I need {{ $request->category ? $request->category->title : '' }} ({{ $request->description }}) around {{ ucfirst(Str::lower($request->api_city))}}, {{ ucfirst(Str::lower($request->api_state))}} ({{ $request->street }})
 
                             <p>Status: <strong class="text-danger">{{$request_bid->status}}</strong></p>
-                            <p>Weight: <strong class="text-danger">{{$request->weight}}kg</strong></p>
+                            <p>Item Size: <strong class="text-danger"> {{itemSize($request->weight)}}</strong></p>
                             <p>Delivery Fee Payer: <strong class="text-danger">{{$request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong></p>
                           </label> 
 
@@ -147,8 +147,13 @@
            
                           <tbody>
                           <br>
-                            <h5>Delivery fee detail</h5>
+                            <h2>Delivery fee detail</h2>
                             <tr>
+                               <td class="rent_title">Item Size Rate(N)</td>
+                               <td> {{itemSize($request->weight)}}</td> 
+                            </tr>
+
+                             <tr>
                                <td class="rent_title">Delivery Fee</td>
                                <td>&#8358;{{number_format($fee['DeliveryFee'],2)}}</td> 
                             </tr>

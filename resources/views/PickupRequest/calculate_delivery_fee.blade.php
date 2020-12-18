@@ -59,8 +59,13 @@
                             </div>
 
                              <div class="col-sm-6">
-                            <label for="Weight">Weight</label>
-                              <input type="text" name="Weight" class="form-control" required>
+                            <label for="Weight">Item Size</label>
+                            <select name="Weight" class="form-control" required>
+                              <option value="">Select Item Size</option>
+                              <option value="1">Small</option>
+                              <option value="2">Medium</option>
+                              <option value="4">Large</option>
+                            </select>
                             </div>
                            
                           </div>

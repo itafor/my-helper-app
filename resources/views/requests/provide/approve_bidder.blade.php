@@ -33,7 +33,16 @@
            
                     <tbody>
                       <br>
-                      <h5>Delivery fee detail</h5>
+                      <h2>Delivery fee and Receiver details</h5>
+
+                    <tr>
+                     <td class="rent_title">Item Size</td>
+                     <td> 
+                        {{itemSize($request->weight)}}
+                       
+                      </td> 
+                   </tr>
+
                    <tr>
                      <td class="rent_title">Delivery Fee</td>
                      <td> 
@@ -55,13 +64,45 @@
                  &#8358;{{number_format($fee['TotalAmount'],2)}}
                      </td>
                    </tr>
+
+                    <tr>
+                     <td class="rent_title">Receiver City</td>
+                     <td>
+                {{providerDetail($request->id,$request_bidder->id)['api_city']}}
+                     </td>
+                   </tr>
+                 <tr>
+                     <td class="rent_title">Receiver Address</td>
+                     <td>
+                {{providerDetail($request->id,$request_bidder->id)['providerAddress']}}
+                     </td>
+                   </tr>
+                 <tr>
+                     <td class="rent_title">Receiver Name</td>
+                     <td>
+                {{$request_bidder ? $request_bidder->name : 'N/A'}} {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
+                     </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Receiver Email</td>
+                     <td>
+                {{$request_bidder->email}}
+                     </td>
+                   </tr>
+                  <tr>
+                     <td class="rent_title">Receiver Phone number</td>
+                     <td>
+                {{$request_bidder->phone}}
+                     </td>
+                   </tr>
 </tbody>
 </table>
                           @endforeach
             <hr>
  
  @if($request_bid->status == 'Pending')
-   Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+  <span style="font-size: 20px;"> Request Status:</span> <span class="text-danger" style="font-size: 20px;"> <strong>{{$request_bid->status}}</strong></span>
 
    @elseif($request_bid->status == 'Approved')
                     Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
@@ -250,9 +291,9 @@
                 @elseif($request_bid->status == 'Approved')
                     <!-- Request Status:<span class=" text-primary">{{$request_bid->status}}</span> -->
                 @elseif($request_bid->status == 'Rejected')
-                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+                    Request Status: <span class=" text-danger" style="font-size: 20px;"> {{$request_bid->status}}</span>
                 @elseif($request_bid->status == 'Delivered')
-                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+                    Request Status:<span class=" text-success" style="font-size: 20px;"> {{$request_bid->status}}</span>
                 @endif
 
                         </form>
