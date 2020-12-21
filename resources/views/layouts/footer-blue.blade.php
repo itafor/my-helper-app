@@ -1,25 +1,26 @@
-	<footer>
-         <div class="col_ggSecondary1 layout_centerVertical">
-            <div class="grid-padder grid-parent layout_centerVertical">
-               <div class="grid-12 grid-lg-8 layout_center layout_lg_alignLeft text_fontSizeSmallest box_topPadded2 box_lg_topPadded0">
-                  <address class="layout_inlineBlock col_ggSecondary1LighterText text_4n">
+	<footer class="dark">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-md-8">
+                  <div class="copyright">
                      
                      Copyright &copy; {{ now()->year }} {{ _( 'All rights reserved.') }}  <br />
                      
-                     <span class="col_ggSecondary1LighterText">
-					 {{ _( 'This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed. Kindly engage with caution.') }} </span>
+                     <span class="disclaimer">
+					          {{ _( 'This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed. Kindly engage with caution.') }} 
+                     </span>
                      
-                  </address>
+                  </div>
                </div>
-               <div class="grid-12 grid-lg-4 box_leftPaddedHalf layout_centerVertical grid-parent layout_center layout_lg_alignRight text_fontSizeSmallest print_noPrint text_allCaps text_7n col_ggPrimary1Text box_verticalPadded3">
+               <div class="col-md-4 partners-links text-right">
                   
-                  <span class="box_horizontalPadded1 box_lg_horizontalPadded0">{{ __('Powered By ' ) }}&nbsp;·&nbsp;</span><br />
-                  <a class="col_whiteText" href="https://sterling.ng" target="_blank">{{ _( 'Sterling Bank' ) }}</a><span class="box_horizontalPadded1 box_lg_horizontalPadded0">&nbsp;·&nbsp;</span>
-                  <a class="col_whiteText" href="https://giving.ng" target="_blank">{{ _( 'Giving' ) }}</a><span class="box_horizontalPadded1 box_lg_horizontalPadded0">&nbsp;·&nbsp;</span>
-                  <a class="col_whiteText" href="https://100startapps.com" target="_blank">{{ _( '100StartApps' ) }}</a><span class="box_horizontalPadded1 box_lg_horizontalPadded0">&nbsp;·&nbsp;</span>
+                  <span class="powered-by">{{ __('Powered By ' ) }}<span class="bullet">&bull;</span></span>
+                  <a class="text-white" href="https://sterling.ng" target="_blank">{{ _( 'Sterling Bank' ) }}</a><span class="bullet">&bull;</span>
+                  <a class="text-white" href="https://giving.ng" target="_blank">{{ _( 'Giving' ) }}</a><span class="bullet">&bull;</span>
+                  <a class="text-white" href="https://100startapps.com" target="_blank">{{ _( '100StartApps' ) }}</a><span class="bullet">&bull;</span>
                   
                </div>
             </div>
          </div>
-      </footer>
+   </footer>
 

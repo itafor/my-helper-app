@@ -440,7 +440,7 @@ label.error{
 	padding-top: 100px;
 }
 .track-cards{
-	margin-top: 35px;
+	margin-top: 135px;
 }
 .sidebar .nav li.active>a:not([data-toggle="collapse"]):before, .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]):before{
 	left: -5px;
@@ -453,8 +453,11 @@ label.error{
     width: 23px;
     text-align: left;
 }
+.sidebar .nav, .off-canvas-sidebar .nav{
+    margin-left: 0 !important;
+}
 .sidebar .nav p, .off-canvas-sidebar .nav p{
-	font-size: 14.5px;
+	font-size: 13px;
 }
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .btn-danger:active:focus, .btn-danger:active:hover, .btn-danger.active:focus, .btn-danger.active:hover {

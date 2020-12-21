@@ -25,7 +25,7 @@
 										@php
 										$logged_in = Auth::user();
 										@endphp
-										<p class="d-lg-none">Helo, {{ $logged_in->name }}</p>
+										<p>Helo, {{ $logged_in->name }}</p>
 									</a>
 									<ul class="dropdown-menu dropdown-navbar">
 										<li class="nav-link">

@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
         <!--<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">-->
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/css/minimal.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/slick/slick.css"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/slick/slick-theme.css"/>
@@ -73,7 +73,7 @@
             </div>
         @endauth
        
-       @if ( (\Request::is('make/req/*') ) || (\Request::is('provide/req/*') ) ){ 
+       @if ( (\Request::is('make/req/*') ) || (\Request::is('provide/req/*') ) ) 
         <!--   Core JS Files   -->
         <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
@@ -91,20 +91,28 @@
     
       
        @else 
-        
+        <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
 		<script src="{{ asset('white') }}/js/core/popper.min.js"></script>
 		<script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
-        
+        <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
 
 		<!-- sweetalert script -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<!--<script src="sweetalert2/dist/sweetalert2.all.min.js"></script>-->
+        <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script>
 		<script src="{{ asset('blue') }}/js/s.js"></script>
         <script type="text/javascript" src="{{ asset('blue') }}/slick/slick.min.js"></script>
 		
         @stack('js')
-
+        <script type="text/javascript">
+            $(document).ready( function () {
+                $('#requests').DataTable();
+            } );
+        </script>
         <script type="text/javascript">
             $('.request-slide').slick({
 			  dots: true,
@@ -165,7 +173,63 @@
 			  ]
 			});
         </script>
-         
+        <script>
+           function searchCards() {
+              // Declare variables
+              var input, filter, div, carddiv, name, req, cat, city, price, time, i, result, results;
+              input = document.getElementById("cardSearch");
+              filter = input.value.toUpperCase();
+
+              div = document.getElementById("card");
+              carddiv = div.getElementsByClassName("card-inner"); //** Select by class
+
+              // Loop through all list items, and hide those who don't match the search query
+              for (i = 0; i < carddiv.length; i++) {
+                //** Select specific parent element. innerText will return text in child h1.
+                name = carddiv[i].querySelector("[id='name']").innerText;
+                req = carddiv[i].querySelector("[id='req_type']").innerText;
+                cat = carddiv[i].querySelector("[id='category']").innerText;
+                price = carddiv[i].querySelector("[id='price']").innerText;
+                city = carddiv[i].querySelector("[id='city']").innerText;
+                time = carddiv[i].querySelector("[id='time']").innerText;
+
+                
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                carddiv[i].style.display = "block";                                
+                } else {
+                    if (time.toUpperCase().indexOf(filter) > -1) {
+                        carddiv[i].style.display = "block";
+                        carddiv[i].id = "result"; 
+                    } else {
+                        if (req.toUpperCase().indexOf(filter) > -1 ) {
+                            carddiv[i].style.display = "block"; 
+                            carddiv[i].id = "result";   
+                        } else {
+                            if (cat.toUpperCase().indexOf(filter) > -1) {
+                                carddiv[i].style.display = "block";
+                                carddiv[i].id = "result"; 
+                            } else {
+                                if (price.toUpperCase().indexOf(filter) > -1) {
+                                    carddiv[i].style.display = "block";
+                                    carddiv[i].id = "result"; 
+                                } else {
+                                    if (city.toUpperCase().indexOf(filter) > -1) {
+                                        carddiv[i].style.display = "block";
+                                        carddiv[i].id = "result"; 
+                                    } else {
+                                        carddiv[i].style.display = "none";                                
+                                    } 
+                                }
+                            }
+                        }
+                    }
+
+                }
+                
+            }
+                
+        };
+        </script>
         @stack('js')
 		
 		<div style="position: static !important;"></div>

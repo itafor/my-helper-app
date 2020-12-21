@@ -36,6 +36,7 @@ Route::get('view/{id}/request', ['uses' => 'ProvideRequestController@show', 'as'
 Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'as' => 'view.make.request']);
 
 Route::get('how-it-works', ['uses' => 'PagesController@how_it_works', 'as' => 'how_it_works']);
+Route::get('all-requests', ['uses' => 'PagesController@all_requests', 'as' => 'all_requests']);
 
 
 

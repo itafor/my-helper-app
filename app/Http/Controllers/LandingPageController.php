@@ -15,7 +15,7 @@ class LandingPageController extends Controller
 
         
     }
-    
+        
     public function registrationType()
     {
     	return view('auth.select_registration_type');
