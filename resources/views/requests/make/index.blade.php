@@ -1,21 +1,20 @@
-@extends('layouts.app', ['pageSlug' => 'Requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'Requests'])
 
 @section('content')
-    <div class="header py-7 py-lg-8">
-        <div class="container-fluid">
-            <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
+     <div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods and services for free or at a fee.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
+                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods and services.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
 
-                            <div class="btn-group req-btn">
-                                <button type="button" class="btn btn-danger btn-custom dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-panel dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Get or Provide Help Here
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('new.make.request') }}">Get Help</a>
-                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('new.provide.request') }}">Provide Help</a>
                                 </div>
                             </div>
@@ -23,10 +22,10 @@
                             {{ __('What do u need right now for your lockdown?') }}
                         </p> -->
                         </div>
-                        <div class="col-md-12 welcome-cards">
+                        <div class="col-md-12 content-wrap">
                             <div id="card" class="card ">
                                 <div class="card-header">
-                                    <h4 class="card-title">All Requests</h4>
+                                    <h2 class="card-title text-center">All Requests</h2>
                                 </div>
                                 <div class="card-body">
                                 @include('alerts.success')
@@ -113,12 +112,11 @@
                                                                     
                                                                 </div>
                                                             </div>
-                                                                <button class="clickable-row btn btn-custom btn-request" 
-                                                                    @if($req->request_type == 1)
-                                                                        data-href="{{ route('view.make.request', [$req->id]) }}">View Request</button>
-                                                                    @else
-                                                                        data-href="{{ route('view.request', [$req->id]) }}">View Supply</button>
-                                                                    @endif
+                                                            @if($req->request_type == 1)
+                                                                <button class="clickable-row btn btn-custom btn-request" data-href="{{ route('view.make.request', [$req->id]) }}">View Request</button>
+                                                            @else
+                                                                 <button class="clickable-row btn btn-custom btn-request" data-href="{{ route('view.request', [$req->id]) }}">View Supply</button>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,7 +131,7 @@
 
 
                                     <div class="table-responsive hidden-mobile">
-                                        <table class="table tablesorter " id="requests">
+                                        <table class="table table-striped tablesorter " id="requests">
                                             <thead class=" text-primary">
                                                 <tr>
                                                     <th class="text-left id hidden_all">SN</th>
@@ -191,12 +189,8 @@
                                                 
                                             </tbody>
                                         </table>
-                                    </div>
 
-                                    <div class="disclaimer">
-                                          <p><span>Disclaimer:</span> 
-                                    This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed.  Kindly engage with caution.</p>
-                                    </div>
+                                    </div>                                    
 
                                 </div>
                             </div>

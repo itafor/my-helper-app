@@ -1,5 +1,5 @@
 
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 
 
 @section('content')

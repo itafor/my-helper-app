@@ -1,125 +1,123 @@
-@extends('layouts.app', ['pageSlug' => ''])
+@extends('layouts.app-blue', ['pageSlug' => ''])
 
 @section('content')
-    <div class="container-fluid mt--7 header-body track-cards">
-        <div class="row">
-            <div class="col-xl-12 order-xl-1 welcome-cards">
+     
                 <div class="card">
-                    <div class="card-header list-header">
+                    <div class="card-header bs-padded">
                         <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="card-title">Supply of {{ $getRequest->category ? $getRequest->category->title : ''}}</h3>
+                            <div class="col-8 col-left">    
+                                <h2>Supply of {{ $getRequest->category ? $getRequest->category->title : ''}}</h2>
                             </div>
                             <div class="col-4 text-right">
                                 @if(auth()->check())
-                                    <a href="{{ route('requests') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                    <a href="{{ route('requests') }}" class="btn btn-dark">{{ __('Back to list') }}</a>
                                 @else
-                                    <a href="{{ route('home.landingpage') }}" class="btn btn-sm btn-primary btn-header">{{ __('Back to list') }}</a>
+                                    <a href="{{ route('home.landingpage') }}" class="btn btn-dark">{{ __('Back to list') }}</a>
                                 @endif
                             </div>
                         </div>
                     </div>
                     <div class="card-body request-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
-                      <div>
-                       <div class="col-md-9 float-left">
-                               
-                                    <div class="user-request-card">
-                                      <label>
-                                    <h4>Welcome to my page -{{ $getRequest->user->username }}</h4>
-                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})<br><br>
+                       <div class="row">
+                          <div class="col-md-8">
+                            <div class="group-wrap">
+                              <div class="user-request-card">
+                                  <div class="request-title">
 
+                                    <h3>Welcome to my page - 
+                                      <strong>{{ $getRequest->user->username }}</strong>
+                                    </h3>
+
+                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                    <div class="request-detail size-wrap">
                                       Item Size: {{itemSize($getRequest->weight)}}
+                                    </div>
 
-                                      <br><br>
+                                    <div class="request-detail delivery-fee-wrap">
+                                      Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong>
+                                    </div>
+                                  </div>
 
-                    Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
-                    </label>
-                    @auth
-                        <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
-                    @endauth
-                <!--Tab Gallery: The expanding image container -->
-                  <div class="container" style="display: none;">
-                    
-                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+                                  <div class="photos-wrap">
+                                    @auth
+                                      <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
+                                    @endauth
 
-                   
-                    <img id="expandedImg" style="width:500px; height: 400px;">
-
+                                  <!--Tab Gallery: The expanding image container -->
+                                    <div class="container" style="display: none;">                                      
+                                      <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>    
+                                      <img id="expandedImg" style="width:500px; height: 400px;">
+                                      <div id="imgtext"></div>
+                                    </div>
+                                
+                                    @foreach($request_photos as $photo)                  
+                                    <div class="column">
+                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50px;">
+                                    </div>                                    
+                                    @endforeach
+                                  </div>
                   
-                    <div id="imgtext"></div>
-                  </div>
-                                @foreach($request_photos as $photo)
+                                  @if(auth()->check())
+                                  <!-- show all users that want this help -->
+                                  @if(authUser()->id == $getRequest->user->id)
 
-                  
-                    <div class="column">
-                   
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50px;">
-                    </div>
-                    
-                    @endforeach
-                 
+                                  <div class="table-responsive">
 
-                        
-                  
-                        @if(auth()->check())
-                        <!-- show all users that want this help -->
-                         @if(authUser()->id == $getRequest->user->id)
+                                    <table class="table tablesorter" id="requests">
 
-            <div class="table-responsive">
+                                      <thead class=" text-primary">
+                                         <tr>
+                                        <th> Full name </th>
+                                        <th> City </th>
+                                        <th> Delivery Cost </th>
+                                        <th> Status </th>
+                                        <th> Actions </th>
+                                          </tr>
+                                       
+                                      </thead>
+                                      <tbody>
 
-                  <table class="table tablesorter" id="requests">
+                                        @foreach($help_request_bidders as $bid)
+                                        <tr>
+                                          <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
+                                              {{$bid->bidder ? $bid->bidder->last_name : 'N/A'}}
+                                          </td>
+                                          <td>{{$bid->bidder ? providerDetail($getRequest->id,$bid->bidder->id)['api_city'] : 'N/A'}} </td>
+                                          <td>
 
-                    <thead class=" text-primary">
-                       <tr>
-                      <th> Full name </th>
-                      <th> City </th>
-                      <th> Delivery Cost </th>
-                      <th> Status </th>
-                      <th> Actions </th>
-                        </tr>
-                     
-                    </thead>
-                    <tbody>
+                                            @if($bid->bidder) 
+                                            @foreach(deliveryFee($getRequest->api_city,providerDetail($getRequest->id,$bid->bidder->id)['api_city'],$getRequest->weight,providerDetail($getRequest->id,$bid->bidder->id)['api_delivery_town_id']) as $fee)
+                                               &#8358;{{$fee['TotalAmount']}}
+                                            @endforeach
+                                              @endif
+                                           </td>
+                                          <td>
+                                              @if($bid->status == 'Approved')
+                                             <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
+                                              @elseif($bid->status =='Pending')
+                                             <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
+                                             @elseif($bid->status == 'Delivered')
+                                             <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
+                                              @elseif($bid->status == 'Rejected')
+                                             <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
+                                             @endif
 
-                      @foreach($help_request_bidders as $bid)
-                      <tr>
-                        <td>{{$bid->bidder ? $bid->bidder->name : 'N/A'}} 
-                            {{$bid->bidder ? $bid->bidder->last_name : 'N/A'}}
-                        </td>
-                        <td>{{$bid->bidder ? providerDetail($getRequest->id,$bid->bidder->id)['api_city'] : 'N/A'}} </td>
-                        <td>
+                                          </td>
+                                       
+                                       <td>
+                                       <a href="{{route('request.approve',[$bid->id])}}">
+                                            <button class="btn btn-sm btn-success btn-custom"><i class="fa fa-eye" title="View"></i></button>
+                                            </a>
+                                          </td>
+                                         
+                                        </tr>
+                                       @endforeach
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                                  @endif 
 
-                          @if($bid->bidder) 
-                          @foreach(deliveryFee($getRequest->api_city,providerDetail($getRequest->id,$bid->bidder->id)['api_city'],$getRequest->weight,providerDetail($getRequest->id,$bid->bidder->id)['api_delivery_town_id']) as $fee)
-                             &#8358;{{$fee['TotalAmount']}}
-                          @endforeach
-                            @endif
-                         </td>
-                        <td>
-                            @if($bid->status == 'Approved')
-                           <span style="color: green; font-size: 14px;">{{$bid->status}}</span>  
-                            @elseif($bid->status =='Pending')
-                           <span style="color: brown; font-size: 14px;">{{$bid->status}}</span>
-                           @elseif($bid->status == 'Delivered')
-                           <span style="color: blue; font-size: 14px;">{{$bid->status}}</span>  
-                            @elseif($bid->status == 'Rejected')
-                           <span style="color: red; font-size: 14px;">{{$bid->status}}</span>  
-                           @endif
-
-                        </td>
-                     
-                     <td>
-                     <a href="{{route('request.approve',[$bid->id])}}">
-                          <button class="btn btn-sm btn-success btn-custom"><i class="fa fa-eye" title="View"></i></button>
-                          </a>
-                        </td>
-                       
-                      </tr>
-                     @endforeach
-                    </tbody>
-                  </table>
-                </div>
-                        @endif 
 
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
                                 <p style="color:red"> 
@@ -216,17 +214,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
-                                    <input type="hidden" name="receiver_state" id="receiver_state" value="{{$getRequest->api_state}}">
+                                        <input type="hidden" name="api_delivery_town_id" id="api_delivery_town_id">
+                                        <input type="hidden" name="receiver_state" id="receiver_state" value="{{$getRequest->api_state}}">
 
-                         <div class="form-group">
-                            <!-- <label for="exampleInputEmail1">Comment (Optional)</label> -->
-                            <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="Type a comment (Optional)" ></textarea>
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-custom">
-                              Contact  {{ $getRequest->user->username }}
-                          </button>
-                        </form>
+                                       <div class="form-group">
+                                          <!-- <label for="exampleInputEmail1">Comment (Optional)</label> -->
+                                          <textarea type="text" name="comment" class="form-control" id="delievery_cost" value="3500" placeholder="Type a comment (Optional)" ></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-custom">
+                                            Contact  {{ $getRequest->user->username }}
+                                        </button>
+                                    </form>
                                     </div>
                                    @endif
                                 @endif
@@ -240,9 +238,9 @@
                         </div>
                
                     </div>
-
-        @if(auth()->check())
-                            <div class="col-md-3 float-right">
+                    </div>
+                            @if(auth()->check())
+                            <div class="col-md-4 float-right">
                                 <div class="suggestion">
                                     <h4>Suggestions</h4>
                                     @foreach($suggestions as $suggestion)
@@ -252,8 +250,8 @@
                                                 <h4 class="name">{{ $suggestion->user->username }}<br> <span class="float-left">{{ $suggestion->category ? $suggestion->category->title : '' }} </span>
                                                 </h4>    
                                                 <br>                                        
-                                                <div class="memo desc">{{ Str::limit($suggestion->description,16) }} </div>
-                                                <div class="desc">State: <span>{{ $suggestion->api_state }} </span></div>
+                                                <div class="memo desc">{{ Str::words($suggestion->description,7) }} </div>
+                                                <div class="desc">State: <span>{{ $suggestion->api_state ? $suggestion->api_state : "Undefined" }} </span></div>
                                             </a>
                                         </div>
                                         <br>
@@ -267,5 +265,5 @@
             </div>
         </div>
     </div>
-    
+  </div>
 @endsection
