@@ -2,13 +2,18 @@
 
 @section('content')
      
-                <div class="card">
+      <div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
+                  <div class="card">     
                     <div class="card-header bs-padded">
-                        <div class="row align-items-center">
-                            <div class="col-8 col-left">    
+                        <div class="row ">
+                            <div class="col-md-8">    
                                 <h2>Supply of {{ $getRequest->category ? $getRequest->category->title : ''}}</h2>
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="col-md-4 text-right">
                                 @if(auth()->check())
                                     <a href="{{ route('requests') }}" class="btn btn-dark">{{ __('Back to list') }}</a>
                                 @else
@@ -51,8 +56,8 @@
                                     </div>
                                 
                                     @foreach($request_photos as $photo)                  
-                                    <div class="column">
-                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50px;">
+                                    <div class="column pb-20 mb-20">
+                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 100%;">
                                     </div>                                    
                                     @endforeach
                                   </div>

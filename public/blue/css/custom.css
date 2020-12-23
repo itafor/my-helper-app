@@ -1181,7 +1181,20 @@ footer.dark .disclaimer, footer.dark .copyright{
 	margin: 0 0 25px;
 	display: none;
 }
+#rental_table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
 
+#rental_table td{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#rental_table .rent_title{
+  width: 150px;
+}
 
 
 
