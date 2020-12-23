@@ -1,12 +1,14 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 @section('content')
 
-<div class="container-fluid mt--7 header-body track-cards">
-        <div class="row">
-            <div class="col-xl-12 order-xl-1 welcome-cards">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">{{ __('Provide Help') }}</h4>
+<div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
+                  <div class="card">     
+                    <div class="card-header text-center bs-padded">
+                        <h2>{{ __('Provide Help') }}</h2>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off" enctype="multipart/form-data">
@@ -197,5 +199,5 @@
         
         {{--@include('layouts.footers.auth') --}}
     </div>
-
+</div>
 @endsection

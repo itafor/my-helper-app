@@ -1,31 +1,29 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 
 
 @section('content')
 
- d -->
-        <div class="row header-body">
-
-          <!-- Grid Item -->
-          <div class="col-xl-12 track-cards">
-
-            <div class="welcome-cards">
-              <!-- Card -->
-              <div class="card" id="card">
+<!-- d -->
+      <div class="page-wrap">
+        <div class="container">
+            <div class="row">
                 
-                <div class="card-header">
-                   <div class="col-md-8">
-                      <h4 class="card-title">Submitting Pickup Request Information and Generation of Waybill Number</h4>                       
-                    </div>
-                    <div class="col-md-4">
-                      <div class="float-right">				
-              					@if($request_bid->status == 'Pending')
-              					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
+                <div class="card">     
+                
+                  <div class="card-header bs-padded">
+                     <div class="col-md-8">
+                        <h2>Submitting Pickup Request Information and Generation of Waybill Number</h2>                       
+                      </div>
+                      <div class="col-md-4">
+                        <div class="float-right">				
+                					@if($request_bid->status == 'Pending')
+                					<button class="btn btn-dark" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
 
-              					@endif
-				              </div>
-				            </div>
-                </div>
+                					@endif
+  				              </div>
+  				            </div>
+                  </div>
 
 				  <div class="card-body">
              @foreach(deliveryFee($request->api_city,providerDetail($request->id,$request_bidder->id)['api_city'],$request->weight,providerDetail($request->id,$request_bidder->id)['api_delivery_town_id']) as $fee)
@@ -33,7 +31,7 @@
            
                     <tbody>
                       <br>
-                      <h2>Delivery fee and Receiver details</h5>
+                      <h2>Delivery fee and Receiver details</h2>
 
                     <tr>
                      <td class="rent_title">Item Size</td>
@@ -96,31 +94,31 @@
                 {{$request_bidder->phone}}
                      </td>
                    </tr>
-</tbody>
-</table>
-                          @endforeach
+              </tbody>
+          </table>
+                            @endforeach
             <hr>
  
- @if($request_bid->status == 'Pending')
-  <span style="font-size: 20px;"> Request Status:</span> <span class="text-danger" style="font-size: 20px;"> <strong>{{$request_bid->status}}</strong></span>
+           @if($request_bid->status == 'Pending')
+            <span style="font-size: 20px;"> Request Status:</span> <span class="text-danger" style="font-size: 20px;"> <strong>{{$request_bid->status}}</strong></span>
 
-   @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
-                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
-                        <button class="btn-sm btn-primary">View details</button>
+             @elseif($request_bid->status == 'Approved')
+                              Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
+                                <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
+                                  <button class="btn-sm btn-primary">View details</button>
 
-                      </a>
-  @elseif($request_bid->status == 'Rejected')
-                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
-  @elseif($request_bid->status == 'Delivered')
-                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
-  @endif
+                                </a>
+            @elseif($request_bid->status == 'Rejected')
+                              Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+            @elseif($request_bid->status == 'Delivered')
+                              Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+            @endif
 
 				   <hr>
 				   <div class="col-sm-12">
 				  
 
-					<form class="form" method="post" action="{{ route('request.approve.store') }}" id="approveRequest">
+					       <form class="form" method="post" action="{{ route('request.approve.store') }}" id="approveRequest">
                             @csrf
                           <div>
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
@@ -427,8 +425,8 @@
           </div>
           <!-- /grid item -->
         </div>
-        <!-- /grid -->
-
+       < <!-- /grid -->
+</div>
 
 
 @endsection
