@@ -56,8 +56,8 @@
                                     </div>
                                 
                                     @foreach($request_photos as $photo)                  
-                                    <div class="column">
-                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50px;">
+                                    <div class="column pb-20 mb-20">
+                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 100%;">
                                     </div>                                    
                                     @endforeach
                                   </div>
