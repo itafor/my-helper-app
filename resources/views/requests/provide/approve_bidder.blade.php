@@ -108,16 +108,27 @@
                              
                               <div class="float-left">
                                 <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
-                                  <button class="btn-primary">View details</button>
+                                  <button class="btn btn-primary">View details</button>
                                 </a>
                               </div>
                                 
                               <div class="float-right">
+
+                             Payment Status:  {{paymentStatus(helpProviderPickupRequestDetails($help_provider->id, $request->id)['PaymentRef'])}}
+                <br>
+
+                                {{$request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}
+
+                                 @if($request->delivery_cost_payer =='prepaid')
                                 <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
-                    <input type="text" name="waybillNo" value="{{getDonorWayBillNo($help_provider->id, $request->id)}}">
-                                  <button type="submit" class="btn-success">Pay shipping fee</button>
+                    <input type="text" name="waybillNo" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id)['WaybillNumber']}}">
+
+                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id)['id']}}">
+
+                                  <button type="submit" class="btn btn-success">Pay shipping fee</button>
                                 </form>
+                                @endif
                               </div>
                          </div>        
 
@@ -360,7 +371,7 @@
                     <!-- The grid:-->
                     <div class="column">
                      <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 15%;">
                     </div>
                     
                     @endforeach

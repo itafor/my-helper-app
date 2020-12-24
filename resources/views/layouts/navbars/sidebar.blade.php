@@ -25,6 +25,13 @@
                 </a>
             </li>
 
+             <li @if ($pageSlug == 'check_payment_status') class="active " @endif>
+                <a href="{{ route('check.payment.status.form') }}">
+                   <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>{{ _('Payment Status') }}</p>
+                </a>
+            </li>
+
              <li @if ($pageSlug == 'calculate_deliveryfee') class="active " @endif>
                 <a href="{{ route('pickupRequest.calculate.deliveryfee') }}">
                    <i class="fa fa-question-circle" aria-hidden="true"></i>

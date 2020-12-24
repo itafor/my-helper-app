@@ -39,7 +39,7 @@
                                     </div>
 
                                     <div class="request-detail delivery-fee-wrap">
-                                      Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong>
+                                      Delivery Fee Payer: <strong class="text-danger">{{$getRequest->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong>
                                     </div>
                                   </div>
 
@@ -57,7 +57,7 @@
                                 
                                     @foreach($request_photos as $photo)                  
                                     <div class="column pb-20 mb-20">
-                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 100%;">
+                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 10%;">
                                     </div>                                    
                                     @endforeach
                                   </div>
@@ -127,7 +127,31 @@
                             @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help'))
                                 <p style="color:red"> 
                                 </p>
+
                                 <span style="font-size: 20px;">Request Status: <strong>{{user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status']}}</strong></span>
+                                @php
+
+                               $get_pickup_request = helpReceiverPickupRequestDetails(auth()->user()->id, $getRequest->id)
+
+                                @endphp
+                                <br>
+                                Payment Status: {{paymentStatus($get_pickup_request->PaymentRef)}}
+                                <br>
+                @if($getRequest->delivery_cost_payer =='pay on delivery')
+        @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status'] == 'Approved')
+            <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="text" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
+                    <input type="hidden" name="pickupRequest_id" value="{{$get_pickup_request->id}}">
+                                  <button type="submit" class="btn btn-success">Pay shipping fee</button>
+                                </form>
+
+              @endif
+          @endif
+          <br>
+                                @include('inc.pickupRequestDetails')
+
+
                             @else
                                 @if($getRequest->user_id != auth()->user()->id)
                                 

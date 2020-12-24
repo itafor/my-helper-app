@@ -179,6 +179,9 @@ Route::group([
 
   Route::post('/shipping_fee_payment', 'PickupRequestController@payWithPayStack')->name('initiate_shipping_fee_payment');
 
+  Route::get('/payment-status', 'PickupRequestController@getPaymentStatus')->name('check.payment.status.form');
+  Route::post('/check-payment-status', 'PickupRequestController@checkPaymentStatus')->name('check.payment.status');
+
 });
 
 

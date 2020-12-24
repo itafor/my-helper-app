@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PickupRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
@@ -91,11 +92,36 @@ public function payWithPayStack(Request $request){
      $payment_response = json_decode($response, true);
 
         if($payment_response['ResponseCode'] == '00'){
+            $data['paymentRef'] = $payment_response['PaymentRef'];
+            PickupRequest::updatePickupRequest($data);
             return Redirect::to($payment_response['CheckoutURL']);
         }
      
       return back()->withInput()->with('error', $payment_response['ResponseDescription']);
 
+}
+
+public function getPaymentStatus(){
+    return view('PickupRequest.payment_status');
+}
+
+public function checkPaymentStatus(Request $request){
+    
+    $data = $request->all();
+
+    $client = new Client(['verify' => false]);
+
+     $checkPaymentRef = $client->get('https://api.clicknship.com.ng/ClicknShip/NotifyMe/RequeryPayment?PaymentRef='.$data['paymentRef'].'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+              
+                    ]);
+
+       $response = $checkPaymentRef->getBody()->getContents();
+      $values = json_decode($response, true);
+
+      return back()->withInput()->with('error', $values);
 }
 
 }
