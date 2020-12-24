@@ -226,7 +226,7 @@ class RequestBiddersController extends Controller
        $response = $pickupRequest->getBody()->getContents();
       $values = json_decode($response, true);
 
-
+     
      if($values['TransStatus'] == 'Successful'){
 
       $data['OrderNo'] = $values['OrderNo'];
@@ -257,6 +257,7 @@ class RequestBiddersController extends Controller
         return back()->with('success', $values['TransStatusDetails']);
           
           }
+         
 
         return back()->withInput()->with('error', $values['TransStatusDetails']);
 

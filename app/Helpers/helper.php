@@ -2,6 +2,7 @@
 
 use App\City;
 use App\Country;
+use App\PickupRequest;
 use App\ProviderLocation;
 use App\RequestBidders;
 use App\RequestPhoto;
@@ -65,6 +66,15 @@ function user_already_contacted_help_seeker($requester_id,$request_id,$bidder_id
     return $result;
 }
 
+function getDonorWayBillNo($donor_id, $request_id){
+
+  $waybillno = PickupRequest::where([
+    ['provider_id', $donor_id],
+    ['request_id', $request_id],
+  ])->first();
+
+  return $waybillno->WaybillNumber;
+}
 
 function uploadImage($image)
 {
@@ -315,6 +325,8 @@ function providerDetail($request_id,$provider_id){
        return $delivery_cost;
 
 }
+
+
 
 function requestPhotos($request_id,$provider_id){
    $request_photos= RequestPhoto::where([

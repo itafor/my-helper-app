@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PickupRequestController extends Controller
 {
@@ -68,6 +68,33 @@ public function calculateDeliveryFeeOperation(Request  $request){
      // dd($data['deliveryFee']);
 
        return view('PickupRequest.calculate_delivery_fee',$data);
+
+}
+
+public function payWithPayStack(Request $request){
+
+    $data = $request->all();
+
+           $client = new Client(['verify' => false]);
+
+     $pay_With_payStack = $client->post('https://api.clicknship.com.ng/ClicknShip/NotifyMe/PayWithPayStack', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+                'form_params' => [
+                'WaybillNumber' => $data['waybillNo'],
+                'CallBackURL' => "www.test.com",
+            ]
+                    ]);
+
+       $response = $pay_With_payStack->getBody()->getContents();
+     $payment_response = json_decode($response, true);
+
+        if($payment_response['ResponseCode'] == '00'){
+            return Redirect::to($payment_response['CheckoutURL']);
+        }
+     
+      return back()->withInput()->with('error', $payment_response['ResponseDescription']);
 
 }
 

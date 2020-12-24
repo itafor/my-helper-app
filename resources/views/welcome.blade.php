@@ -113,7 +113,7 @@
 		
 		<div class="grid-parent col_ggPrimary5VeryLight box_horizontalPadded2 layout_center layout_centerVertical col_ggPrimary5Text page-cta">
 			<span class="grid-12 grid-lg-6 text_fontSizeSmall_2 box_verticalPadded2 text_allCaps layout_alignLeft">Requests</span>
-			<a href="{{ route('all_requests') }}" class="grid-12 grid-lg-6 text_fontSizeSmall col_ggPrimary5Text box_verticalPadded2 text_allCaps layout_alignRight">Explore ›</a>
+			<a href="{{route('all_requests')}}" class="grid-12 grid-lg-6 text_fontSizeSmall col_ggPrimary5Text box_verticalPadded2 text_allCaps layout_alignRight">Explore ›</a>
 		</div>
 		
 		<section class="requests-slides">

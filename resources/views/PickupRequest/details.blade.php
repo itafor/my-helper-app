@@ -34,10 +34,19 @@
                               </div>
                           </div>
                       </div>
-  
-   
+               
 
                       <div class="card-body">
+
+                    <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="hidden" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
+                                  <button type="submit" class="btn-success">Pay shipping fee</button>
+                                </form>
+                      
+                           <br>
+
+
                         @if($get_pickup_request)
 
                             <table class="table table-bordered" id="rental_table">
@@ -104,9 +113,9 @@
                           </tr>
 
                             <tr>
-                               <td class="rent_title">Weight</td>
+                               <td class="rent_title">Item Size</td>
                                <td>
-                           {{$get_pickup_request->Weight}}
+                           {{itemSize($get_pickup_request->Weight)}}
                               
                               </td>
                           </tr>
@@ -272,6 +281,12 @@
 
                   @endif
                   --}}
+
+                    <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="hidden" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
+                                  <button type="submit" class="btn-success">Pay shipping fee</button>
+                                </form>
                 </div>
               </div>
             </div>
