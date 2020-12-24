@@ -1,21 +1,21 @@
-@extends('layouts.app', ['pageSlug' => ''])
+@extends('layouts.app-blue', ['pageSlug' => ''])
 @section('content')
-     <div class="header py-7 py-lg-8">
-        <div class="container-fluid">
-            <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
+    <div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="justify-content-center">
                     <div class="col-md-12 content-wrapper">
-                        <div class="welcome-cards">
+                        <div class="welcome-cards pt-40 pb-40">
                             <div id="card" class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">How It Works</h4>
+                                <div class="card-header bs-padded text-center">
+                                    <h2>How It Works</h2>
                                 </div>
                                 <div class="card-body">
                                                                             
                                     <div class="card-detail how-it-works">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="content-box">                     
+                                                <div class="content-box group-wrap">                     
                                                     <h3>Requesting for Help</h3>
                                                     <ol class="basic-list">
                                                         <li>Click Get Help</li>
@@ -29,7 +29,7 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <div class="content-box">    
+                                                <div class="content-box group-wrap">    
                                                     <h3>Providing Help</h3>
                                                     <ol class="basic-list">
                                                         <li>Click Get Help</li>
@@ -43,7 +43,7 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <div class="content-box content-box-bottom social">
+                                                <div class="content-box content-box-bottom group-wrap social">
                                                     <h3>Support</h3> 
                                                     <span>
                                                         <i class="fas fa-phone"></i> +234 703 410 4040 (Whatsapp Chat and SMS Only)

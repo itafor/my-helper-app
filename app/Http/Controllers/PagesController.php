@@ -10,4 +10,9 @@ class PagesController extends Controller
     {
         return view('how_it_works');
     }
+    public function all_requests()
+    {
+        return view('all-requests');
+    }
+   
 }

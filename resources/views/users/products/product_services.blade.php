@@ -1,16 +1,16 @@
-@extends('layouts.app', ['pageSlug' => 'productServices'])
+@extends('layouts.app-blue', ['pageSlug' => 'productServices'])
 
 @section('content')
-    <div class="header py-7 py-lg-8 header-body track-cards">
-        <div class="container-fluid">
-            <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
+    <div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods and services for free or at a fee.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
+                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods and services.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
 
-                            <div class="btn-group req-btn">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-panel dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Get or Provide Help Here
                                 </button>
                                 <div class="dropdown-menu">
@@ -25,8 +25,8 @@
                         </div>
                         <div class="col-md-12 welcome-cards">
                             <div id="card" class="card ">
-                                <div class="card-header">
-                                    <h4 class="card-title">My Requests</h4>
+                                <div class="card-header text-center">
+                                    <h2>My Requests</h2>
                                 </div>
                                 <div class="card-body">
                                 @include('alerts.success')

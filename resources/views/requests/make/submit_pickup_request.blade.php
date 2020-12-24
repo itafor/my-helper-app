@@ -1,28 +1,26 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 
 
 @section('content')
 
  <!-- Grid -->
-        <div class="row header-body">
-
-          <!-- Grid Item -->
-          <div class="col-xl-12 track-cards">
-
-            <div class="welcome-cards">
-              <!-- Card -->
-              <div class="card" id="card">
+        <div class="page-wrap">
+        <div class="container">
+            <div class="row">
                 
-                <div class="card-header">
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
+                  <div class="card">     
+                
+                <div class="card-header s-padded">
 
                     <div class="col-md-8">
-                      <h4 class="card-title">Submitting Pickup Request Information and Generation of Waybill Number</h4>           
+                      <h2>Submitting Pickup Request Information and Generation of Waybill Number</h2>           
                     </div>
                     <div class="col-md-4">
                       <div class="float-right">
 
                         @if($request_bid->status == 'Pending')
-                        <button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>@endif
+                        <button class="btn btn-dark" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>@endif
 				
 				              </div>
 				            </div>
@@ -377,7 +375,7 @@
           </div>
           <!-- /grid item -->
 
-        </div>
+        <!--</div>-->
         <!-- /grid -->
 
 

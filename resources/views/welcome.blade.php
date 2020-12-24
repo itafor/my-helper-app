@@ -113,78 +113,80 @@
 		
 		<div class="grid-parent col_ggPrimary5VeryLight box_horizontalPadded2 layout_center layout_centerVertical col_ggPrimary5Text page-cta">
 			<span class="grid-12 grid-lg-6 text_fontSizeSmall_2 box_verticalPadded2 text_allCaps layout_alignLeft">Requests</span>
-			<a href="#" class="grid-12 grid-lg-6 text_fontSizeSmall col_ggPrimary5Text box_verticalPadded2 text_allCaps layout_alignRight">Explore ›</a>
+			<a href="{{ route('all_requests') }}" class="grid-12 grid-lg-6 text_fontSizeSmall col_ggPrimary5Text box_verticalPadded2 text_allCaps layout_alignRight">Explore ›</a>
 		</div>
 		
 		<section class="requests-slides">
 			<div class="container-fluid">
-				<div class="grid-12 grid-md-3 grid-lg-3 grid-xl-3 grid-xxl-3">
-					<div class="grid-box">
-						<div class="slide-group">
-							<div class="title-box">
-								<img src="{{ asset('blue') }}/images/help_requests.jpg" alt="Help Requests" />
-								<div class="details">
-									<h4>{{ __('Help Requests') }}</h4>
-									<p>{{ __('Create help requests to get help on the platform') }}</p>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="grid-box">
+							<div class="slide-group">
+								<div class="title-box">
+									<img src="{{ asset('blue') }}/images/help_requests.jpg" alt="Help Requests" />
+									<div class="details">
+										<h4>{{ __('Help Requests') }}</h4>
+										<p>{{ __('Create help requests to get help on the platform') }}</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="offset-lg-1 offset-md-0">
-				
-				</div>
-				<div class="grid-12 grid-md-8 grid-lg-8 grid-xl-8 grid-xxl-8">
-					<div class="grid-box">
-						<div class="requests-cards-slide">
-						
-							<div class="request-slide">
-								@php
-									$i = 1;
-								@endphp
-								@foreach( $allRequests->take(12) as $req )
-								@if($req->request_type == 1) 
-																			
-								<div id="id_{{ $i }}" class="item card-container">
-									<span class="pro">{{ __('Request') }}</span>
-									<img class="round" src="{{ asset('blue') }}/images/user.jpg" alt="user" />
-									<h3>{{ $req->user->username }}</h3>
-									@if ( $req->api_city !== "" )
-									<h6>{{ $req->api_city }}, {{ $req->api_state }}</h6>
+					<div class="col-md-1">
+					
+					</div>
+					<div class="col-md-8">
+						<div class="grid-box">
+							<div class="requests-cards-slide">
+							
+								<div class="request-slide">
+									@php
+										$i = 1;
+									@endphp
+									@foreach( $allRequests->take(12) as $req )
+									@if($req->request_type == 1) 
+																				
+									<div id="id_{{ $i }}" class="item card-container">
+										<span class="pro">{{ __('Request') }}</span>
+										<img class="round" src="{{ asset('blue') }}/images/user.jpg" alt="user" />
+										<h3>{{ $req->user->username }}</h3>
+										@if ( $req->api_city !== "" )
+										<h6>{{ $req->api_city }}, {{ $req->api_state }}</h6>
+										@endif
+										<p>{{ Str::limit($req->description, 30) }}</p>
+										<div class="buttons">
+											<a class="primary" href="{{ route('view.make.request', [$req->id]) }}">View Request</a>											
+										</div>
+										<div class="skills">
+											<ul>
+												<li>{{ $req->category ? $req->category->title : '' }}</li>
+												@php
+													$today = \Carbon\Carbon::today();
+													$time = \Carbon\Carbon::now();
+													$ageInSeconds = \Carbon\Carbon::parse($req->created_at)->diffInSeconds($time);
+													$ageInMins = \Carbon\Carbon::parse($req->created_at)->diffInMinutes($time);
+													$ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
+													$age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
+												@endphp
+	                                            @if($ageInMins < 60)
+												<li>{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</li>
+												@elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
+												<li>{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</li>
+												@else
+												<li>{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</li>
+												@endif
+	                                                											
+											</ul>
+										</div>
+									</div>
 									@endif
-									<p>{{ Str::limit($req->description, 30) }}</p>
-									<div class="buttons">
-										<a class="primary" href="{{ route('view.make.request', [$req->id]) }}">View Request</a>											
-									</div>
-									<div class="skills">
-										<ul>
-											<li>{{ $req->category ? $req->category->title : '' }}</li>
-											@php
-												$today = \Carbon\Carbon::today();
-												$time = \Carbon\Carbon::now();
-												$ageInSeconds = \Carbon\Carbon::parse($req->created_at)->diffInSeconds($time);
-												$ageInMins = \Carbon\Carbon::parse($req->created_at)->diffInMinutes($time);
-												$ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
-												$age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
-											@endphp
-                                            @if($ageInMins < 60)
-											<li>{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</li>
-											@elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
-											<li>{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</li>
-											@else
-											<li>{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</li>
-											@endif
-                                                											
-										</ul>
-									</div>
-								</div>
-								@endif
-								
-								@php
-								$i++;
-								@endphp
-								@endforeach		
-							</div>													
+									
+									@php
+									$i++;
+									@endphp
+									@endforeach		
+								</div>													
+							</div>
 						</div>
 					</div>
 				</div>
@@ -193,73 +195,76 @@
 		
 		<section class="provide-slides grey-bg">
 			<div class="container-fluid">
-				<div class="grid-12 grid-md-3 grid-lg-3 grid-xl-3 grid-xxl-3">
-					<div class="grid-box">
-						<div class="slide-group">
-							<div class="title-box">
-								<img src="{{ asset('blue') }}/images/help_requests.jpg" alt="Help Requests" />
-								<div class="details">
-									<h4>{{ __('{Provide Requests') }}</h4>
-									<p>{{ __('Create provide requests to help people on the platform') }}</p>
+				<div class="row">
+
+					<div class="col-md-3">
+						<div class="grid-box">
+							<div class="slide-group">
+								<div class="title-box">
+									<img src="{{ asset('blue') }}/images/help_requests.jpg" alt="Help Requests" />
+									<div class="details">
+										<h4>{{ __('Provide Requests') }}</h4>
+										<p>{{ __('Create provide requests to help people on the platform') }}</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="offset-lg-1 offset-md-0">
-				
-				</div>
-				<div class="grid-12 grid-md-8 grid-lg-8 grid-xl-8 grid-xxl-8">
-					<div class="grid-box">
-						<div class="requests-cards-slide">
-						
-							<div class="request-slide">
-								@php
-									$i = 1;
-								@endphp
-								@foreach( $allRequests->take(12) as $req )
-								@if($req->request_type == 2) 
-																			
-								<div id="id_{{ $i }}" class="item card-container">
-									<span class="pro">{{ __('Supply') }}</span>
-									<img class="round" src="{{ asset('blue') }}/images/user.jpg" alt="user" />
-									<h3>{{ $req->user->username }}</h3>
-									@if ( $req->api_city !== "" )
-									<h6>{{ $req->api_city }}, {{ $req->api_state }}</h6>
+					<div class="col-md-1">
+					
+					</div>
+					<div class="col-md-8">
+						<div class="grid-box">
+							<div class="requests-cards-slide">
+							
+								<div class="request-slide">
+									@php
+										$i = 1;
+									@endphp
+									@foreach( $allRequests->take(12) as $req )
+									@if($req->request_type == 2) 
+																				
+									<div id="id_{{ $i }}" class="item card-container">
+										<span class="pro">{{ __('Supply') }}</span>
+										<img class="round" src="{{ asset('blue') }}/images/user.jpg" alt="user" />
+										<h3>{{ $req->user->username }}</h3>
+										@if ( $req->api_city !== "" )
+										<h6>{{ $req->api_city }}, {{ $req->api_state }}</h6>
+										@endif
+										<p>{{ Str::limit($req->description, 30) }}</p>
+										<div class="buttons">
+											<a class="primary" href="{{ route('view.request', [$req->id]) }}">View Request</a>											
+										</div>
+										<div class="skills">
+											<ul>
+												<li>{{ $req->category ? $req->category->title : '' }}</li>
+												@php
+													$today = \Carbon\Carbon::today();
+													$time = \Carbon\Carbon::now();
+													$ageInSeconds = \Carbon\Carbon::parse($req->created_at)->diffInSeconds($time);
+													$ageInMins = \Carbon\Carbon::parse($req->created_at)->diffInMinutes($time);
+													$ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
+													$age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
+												@endphp
+	                                            @if($ageInMins < 60)
+													<li>{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</li>
+												@elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
+													<li>{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</li>
+												@else
+													<li>{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</li>
+												@endif
+	                                                											
+											</ul>
+										</div>
+									</div>
 									@endif
-									<p>{{ Str::limit($req->description, 30) }}</p>
-									<div class="buttons">
-										<a class="primary" href="{{ route('view.request', [$req->id]) }}">View Request</a>											
-									</div>
-									<div class="skills">
-										<ul>
-											<li>{{ $req->category ? $req->category->title : '' }}</li>
-											@php
-												$today = \Carbon\Carbon::today();
-												$time = \Carbon\Carbon::now();
-												$ageInSeconds = \Carbon\Carbon::parse($req->created_at)->diffInSeconds($time);
-												$ageInMins = \Carbon\Carbon::parse($req->created_at)->diffInMinutes($time);
-												$ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
-												$age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
-											@endphp
-                                            @if($ageInMins < 60)
-												<li>{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</li>
-											@elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
-												<li>{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</li>
-											@else
-												<li>{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</li>
-											@endif
-                                                											
-										</ul>
-									</div>
-								</div>
-								@endif
-								
-								@php
-								$i++;
-								@endphp
-								@endforeach		
-							</div>							
+									
+									@php
+									$i++;
+									@endphp
+									@endforeach		
+								</div>							
+							</div>
 						</div>
 					</div>
 				</div>
