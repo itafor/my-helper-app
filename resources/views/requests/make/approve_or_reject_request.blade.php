@@ -80,7 +80,7 @@
                                   {{providerDetail($request->id,$help_provider->id)['providerAddress']}}
                                    </p>                       
                                 </dd>
-                                <dt class="col-sm-3 text-truncate">Pickup Status</dt>
+                              <!--   <dt class="col-sm-3 text-truncate">Pickup Status</dt>
                                 <dd class="col-sm-9">
                                   @if($request_bid->pickup_status == 'Success')
                                    <p>
@@ -90,7 +90,7 @@
                                      @else
                                      <span>N/A</span>
                                      @endif                
-                                </dd>
+                                </dd> -->
                               </dl>
                           </label>
 
@@ -101,13 +101,16 @@
                             <div class="request-cards">
                                 <label>
                                   I need {{ $request->category ? $request->category->title : '' }} ({{ $request->description }}) around {{ ucfirst(Str::lower($request->api_city))}}, {{ ucfirst(Str::lower($request->api_state))}} ({{ $request->street }})
-
-                                  <p>Status: <strong class="text-danger">{{$request_bid->status}}</strong></p>
-                                  <p>Item Size: <strong class="text-danger"> {{itemSize($request->weight)}}</strong></p>
-                                  <p>Delivery Fee Payer: <strong class="text-danger">{{$request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong></p>
+                                  <br>
+                                  <br>
+                                  Status: <strong class="text-danger">{{$request_bid->status}}</strong>
+                                  <br>
+                                  Item Size: <strong class="text-danger"> {{itemSize($request_bid->weight)}}</strong>
+                                  <br>
+                                  <p>Delivery Fee Payer: <strong class="text-danger">{{$request_bid->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong></p>
                                 </label> 
 
-                                @if(isset($request_photos) && $request_photos !='')
+                                @if(isset($request_photos) && count($request_photos) >= 1)
 
                                 <h4>Sample photos uploaded by the provider ({{$help_provider ? $help_provider->name : 'N/A'}} 
                                   {{$help_provider ? $help_provider->last_name : 'N/A'}})</h4>
@@ -115,10 +118,10 @@
                                 <!--Tab Gallery: The expanding image container -->
                                 <div class="container" >
                                   <!-- Close the image -->
-                                  <span onclick="this.parentElement.style.display='none'" class="closebtn" style="width:450px;">&times;</span>
+                                  <span onclick="hidePhoto()" id="closebtn" style="width:450px; display: none;">&times;</span>
 
                                   <!-- Expanded image -->
-                                  <img id="expandedImg" style="width:500px; height: 300px;">
+                                  <img id="expandedImg" style="width:500px; height: 300px; display: none;">
 
                                   <!-- Image text -->
                                   <div id="imgtext"></div>
@@ -127,9 +130,9 @@
                                   @foreach($request_photos as $photo)
 
                                   <!-- The grid:-->
-                                  <div class="column">
+                                  <div class="column" style="display: inline;">
                                    <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                                    <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 100px; height: 100px;">
+                                    <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50; height: 50;">
                                   </div>
                                   
                                   @endforeach
@@ -138,38 +141,7 @@
                           </div>
 
       				            <div class="col-sm-6">
-                            <div class="table-responsive">
-
-                            @foreach(deliveryFee($request->api_city,providerDetail($request->id,$help_provider->id)['api_city'],$request->weight,providerDetail($request->id,$help_provider->id)['api_delivery_town_id']) as $fee)
-                              <table class="table table-bordered" id="rental_table">
-                 
-                                <tbody>
-                                <br>
-                                  <h2>Delivery fee detail</h2>
-                                  <tr>
-                                     <td class="rent_title">Item Size Rate(N)</td>
-                                     <td> {{itemSize($request->weight)}}</td> 
-                                  </tr>
-
-                                   <tr>
-                                     <td class="rent_title">Delivery Fee</td>
-                                     <td>&#8358;{{number_format($fee['DeliveryFee'],2)}}</td> 
-                                  </tr>
-
-                                  <tr>
-                                     <td class="rent_title">Vat Amount</td>
-                                     <td>&#8358;{{number_format($fee['VatAmount'],2)}}</td>
-                                  </tr>
-
-                                  <tr>
-                                      <td class="rent_title">Total Amount</td>
-                                      <td>&#8358;{{number_format($fee['TotalAmount'],2)}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-
-                              @endforeach
-                              </div>
+                  
 
       				                @if($request_bid->status == 'Pending')
                      
@@ -203,7 +175,7 @@
 
                                       <div class="col-sm-2">
                                           <label for="inputweight">Weight</label>
-                                          <input type="text" name="weight" class="form-control" id="weight" value="{{$request->weight}}" >
+                                          <input type="text" name="weight" class="form-control" id="weight" value="{{$request_bid->weight}}" >
                                       </div>
 
                                       <div class="col-sm-3">
@@ -211,7 +183,7 @@
                                         <select name="PaymentType" id="PaymentType" class="form-control" required >
                                             <option value="">Select payment type</option>
                                             @foreach(payment_types() as $paymentype)
-                                            <option  value="{{ $paymentype['PaymentType'] }}" {{$request->delivery_cost_payer ==
+                                            <option  value="{{ $paymentype['PaymentType'] }}" {{$request_bid->payment_type ==
                                                     $paymentype['PaymentType'] ? 'selected':''}}>{{ $paymentype['PaymentType'] }}</option>
                                             @endforeach
                                         </select>
@@ -365,7 +337,36 @@
                               <span class="text-danger"> <br>You are not the owner of this request, hence you are not allowed to approve or reject it</span>
                               @endif
                                 @elseif($request_bid->status == 'Approved')
+                                <div class="col-md-12">
+                                 <div class="float-left">
                                 Request Status:<span class=" text-primary"> {{$request_bid->status}}</span>
+                              </div>
+                             
+                            <div class="float-right">
+
+                                 @if($request_bid->payment_type =='pay on delivery')
+                  <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="hidden" name="waybillNo" value="{{helpReceiverPickupRequestDetails($request_bid->bidder_id, $request->id, $request_bid->requester_id)['WaybillNumber']}}">
+
+                    <input type="hidden" name="pickupRequest_id" value="{{helpReceiverPickupRequestDetails($request_bid->bidder_id, $request->id, $request_bid->requester_id)['id']}}">
+
+                        <button type="submit" class="btn btn-dark">Pay shipping fee</button>
+                    </form>
+                                @endif
+                              </div>
+                           @php
+                                $get_pickup_request = helpReceiverPickupRequestDetails($request->user->id, $request->id, $request_bid->requester_id);
+                          @endphp
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              <h2>Pickup Request Details</h2>
+                             @include('inc.pickupRequestDetails')  
+
+                    </div>
+
                                 @elseif($request_bid->status == 'Rejected')
                                 Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
                                  @elseif($request_bid->status == 'Delivered')

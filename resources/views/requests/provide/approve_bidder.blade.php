@@ -12,13 +12,13 @@
                 <div class="card">     
                 
                   <div class="card-header bs-padded">
-                     <div class="col-md-8">
+                     <div class="col-md-8 float-left">
                         <h2>Submitting Pickup Request Information and Generation of Waybill Number</h2>                       
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 float-right">
                         <div class="float-right">				
                 					@if($request_bid->status == 'Pending')
-                					<button class="btn btn-dark" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+                					<button class="btn btn-dark text-danger" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
 
                 					@endif
   				              </div>
@@ -94,6 +94,13 @@
                 {{$request_bidder->phone}}
                      </td>
                    </tr>
+
+                   <tr>
+                     <td class="rent_title">Shipping Fee Payer</td>
+                     <td>
+                 {{$request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}
+                     </td>
+                   </tr>
               </tbody>
           </table>
                             @endforeach
@@ -103,11 +110,34 @@
             <span style="font-size: 20px;"> Request Status:</span> <span class="text-danger" style="font-size: 20px;"> <strong>{{$request_bid->status}}</strong></span>
 
              @elseif($request_bid->status == 'Approved')
-                              Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
+                             
+                              <div class="col-md-12-12">
+                             
+                              <div class="float-left">
+                                 Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
+                                 <br>
                                 <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
-                                  <button class="btn-sm btn-primary">View details</button>
-
+                                  <button class="btn btn-primary">View details</button>
                                 </a>
+                              </div>
+                                
+                              <div class="float-right">
+
+                             Payment Status:  {{paymentStatus(helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['PaymentRef'])}}
+
+                                 @if($request->delivery_cost_payer =='prepaid')
+                                <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="text" name="waybillNo" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['WaybillNumber']}}">
+
+                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['id']}}">
+
+                                  <button type="submit" class="btn btn-success">Pay shipping fee</button>
+                                </form>
+                                @endif
+                              </div>
+                         </div>        
+
             @elseif($request_bid->status == 'Rejected')
                               Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
             @elseif($request_bid->status == 'Delivered')
@@ -136,7 +166,7 @@
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
-                        <div style="display: none;">
+                        <div style="display: none;" >
                      <div class="row">
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
@@ -284,7 +314,7 @@
 
                            @if($request_bid->status == 'Pending')
                           <button type="submit" class="btn btn-primary float-left">Approve and Submit Pickup Request</button>
-					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
+					      <button type="button"  class="btn btn-danger float-right text-danger" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
                 @elseif($request_bid->status == 'Approved')
                     <!-- Request Status:<span class=" text-primary">{{$request_bid->status}}</span> -->
@@ -347,7 +377,7 @@
                     <!-- The grid:-->
                     <div class="column">
                      <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 15%;">
                     </div>
                     
                     @endforeach

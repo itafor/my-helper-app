@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body request-card column-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
                       <div class="row">
-                      <div class="col-md-8">
+                      <div class="col-md-8 float-left">
                             <div class="group-wrap">
                               <div class="user-request-card">
                                   <div class="request-title">
@@ -33,6 +33,16 @@
                                     </h3>
                                    
                                         I need {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+
+                                        @if($requestBid)
+                                           <div class="request-detail size-wrap">
+                                      Item Size: {{itemSize($requestBid->weight)}}
+                                    </div>
+
+                                    <div class="request-detail delivery-fee-wrap">
+                                      Delivery Fee Payer: <strong class="text-danger">{{$requestBid->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong>
+                                    </div>
+                                    @endif
                                   </div>   
                                   
                                   @if(auth()->check())
@@ -105,15 +115,35 @@
 
                                         <p class="error"></p>
                                         <span style="font-size: 20px;">Request Status: <strong>{{user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status']}} </strong>
+                                        </span>
                                 
                                           @if(user_already_contacted_help_seeker(authUser()->id,$getRequest->id,$getRequest->user_id,'Get Help')['status'] == 'Approved') and pickup request sent.
+                                          <br>
+                                          <br>
+                            
+                 @php
+                    $get_pickup_request = helpProviderPickupRequestDetails($requestBid->requester_id, $getRequest->id, $requestBid->bidder_id);
+                 @endphp   
 
-                                            <a href="{{URL::route('pickupRequest.details', [$getRequest->id, authUser()->id, $getRequest->user->id] )}}">View and track shipment status</a>
+                      Payment Status:  {{$get_pickup_request->PaymentRef ? paymentStatus($get_pickup_request->PaymentRef) : 'N/A'}}
 
-                                          @endif
-                                        </span>
-                                        
-                                        @else
+                 @if($requestBid->payment_type =='prepaid')
+                  <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="hidden" name="waybillNo" value="{{helpProviderPickupRequestDetails($requestBid->requester_id, $getRequest->id, $requestBid->bidder_id)['WaybillNumber']}}">
+
+                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($requestBid->requester_id, $getRequest->id, $requestBid->bidder_id)['id']}}">
+
+                        <button type="submit" class="btn btn-success">Pay shipping fee</button>
+                    </form>
+                 @endif
+                              <br>
+                              <br>
+
+                              <h2>Pickup Request Details</h2>
+                             @include('inc.pickupRequestDetails')  
+                @endif
+                        @else
                                           @if($getRequest->user_id != auth()->user()->id)
                                             @if($getRequest->request_type == 1)
 
@@ -302,7 +332,7 @@
 
                           <!-- Render suggestion if authenticated -->
                         @if(auth()->check())
-                        <div class="col-md-4 float-right right">
+                        <div class="col-md-4 float-right">
                             <div class="suggestion">
                                 <h4>Suggestions</h4>
                                 @foreach($suggestions as $suggestion)
