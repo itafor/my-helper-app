@@ -1,31 +1,29 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 
 
 @section('content')
 
- d -->
-        <div class="row header-body">
-
-          <!-- Grid Item -->
-          <div class="col-xl-12 track-cards">
-
-            <div class="welcome-cards">
-              <!-- Card -->
-              <div class="card" id="card">
+<!-- d -->
+      <div class="page-wrap">
+        <div class="container">
+            <div class="row">
                 
-                <div class="card-header">
-                   <div class="col-md-8">
-                      <h4 class="card-title">Submitting Pickup Request Information and Generation of Waybill Number</h4>                       
-                    </div>
-                    <div class="col-md-4">
-                      <div class="float-right">				
-              					@if($request_bid->status == 'Pending')
-              					<button class="btn btn-danger btn-sm" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
+                <div class="card">     
+                
+                  <div class="card-header bs-padded">
+                     <div class="col-md-8 float-left">
+                        <h2>Submitting Pickup Request Information and Generation of Waybill Number</h2>                       
+                      </div>
+                      <div class="col-md-4 float-right">
+                        <div class="float-right">				
+                					@if($request_bid->status == 'Pending')
+                					<button class="btn btn-dark text-danger" onclick="rejectRequest({{ $request_bid->id  }})">Reject Request</button>
 
-              					@endif
-				              </div>
-				            </div>
-                </div>
+                					@endif
+  				              </div>
+  				            </div>
+                  </div>
 
 				  <div class="card-body">
              @foreach(deliveryFee($request->api_city,providerDetail($request->id,$request_bidder->id)['api_city'],$request->weight,providerDetail($request->id,$request_bidder->id)['api_delivery_town_id']) as $fee)
@@ -33,7 +31,16 @@
            
                     <tbody>
                       <br>
-                      <h5>Delivery fee detail</h5>
+                      <h2>Delivery fee and Receiver details</h2>
+
+                    <tr>
+                     <td class="rent_title">Item Size</td>
+                     <td> 
+                        {{itemSize($request->weight)}}
+                       
+                      </td> 
+                   </tr>
+
                    <tr>
                      <td class="rent_title">Delivery Fee</td>
                      <td> 
@@ -55,31 +62,93 @@
                  &#8358;{{number_format($fee['TotalAmount'],2)}}
                      </td>
                    </tr>
-</tbody>
-</table>
-                          @endforeach
+
+                    <tr>
+                     <td class="rent_title">Receiver City</td>
+                     <td>
+                {{providerDetail($request->id,$request_bidder->id)['api_city']}}
+                     </td>
+                   </tr>
+                 <tr>
+                     <td class="rent_title">Receiver Address</td>
+                     <td>
+                {{providerDetail($request->id,$request_bidder->id)['providerAddress']}}
+                     </td>
+                   </tr>
+                 <tr>
+                     <td class="rent_title">Receiver Name</td>
+                     <td>
+                {{$request_bidder ? $request_bidder->name : 'N/A'}} {{$request_bidder ? $request_bidder->last_name : 'N/A'}}
+                     </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Receiver Email</td>
+                     <td>
+                {{$request_bidder->email}}
+                     </td>
+                   </tr>
+                  <tr>
+                     <td class="rent_title">Receiver Phone number</td>
+                     <td>
+                {{$request_bidder->phone}}
+                     </td>
+                   </tr>
+
+                   <tr>
+                     <td class="rent_title">Shipping Fee Payer</td>
+                     <td>
+                 {{$request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}
+                     </td>
+                   </tr>
+              </tbody>
+          </table>
+                            @endforeach
             <hr>
  
- @if($request_bid->status == 'Pending')
-   Request Status:<span class="text-danger"> <strong>{{$request_bid->status}}</strong></span>
+           @if($request_bid->status == 'Pending')
+            <span style="font-size: 20px;"> Request Status:</span> <span class="text-danger" style="font-size: 20px;"> <strong>{{$request_bid->status}}</strong></span>
 
-   @elseif($request_bid->status == 'Approved')
-                    Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
-                      <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
-                        <button class="btn-sm btn-primary">View details</button>
+             @elseif($request_bid->status == 'Approved')
+                             
+                              <div class="col-md-12-12">
+                             
+                              <div class="float-left">
+                                 Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
+                                 <br>
+                                <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
+                                  <button class="btn btn-primary">View details</button>
+                                </a>
+                              </div>
+                                
+                              <div class="float-right">
 
-                      </a>
-  @elseif($request_bid->status == 'Rejected')
-                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
-  @elseif($request_bid->status == 'Delivered')
-                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
-  @endif
+                             Payment Status:  {{paymentStatus(helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['PaymentRef'])}}
+
+                                 @if($request->delivery_cost_payer =='prepaid')
+                                <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
+                                  @csrf
+                    <input type="text" name="waybillNo" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['WaybillNumber']}}">
+
+                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['id']}}">
+
+                                  <button type="submit" class="btn btn-success">Pay shipping fee</button>
+                                </form>
+                                @endif
+                              </div>
+                         </div>        
+
+            @elseif($request_bid->status == 'Rejected')
+                              Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+            @elseif($request_bid->status == 'Delivered')
+                              Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+            @endif
 
 				   <hr>
 				   <div class="col-sm-12">
 				  
 
-					<form class="form" method="post" action="{{ route('request.approve.store') }}" id="approveRequest">
+					       <form class="form" method="post" action="{{ route('request.approve.store') }}" id="approveRequest">
                             @csrf
                           <div>
                             <input type="hidden" name="request_id" class="form-control" id="request_id" value="{{$request->id}}" >
@@ -97,7 +166,7 @@
                             <input type="hidden" name="requester_id" class="form-control" id="request_id" value="{{authUser()->id}}" >
                           </div>
 
-                        <div style="display: none;">
+                        <div style="display: none;" >
                      <div class="row">
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
@@ -245,14 +314,14 @@
 
                            @if($request_bid->status == 'Pending')
                           <button type="submit" class="btn btn-primary float-left">Approve and Submit Pickup Request</button>
-					      <button type="button" class="btn btn-danger float-right" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
+					      <button type="button"  class="btn btn-danger float-right text-danger" onclick="rejectRequest({{ $request_bid->id  }})">Reject request</button>
 
                 @elseif($request_bid->status == 'Approved')
                     <!-- Request Status:<span class=" text-primary">{{$request_bid->status}}</span> -->
                 @elseif($request_bid->status == 'Rejected')
-                    Request Status: <span class=" text-danger"> {{$request_bid->status}}</span>
+                    Request Status: <span class=" text-danger" style="font-size: 20px;"> {{$request_bid->status}}</span>
                 @elseif($request_bid->status == 'Delivered')
-                    Request Status:<span class=" text-success"> {{$request_bid->status}}</span>
+                    Request Status:<span class=" text-success" style="font-size: 20px;"> {{$request_bid->status}}</span>
                 @endif
 
                         </form>
@@ -308,7 +377,7 @@
                     <!-- The grid:-->
                     <div class="column">
                      <!--  <img src="img_nature.jpg" alt="Nature" > -->
-                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image">
+                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 15%;">
                     </div>
                     
                     @endforeach
@@ -386,8 +455,8 @@
           </div>
           <!-- /grid item -->
         </div>
-        <!-- /grid -->
-
+       < <!-- /grid -->
+</div>
 
 
 @endsection

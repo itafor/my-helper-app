@@ -2,6 +2,7 @@
 
 use App\City;
 use App\Country;
+use App\PickupRequest;
 use App\ProviderLocation;
 use App\RequestBidders;
 use App\RequestPhoto;
@@ -65,6 +66,27 @@ function user_already_contacted_help_seeker($requester_id,$request_id,$bidder_id
     return $result;
 }
 
+function helpProviderPickupRequestDetails($providerId, $request_id, $receiver_id){
+
+  $pickup_request = PickupRequest::where([
+    ['provider_id', $providerId],
+    ['request_id', $request_id],
+    ['receiver_id', $receiver_id],
+  ])->first();
+
+  return $pickup_request;
+}
+
+function helpReceiverPickupRequestDetails($receiver_id, $request_id, $providerId){
+
+  $pickupRequest = PickupRequest::where([
+    ['receiver_id', $receiver_id],
+    ['request_id', $request_id],
+    ['provider_id', $providerId],
+  ])->first();
+
+  return $pickupRequest;
+}
 
 function uploadImage($image)
 {
@@ -256,7 +278,7 @@ function getTownID($city_code){
     
     $client = new Client(['verify' => false]);
 
-     $towns = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTowns?CityCode='.$city_code.'', [
+ $towns = $client->get('http://api.clicknship.com.ng/clicknship/Operations/DeliveryTowns?CityCode='.$city_code.'', [
                         'headers' => [
                             'Authorization' => 'Bearer '.authToken(),
                         ],
@@ -316,10 +338,46 @@ function providerDetail($request_id,$provider_id){
 
 }
 
+function paymentStatus($paymentRef){
+    
+    $client = new Client(['verify' => false]);
+
+     $checkPaymentRef = $client->get('https://api.clicknship.com.ng/ClicknShip/NotifyMe/RequeryPayment?PaymentRef='.$paymentRef.'', [
+                        'headers' => [
+                            'Authorization' => 'Bearer '.authToken(),
+                        ],
+              
+                    ]);
+
+       $response = $checkPaymentRef->getBody()->getContents();
+      $values = json_decode($response, true);
+
+
+      return $values;
+}
+
+
 function requestPhotos($request_id,$provider_id){
    $request_photos= RequestPhoto::where([
           ['request_id', $request_id],
           ['provider_id',$provider_id],
        ])->get();
    return $request_photos;
+}
+
+function itemSize($size){
+  switch ($size) {
+    case 1:
+     return 'Small';
+      break;
+    case 2:
+      return 'Medium';
+       break;
+    case 4:
+      return 'Large';
+       break;
+    default:
+     return 'Size Not Specified';
+      break;
+  }
 }

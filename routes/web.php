@@ -37,6 +37,9 @@ Route::get('view/make/{id}/request', ['uses' => 'MakeRequestController@show', 'a
 
 Route::get('how-it-works', ['uses' => 'PagesController@how_it_works', 'as' => 'how_it_works']);
 
+Route::get('all-requests', 'PagesController@all_requests')->name('all_requests');
+
+
 
 
 
@@ -173,6 +176,11 @@ Route::group([
      Route::get('/approve/{id}', 'MakeRequestController@initialRequestApprovalForhelpSeekers')->name('pickupRequest.approve');
 
  Route::post('/approve', 'MakeRequestController@finalRequestApprovalForhelpSeekers')->name('pickupRequest.approve.store');
+
+  Route::post('/shipping_fee_payment', 'PickupRequestController@payWithPayStack')->name('initiate_shipping_fee_payment');
+
+  Route::get('/payment-status', 'PickupRequestController@getPaymentStatus')->name('check.payment.status.form');
+  Route::post('/check-payment-status', 'PickupRequestController@checkPaymentStatus')->name('check.payment.status');
 
 });
 

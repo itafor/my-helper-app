@@ -14,7 +14,7 @@ class PickupRequest extends Model
 						   'DeliveryFee','VatAmount','TotalAmount',
 						   'Description','Weight','SenderName','SenderCity','SenderTownID',
 						   'SenderAddress','SenderPhone','SenderEmail','RecipientName','RecipientCity',
-						   'RecipientTownID','RecipientAddress','RecipientPhone','RecipientEmail','PaymentType','DeliveryType','request_id','provider_id','receiver_id'
+						   'RecipientTownID','RecipientAddress','RecipientPhone','RecipientEmail','PaymentType','DeliveryType','request_id','provider_id','receiver_id','PaymentRef'
 						];
 
 
@@ -94,4 +94,15 @@ public function receiver()
         }
     }
 }
+ 
+ public static function updatePickupRequest($data)
+ {
+    $pickupd_req = self::where('id',$data['pickupRequest_id'])->first();
+
+    if($pickupd_req){
+        $pickupd_req->PaymentRef = $data['paymentRef'];
+        $pickupd_req->save();
+    }
+ }
+
 }

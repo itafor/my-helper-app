@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>MyHelperApp</title>
-        <!-- Favicon -->
+
+        <link rel="mask-icon" sizes="any" href="{{ asset('blue') }}/images/icons/favicon-48x48.svg" color="#F08B1D">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('blue') }}/images/icons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('blue') }}/images/icons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('blue') }}/images/icons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('blue') }}/images/icons/apple-touch-icon-180x180.png">
+        
+        
+        <meta name="apple-mobile-web-app-title" content="MyHelperApp">
+        <link rel="icon" type="image/png" href="{{ asset('blue') }}/images/icons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="{{ asset('blue') }}/images/icons/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="{{ asset('blue') }}/images/icons/favicon-32x32.png" sizes="32x32">
+        <meta name="msapplication-TileColor" content="#59BFCE">
+        <meta name="msapplication-TileImage" content="{{ asset('blue') }}/images/icons/mstile-144x144.png">
+
+        <meta name="application-name" content="MyHelperApp">
+
+        <!-- Favicon --
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('white') }}/img/favicon.png">
-        <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png">
+        <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png"> 
+        -->
         <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+
         <link href="https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
         <!-- Icons -->
         <link href="{{ asset('white') }}/css/nucleo-icons.css" rel="stylesheet" />
+
+
         <!-- CSS -->
         <link href="{{ asset('white') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('white') }}/css/theme.css" rel="stylesheet" />
@@ -33,7 +56,17 @@
       
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
-<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+
+        <!-- new design - /blue --> 
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/css/minimal.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/slick/slick-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('blue') }}/css/custom.css">
+        <meta name="description" content="Welcome to MyHelperApp where you can receive or provide goods and services.">
+       
+       <script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         
          
         <!-- CSS Files -->

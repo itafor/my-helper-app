@@ -1,12 +1,14 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 @section('content')
 
-<div class="container-fluid mt--7 header-body track-cards">
-        <div class="row">
-            <div class="col-xl-12 order-xl-1 welcome-cards">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">{{ __('Provide Help') }}</h4>
+<div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
+                  <div class="card">     
+                    <div class="card-header text-center bs-padded">
+                        <h2>{{ __('Provide Help') }}</h2>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('store.provide.request') }}" autocomplete="off" enctype="multipart/form-data">
@@ -129,31 +131,31 @@
                                     
                                     <div class="row req-description">
                                         <div class="col-md-12">
-                                            <h3>Item Size IN Weight</h3>
+                                            <h3>Item Size Rate(N)</h3>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="3.5" style="margin-left: 5px;" required>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight1" value="1" style="margin-left: 5px;" required>
                                                 <label class="form-check-label" for="weight1" style="margin-left: 20px;">
-                                                    <span class="desc">SMALL (3.5 kg)</span>
+                                                    <span class="desc">SMALL</span>
                                                     <span class="desc-price">N800</span>                                           
                                               </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight2" value="7.5" style="margin-left: 5px;" required>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight2" value="2" style="margin-left: 5px;" required>
                                                 <label class="form-check-label" for="weight2" style="margin-left: 20px;">
-                                                    <span class="desc">MEDIUM (7.5.0 kg)</span>
+                                                    <span class="desc">MEDIUM</span>
                                                     <span class="desc-price">N1,500</span>
                                               </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                                <input class="form-check-input" type="radio" name="weight" id="weight3" value="10.0" style="margin-left: 5px;" required>
+                                                <input class="form-check-input" type="radio" name="weight" id="weight3" value="4" style="margin-left: 5px;" required>
                                                 <label class="form-check-label" for="weight3" style="margin-left: 20px;">
-                                                    <span class="desc">LARGE (10.0kg)</span>
+                                                    <span class="desc">LARGE</span>
                                                     <span class="desc-price">N2,000</span>
                                             </label>
                                             </div>
@@ -197,5 +199,5 @@
         
         {{--@include('layouts.footers.auth') --}}
     </div>
-
+</div>
 @endsection

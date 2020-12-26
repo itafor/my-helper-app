@@ -1,14 +1,16 @@
-@extends('layouts.app', ['pageSlug' => 'requests'])
+@extends('layouts.app-blue', ['pageSlug' => 'requests'])
 @section('content')
 
-<div class="container-fluid mt--7 header-body track-cards">
-        <div class="row">
-            <div class="col-xl-12 order-xl-1 welcome-cards">
+<div class="page-wrap">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12 content-wrapper pt-40 pb-40">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{ __('Get Help') }}</h4>
+                        <h2>{{ __('Get Help') }}</h2>
                     </div>
                     <div class="card-body">
+                        <div class="form-wrap">
                         <form method="post" action="{{ route('store.make.request') }}" autocomplete="off">
                             @csrf
                             <input type="hidden" name="request_type" value="1">
@@ -166,11 +168,12 @@
                             </div>
                         </form>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
         
         {{--@include('layouts.footers.auth') --}}
     </div>
-
+</div>
 @endsection

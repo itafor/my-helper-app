@@ -1,10 +1,10 @@
-@extends('layouts.app', ['pageSlug' => ''])
+@extends('layouts.app-blue', ['pageSlug' => ''])
 
 @section('content')
-    <div class="header py-7 py-lg-8 track-cards">
-        <div class="container-fluid">
-            <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
+    <div class="page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="justify-content-center">
                     <div class="header-hero-wrap">
                         <div class="row">
                             <div class="col-md-4">
@@ -15,7 +15,7 @@
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('Welcome to MyHelperApp')}}</h4>
-                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods and services for free or at a fee.') }}
+                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods and services.') }}
                                             <br /><a href="{{ route('make.request') }}">{{ __('Get Started') }}</a></p>
                                     </div>
                                 </div>
@@ -150,10 +150,7 @@
                                     </div>
                                 </div>
 
-                                <div class="disclaimer">
-                                    <p><span>Disclaimer:</span> 
-                                    This platform does not take responsibility for fulfillment of orders or guarantee of payment for goods and services listed.  Kindly engage with caution.</p>
-                                </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -161,4 +158,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

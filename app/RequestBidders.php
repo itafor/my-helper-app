@@ -12,7 +12,7 @@ class RequestBidders extends Model
 
     protected $fillable = ['request_id','requester_id','bidder_id',
 						   'logistic_partner_id','request_type','status',
-						   'confirmation_code','delievery_cost','comment','pickup_status'
+						   'confirmation_code','delievery_cost','comment','pickup_status','payment_type','weight'
 						];
 
  public function request()
@@ -98,7 +98,7 @@ public static function createNew($data)
         $delievery_cost = isset($data['delievery_cost']) ? $data['delievery_cost'] : null;
         $comment = isset($data['comment']) ? $data['comment'] : null;
 
-        $grantRequest = self::create([
+        $requestBidder = self::create([
             'request_id' => $data['request_id'],
             'requester_id' => $data['requester_id'],//help provider
             'bidder_id' => $data['bidder_id'],//help receiver
@@ -107,12 +107,12 @@ public static function createNew($data)
             'comment' =>  $comment,
         ]); 
 
-        if($grantRequest){
-            self::updateRequest($data);
+        if($requestBidder){
+            self::updateRequest($data, $requestBidder);
             self::addProviderLocation($data);
         }
         
-        return $grantRequest;
+        return $requestBidder;
     }
 
 
@@ -162,13 +162,13 @@ public static function createNew($data)
 
     }
 
-       public static function updateRequest($data)
+       public static function updateRequest($data, $requestBidder)
     {
 
-     $update_request  =  LockdownRequest::where([
-            ['id', $data['request_id'] ],
+     $update_request  =  self::where([
+            ['id', $requestBidder->id],
         ])->update([
-            'delivery_cost_payer' => $data['delivery_cost_payer'],
+            'payment_type' => $data['delivery_cost_payer'],
             'weight' => $data['weight'],
         ]); 
 

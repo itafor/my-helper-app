@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>New Rental | Asset Clerk</title>
+    <title>Accept or Reject Request</title>
     
     <style>
     .invoice-box {
@@ -186,7 +186,10 @@
  Items Category : {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  Items Description: {{$main_request->description }}<br><br>
 
- Items Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
+ Item Size: {{itemSize($request_bidding_record->weight)}} <br>
+
+
+  Delivery Fee Payer: <strong class="text-danger">{{$request_bidding_record->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
 
    @foreach(deliveryFee($main_request->api_city,providerDetail($main_request->id,$help_provider->id)['api_city'],$main_request->weight,providerDetail($main_request->id,$help_provider->id)['api_delivery_town_id']) as $fee)
             <table class="table table-bordered" id="rental_table">
@@ -219,7 +222,6 @@
 </table>
                           @endforeach
 <br>
-  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
 
    
  <p>Receiver Comment: {{$request_bidding_record->comment ? $request_bidding_record->comment : 'N/A'}}</p><br>
