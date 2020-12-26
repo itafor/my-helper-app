@@ -34,6 +34,7 @@
                                    
                                         I need {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
 
+                                    @auth
                                         @if($requestBid)
                                            <div class="request-detail size-wrap">
                                       Item Size: {{itemSize($requestBid->weight)}}
@@ -42,7 +43,9 @@
                                     <div class="request-detail delivery-fee-wrap">
                                       Delivery Fee Payer: <strong class="text-danger">{{$requestBid->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong>
                                     </div>
-                                    @endif
+
+                                    @endauth
+                                  @endif
                                   </div>   
                                   
                                   @if(auth()->check())
@@ -168,7 +171,7 @@
                                               </div>
 
                                               <div class="row req-description">
-                                                <h4 class="full-width bs-padded">Item Size <small>(and Pickup/delivery price)</small></h4>
+                                                <h4 class="full-width bs-padded">Item Size Rate (N)</small></h4>
                                                   <div class="col-md-4">
                                                       <div class="form-group radio-group {{ $errors->has('show_address') ? ' has-danger' : '' }}">                                              
                                                           <input class="form-check-input" type="radio" name="weight" id="weight1" value="1" style="margin-left: 5px;" required/> 

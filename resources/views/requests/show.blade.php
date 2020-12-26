@@ -272,7 +272,7 @@
                             @endif
                         @else
                             <div class="text-left card-btn">
-                                <a onclick="alert('please login to contact this person')" href="{{route('login')}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
+                                <a onclick="alert('please login to contact this person')" href="{{route('auth_view.provide.request', [$getRequest->id])}}" class="btn btn-sm btn-primary btn-header">Contact  {{ $getRequest->user->username }}</a>
 
                             </div>
                         @endif 
