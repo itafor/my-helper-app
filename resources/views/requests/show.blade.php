@@ -43,24 +43,36 @@
                                     </div>
                                   </div>
 
-                                  <div class="photos-wrap">
-                                    @auth
-                                      <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
-                                    @endauth
+                         
 
-                                  <!--Tab Gallery: The expanding image container -->
-                                    <div class="container" style="display: none;">                                      
-                                      <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>    
-                                      <img id="expandedImg" style="width:500px; height: 400px;">
-                                      <div id="imgtext"></div>
-                                    </div>
-                                
-                                    @foreach($request_photos as $photo)                  
-                                    <div class="column pb-20 mb-20">
-                                      <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 10%;">
-                                    </div>                                    
-                                    @endforeach
+                                        @if(isset($request_photos) && count($request_photos) >= 1)
+
+                                @auth
+                                      <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
+                                 @endauth
+                      
+                                <!--Tab Gallery: The expanding image container -->
+                                <div class="container" >
+                                  <!-- Close the image -->
+                                  <span onclick="hidePhoto()" id="closebtn" style="width:450px; display: none;">&times;</span>
+
+                                  <!-- Expanded image -->
+                                  <img id="expandedImg" style="width:500px; height: 300px; display: none;">
+
+                                  <!-- Image text -->
+                                  <div id="imgtext"></div>
+                                </div>
+
+                                  @foreach($request_photos as $photo)
+
+                                  <!-- The grid:-->
+                                  <div class="column" style="display: inline;">
+                                   <!--  <img src="img_nature.jpg" alt="Nature" > -->
+                                    <img src="{{$photo->image_url}}" onclick="myFunction(this);" alt="Sample image" style="width: 50px; height: 50px;">
                                   </div>
+                                  
+                                  @endforeach
+                                @endif
                   
                                   @if(auth()->check())
                                   <!-- show all users that want this help -->
@@ -131,17 +143,16 @@
                                 <span style="font-size: 20px;">Request Status: <strong>{{user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status']}}</strong></span>
                                 @php
 
-                               $get_pickup_request = helpReceiverPickupRequestDetails(auth()->user()->id, $getRequest->id)
+                               $get_pickup_request = helpReceiverPickupRequestDetails(auth()->user()->id, $getRequest->id, $getRequest->user->id)
 
                                 @endphp
-                                <br>
-                                Payment Status: {{paymentStatus($get_pickup_request->PaymentRef)}}
+                               
                                 <br>
                 @if($getRequest->delivery_cost_payer =='pay on delivery')
         @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status'] == 'Approved')
             <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
-                    <input type="text" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
+                    <input type="hidden" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
                     <input type="hidden" name="pickupRequest_id" value="{{$get_pickup_request->id}}">
                                   <button type="submit" class="btn btn-success">Pay shipping fee</button>
                                 </form>
@@ -149,7 +160,8 @@
               @endif
           @endif
           <br>
-                                @include('inc.pickupRequestDetails')
+                  <h2>Pickup Request Details</h2>
+                @include('inc.pickupRequestDetails')
 
 
                             @else

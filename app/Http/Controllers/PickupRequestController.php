@@ -84,7 +84,7 @@ public function payWithPayStack(Request $request){
                         ],
                 'form_params' => [
                 'WaybillNumber' => $data['waybillNo'],
-                'CallBackURL' => "www.test.com",
+                'CallBackURL' => "http://127.0.0.1:8000",
             ]
                     ]);
 

@@ -66,21 +66,23 @@ function user_already_contacted_help_seeker($requester_id,$request_id,$bidder_id
     return $result;
 }
 
-function helpProviderPickupRequestDetails($providerId, $request_id){
+function helpProviderPickupRequestDetails($providerId, $request_id, $receiver_id){
 
   $pickup_request = PickupRequest::where([
     ['provider_id', $providerId],
     ['request_id', $request_id],
+    ['receiver_id', $receiver_id],
   ])->first();
 
   return $pickup_request;
 }
 
-function helpReceiverPickupRequestDetails($receiver_id, $request_id){
+function helpReceiverPickupRequestDetails($receiver_id, $request_id, $providerId){
 
   $pickupRequest = PickupRequest::where([
     ['receiver_id', $receiver_id],
     ['request_id', $request_id],
+    ['provider_id', $providerId],
   ])->first();
 
   return $pickupRequest;

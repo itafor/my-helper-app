@@ -132,15 +132,15 @@
 
  <br>
 
-After you have accepted the request, Red Star Express  Allied Services Ltd. will be contacted to deliver the product. <br>
+After you have accepted the request, Red Star Express  Allied Services Ltd. will be contacted to deliver the item. <br>
 
- Product Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
- Product Description: {{$main_request->description }}<br>
+ item Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ item Description: {{$main_request->description }}<br>
 
- Product Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
+  Item Size: {{itemSize($request_bidding_record->weight)}} <br>
 
 
-  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
+  Delivery Fee Payer: <strong class="text-danger">{{$request_bidding_record->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
 
 
    <p> Helper Comment: {{$request_bidding_record->comment ? $request_bidding_record->comment : 'N/A'}} </p><br>

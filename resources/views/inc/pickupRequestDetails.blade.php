@@ -54,6 +54,20 @@
                               
                               </td>
                           </tr>
+                            <tr>
+                               <td class="rent_title">Payment Reference</td>
+                               <td>
+                           {{$get_pickup_request->PaymentRef ? $get_pickup_request->PaymentRef : 'N/A'}}
+                              
+                              </td>
+                          </tr>
+                           <tr>
+                               <td class="rent_title">Payment Status</td>
+                               <td>
+                           {{$get_pickup_request->PaymentRef ? paymentStatus($get_pickup_request->PaymentRef) : 'N/A'}}
+                              
+                              </td>
+                          </tr>
 
                           <tr>
                                <td class="rent_title">Description</td>
@@ -183,13 +197,7 @@
                               
                               </td>
                           </tr>
-                           <tr>
-                               <td class="rent_title">Payment Reference</td>
-                               <td>
-                           {{$get_pickup_request->PaymentRef}}
-                              
-                              </td>
-                          </tr>
+                         
                           </tbody>
                         </table>
                   @else

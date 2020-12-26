@@ -94,6 +94,13 @@
                 {{$request_bidder->phone}}
                      </td>
                    </tr>
+
+                   <tr>
+                     <td class="rent_title">Shipping Fee Payer</td>
+                     <td>
+                 {{$request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}
+                     </td>
+                   </tr>
               </tbody>
           </table>
                             @endforeach
@@ -103,10 +110,12 @@
             <span style="font-size: 20px;"> Request Status:</span> <span class="text-danger" style="font-size: 20px;"> <strong>{{$request_bid->status}}</strong></span>
 
              @elseif($request_bid->status == 'Approved')
-                              Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
+                             
                               <div class="col-md-12-12">
                              
                               <div class="float-left">
+                                 Request Status:<span class=" text-primary"> Request {{$request_bid->status}} and pickup request sent</span>
+                                 <br>
                                 <a href="{{URL::route('pickupRequest.details', [$request->id, $help_provider->id, $request_bidder->id] )}}">
                                   <button class="btn btn-primary">View details</button>
                                 </a>
@@ -114,17 +123,14 @@
                                 
                               <div class="float-right">
 
-                             Payment Status:  {{paymentStatus(helpProviderPickupRequestDetails($help_provider->id, $request->id)['PaymentRef'])}}
-                <br>
-
-                                {{$request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}
+                             Payment Status:  {{paymentStatus(helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['PaymentRef'])}}
 
                                  @if($request->delivery_cost_payer =='prepaid')
                                 <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
-                    <input type="text" name="waybillNo" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id)['WaybillNumber']}}">
+                    <input type="text" name="waybillNo" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['WaybillNumber']}}">
 
-                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id)['id']}}">
+                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['id']}}">
 
                                   <button type="submit" class="btn btn-success">Pay shipping fee</button>
                                 </form>
