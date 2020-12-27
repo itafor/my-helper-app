@@ -151,7 +151,8 @@
                                             @if($getRequest->request_type == 1)
 
                                        <div class="group-wrap">
-                                         
+       <h2>Fill the following form to contact {{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</h2>
+    <br>
                                           <form class="form" method="post" action="{{ route('request.provide') }}" enctype="multipart/form-data">
                                           @csrf
                                               <div class="form-group">
@@ -171,7 +172,7 @@
                                               </div>
 
                                               <div class="row req-description">
-                                                <h4 class="full-width bs-padded">Item Size Rate (N)</small></h4>
+                                                <h4 class="full-width bs-padded">Shipping Fee Per Item Size </small></h4>
                                                   <div class="col-md-4">
                                                       <div class="form-group radio-group {{ $errors->has('show_address') ? ' has-danger' : '' }}">                                              
                                                           <input class="form-check-input" type="radio" name="weight" id="weight1" value="1" style="margin-left: 5px;" required/> 
@@ -187,7 +188,7 @@
                                                           <input class="form-check-input" type="radio" name="weight" id="weight2" value="2" style="margin-left: 5px;" required>
                                                           <label class="form-check-label" for="weight2">
                                                               <span class="desc">MEDIUM</span>
-                                                              <span class="desc-price">N1,500</span>
+                                                              <span class="desc-price">N1,200</span>
                                                           </label>
                                                       </div>
                                                   </div>

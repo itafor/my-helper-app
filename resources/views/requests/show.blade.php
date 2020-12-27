@@ -194,6 +194,8 @@
                     @enderror
                           </div>
 <br>
+    <h2>Fill the following form to contact {{ $getRequest->user->name }} {{ $getRequest->user->last_name }}</h2>
+    <br>
                            <h4 style="margin-left: 200px;">Delivery Location</h4>
                                     <div class="row">
                                         <div class="col-md-6">
