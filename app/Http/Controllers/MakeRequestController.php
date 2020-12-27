@@ -206,11 +206,6 @@ class MakeRequestController extends Controller
 
         $help_request_bidders = $getRequest->request_bidders;
 
-          $request_photos= RequestPhoto::where([
-          ['request_id', $getRequest->id],
-          ['provider_id',authUser() ? authUser()->id : ''],
-       ])->get();
-        
         // Check many to many table if the id of the request has mapped with this user id, to avoid multiple 
         // times of contacts by the same person
         $checkIfContacted = $getRequest->users()->allRelatedIds()->toArray();
@@ -229,7 +224,7 @@ class MakeRequestController extends Controller
                                         ->get();
         
         // dd($suggestions);
-        return view('requests.make.show', compact('getRequest', 'checkIfContacted', 'suggestions','help_request_bidders','request_photos'));
+        return view('requests.make.guest', compact('getRequest'));
     }
 
     public function sendMail($req)
