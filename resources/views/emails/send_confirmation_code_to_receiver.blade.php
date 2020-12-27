@@ -193,40 +193,10 @@
 </p>
  <br>
 
-  Items Weight (kg): {{$main_request->weight ? $main_request->weight : 'N/A' }} <br>
-
-   @foreach(deliveryFee($main_request->api_city,providerDetail($main_request->id,$help_provider->id)['api_city'],$main_request->weight,providerDetail($main_request->id,$help_provider->id)['api_delivery_town_id']) as $fee)
-            <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-                      <br>
-                      <h5>Delivery fee detail</h5>
-                   <tr>
-                     <td class="rent_title">Delivery Fee</td>
-                     <td> 
-                         &#8358;{{number_format($fee['DeliveryFee'],2)}} 
-                       
-                      </td> 
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Vat Amount</td>
-                     <td>  
-                 &#8358;{{number_format($fee['VatAmount'],2)}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Total Amount</td>
-                     <td>
-                 &#8358;{{number_format($fee['TotalAmount'],2)}}
-                     </td>
-                   </tr>
-</tbody>
-</table>
-                          @endforeach
+ Item Size: {{itemSize($main_request->weight)}} <br>
+   
 <br>
-  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Sender will pay for Shipping cost':'Receiver will pay for Shipping cost'}}</strong><br>
+  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
 
 <br>
 <h3>Help Provider details</h3>
@@ -280,7 +250,7 @@
        </tbody>
                   </table>
 <hr>
-  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
+  <a href="{{route('auth_view.provide.request',[$main_request->id])}}">View Request Details</a>
 
                
                 </div>
