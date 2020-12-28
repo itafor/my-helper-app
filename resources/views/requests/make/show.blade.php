@@ -54,7 +54,7 @@
                                     <div class="group-wraps wrap-2">
                                         <h4 class="mt-20">Users interested to provide the above request</h4>
                                         <div class="table-responsive">
-                                            <table class="table tablesorter" id="requests">
+                                            <table class="table tablesorter">
                                               <thead class=" text-primary">
                                                  <tr>
                                                 <th> Full name </th>
@@ -130,7 +130,9 @@
 
                       Payment Status:  {{$get_pickup_request->PaymentRef ? paymentStatus($get_pickup_request->PaymentRef) : 'N/A'}}
 
-                 @if($requestBid->payment_type =='prepaid')
+                 @if($requestBid->payment_type == 'prepaid')
+
+                @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
                   <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
                     <input type="hidden" name="waybillNo" value="{{helpProviderPickupRequestDetails($requestBid->requester_id, $getRequest->id, $requestBid->bidder_id)['WaybillNumber']}}">
@@ -140,6 +142,7 @@
                         <button type="submit" class="btn btn-success">Pay shipping fee</button>
                     </form>
                  @endif
+             @endif
                               <br>
                               <br>
 

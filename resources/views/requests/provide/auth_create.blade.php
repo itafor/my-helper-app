@@ -131,7 +131,7 @@
                                     
                                     <div class="row req-description">
                                         <div class="col-md-12">
-                                            <h3>Item Size Rate(N)</h3>
+                                            <h3>Shipping Fee Per Item Size</h3>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('show_address') ? ' has-danger' : '' }}">
