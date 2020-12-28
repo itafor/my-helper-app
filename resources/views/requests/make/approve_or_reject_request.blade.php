@@ -343,8 +343,11 @@
                               </div>
                              
                             <div class="float-right">
-
-                                 @if($request_bid->payment_type =='pay on delivery')
+                          @php
+                                $get_pickup_request = helpReceiverPickupRequestDetails($request->user->id, $request->id, $request_bid->requester_id);
+                          @endphp
+                              @if($request_bid->payment_type =='pay on delivery')
+                                 @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
                   <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
                     <input type="hidden" name="waybillNo" value="{{helpReceiverPickupRequestDetails($request_bid->bidder_id, $request->id, $request_bid->requester_id)['WaybillNumber']}}">
@@ -353,11 +356,11 @@
 
                         <button type="submit" class="btn btn-dark">Pay shipping fee</button>
                     </form>
-                                @endif
+
+                          @endif
+                        @endif
                               </div>
-                           @php
-                                $get_pickup_request = helpReceiverPickupRequestDetails($request->user->id, $request->id, $request_bid->requester_id);
-                          @endphp
+                         
                               <br>
                               <br>
                               <br>

@@ -44,11 +44,12 @@
                                   </div>
 
                          
-
+                                  <h2>Users that applied to receive your help</h2>
+                                  <hr>
                                         @if(isset($request_photos) && count($request_photos) >= 1)
 
                                 @auth
-                                      <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
+                                      <h4>Sample photos</h4>
                                  @endauth
                       
                                 <!--Tab Gallery: The expanding image container -->
@@ -80,7 +81,7 @@
 
                                   <div class="table-responsive">
 
-                                    <table class="table tablesorter" id="requests">
+                                    <table class="table tablesorter" >
 
                                       <thead class=" text-primary">
                                          <tr>
@@ -148,15 +149,17 @@
                                 @endphp
                                
                                 <br>
-                @if($getRequest->delivery_cost_payer =='pay on delivery')
+      @if($getRequest->delivery_cost_payer =='pay on delivery')
         @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status'] == 'Approved')
+                 @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
             <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
                     <input type="hidden" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
                     <input type="hidden" name="pickupRequest_id" value="{{$get_pickup_request->id}}">
                                   <button type="submit" class="btn btn-success">Pay shipping fee</button>
-                                </form>
+                </form>
 
+                @endif
               @endif
           @endif
           <br>

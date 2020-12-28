@@ -122,19 +122,25 @@
                               </div>
                                 
                               <div class="float-right">
+                    @php
+                      $get_pickup_request = helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id);
+                    @endphp  
 
-                             Payment Status:  {{paymentStatus(helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['PaymentRef'])}}
+                  Payment Status:  {{paymentStatus($get_pickup_request->PaymentRef)}}
 
-                                 @if($request->delivery_cost_payer =='prepaid')
+                    @if($request->delivery_cost_payer =='prepaid')
+                       @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
                                 <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
-                    <input type="text" name="waybillNo" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['WaybillNumber']}}">
+                    <input type="hidden" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
 
-                    <input type="hidden" name="pickupRequest_id" value="{{helpProviderPickupRequestDetails($help_provider->id, $request->id, $request_bid->bidder_id)['id']}}">
+                    <input type="hidden" name="pickupRequest_id" value="{{$get_pickup_request->id}}">
 
                                   <button type="submit" class="btn btn-success">Pay shipping fee</button>
                                 </form>
+
                                 @endif
+                            @endif
                               </div>
                          </div>        
 
