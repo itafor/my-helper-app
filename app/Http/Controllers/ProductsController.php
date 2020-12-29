@@ -101,5 +101,11 @@ public function storeLogisticEgent(Request $request) {
     $data['items'] = ItemSubCategory::orderBy('created_at','desc')->get();
     return view('admin.product_subcategory.index',$data);
 }
+
+public function getItemsByCategory($id)
+{
+   $items = ItemSubCategory::where('category_id',$id)->get();
+   return response()->json(['items'=>$items]);
+}
 }
 

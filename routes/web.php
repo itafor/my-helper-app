@@ -190,5 +190,6 @@ Route::group([
 
 });
 
+  Route::get('/get-items-by-category/{id}', 'ProductsController@getItemsByCategory');
 
 

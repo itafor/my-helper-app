@@ -248,9 +248,9 @@ $(".clickable-row").click(function() {
     window.location = $(this).data("href");
 });
 
-$(document).ready( function () {
-    $('#requests').DataTable();
-} );
+// $(document).ready( function () {
+//     $('#requests').DataTable();
+// } );
 
 // $('#finish').click(function() {
 //     if (!$('.select_corporate') || !$('.select_individual')) {
@@ -436,3 +436,40 @@ function hidePhoto(){
    closebtn.style.display = "none";
 
 }
+ 
+
+$(document).ready(function(){
+        $('#category_id').change(function(){
+    var category = $(this).val();
+
+    if(category){
+        $('#sub_category_id').empty();
+        $('<option>').val('').text('Loading...').appendTo('#sub_category_id');
+        $.ajax({
+            url: baseUrl+'/get-items-by-category/'+category,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                $('#sub_category_id').empty();
+                $('<option>').val('').text('Select an item').appendTo('#sub_category_id');
+                    $('#multipleItem').empty();
+                    $('#itemlabel').text('Items')
+                $.each(data.items, function(k, v) {
+                  var multiple_item = '<label for="two">'+
+        '<input type="checkbox" name="items[]" value="'+v.id+'" />'+' '+ v.name +'</label>';
+                   // $('<option>').val(v.id).text(v.name).appendTo('#sub_category_id');
+
+                   $('#multipleItem').append(multiple_item);
+                });
+            }
+        });
+    }
+});
+});
+
+  // $(function() {
+  //   $('#sub_category_id').multipleSelect({
+  //     multiple: true,
+  //     multipleWidth: 100
+  //   })
+  // })

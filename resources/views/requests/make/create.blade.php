@@ -190,14 +190,21 @@
                                             <div class="col-md-12">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <label>Category</label><br>
-                                                        <select name="category_id" class="form-control" required>
+                                                        <label>Item Category</label><br>
+                                                        <select  name="category_id" id="category_id" class="form-control" required>
                                                             @foreach($categories as $category)
                                                                 <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
+
+                             <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label id="itemlabel"></label><br>
+                                        <div id="multipleItem"></div>
+                                    </div>
+                                </div>
                                               
                                                 <div class="tab-pane" id="description">
                                                     
