@@ -15,6 +15,11 @@ public function item_category()
 	return $this->belongsTo(Category::class,'category_id','id');
 }
 
+ public function request_items()
+    {
+      return $this->hasMany(RequestItem::class,'item_id','id');
+    }
+
     public static function createNew($data)
   {
   	

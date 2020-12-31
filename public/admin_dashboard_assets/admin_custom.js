@@ -59,9 +59,9 @@ function duplicateEmail(element){
                 alert('Email taken, please Login');
                 $('#finish').prop('disabled', true)
                 $('.loginLink').show();
-                $(":input").not("[name=email]").prop("readonly", true)
+                // $(":input").not("[name=email]").prop("readonly", true)
             } else {
-                $(":input").not("[name=email]").prop("readonly", false)
+                // $(":input").not("[name=email]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
                 $('.loginLink').hide();
             }
@@ -84,9 +84,9 @@ function duplicateUserName(element){
             if(res.exists){
                 alert('Username taken, Choose another');
                 $('#finish').prop('disabled', true);
-                $(":input").not("[name=username]").prop("readonly", true)
+                // $(":input").not("[name=username]").prop("readonly", true)
             } else {
-                $(":input").not("[name=username]").prop("readonly", false)
+                // $(":input").not("[name=username]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
             }
         },

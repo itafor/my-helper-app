@@ -5,6 +5,7 @@ use App\Country;
 use App\PickupRequest;
 use App\ProviderLocation;
 use App\RequestBidders;
+use App\RequestItem;
 use App\RequestPhoto;
 use App\ShipmentItem;
 use App\State;
@@ -380,4 +381,12 @@ function itemSize($size){
      return 'Size Not Specified';
       break;
   }
+}
+
+function reqItems($reqId, $itemCategoryId)
+{
+ return RequestItem::where([
+    ['request_id', $reqId],
+    ['item_category_id', $itemCategoryId]
+  ])->get();
 }

@@ -183,9 +183,9 @@ function duplicateEmail(element){
                 alert('Email taken, please Login');
                 $('#finish').prop('disabled', true)
                 $('.loginLink').show();
-                $(":input").not("[name=email]").prop("readonly", true)
+                // $(":input").not("[name=email]").prop("readonly", true)
             } else {
-                $(":input").not("[name=email]").prop("readonly", false)
+                // $(":input").not("[name=email]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
                 $('.loginLink').hide();
             }
@@ -208,9 +208,9 @@ function duplicateUserName(element){
             if(res.exists){
                 alert('Username taken, Choose another');
                 $('#finish').prop('disabled', true);
-                $(":input").not("[name=username]").prop("readonly", true)
+                // $(":input").not("[name=username]").prop("readonly", true)
             } else {
-                $(":input").not("[name=username]").prop("readonly", false)
+                // $(":input").not("[name=username]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
             }
         },
@@ -456,8 +456,7 @@ $(document).ready(function(){
                     $('#itemlabel').text('Items')
                 $.each(data.items, function(k, v) {
                   var multiple_item = '<label for="two">'+
-        '<input type="checkbox" name="items[]" value="'+v.id+'" />'+' '+ v.name +'</label>';
-                   // $('<option>').val(v.id).text(v.name).appendTo('#sub_category_id');
+        '<input type="checkbox" name="items[]" value="'+v.id+'" required />'+' '+ v.name +'</label>';
 
                    $('#multipleItem').append(multiple_item);
                 });
