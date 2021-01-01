@@ -92,6 +92,7 @@ class ProvideRequestController extends Controller
         $validator =validator::make($data,[
             'description'=>'required',
             'category_id'=>'required',
+            'items' => 'required',
         ]);
 
          if($validator->fails()){

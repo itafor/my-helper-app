@@ -26,11 +26,9 @@
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('industry'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('category') }}</strong>
-                                                </span>
-                                            @endif
+                                @error('category_id')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                         </div>
                                     </div>
 
@@ -38,6 +36,9 @@
                                     <div class="form-group">
                                         <label id="itemlabel"></label><br>
                                         <div id="multipleItem"></div>
+                                @error('items')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                     </div>
                                 </div>
                             <div class="col-md-8">
@@ -45,11 +46,9 @@
                                             <strong><label class="form-control-label" for="input-company">{{ __('Description') }}</label></strong>
                                             <textarea name="description" id="input-description" class="form-control" placeholder="{{ __('Description') }}" value="{{ old('description') }}" required></textarea>
 
-                                            @if ($errors->has('company_name'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('company_name') }}</strong>
-                                                </span>
-                                            @endif
+                            @error('description')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                         </div>
                                     </div>                                                         
                                 </div>
@@ -64,11 +63,9 @@
                                                         <option  value="{{ $state['StateName'] }}">{{ $state['StateName'] }}</option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('api_state'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('api_state_id') }}</strong>
-                                                    </span>
-                                                @endif
+                            @error('api_state')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -78,11 +75,9 @@
                                                     <option value="">Select City</option>
                                                    
                                                 </select>
-                                                @if ($errors->has('api_city'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('api_city_id') }}</strong>
-                                                    </span>
-                                                @endif
+                                @error('api_city')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                             </div>
                                         </div>
                                        
@@ -96,11 +91,9 @@
                                                 <select name="api_onforwarding_town_id" id="api_onforwarding_town_id" class="form-control form-control-alternative{{ $errors->has('api_onforwarding_town_id') ? ' is-invalid' : '' }}" placeholder="{{ __('api_onforwarding_town_id') }}" value="{{ old('street') }}" required>
                                                     <option value="">Select Town</option>
                                                 </select>
-                                                @if ($errors->has('api_onforwarding_town_id'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('api_onforwarding_town_id') }}</strong>
-                                                    </span>
-                                                @endif
+                            @error('api_onforwarding_town_id')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -108,11 +101,9 @@
                                                 <strong><label class="form-control-label" for="input-street">{{ __('Street') }}</label></strong>
                                                 <input type="text" name="street" id="input-street" class="form-control form-control-alternative{{ $errors->has('street') ? ' is-invalid' : '' }}" placeholder="{{ __('Street') }}" value="{{ old('street') }}" required >
 
-                                                @if ($errors->has('street'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('street') }}</strong>
-                                                    </span>
-                                                @endif
+                            @error('street')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
                                             </div>
                                         </div>
                                     </div>

@@ -456,7 +456,7 @@ $(document).ready(function(){
                     $('#itemlabel').text('Items')
                 $.each(data.items, function(k, v) {
                   var multiple_item = '<label for="two">'+
-        '<input type="checkbox" name="items[]" value="'+v.id+'" required />'+' '+ v.name +'</label>';
+        '<input type="checkbox" name="items[]" id="option-'+k+'" value="'+v.id+'" />'+' '+ v.name +'</label>';
 
                    $('#multipleItem').append(multiple_item);
                 });
@@ -465,6 +465,8 @@ $(document).ready(function(){
     }
 });
 });
+
+
 
   // $(function() {
   //   $('#sub_category_id').multipleSelect({

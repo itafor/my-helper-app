@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -120,7 +121,7 @@ class RegisterController extends Controller
 
        $trimmedonforwardingTown=trim($onforwardingTown[1]);
         
-        if($request->has('category_id') || $request->has('description')) {
+        if($request->has('category_id') && $request->has('description') && $request->has('items')) {
             $lockdownRequest = new LockdownRequest;
             $userId = $user->id;
     
@@ -144,7 +145,11 @@ class RegisterController extends Controller
             RequestItem::addNew($data, $lockdownRequest);
         }
         
+        }else{
+            // return back()->with('error','Request could not be created');
+             Session::flash("status", "Request could not be created");
         }
+
         return $request->wantsJson()
                     ? new Response('', 201)
                     : redirect($this->redirectPath());
