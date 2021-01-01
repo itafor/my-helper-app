@@ -33,13 +33,12 @@ class ProductsController extends Controller
     return view('admin.products.show',$data);
     }
 
-public function storeLogisticEgent(Request $request) {
+public function storeItemCategory(Request $request) {
 
 	  $data = $request->all();
 
        $validator = validator::make($data,[
              'title'=>'required',
-            'description'=>'required',
     ]);
 
     if($validator->fails()){

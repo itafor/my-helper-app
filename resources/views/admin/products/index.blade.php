@@ -21,7 +21,7 @@ Admin | Item Category
                   <a href="{{route('admin.product.create')}}">
                   <button class="btn btn-primary btn-sm">
                   <i class="fa fa-plus"></i>
-                Add new product
+                Add new category  
               </button> 
               </a>
             </h4>

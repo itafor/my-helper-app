@@ -136,7 +136,7 @@ Route::group([
     Route::get('show_Item_detail/{id}', 'ProductsController@showItemDetail')->name('show.item.category.detail');
 
     Route::get('/admin/add_new_product', 'ProductsController@create')->name('admin.product.create');
-    Route::post('/store_product', 'ProductsController@storeLogisticEgent')->name('admin.product.store');
+    Route::post('/store_product', 'ProductsController@storeItemCategory')->name('admin.product.store');
     Route::get('/add_new_item_subcategory', 'ProductsController@createItemSubCategory')->name('admin.item.subcategory.create');
     Route::post('/store_Item_Subcategory', 'ProductsController@storeItemSubcategory')->name('admin.item.Subcategory.store');
     Route::get('items_subcategoies', 'ProductsController@itemSubcategories')->name('admin.view.item.subcategory');
