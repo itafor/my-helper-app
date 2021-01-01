@@ -439,7 +439,7 @@ function hidePhoto(){
  
 
 $(document).ready(function(){
-        $('#category_id').change(function(){
+        $('#item_category_id').change(function(){
     var category = $(this).val();
 console.log('cat id',category);
     if(category){
