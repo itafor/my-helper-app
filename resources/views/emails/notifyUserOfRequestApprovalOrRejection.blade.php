@@ -184,6 +184,13 @@
  We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>accepted</b> by the receiver, and pickup request has been sent to Red Star Express (RSE) Delivery Service.<br>
 
  Items Category : {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ <h5>Items</h5>
+  <ul>
+  @foreach(reqItems($main_request->id, $main_request->category->id) as $reqitem)
+  <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+  @endforeach
+  </ul>
+  <br>
  Items Description: {{$main_request->description }}<br><br>
 
  Item Size: {{itemSize($request_bidding_record->weight)}} <br>
@@ -234,6 +241,15 @@ Please find the receiver details below.
 We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>rejected</b> by the receiver.<br>
 
 Items Category:: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+
+ <h5>Items</h5>
+  <ul>
+  @foreach(reqItems($main_request->id, $main_request->category->id) as $reqitem)
+  <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+  @endforeach
+  </ul>
+  <br>
+  
 Items Description: {{$main_request->description }}<br><br>
 
   <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>

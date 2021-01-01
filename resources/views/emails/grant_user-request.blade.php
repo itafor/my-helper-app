@@ -134,7 +134,15 @@
 
 After you have accepted the request, Red Star Express  Allied Services Ltd. will be contacted to deliver the item. <br>
 
- item Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ Item Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br><br>
+
+<h5>Items</h5>
+  <ul>
+  @foreach(reqItems($main_request->id, $main_request->category->id) as $reqitem)
+  <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+  @endforeach
+  </ul>
+<br>
  item Description: {{$main_request->description }}<br>
 
   Item Size: {{itemSize($request_bidding_record->weight)}} <br>

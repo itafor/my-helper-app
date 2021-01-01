@@ -109,7 +109,7 @@
                               <h5>ITEMS</h5>
                               <ul>
                               @foreach(reqItems($request->id, $request->category->id) as $reqitem)
-                              <li>{{$reqitem->item->name}}</li>
+                               <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
                               @endforeach
                               </ul>
 
@@ -176,11 +176,11 @@
                                 
                                   <!-- shipment form -->
 
-                                  <div   >
+                                  <div style="display: none;">
                                     <div class="row" >
                                       <div class="col-sm-4">
                                         <label for="Inputdescription">Description</label>
-                                        <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
+                                        <textarea name="description" class="form-control" id="description">{{ $request->description }}</textarea>
                                       </div>
 
                                       <div class="col-sm-2">
@@ -295,11 +295,11 @@
                                     <!-- <h3>Shipment Items</h3> -->
                                      @foreach(reqItems($request->id, $request->category->id) as $key => $reqitem)
                               
-                             
+                              
                                     <div class="row" >
                                       <div class="col-sm-4">
                                           <label for="inputweight">ItemName</label>
-                                          <input type="text" name="ShipmentItems[{{$key}}][ItemName]" class="form-control" id="ItemName" value="{{$reqitem->item->name}}">
+                                          <input type="text" name="ShipmentItems[{{$key}}][ItemName]" class="form-control" id="ItemName" value="{{$reqitem->item ? $reqitem->item->name : 'N/A'}}">
                                       </div>
 
                                       <div class="col-sm-4">

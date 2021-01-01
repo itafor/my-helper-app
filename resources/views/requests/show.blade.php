@@ -33,9 +33,19 @@
                                       <strong>{{ $getRequest->user->username }}</strong>
                                     </h3>
 
-                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                      I want to provide the following items ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
                                     <div class="request-detail size-wrap">
-                                      Item Size: {{itemSize($getRequest->weight)}}
+                            <span>ITEM CATEGORY: {{ $getRequest->category ? $getRequest->category->title : '' }}</span>
+                                <br>
+                                <br>
+                              <h5>ITEMS</h5>
+                              <ul>
+                              @foreach(reqItems($getRequest->id, $getRequest->category->id) as $reqitem)
+                              <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+                              @endforeach
+                              </ul>
+                            
+                            Item Size: {{itemSize($getRequest->weight)}}
                                     </div>
 
                                     <div class="request-detail delivery-fee-wrap">
@@ -44,8 +54,7 @@
                                   </div>
 
                          
-                                  <h2>Users that applied to receive your help</h2>
-                                  <hr>
+                                 
                                         @if(isset($request_photos) && count($request_photos) >= 1)
 
                                 @auth
@@ -78,7 +87,8 @@
                                   @if(auth()->check())
                                   <!-- show all users that want this help -->
                                   @if(authUser()->id == $getRequest->user->id)
-
+                               <h2>Users that applied to receive your help</h2>
+                                  <hr>
                                   <div class="table-responsive">
 
                                     <table class="table tablesorter" >

@@ -10,14 +10,15 @@ use App\LockdownRequest;
 use App\Notifications\SendRequestDetails;
 use App\PickupRequest;
 use App\RequestBidders;
+use App\RequestItem;
 use App\RequestPhoto;
 use App\State;
 use App\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Session;
 use Stevebauman\Location\Facades\Location;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Validator;
 
 class MakeRequestController extends Controller
@@ -124,6 +125,9 @@ class MakeRequestController extends Controller
         $lockdownRequest->street = $request->street;
         
         $lockdownRequest->save();
+         if($lockdownRequest){
+         RequestItem::addNew($data, $lockdownRequest);
+       }
         Session::flash('status', 'Request has been successfully registered');
         return redirect()->route('requests');
 

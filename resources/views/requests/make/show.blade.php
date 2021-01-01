@@ -41,7 +41,7 @@
                               <h5>ITEMS</h5>
                               <ul>
                               @foreach(reqItems($getRequest->id, $getRequest->category->id) as $reqitem)
-                              <li>{{$reqitem->item->name}}</li>
+                              <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
                               @endforeach
                               </ul>
 

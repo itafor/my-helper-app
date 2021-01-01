@@ -176,7 +176,7 @@
                      <div class="row">
                        <div class="col-sm-4">
                             <label for="Inputdescription">Description</label>
-                            <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
+                            <textarea name="description" class="form-control" id="description">{{ $request->description }}</textarea>
                           </div>
                            <div class="col-sm-2">
                              <label for="inputweight">Weight</label>
@@ -276,31 +276,31 @@
                           </div>
 
                           <h3>Shipment Items</h3>
-
+                           @foreach(reqItems($request->id, $request->category->id) as $key => $reqitem)
                           <div class="row">
                             <div class="col-sm-3">
                             <label for="inputweight">ItemName</label>
-                            <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
+                            <input type="text" name="ShipmentItems[{{$key}}][ItemName]" class="form-control" id="ItemName" value="{{$reqitem->item ? $reqitem->item->name : 'N/A'}}">
                             </div>
                             <div class="col-sm-2">
                                 <label for="exampleInputEmail1">ItemUnitCost</label>
-                            <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
+                            <input type="number" name="ShipmentItems[{{$key}}][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
                             </div>
                             <div class="col-sm-2">
                               <label for="Inputdescription">ItemQuantity</label>
-                            <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity" value="0">
+                            <input type="number" name="ShipmentItems[{{$key}}][ItemQuantity]" class="form-control" id="ItemQuantity" value="1">
                           </div>
 
                           <div class="col-sm-3">
                               <label for="Inputdescription">ItemColour</label>
-                            <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
+                            <input type="text" name="ShipmentItems[{{$key}}][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
                           </div>
                           <div class="col-sm-2">
                               <label for="Inputdescription">ItemSize</label>
-                            <input type="text" name="ShipmentItems[112211][ItemSize]" class="form-control" id="ItemColour" value="0">
+                            <input type="text" name="ShipmentItems[{{$key}}][ItemSize]" class="form-control" id="ItemColour" value="0">
                           </div>
                           </div>
-
+                       @endforeach
 
                                 <div id="shipmentItemsContainer">
                                 
@@ -342,7 +342,7 @@
 				</div>
 
            
-             <div class="card">
+             {{-- <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Your Request (Help provided)</h4>
               </div>
@@ -394,7 +394,7 @@
 
                   <footer class="blockquote-footer">Here is your request <cite title="Source Title">to provide help</cite></footer>
               </div>
-            </div>
+            </div> --}}
 
                   {{--<div class="card">
               <div class="card-header">

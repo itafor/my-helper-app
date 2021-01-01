@@ -182,7 +182,14 @@
 
 We wish to notify you that your request to get help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>rejected</b> by the provider. See details below.<br><br>
 
-Items Category:: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+Item Category:: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br><br>
+<h5>Items</h5>
+  <ul>
+  @foreach(reqItems($main_request->id, $main_request->category->id) as $reqitem)
+  <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+  @endforeach
+  </ul>
+  <br><br>
 Items Description: {{$main_request->description }}<br><br>
 
 </p>

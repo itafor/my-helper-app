@@ -171,15 +171,23 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Category</label><br>
-                                                    <select name="category_id" class="form-control" required>
-
+                                                    <select name="category_id" id="category_id" class="form-control" required>
+                                                <option value="">Select Item Category</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>        
                                                     @endforeach
                                                         
                                                     </select>
                                                 </div>
+
                                             </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label id="itemlabel"></label><br>
+                                        <div id="multipleItem"></div>
+                                    </div>
+                                </div>
                                               
                                             <div id="description" class="col-md-12">
                                                 <div class="form-group">
