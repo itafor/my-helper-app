@@ -200,6 +200,32 @@
                          
                           </tbody>
                         </table>
+                       
+                       <h3>Items</h3>
+                       @if($get_pickup_request->shipment_items)
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                          <th>Item Name</th>
+                          <th>Item Qty</th>
+                        </tr>
+                          </thead>
+                         
+                         <tbody>
+                       @foreach($get_pickup_request->shipment_items as $item)
+                        <tr>
+                           <td>  {{$item->ItemName}} </td>
+                           <td>  {{$item->ItemQuantity}} </td>
+                        </tr>
+                        @endforeach
+                         </tbody>
+
+                        </table>
+                       </div>
+                       @else
+                       <span>No item found</span>
+                       @endif
                   @else
                   <span>Pickup request not yet submitted</span>
                   @endif

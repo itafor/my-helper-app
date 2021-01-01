@@ -213,7 +213,16 @@
 <dl class="row">
   <dt class="col-sm-6">Help detail description:</dt>
   <dd class="col-sm-6">
-    <p>{{$user_request->description}}</p>
+     Items Category: {{$user_request->category ? $user_request->category->title : 'N/A' }} <br>
+ <h5>Items</h5>
+  <ul>
+  @foreach(reqItems($user_request->id, $user_request->category->id) as $reqitem)
+  <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+  @endforeach
+  </ul>
+  <br>
+  Description  <p>{{$user_request->description}}</p>
+  <br>
     <a href="{{route('auth_view.provide.request',[$user_request->id])}}"> View details</a> 
 </dd>
  

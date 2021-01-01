@@ -63,7 +63,7 @@
           <li @if (isset($pageSlug) && $pageSlug == 'admin_dashboard') class="active " @endif>
             <a href="{{route('admin.dashboard')}}">
               <i class="now-ui-icons design_app"></i>
-              <p>Dashboard</p>
+              <p>All Requests</p>
             </a>
           </li>
      
@@ -76,7 +76,14 @@
           <li @if (isset($pageSlug) && $pageSlug == 'products_services') class="active " @endif>
             <a href="{{route('admin.product.index')}}">
               <i class="now-ui-icons location_map-big"></i>
-              <p>Products and Services</p>
+              <p>Items Categories</p>
+            </a>
+          </li>
+
+           <li @if (isset($pageSlug) && $pageSlug == 'items') class="active " @endif>
+            <a href="{{route('admin.view.item.subcategory')}}">
+              <i class="now-ui-icons location_map-big"></i>
+              <p>Items</p>
             </a>
           </li>
          

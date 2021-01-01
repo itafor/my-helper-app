@@ -105,6 +105,21 @@ Request | Summary
                 </tr>
 
                 <tr>
+                     <td class="rent_title">Payment Reference</td>
+                     <td>
+                 {{$get_pickup_request->PaymentRef ? $get_pickup_request->PaymentRef : 'N/A'}}
+                    
+                    </td>
+                </tr>
+                 <tr>
+                     <td class="rent_title">Payment Status</td>
+                     <td>
+                 {{$get_pickup_request->PaymentRef ? paymentStatus($get_pickup_request->PaymentRef) : 'N/A'}}
+                    
+                    </td>
+                </tr>
+
+                <tr>
                      <td class="rent_title">Description</td>
                      <td>
                  {{$get_pickup_request->Description}}
@@ -113,9 +128,9 @@ Request | Summary
                 </tr>
 
                   <tr>
-                     <td class="rent_title">Weight</td>
+                     <td class="rent_title">Item Size</td>
                      <td>
-                 {{$get_pickup_request->Weight}}
+                 {{itemSize($get_pickup_request->Weight)}}
                     
                     </td>
                 </tr>
@@ -234,6 +249,31 @@ Request | Summary
                 </tr>
        </tbody>
                   </table>
+                    <h3>Items</h3>
+                       @if($get_pickup_request->shipment_items)
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                          <th>Item Name</th>
+                          <th>Item Qty</th>
+                        </tr>
+                          </thead>
+                         
+                         <tbody>
+                       @foreach($get_pickup_request->shipment_items as $item)
+                        <tr>
+                           <td>  {{$item->ItemName}} </td>
+                           <td>  {{$item->ItemQuantity}} </td>
+                        </tr>
+                        @endforeach
+                         </tbody>
+
+                        </table>
+                       </div>
+                       @else
+                       <span>No item found</span>
+                       @endif
                   @else
                   <span>Pickup request not yet submitted</span>
                   @endif
@@ -255,27 +295,8 @@ Request | Summary
            
              <div class="card">
               <div class="card-header">
-              Request (Help provided)
               </div>
               <div class="card-body">
-                      <h3>Welcome to my page - <strong>{{ $request->user->username }}</strong></h3>
-                                    @if($request->show_phone == 1)
-                                    <div class="user-request-card">
-                                        <p>Please call me on 
-                                        <strong>
-                                                {{ $request->user->phone }}
-                                            @else
-                                                <p>Kindly contact me through this platform
-                                            @endif
-                                        </strong>for <b>free</b> <strong>{{ $request->category ? $request->category->title : '' }} - ({{ $request->description }})</strong> around <strong>{{ $request->api_city }}, {{ $request->api_state }}</strong>.
-                                    
-                                    </p>
-                                    <p>Thank you</p>
-                                    <p><strong>{{ $request->user->username }}</strong></p> 
-                                    @if($request->show_address == 1)
-                                        <p>Address: {{ $request->street }}</p>
-                                    @endif
-
 
           @if($request_bid->status == 'Approved')       
 <h4>Photos uploaded by the provider</h4>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\ItemSubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -11,7 +12,7 @@ class ProductsController extends Controller
 {
     
    public function index(Request $request) {
-   	$data['products'] = Category::orderBy('title','desc')->get();
+   	$data['products'] = Category::orderBy('created_at','desc')->get();
     return view('admin.products.index',$data);
 }
 
@@ -26,6 +27,11 @@ class ProductsController extends Controller
     return view('admin.products.create');
 }
 
+ public function showItemDetail($id)
+    {
+            $data['item'] = Category::find($id);
+    return view('admin.products.show',$data);
+    }
 
 public function storeLogisticEgent(Request $request) {
 
@@ -53,4 +59,53 @@ public function storeLogisticEgent(Request $request) {
 
         return redirect()->route('admin.product.index')->with('success', 'Product added successfully');
     }
+
+    public function createItemSubCategory()
+    {
+            $data['items'] = Category::orderBy('title','desc')->get();
+    return view('admin.product_subcategory.create',$data);
+    }
+
+        public function storeItemSubcategory(Request $request)
+    {
+
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'category_id' => 'required|max:50'
+            // 'subcategories.*.name' => 'required|max:50'
+        ]);
+        if($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        }
+
+        
+
+        $item_subcategory = ItemSubCategory::createNew($request->all());
+       
+       if($item_subcategory){
+        $status = 'Item SubCategory has been created';
+
+        return back()->with('success',$status);
+       
+
+        } else {
+
+        return back()->withInput()->with('error', 'The process could not be completed');
+          
+        }
+
+        
+    }
+
+    public function itemSubcategories(Request $request) {
+    $data['items'] = ItemSubCategory::orderBy('created_at','desc')->get();
+    return view('admin.product_subcategory.index',$data);
 }
+
+public function getItemsByCategory($id)
+{
+   $items = ItemSubCategory::where('category_id',$id)->get();
+   return response()->json(['items'=>$items]);
+}
+}
+

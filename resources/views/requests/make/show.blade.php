@@ -32,7 +32,18 @@
                                       <strong>{{ $getRequest->user->username }}</strong>
                                     </h3>
                                    
-                                        I need {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                        I need the following items ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                      <br>
+                                      <br>
+                                <span>ITEM CATEGORY: {{ $getRequest->category ? $getRequest->category->title : '' }}</span>
+                                <br>
+                                <br>
+                              <h5>ITEMS</h5>
+                              <ul>
+                              @foreach(reqItems($getRequest->id, $getRequest->category->id) as $reqitem)
+                              <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+                              @endforeach
+                              </ul>
 
                                     @auth
                                         @if($requestBid)

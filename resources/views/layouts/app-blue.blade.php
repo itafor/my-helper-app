@@ -39,7 +39,10 @@
        
        <script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         
-         
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+
+
         <!-- CSS Files -->
         <script>
             var baseUrl = '{{url("/")}}';
@@ -83,6 +86,8 @@
         <script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
 
+          <!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
         <!--  Plugin for the Wizard -->
         <script src="{{ asset('assets/js/gsdk-bootstrap-wizard.js')}}"></script>
 
@@ -107,6 +112,8 @@
 		<script src="{{ asset('blue') }}/js/s.js"></script>
         <script type="text/javascript" src="{{ asset('blue') }}/slick/slick.min.js"></script>
 		
+      
+
         @stack('js')
         <script type="text/javascript">
             $(document).ready( function () {

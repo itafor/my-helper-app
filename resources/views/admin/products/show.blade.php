@@ -5,7 +5,7 @@
 
 @section('title')
 
-Admin | Item Category
+Admin | Item Details
 
 @endsection
 
@@ -15,47 +15,44 @@ Admin | Item Category
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left"> Items Categories</h4>
+                <h4 class="card-title float-left"> Item Details</h4>
 
                 <h4 class="card-title float-right">
-                  <a href="{{route('admin.product.create')}}">
+                  <a href="{{route('admin.product.index')}}">
                   <button class="btn btn-primary btn-sm">
-                  <i class="fa fa-plus"></i>
-                Add new product
+              Back to List
               </button> 
               </a>
             </h4>
               </div>
               <div class="card-body">
+               
                 <div class="table-responsive">
+                  <span style="font-size: 20px;">Item Category Name:</span> <strong>{{$item->title}}</strong>
                   <table class="table tablesorter" id="requests">
                     <thead class=" text-primary">
                        <tr>
-                      <th> Items Category </th>
-                      <th colspan="2"> Actions </th>
+                      <th> Items </th>
+                      <th colspan="2"> </th>
                         </tr>
                      
                     </thead>
+                    @if($item->item_subcategory)
                     <tbody>
-                      @foreach($products as $product)
+                      @foreach($item->item_subcategory as $subcat)
                       <tr>
-                        <td>{{$product->title}} </td>
+
+
+                        <td>{{$subcat->name}} </td>
                         
-                        <td>
-                   <a href="{{route('show.item.category.detail',[$product->id])}}">
-                      <button type="button" class="btn btn-success btn-sm"><i class="fa fa-eye" title="Vioew"></i></button>
-                   </a>
-
-                        </td>
-
-                          <td>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteItems('Products',{{ $product->id  }})"><i class="fa fa-trash" title="Delete"></i></button>
-
-                        </td>
+                    
                        
                       </tr>
                      @endforeach
                     </tbody>
+                    @else
+                    <span>No Item subcategory found</span>
+                    @endif
                   </table>
                 </div>
               </div>

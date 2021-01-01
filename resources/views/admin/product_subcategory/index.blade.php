@@ -1,11 +1,11 @@
 
-@extends('admin.layouts.master', ['pageSlug' => 'products_services'])
+@extends('admin.layouts.master', ['pageSlug' => 'items'])
 
 
 
 @section('title')
 
-Admin | Item Category
+Admin | Items
 
 @endsection
 
@@ -15,13 +15,13 @@ Admin | Item Category
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left"> Items Categories</h4>
+                <h4 class="card-title float-left"> Items</h4>
 
                 <h4 class="card-title float-right">
-                  <a href="{{route('admin.product.create')}}">
+                  <a href="{{route('admin.item.subcategory.create')}}">
                   <button class="btn btn-primary btn-sm">
                   <i class="fa fa-plus"></i>
-                Add new product
+                Add new Item 
               </button> 
               </a>
             </h4>
@@ -31,27 +31,18 @@ Admin | Item Category
                   <table class="table tablesorter" id="requests">
                     <thead class=" text-primary">
                        <tr>
-                      <th> Items Category </th>
+                      <th> Items </th>
+                      <th> Item Categories </th>
                       <th colspan="2"> Actions </th>
                         </tr>
                      
                     </thead>
                     <tbody>
-                      @foreach($products as $product)
+                      @foreach($items as $item)
                       <tr>
-                        <td>{{$product->title}} </td>
-                        
-                        <td>
-                   <a href="{{route('show.item.category.detail',[$product->id])}}">
-                      <button type="button" class="btn btn-success btn-sm"><i class="fa fa-eye" title="Vioew"></i></button>
-                   </a>
-
-                        </td>
-
-                          <td>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteItems('Products',{{ $product->id  }})"><i class="fa fa-trash" title="Delete"></i></button>
-
-                        </td>
+                        <td>{{$item->name}} </td>
+                        <td>{{$item->item_category ? $item->item_category->title : "N/A"}} </td>
+                    
                        
                       </tr>
                      @endforeach

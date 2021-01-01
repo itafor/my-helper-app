@@ -188,6 +188,13 @@
  <br>
 
  Items Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
+ <h5>Items</h5>
+  <ul>
+  @foreach(reqItems($main_request->id, $main_request->category->id) as $reqitem)
+  <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+  @endforeach
+  </ul>
+  <br>
  Items Description: {{$main_request->description }}<br><br>
 
 </p>

@@ -59,9 +59,9 @@ function duplicateEmail(element){
                 alert('Email taken, please Login');
                 $('#finish').prop('disabled', true)
                 $('.loginLink').show();
-                $(":input").not("[name=email]").prop("readonly", true)
+                // $(":input").not("[name=email]").prop("readonly", true)
             } else {
-                $(":input").not("[name=email]").prop("readonly", false)
+                // $(":input").not("[name=email]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
                 $('.loginLink').hide();
             }
@@ -84,9 +84,9 @@ function duplicateUserName(element){
             if(res.exists){
                 alert('Username taken, Choose another');
                 $('#finish').prop('disabled', true);
-                $(":input").not("[name=username]").prop("readonly", true)
+                // $(":input").not("[name=username]").prop("readonly", true)
             } else {
-                $(":input").not("[name=username]").prop("readonly", false)
+                // $(":input").not("[name=username]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
             }
         },
@@ -198,3 +198,48 @@ function deleteItems(item,item_id)
   // Show the container element (hidden with CSS)
   expandImg.parentElement.style.display = "block";
 }
+
+
+function identifier(){
+    return Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
+}
+
+var row = 1;
+// Add more product subcategories
+   $('#addMoreSubcategory').click(function(e) {
+           // console.log('ok')
+            e.preventDefault();
+
+            if(row >= 10){
+                alert("You've reached the maximum limit");
+                return;
+            }
+
+            var rowId = identifier();
+
+            $("#subcaegoryContainer").append(
+                '<div>'
+                    +'<div style="float:right; margin-right:50px; margin-top: 5px;" class="remove_subcategory"><span style="cursor:pointer; " class="badge badge-danger" border="2"><i class="fa fa-minus"></i> Remove</span></div>'
+                  
+                              +' <label class="form-control-label" for="input-property_type" style="margin-bottom:40px;">Item</label>'
+                             
+                            
+                                 +  '<input type="text" name="subcategories['+rowId+'][name]" class="form-control" required style="margin-top: -30px;">'
+                               
+                        
+                        +'<br>'
+                    +'</div>'
+
+            );
+            row++;
+            $(".select"+rowId).select2({
+                    theme: "bootstrap"
+                });
+        });
+
+        // Remove parent of 'remove' link when link is clicked.
+        $('#subcaegoryContainer').on('click', '.remove_subcategory', function(e) {
+            e.preventDefault();
+            $(this).parent().remove();
+            row--;
+        });
