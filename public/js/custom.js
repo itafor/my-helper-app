@@ -447,7 +447,6 @@ $(document).ready(function(){
             type: "GET",
             dataType: 'json',
             success: function(data) {
-                console.log(data)
                     $('#multipleItem').empty();
                     $('#itemlabel').text('Items')
                 $.each(data.items, function(k, v) {
@@ -458,6 +457,9 @@ $(document).ready(function(){
                 });
             }
         });
+    }else{
+         $('#multipleItem').empty();
+          $('#itemlabel').empty();
     }
 });
 });
