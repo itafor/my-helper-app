@@ -3,7 +3,7 @@
 
 @section('title')
 
-Admin | Dashboard
+Admin | All Requests
 
 @endsection
 

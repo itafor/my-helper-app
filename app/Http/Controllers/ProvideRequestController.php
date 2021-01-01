@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Category;
-use App\Country;
-use App\State;
 use App\City;
+use App\Country;
 use App\LockdownRequest;
-use Stevebauman\Location\Facades\Location;
-use Session;
 use App\Notifications\ProvideRequestDetails;
+use App\RequestItem;
+use App\State;
+use Illuminate\Http\Request;
+use Session;
+use Stevebauman\Location\Facades\Location;
 use Validator;
 
 class ProvideRequestController extends Controller
@@ -91,6 +92,7 @@ class ProvideRequestController extends Controller
         $validator =validator::make($data,[
             'description'=>'required',
             'category_id'=>'required',
+            'items' => 'required',
         ]);
 
          if($validator->fails()){
@@ -122,6 +124,7 @@ class ProvideRequestController extends Controller
         $lockdownRequest->save();
         if($lockdownRequest){
             $lockdown_request = LockdownRequest::find($lockdownRequest->id);
+            RequestItem::addNew($data, $lockdownRequest);
             LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
         }
         Session::flash('status', 'Request has been successfully registered');

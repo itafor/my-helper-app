@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeletedAtCategoriesTable extends Migration
+class CreateItemSubCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class AddDeletedAtCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::create('item_sub_categories', function (Blueprint $table) {
+            $table->id();
+            $table->integer('category_id')->nullable();
+            $table->string('name')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
-
         });
     }
 
@@ -27,8 +29,6 @@ class AddDeletedAtCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-             Schema::dropIfExists('categories');
-        });
+        Schema::dropIfExists('item_sub_categories');
     }
 }

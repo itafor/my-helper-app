@@ -32,7 +32,18 @@
                                       <strong>{{ $getRequest->user->username }}</strong>
                                     </h3>
                                    
-                                        I need {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                        I need the following items ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                      <br>
+                                      <br>
+                                <span>ITEM CATEGORY: {{ $getRequest->category ? $getRequest->category->title : '' }}</span>
+                                <br>
+                                <br>
+                              <h5>ITEMS</h5>
+                              <ul>
+                              @foreach(reqItems($getRequest->id, $getRequest->category->id) as $reqitem)
+                              <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+                              @endforeach
+                              </ul>
 
                                     @auth
                                         @if($requestBid)
@@ -54,7 +65,7 @@
                                     <div class="group-wraps wrap-2">
                                         <h4 class="mt-20">Users interested to provide the above request</h4>
                                         <div class="table-responsive">
-                                            <table class="table tablesorter" id="requests">
+                                            <table class="table tablesorter">
                                               <thead class=" text-primary">
                                                  <tr>
                                                 <th> Full name </th>
@@ -130,7 +141,9 @@
 
                       Payment Status:  {{$get_pickup_request->PaymentRef ? paymentStatus($get_pickup_request->PaymentRef) : 'N/A'}}
 
-                 @if($requestBid->payment_type =='prepaid')
+                 @if($requestBid->payment_type == 'prepaid')
+
+                @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
                   <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
                     <input type="hidden" name="waybillNo" value="{{helpProviderPickupRequestDetails($requestBid->requester_id, $getRequest->id, $requestBid->bidder_id)['WaybillNumber']}}">
@@ -140,6 +153,7 @@
                         <button type="submit" class="btn btn-success">Pay shipping fee</button>
                     </form>
                  @endif
+             @endif
                               <br>
                               <br>
 

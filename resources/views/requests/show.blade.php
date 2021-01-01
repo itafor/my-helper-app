@@ -33,9 +33,19 @@
                                       <strong>{{ $getRequest->user->username }}</strong>
                                     </h3>
 
-                                      I want to provide {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+                                      I want to provide the following items ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
                                     <div class="request-detail size-wrap">
-                                      Item Size: {{itemSize($getRequest->weight)}}
+                            <span>ITEM CATEGORY: {{ $getRequest->category ? $getRequest->category->title : '' }}</span>
+                                <br>
+                                <br>
+                              <h5>ITEMS</h5>
+                              <ul>
+                              @foreach(reqItems($getRequest->id, $getRequest->category->id) as $reqitem)
+                              <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+                              @endforeach
+                              </ul>
+                            
+                            Item Size: {{itemSize($getRequest->weight)}}
                                     </div>
 
                                     <div class="request-detail delivery-fee-wrap">
@@ -44,11 +54,11 @@
                                   </div>
 
                          
-
+                                 
                                         @if(isset($request_photos) && count($request_photos) >= 1)
 
                                 @auth
-                                      <h4>Sample photos {{authUser()->id == $getRequest->user->id ?  'and users that applied to get your help':''}}</h4>
+                                      <h4>Sample photos</h4>
                                  @endauth
                       
                                 <!--Tab Gallery: The expanding image container -->
@@ -77,10 +87,11 @@
                                   @if(auth()->check())
                                   <!-- show all users that want this help -->
                                   @if(authUser()->id == $getRequest->user->id)
-
+                               <h2>Users that applied to receive your help</h2>
+                                  <hr>
                                   <div class="table-responsive">
 
-                                    <table class="table tablesorter" id="requests">
+                                    <table class="table tablesorter" >
 
                                       <thead class=" text-primary">
                                          <tr>
@@ -148,15 +159,17 @@
                                 @endphp
                                
                                 <br>
-                @if($getRequest->delivery_cost_payer =='pay on delivery')
+      @if($getRequest->delivery_cost_payer =='pay on delivery')
         @if(user_already_contacted_help_provider($getRequest->user_id,$getRequest->id,auth()->user()->id,'Provide Help')['status'] == 'Approved')
+                 @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
             <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
                     <input type="hidden" name="waybillNo" value="{{$get_pickup_request->WaybillNumber}}">
                     <input type="hidden" name="pickupRequest_id" value="{{$get_pickup_request->id}}">
                                   <button type="submit" class="btn btn-success">Pay shipping fee</button>
-                                </form>
+                </form>
 
+                @endif
               @endif
           @endif
           <br>

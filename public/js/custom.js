@@ -183,9 +183,9 @@ function duplicateEmail(element){
                 alert('Email taken, please Login');
                 $('#finish').prop('disabled', true)
                 $('.loginLink').show();
-                $(":input").not("[name=email]").prop("readonly", true)
+                // $(":input").not("[name=email]").prop("readonly", true)
             } else {
-                $(":input").not("[name=email]").prop("readonly", false)
+                // $(":input").not("[name=email]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
                 $('.loginLink').hide();
             }
@@ -208,9 +208,9 @@ function duplicateUserName(element){
             if(res.exists){
                 alert('Username taken, Choose another');
                 $('#finish').prop('disabled', true);
-                $(":input").not("[name=username]").prop("readonly", true)
+                // $(":input").not("[name=username]").prop("readonly", true)
             } else {
-                $(":input").not("[name=username]").prop("readonly", false)
+                // $(":input").not("[name=username]").prop("readonly", false)
                 $('#finish').prop('disabled', false)
             }
         },
@@ -248,9 +248,9 @@ $(".clickable-row").click(function() {
     window.location = $(this).data("href");
 });
 
-$(document).ready( function () {
-    $('#requests').DataTable();
-} );
+// $(document).ready( function () {
+//     $('#requests').DataTable();
+// } );
 
 // $('#finish').click(function() {
 //     if (!$('.select_corporate') || !$('.select_individual')) {
@@ -436,3 +436,33 @@ function hidePhoto(){
    closebtn.style.display = "none";
 
 }
+ 
+
+$(document).ready(function(){
+        $('#category_id').change(function(){
+    var category = $(this).val();
+    if(category){
+        $.ajax({
+            url: baseUrl+'/get-items-by-category/'+category,
+            type: "GET",
+            dataType: 'json',
+            success: function(data) {
+                    $('#multipleItem').empty();
+                    $('#itemlabel').text('Items')
+                $.each(data.items, function(k, v) {
+                  var multiple_item = '<label for="two">'+
+        '<input type="checkbox" name="items[]" id="option-'+k+'" value="'+v.id+'" />'+' '+ v.name +'</label>';
+
+                   $('#multipleItem').append(multiple_item);
+                });
+            }
+        });
+    }else{
+         $('#multipleItem').empty();
+          $('#itemlabel').empty();
+    }
+});
+});
+
+
+

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
 use App\LockdownRequest;
 use App\Notifications\NewRegisteredUser;
+use App\RequestItem;
+use App\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -100,6 +101,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
+       // dd($request->all());
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
@@ -118,7 +121,7 @@ class RegisterController extends Controller
 
        $trimmedonforwardingTown=trim($onforwardingTown[1]);
         
-        if($request->has('category_id') || $request->has('description')) {
+        if($request->has('category_id') && $request->has('description') && $request->has('items')) {
             $lockdownRequest = new LockdownRequest;
             $userId = $user->id;
     
@@ -139,9 +142,14 @@ class RegisterController extends Controller
             if($lockdownRequest){
             $lockdown_request = LockdownRequest::find($lockdownRequest->id);
             LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
+            RequestItem::addNew($data, $lockdownRequest);
         }
         
+        }else{
+            // return back()->with('error','Request could not be created');
+             Session::flash("status", "Request could not be created");
         }
+
         return $request->wantsJson()
                     ? new Response('', 201)
                     : redirect($this->redirectPath());

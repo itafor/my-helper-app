@@ -25,8 +25,18 @@
        Welcome to my page -  <strong>{{ $getRequest->user->username }}</strong>
     </h5>
     <p class="card-text">
-      I need {{ $getRequest->category ? $getRequest->category->title : '' }} ({{ $getRequest->description }}) around {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+      I need the following items ({{ $getRequest->description }}) around  {{ ucfirst(Str::lower($getRequest->api_city))}} {{ ucfirst(Str::lower($getRequest->api_state))}} ({{ $getRequest->street }})
+
     </p>
+ <span>ITEM CATEGORY: {{ $getRequest->category ? $getRequest->category->title : '' }}</span>
+                                <br>
+                                <br>
+      <h5>ITEMS</h5>
+      <ul>
+      @foreach(reqItems($getRequest->id, $getRequest->category->id) as $reqitem)
+      <li>{{$reqitem->item->name}}</li>
+      @endforeach
+      </ul>
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
      <a onclick="alert('please login to contact this person')" href="{{route('auth_view.make.request', [$getRequest->id])}}" class="btn btn-primary">Contact  {{ $getRequest->user->username ? $getRequest->user->username : $getRequest->user->company_name }}</a>
   </div>

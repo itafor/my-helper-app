@@ -13,6 +13,10 @@ class Category extends Model
         'title', 'description'
     ];
 
+public function item_subcategory()
+{
+  return $this->hasMany(ItemSubCategory::class,'category_id','id');
+}
       public static function updateProduct($data)
     {
      $product  =  self::where([

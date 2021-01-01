@@ -100,9 +100,19 @@
                             <h4>REQUEST: Welcome to my page - <strong>{{ $request->user->username ? $request->user->username : $request->user->company_name }}</strong></h4>
                             <div class="request-cards">
                                 <label>
-                                  I need {{ $request->category ? $request->category->title : '' }} ({{ $request->description }}) around {{ ucfirst(Str::lower($request->api_city))}}, {{ ucfirst(Str::lower($request->api_state))}} ({{ $request->street }})
+                                  I need the following items  ({{ $request->description }}) around {{ ucfirst(Str::lower($request->api_city))}}, {{ ucfirst(Str::lower($request->api_state))}} ({{ $request->street }})
                                   <br>
                                   <br>
+                            <span>ITEM CATEGORY: {{ $request->category ? $request->category->title : '' }}</span>
+                                <br>
+                                <br>
+                              <h5>ITEMS</h5>
+                              <ul>
+                              @foreach(reqItems($request->id, $request->category->id) as $reqitem)
+                               <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+                              @endforeach
+                              </ul>
+
                                   Status: <strong class="text-danger">{{$request_bid->status}}</strong>
                                   <br>
                                   Item Size: <strong class="text-danger"> {{itemSize($request_bid->weight)}}</strong>
@@ -170,7 +180,7 @@
                                     <div class="row" >
                                       <div class="col-sm-4">
                                         <label for="Inputdescription">Description</label>
-                                        <textarea name="description" class="form-control" id="description">{{ $request->category ? $request->category->title : '' }} : {{ $request->description }}</textarea>
+                                        <textarea name="description" class="form-control" id="description">{{ $request->description }}</textarea>
                                       </div>
 
                                       <div class="col-sm-2">
@@ -283,36 +293,37 @@
                                     </div>
 
                                     <!-- <h3>Shipment Items</h3> -->
-
+                                     @foreach(reqItems($request->id, $request->category->id) as $key => $reqitem)
+                              
+                              
                                     <div class="row" >
-
-                                      <div class="col-sm-3">
+                                      <div class="col-sm-4">
                                           <label for="inputweight">ItemName</label>
-                                          <input type="text" name="ShipmentItems[112211][ItemName]" class="form-control" id="ItemName" value="ItemName">
+                                          <input type="text" name="ShipmentItems[{{$key}}][ItemName]" class="form-control" id="ItemName" value="{{$reqitem->item ? $reqitem->item->name : 'N/A'}}">
                                       </div>
 
-                                      <div class="col-sm-2">
+                                      <div class="col-sm-4">
                                           <label for="exampleInputEmail1">ItemUnitCost</label>
-                                          <input type="number" name="ShipmentItems[112211][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
+                                          <input type="number" name="ShipmentItems[{{$key}}][ItemUnitCost]" class="form-control" id="ItemUnitCost" value="0">
                                       </div>
 
-                                      <div class="col-sm-2">
+                                      <div class="col-sm-4">
                                           <label for="Inputdescription">ItemQuantity</label>
-                                          <input type="number" name="ShipmentItems[112211][ItemQuantity]" class="form-control" id="ItemQuantity" value="0">
+                                          <input type="number" name="ShipmentItems[{{$key}}][ItemQuantity]" class="form-control" id="ItemQuantity" value="1">
                                       </div>
 
-                                      <div class="col-sm-3">
+                                      <div class="col-sm-4">
                                           <label for="Inputdescription">ItemColour</label>
-                                          <input type="text" name="ShipmentItems[112211][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
+                                          <input type="text" name="ShipmentItems[{{$key}}][ItemColour]" class="form-control" id="ItemColour" value="ItemColour">
                                       </div>
 
-                                      <div class="col-sm-2">
+                                      <div class="col-sm-4">
                                           <label for="Inputdescription">ItemSize</label>
-                                          <input type="text" name="ShipmentItems[112211][ItemSize]" class="form-control" id="ItemColour" value="0">
+                                          <input type="text" name="ShipmentItems[{{$key}}][ItemSize]" class="form-control" id="ItemColour" value="0">
                                       </div>
 
                                     </div>
-
+                                  @endforeach
                                     <div id="shipmentItemsContainer"></div>
                                     <div style="clear:both"></div>
 
@@ -343,8 +354,11 @@
                               </div>
                              
                             <div class="float-right">
-
-                                 @if($request_bid->payment_type =='pay on delivery')
+                          @php
+                                $get_pickup_request = helpReceiverPickupRequestDetails($request->user->id, $request->id, $request_bid->requester_id);
+                          @endphp
+                              @if($request_bid->payment_type =='pay on delivery')
+                                 @if(paymentStatus($get_pickup_request->PaymentRef) != "Payment Successful")
                   <form action="{{route('initiate_shipping_fee_payment')}}" method="post">
                                   @csrf
                     <input type="hidden" name="waybillNo" value="{{helpReceiverPickupRequestDetails($request_bid->bidder_id, $request->id, $request_bid->requester_id)['WaybillNumber']}}">
@@ -353,11 +367,11 @@
 
                         <button type="submit" class="btn btn-dark">Pay shipping fee</button>
                     </form>
-                                @endif
+
+                          @endif
+                        @endif
                               </div>
-                           @php
-                                $get_pickup_request = helpReceiverPickupRequestDetails($request->user->id, $request->id, $request_bid->requester_id);
-                          @endphp
+                         
                               <br>
                               <br>
                               <br>

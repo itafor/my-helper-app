@@ -5,7 +5,7 @@
 
 @section('title')
 
-Admin | Logistic Agents
+Admin | Request Details
 
 @endsection
 
@@ -16,7 +16,7 @@ Admin | Logistic Agents
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title float-left">Request details </h4>
+                <h4 class="card-title float-left">Get Help Request details </h4>
 
                 <h4 class="card-title float-right">
                   <a href="{{route('admin.dashboard')}}">
@@ -44,39 +44,27 @@ Admin | Logistic Agents
     {{$request_details->request_type == 2 ? 'Supply' : 'Request'}}
   </dd>
 
-   <dt class="col-sm-3">Category</dt>
-  <dd class="col-sm-9">
-    {{ $request_details->category ? $request_details->category->title : 'N/A' }}
-  </dd>
-
-   <dt class="col-sm-3">Display Name</dt>
-  <dd class="col-sm-9">
-   {{ $request_details->user ? $request_details->user->username : 'N/A' }}
-  </dd>
 
    <dt class="col-sm-3">Description</dt>
   <dd class="col-sm-9">
    <p>{{ $request_details->description }}</p>
   </dd>
 
-   <dt class="col-sm-3">Type</dt>
+
+   <dt class="col-sm-3">Item Category</dt>
   <dd class="col-sm-9">
-{{$request_details->type}}
+    {{ $request_details->category ? $request_details->category->title : 'N/A' }}
   </dd>
 
-<dt class="col-sm-3 text-truncate">State</dt>
-  <dd class="col-sm-9">
-
-     {{ $request_details->api_state ? $request_details->api_state : 'N/A' }}
-                       
-  </dd>
-  <dt class="col-sm-3 text-truncate">City</dt>
-  <dd class="col-sm-9">
-
-     {{ $request_details->api_city ? $request_details->api_city : 'N/A' }}
-                       
-  </dd>
 </dl>
+
+
+            <h5>ITEMS</h5>
+            <ul>
+            @foreach(reqItems($request_details->id, $request_details->category->id) as $reqitem)
+            <li>{{$reqitem->item ? $reqitem->item->name : 'N/A'}}</li>
+            @endforeach
+            </ul>
        
               </div>
             </div>

@@ -81,7 +81,7 @@ class RequestBiddersController extends Controller
       public function finalRequestApprovalByHelpReceiver(Request $request){
       
      $data = $request->all();
-    //dd($data);
+   // dd($data);
        $validator = validator::make($data,[
             'request_id'=>'required',
             'request_bid_id'=>'required',
@@ -131,6 +131,7 @@ class RequestBiddersController extends Controller
        $response = $pickupRequest->getBody()->getContents();
       $values = json_decode($response, true);
 
+      // dd($values);
 
      if($values['TransStatus'] == 'Successful'){
 

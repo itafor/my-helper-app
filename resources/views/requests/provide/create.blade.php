@@ -171,15 +171,23 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Category</label><br>
-                                                    <select name="category_id" class="form-control" required>
-
+                                                    <select name="category_id" id="category_id" class="form-control" required>
+                                                <option value="">Select Item Category</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>        
                                                     @endforeach
                                                         
                                                     </select>
                                                 </div>
+
                                             </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label id="itemlabel"></label><br>
+                                        <div id="multipleItem"></div>
+                                    </div>
+                                </div>
                                               
                                             <div id="description" class="col-md-12">
                                                 <div class="form-group">
@@ -191,7 +199,7 @@
 
                                         <div class="group-wrap">
                                             <div class="col-md-12">
-                                                <h4>Item Size Rate(N)</h4>
+                                                <h4>Shipping Fee Per Item Size</h4>
                                             </div>
 
                                             <div class="row req-description">
@@ -235,9 +243,9 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group{{ $errors->has('delivery_cost_payer') ? ' has-danger' : '' }}">
-                                                    <label class="form-control-label" for="delivery_cost_payer"><strong>{{ __('Who will pay delivery cost') }}</strong></label>
+                                                    <label class="form-control-label" for="delivery_cost_payer"><strong>{{ __('Who will pay shipping fee') }}</strong></label>
                                                     <select name="delivery_cost_payer" id="delivery_cost_payer" class="form-control" required>
-                                                        <option value="">Select delivey fee payer</option>
+                                                        <option value="">Select shipping fee payer</option>
                                                         @foreach(payment_types() as $paymentype)
                                                             <option  value="{{ $paymentype['PaymentType'] }}">{{ $paymentype['PaymentType'] =='pay on delivery' ? 'Receiver will pay for shipping cost':'Sender will pay for shipping cost' }}</option>
                                                         @endforeach
