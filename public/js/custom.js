@@ -450,7 +450,7 @@ $(document).ready(function(){
                     $('#multipleItem').empty();
                     $('#itemlabel').text('Items')
                 $.each(data.items, function(k, v) {
-                  var multiple_item = '<label for="two">'+
+                  var multiple_item = '<label for="two" style="font-family: Courier">'+
         '<input type="checkbox" name="items[]" id="option-'+k+'" value="'+v.id+'" />'+' '+ v.name +'</label>';
 
                    $('#multipleItem').append(multiple_item);
