@@ -439,9 +439,8 @@ function hidePhoto(){
  
 
 $(document).ready(function(){
-        $('#item_category_id').change(function(){
+        $('#category_id').change(function(){
     var category = $(this).val();
-console.log('cat id',category);
     if(category){
         $.ajax({
             url: baseUrl+'/get-items-by-category/'+category,

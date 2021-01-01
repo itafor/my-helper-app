@@ -191,7 +191,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label>Item Category</label><br>
-                                                        <select  name="category_id" id="item_category_id" class="form-control" required>
+                                                        <select  name="category_id" id="category_id" class="form-control" required>
                                                             
                                                 <option value="">Select Item Category</option>
 
