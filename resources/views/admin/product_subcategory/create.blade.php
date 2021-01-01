@@ -5,7 +5,7 @@
 
 @section('title')
 
-Admin | Logistic Agents
+Admin | Items
 
 @endsection
 
