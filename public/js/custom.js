@@ -441,17 +441,14 @@ function hidePhoto(){
 $(document).ready(function(){
         $('#category_id').change(function(){
     var category = $(this).val();
-
+console.log('cat id',category);
     if(category){
-        $('#sub_category_id').empty();
-        $('<option>').val('').text('Loading...').appendTo('#sub_category_id');
         $.ajax({
             url: baseUrl+'/get-items-by-category/'+category,
             type: "GET",
             dataType: 'json',
             success: function(data) {
-                $('#sub_category_id').empty();
-                $('<option>').val('').text('Select an item').appendTo('#sub_category_id');
+                console.log(data)
                     $('#multipleItem').empty();
                     $('#itemlabel').text('Items')
                 $.each(data.items, function(k, v) {
@@ -468,9 +465,3 @@ $(document).ready(function(){
 
 
 
-  // $(function() {
-  //   $('#sub_category_id').multipleSelect({
-  //     multiple: true,
-  //     multipleWidth: 100
-  //   })
-  // })
