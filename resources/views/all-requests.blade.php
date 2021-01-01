@@ -15,7 +15,10 @@
 						</div>
 						<div class="row grid-box all-requests">
 							
-							@php
+							
+						@if($allRequests)
+						
+						   @php
 								$i = 1;
 							@endphp
 							@foreach( $allRequests as $req )
@@ -71,13 +74,13 @@
 							</div>
 						</div>
 							
-						
-							
 							@php
 							$i++;
 							@endphp
 							@endforeach	
-
+						@else
+						<small>No request found</small>
+						@endif
 							
 						</div>
 						<div class="text-center pt-40 pb-40 bs-padded">
