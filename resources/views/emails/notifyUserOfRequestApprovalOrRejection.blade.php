@@ -183,6 +183,8 @@
 
  We wish to notify you that your request to provide help on <a href="{{url('/')}}">Myhelperapp.com</a> have been <b>accepted</b> by the receiver, and pickup request has been sent to Red Star Express (RSE) Delivery Service.<br>
 
+ Note: Shipping fee has to be paid before items delievery
+<br>
  Items Category : {{$main_request->category ? $main_request->category->title : 'N/A' }} <br>
  <h5>Items</h5>
   <ul>
@@ -196,38 +198,9 @@
  Item Size: {{itemSize($request_bidding_record->weight)}} <br>
 
 
-  Delivery Fee Payer: <strong class="text-danger">{{$request_bidding_record->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
+  Shipping Fee Payer: <strong class="text-danger">{{$request_bidding_record->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
 
-   @foreach(deliveryFee($main_request->api_city,providerDetail($main_request->id,$help_provider->id)['api_city'],$main_request->weight,providerDetail($main_request->id,$help_provider->id)['api_delivery_town_id']) as $fee)
-            <table class="table table-bordered" id="rental_table">
-           
-                    <tbody>
-                      <br>
-                      <h5>Delivery fee detail</h5>
-                   <tr>
-                     <td class="rent_title">Delivery Fee</td>
-                     <td> 
-                  &#8358;{{number_format($fee['DeliveryFee'],2)}} 
-                       
-                      </td> 
-                   </tr>
 
-                   <tr>
-                     <td class="rent_title">Vat Amount</td>
-                     <td>  
-                 &#8358;{{number_format($fee['VatAmount'],2)}}
-                      </td>
-                   </tr>
-
-                   <tr>
-                     <td class="rent_title">Total Amount</td>
-                     <td>
-                 &#8358;{{number_format($fee['TotalAmount'],2)}}
-                     </td>
-                   </tr>
-</tbody>
-</table>
-                          @endforeach
 <br>
 
    

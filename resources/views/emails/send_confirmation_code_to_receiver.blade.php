@@ -183,6 +183,8 @@
 
  We wish to notify you that your application to get help from the following help provider has been approved. An Express Delivery Service (Red Star Express Delivery Service) has been notified to deliver the requested items to you any moment from now. <br>
 
+ Note: Shipping fee has to be paid before items delievery
+<br>
  Please find below the provider information. Thanks<br><br>
 
  <br>
@@ -200,10 +202,10 @@
 </p>
  <br>
 
- Item Size: {{itemSize($main_request->weight)}} <br>
+ Item Size: {{itemSize($request_bidding_record->weight)}} <br>
    
 <br>
-  Delivery Fee Payer: <strong class="text-danger">{{$main_request->delivery_cost_payer =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
+  Shipping Fee Payer: <strong class="text-danger">{{$request_bidding_record->payment_type =='prepaid' ? 'Help Provider will pay for Shipping fee':'Help Receiver will pay for Shipping fee'}}</strong><br>
 
 <br>
 <h3>Help Provider details</h3>
@@ -257,7 +259,7 @@
        </tbody>
                   </table>
 <hr>
-  <a href="{{route('auth_view.provide.request',[$main_request->id])}}">View Request Details</a>
+  <a href="{{route('auth_view.make.request',[$main_request->id])}}">View Request Details</a>
 
                
                 </div>
