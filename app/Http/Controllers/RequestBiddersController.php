@@ -306,7 +306,7 @@ class RequestBiddersController extends Controller
             return back()->withInput()->with('error', 'An attempt to grant user request failed. Please try again');
         }
 
-        return back()->with('success', 'User request successfully approved');
+        return back()->with('success', 'User successfully contacted via email');
 
     }
 
