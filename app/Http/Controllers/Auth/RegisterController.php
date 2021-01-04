@@ -145,9 +145,6 @@ class RegisterController extends Controller
             RequestItem::addNew($data, $lockdownRequest);
         }
         
-        }else{
-            // return back()->with('error','Request could not be created');
-             Session::flash("status", "Request could not be created");
         }
 
         return $request->wantsJson()

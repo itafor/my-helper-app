@@ -134,6 +134,8 @@
 
 After you have accepted the request, Red Star Express  Allied Services Ltd. will be contacted to deliver the item. <br>
 
+ Note: Shipping fee has to be paid before items delievery
+<br>
  Item Category: {{$main_request->category ? $main_request->category->title : 'N/A' }} <br><br>
 
 <h5>Items</h5>
