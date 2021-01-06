@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\RequestSaveSuccessfully;
 use App\LockdownRequest;
 use App\Notifications\NewRegisteredUser;
 use App\RequestItem;
@@ -143,12 +144,20 @@ class RegisterController extends Controller
             $lockdown_request = LockdownRequest::find($lockdownRequest->id);
             LockdownRequest::addRequestPhoto($request->all(),$lockdown_request);
             RequestItem::addNew($data, $lockdownRequest);
+
+            $user = $lockdown_request->user;
+           $request_saved_successfully = (new RequestSaveSuccessfully($lockdown_request, $user))->delay(2);
+          $this->dispatch($request_saved_successfully);
         }
+
+         return redirect()->route('requests')->with('success', 'Successfully registered and request submitted!!');
         
         }
 
-        return $request->wantsJson()
-                    ? new Response('', 201)
-                    : redirect($this->redirectPath());
+         return redirect()->route('requests')->with('success', 'Successfully registered!!');
+
+        // return $request->wantsJson()
+        //             ? new Response('', 201)
+        //             : redirect($this->redirectPath());
     }
 }
