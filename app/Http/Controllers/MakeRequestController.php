@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\City;
 use App\Country;
+use App\Jobs\RequestSaveSuccessfully;
 use App\Jobs\sendConfirmationCodeToReceiver;
 use App\LockdownRequest;
 use App\Notifications\SendRequestDetails;
@@ -128,9 +129,14 @@ class MakeRequestController extends Controller
         $lockdownRequest->save();
          if($lockdownRequest){
          RequestItem::addNew($data, $lockdownRequest);
+            
+      $lockdown_request = LockdownRequest::find($lockdownRequest->id);
+      $user = $lockdown_request->user;
+      $request_saved_successfully = (new RequestSaveSuccessfully($lockdown_request, $user))->delay(2);
+      $this->dispatch($request_saved_successfully);
+
        }
-        Session::flash('status', 'Request has been successfully registered');
-        return redirect()->route('requests');
+        return redirect()->route('requests')->with('success', 'Your request to get help was received');
 
     }
 
