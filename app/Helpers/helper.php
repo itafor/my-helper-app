@@ -124,8 +124,8 @@ function authToken(){
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
             'form_params' => [
-                'username' => 'cnsdemoapiacct',
-                'password' => 'ClickNShip$12345',
+                'username' => 'myhelperapp',
+                'password' => 'Drtfv$GT87adk40',
                 'grant_type' => 'password'
             ]
         ]);
