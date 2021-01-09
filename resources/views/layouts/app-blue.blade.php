@@ -53,7 +53,11 @@
         @auth()
             <div class="main">
                     @include('layouts.navbars.sidebar')
+                @if ( Auth::User() )
+                <div class="main-panel auth-panel">
+                @else
                 <div class="main-panel">
+                @endif
                     @include('layouts.navbars.navbar-blue')
 
                     <div class="content">
@@ -243,23 +247,39 @@
 		
 		</div>
 		<script>
-        $.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		})
+            $.ajaxSetup({
+    			headers: {
+    				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    			}
+    		})
 
-		 $('#approveRequest').on('submit', function() 
-			{
-			 return confirm('Do you really want to approve this request? Approving this request will also submit Pickup Request to the Logistic Delivery partner for shippment!! ');
-			 });
+    		 $('#approveRequest').on('submit', function() 
+    			{
+    			 return confirm('Do you really want to approve this request? Approving this request will also submit Pickup Request to the Logistic Delivery partner for shippment!! ');
+    			 });
 
-		 $('#rejectRequest').on('submit', function() 
-			{
-			 return confirm('Do you really want to reject this request? You cannot undo this action!! ');
-			 });
+    		 $('#rejectRequest').on('submit', function() 
+    			{
+    			 return confirm('Do you really want to reject this request? You cannot undo this action!! ');
+    			 });
 
-    </script>
+             function menuTrigger() {
+              var x = document.getElementById("sidebar-nav");
+                if (window.innerWidth < 992) {
+    
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                        x.style.opacity = "0";
+                    } else {
+                    x.style.display = "block";
+                    x.style.opacity = "1";
+                    }     
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        </script>
+
 	
     </body>
 

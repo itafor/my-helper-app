@@ -1,6 +1,6 @@
 	<footer class="dark">
          <div class="container-fluid">
-            <div class="row">
+            <div class="row mob_layout_center">
                <div class="col-md-8">
                   <div class="copyright">
                      
@@ -12,7 +12,7 @@
                      
                   </div>
                </div>
-               <div class="col-md-4 partners-links text-right">
+               <div class="col-md-4 partners-links text-right mob_layout_center">
                   
                   <span class="powered-by">{{ __('Powered By ' ) }}<span class="bullet">&bull;</span></span>
                   <a class="text-white" href="https://sterling.ng" target="_blank">{{ _( 'Sterling Bank' ) }}</a><span class="bullet">&bull;</span>

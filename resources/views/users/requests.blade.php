@@ -7,7 +7,7 @@
                 <div class="justify-content-center">
                     <div class="col-md-12 content-wrapper">
                         <div class="content-header">
-                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide    goods and services.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
+                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide    goods.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
 
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-panel dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
