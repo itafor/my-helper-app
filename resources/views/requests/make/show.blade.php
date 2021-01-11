@@ -9,6 +9,7 @@
                 <div class="card">
                     <div class="card-header bs-padded">
                         <div class="row align-items-center">
+
                             <div class="col-8 col-left">    
 
                                 <h2>Request for  {{ $getRequest->category ? $getRequest->category->title : '' }}</h2>  
@@ -24,7 +25,8 @@
                     </div>
                     <div class="card-body request-card column-card" style="background-image:url({{ asset('white') }}/img/give.jpg);">
                       <div class="row">
-                      <div class="col-md-8 float-left">
+
+                        <div class="col-md-8 float-left">
                             <div class="group-wrap">
                               <div class="user-request-card">
                                   <div class="request-title">
@@ -344,7 +346,8 @@
                                 </div>
                                 @endif 
                               </div>
-                            
+                            </div>
+                          </div>
                             <!--</div>-->
                         
 
