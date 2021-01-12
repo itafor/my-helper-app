@@ -279,6 +279,11 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 pt-40 pb-40">
+						<div class="text-center">
+							<a href="{{route('all_requests')}}" class="btn btn_simple btn_transparent btn_ggPrimary2">{{ __( 'See all requests' ) }}</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

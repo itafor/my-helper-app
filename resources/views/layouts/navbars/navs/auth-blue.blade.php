@@ -25,7 +25,7 @@
 										@php
 										$logged_in = Auth::user();
 										@endphp
-										<p>Hello, {{ $logged_in->name }}</p>
+										<p>{{ $logged_in->name }}</p>
 									</a>
 									<ul class="dropdown-menu dropdown-navbar">
 										<li class="nav-link">
@@ -48,10 +48,10 @@
 					</div>		
 				</div>
 				<nav class="grid-10 grid-xl-0 layout_centerVertical box_verticalPadded2  text_fontSizeSmall mobile-nav">
-					<a href="{{ route('make.request') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3">{{ _('Get Help') }}</a>
-					<a href="{{ route('provide.request') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3">{{ _('Provide Help') }}</a>		
+					<a href="{{ route('new.make.request') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3">{{ _('Get Help') }}</a>
+					<a href="{{ route('new.provide.request') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3">{{ _('Provide Help') }}</a>		
 					<a href="{{ route('how_it_works') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3">{{ _('How It Works') }}</a>
-					<a href="{{ route('logout') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3"  onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Sign Out</a>
+					<a href="{{ route('logout') }}" class="grid-sm-inline col_ggPrimary5Text link_subtle text_4n box_rightPadded3 hidden-mobile"  onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Sign Out</a>
 				</nav>
 				<div class="menu-trigger-wrap">
 					<a href="javascript:void(0);" class="icon" onclick="menuTrigger()">
