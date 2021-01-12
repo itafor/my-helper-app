@@ -15,7 +15,7 @@
                                     </div>
                                     <div class="content">
                                         <h4>{{ __('Welcome to MyHelperApp')}}</h4>
-                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods and services.') }}
+                                        <p>{{ __('Welcome to MyHelperApp where you can receive or provide goods.') }}
                                             <br /><a href="{{ route('make.request') }}">{{ __('Get Started') }}</a></p>
                                     </div>
                                 </div>

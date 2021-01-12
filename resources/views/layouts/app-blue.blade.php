@@ -241,6 +241,64 @@
                 
         };
         </script>
+
+        <script>
+           function searchCards_new() {
+              // Declare variables
+              var input, filter, div, carddiv, name, req, cat, city,  time, i, result, results;
+              input = document.getElementById("cardSearch");
+              filter = input.value.toUpperCase();
+
+              div = document.getElementById("card");
+              carddiv = div.getElementsByClassName("item"); //** Select by class
+
+              // Loop through all list items, and hide those who don't match the search query
+              for (i = 0; i < carddiv.length; i++) {
+                //** Select specific parent element. innerText will return text in child h1.
+                name = carddiv[i].querySelector("[id='name']").innerText;
+                req = carddiv[i].querySelector("[id='req_type']").innerText;
+                cat = carddiv[i].querySelector("[id='category']").innerText;
+                city = carddiv[i].querySelector("[id='city']").innerText;
+                time = carddiv[i].querySelector("[id='time']").innerText;
+
+                
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                carddiv[i].style.display = "block";                                
+                } else {
+                    if (time.toUpperCase().indexOf(filter) > -1) {
+                        carddiv[i].style.display = "block";
+                        carddiv[i].id = "result"; 
+                    } else {
+                        if (req.toUpperCase().indexOf(filter) > -1 ) {
+                            carddiv[i].style.display = "block"; 
+                            carddiv[i].id = "result";   
+                        } else {
+                            if (cat.toUpperCase().indexOf(filter) > -1) {
+                                carddiv[i].style.display = "block";
+                                carddiv[i].id = "result"; 
+                            } else {
+                               /** if (price.toUpperCase().indexOf(filter) > -1) {
+                                    carddiv[i].style.display = "block";
+                                    carddiv[i].id = "result"; 
+                                } else { **/
+                                    if (city.toUpperCase().indexOf(filter) > -1) {
+                                        carddiv[i].style.display = "block";
+                                        carddiv[i].id = "result"; 
+                                    } else {
+                                        carddiv[i].style.display = "none";                                
+                                    } 
+                                }
+                            }
+                        }
+                    }
+
+                }
+                
+            };
+                
+    
+        </script>
+
         @stack('js')
 		
 		<div style="position: static !important;"></div>

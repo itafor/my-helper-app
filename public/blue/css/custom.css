@@ -164,7 +164,7 @@ p,body,span,em,li{
 	width:100%;
 }
 .home .main{
-	padding-top: 90px;
+	padding-top: 82px;
 }
 header{
 	padding: 15px 0;
@@ -571,13 +571,13 @@ button.primary.ghost {
 	transition: all ease-in .15s;
 }
 .dropdown.nav-item{
-	min-width: 200px;
+	min-width: 100px;
     width: auto;
     display: inline-block;
     padding: 0;
     position: relative;
     vertical-align: middle;
-    margin-right: 0;
+    margin: 0 0 0 15px;
 }
 .dropdown-toggle::after{
 	margin-top:15px;
@@ -981,6 +981,10 @@ textarea.form-control, textarea{
     margin: 45px 0;
     padding: 0 15px;
 }
+.content-header span{
+	display: block;
+	line-height: 40px;
+}
 .page-wrap .content-wrap{
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -1210,10 +1214,18 @@ footer.dark .disclaimer, footer.dark .copyright{
 	position: relative;
 	margin: 0 0 35px;
 }
+.all-requests-wrap{
+	padding-top: 40px;
+}
 .all-requests > div > .card-container{
 	width: 100%;
 	margin: 0 0 25px;
 	display: none;
+}
+.requests.all-requests > div > .card-container{
+	width: 100%;
+	margin: 0 0 25px;
+	display: block;
 }
 #rental_table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;

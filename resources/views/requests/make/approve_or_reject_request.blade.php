@@ -1,7 +1,4 @@
-
 @extends('layouts.app-blue', ['pageSlug' => 'requests'])
-
-
 @section('content')
 
  <!-- Grid -->
