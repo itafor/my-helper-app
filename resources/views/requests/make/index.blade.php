@@ -4,10 +4,10 @@
      <div class="page-wrap">
         <div class="container">
             <div class="row">
-                <div class="justify-content-center">
-                    <div class="col-md-12 content-wrapper">
+                <div class="col-md-12">
+                    <div class="content-wrapper">
                         <div class="content-header">
-                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods and services.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
+                        <h3 class="text-blue text-center h2-heading">{{ __('Welcome to MyHelperApp where you can receive or provide goods.') }} <span> {{__('We’re here to help you get through the day stress free. ')}}</span></h3>
 
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-panel dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,12 +29,12 @@
                                 </div>
                                 <div class="card-body">
                                 @include('alerts.success')
-                                    <div class="requests hidden-pc" id="all-requests">
+                                    <div class="requests hidden-pc all-requests" id="all-requests">
                                          <!--Search CODE -->
                                          <div class="search-filter">
                                             <span class="bmd-form-group">
                                                 <div class="input-group">
-                                                    <input id="cardSearch" class="form-control" placeholder="Search name, category, request type, time, price or location etc." maxlength="100"  onkeyup="searchCards()" type="text">    
+                                                    <input id="cardSearch" class="form-control" placeholder="Search name, category, request type, time, price or location etc." maxlength="100"  onkeyup="searchCards_new()" type="text">    
                                                 </div>
                                             </span>
                                             <p id="summary"></p>
@@ -45,6 +45,59 @@
                                         @endphp
                                         @foreach( $allRequests as $req )
 
+                                        <div id="item id_{{ $i }}" class="item col-md-3">
+                                            <div class="card-container">
+                                                @if($req->request_type == 1) 
+                                                <span id="req_type" class="pro">{{ __('Request') }}</span>
+                                                @else
+                                                <span id="req_type" class="pro">{{ __('Supply') }}</span>
+                                                @endif
+
+                                                <img class="round" src="{{ asset('blue') }}/images/user.jpg" alt="user" />
+                                                
+                                                <h3 id="name">{{ $req->user->username }}</h3>
+
+                                                @if ( $req->api_city !== "" )
+                                                <h6 id="city">{{ $req->api_city }}, {{ $req->api_state }}</h6>
+                                                @endif
+                                                <p>{{ Str::limit($req->description, 30) }}</p>
+
+
+                                                @if($req->request_type == 1) 
+                                                <div class="buttons">
+                                                    <a class="primary" href="{{ route('view.make.request', [$req->id]) }}">View Request</a>                                 
+                                                </div>
+                                                @else
+                                                <div class="buttons">
+                                                    <a class="primary" href="{{ route('view.request', [$req->id]) }}">View Supply</a>                                           
+                                                </div>
+                                                @endif
+
+                                                <div class="skills">
+                                                    <ul>
+                                                        <li id="category">{{ $req->category ? $req->category->title : '' }}</li>
+                                                        @php
+                                                            $today = \Carbon\Carbon::today();
+                                                            $time = \Carbon\Carbon::now();
+                                                            $ageInSeconds = \Carbon\Carbon::parse($req->created_at)->diffInSeconds($time);
+                                                            $ageInMins = \Carbon\Carbon::parse($req->created_at)->diffInMinutes($time);
+                                                            $ageInHrs = \Carbon\Carbon::parse($req->created_at)->diffInHours($time);
+                                                            $age = \Carbon\Carbon::parse($req->created_at)->diffInDays($time);
+                                                        @endphp
+                                                        @if($ageInMins < 60)
+                                                        <li id="time">{{ $ageInMins }}{{ $ageInMins < 2 ? ' minute ' : ' minutes '}} ago</li>
+                                                        @elseif(($ageInHrs >= 1 ) && ( $ageInHrs <= 24 ))
+                                                        <li id="time">{{ $ageInHrs }}{{ $ageInHrs < 2 ? ' hour ' : ' hours '}} ago</li>
+                                                        @else
+                                                        <li id="time">{{ $age }}{{ $age < 2 ? ' day ' : ' days '}} ago</li>
+                                                        @endif
+                                                                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--
                                         <div class='card-inner'>                                            
                                             <div class="card-detail" id="request_{{ $req->id }}">
                                                 <div class="row">
@@ -122,6 +175,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    -->
 
                                          @php
                                             $i++;

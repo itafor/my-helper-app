@@ -53,7 +53,11 @@
         @auth()
             <div class="main">
                     @include('layouts.navbars.sidebar')
+                @if ( Auth::User() )
+                <div class="main-panel auth-panel">
+                @else
                 <div class="main-panel">
+                @endif
                     @include('layouts.navbars.navbar-blue')
 
                     <div class="content">
@@ -237,29 +241,103 @@
                 
         };
         </script>
+
+        <script>
+           function searchCards_new() {
+              // Declare variables
+              var input, filter, div, carddiv, name, req, cat, city,  time, i, result, results;
+              input = document.getElementById("cardSearch");
+              filter = input.value.toUpperCase();
+
+              div = document.getElementById("card");
+              carddiv = div.getElementsByClassName("item"); //** Select by class
+
+              // Loop through all list items, and hide those who don't match the search query
+              for (i = 0; i < carddiv.length; i++) {
+                //** Select specific parent element. innerText will return text in child h1.
+                name = carddiv[i].querySelector("[id='name']").innerText;
+                req = carddiv[i].querySelector("[id='req_type']").innerText;
+                cat = carddiv[i].querySelector("[id='category']").innerText;
+                city = carddiv[i].querySelector("[id='city']").innerText;
+                time = carddiv[i].querySelector("[id='time']").innerText;
+
+                
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                carddiv[i].style.display = "block";                                
+                } else {
+                    if (time.toUpperCase().indexOf(filter) > -1) {
+                        carddiv[i].style.display = "block";
+                        carddiv[i].id = "result"; 
+                    } else {
+                        if (req.toUpperCase().indexOf(filter) > -1 ) {
+                            carddiv[i].style.display = "block"; 
+                            carddiv[i].id = "result";   
+                        } else {
+                            if (cat.toUpperCase().indexOf(filter) > -1) {
+                                carddiv[i].style.display = "block";
+                                carddiv[i].id = "result"; 
+                            } else {
+                               /** if (price.toUpperCase().indexOf(filter) > -1) {
+                                    carddiv[i].style.display = "block";
+                                    carddiv[i].id = "result"; 
+                                } else { **/
+                                    if (city.toUpperCase().indexOf(filter) > -1) {
+                                        carddiv[i].style.display = "block";
+                                        carddiv[i].id = "result"; 
+                                    } else {
+                                        carddiv[i].style.display = "none";                                
+                                    } 
+                                }
+                            }
+                        }
+                    }
+
+                }
+                
+            };
+                
+    
+        </script>
+
         @stack('js')
 		
 		<div style="position: static !important;"></div>
 		
 		</div>
 		<script>
-        $.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		})
+            $.ajaxSetup({
+    			headers: {
+    				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    			}
+    		})
 
-		 $('#approveRequest').on('submit', function() 
-			{
-			 return confirm('Do you really want to approve this request? Approving this request will also submit Pickup Request to the Logistic Delivery partner for shippment!! ');
-			 });
+    		 $('#approveRequest').on('submit', function() 
+    			{
+    			 return confirm('Do you really want to approve this request? Approving this request will also submit Pickup Request to the Logistic Delivery partner for shippment!! ');
+    			 });
 
-		 $('#rejectRequest').on('submit', function() 
-			{
-			 return confirm('Do you really want to reject this request? You cannot undo this action!! ');
-			 });
+    		 $('#rejectRequest').on('submit', function() 
+    			{
+    			 return confirm('Do you really want to reject this request? You cannot undo this action!! ');
+    			 });
 
-    </script>
+             function menuTrigger() {
+              var x = document.getElementById("sidebar-nav");
+                if (window.innerWidth < 992) {
+    
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                        x.style.opacity = "0";
+                    } else {
+                    x.style.display = "block";
+                    x.style.opacity = "1";
+                    }     
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        </script>
+
 	
     </body>
 

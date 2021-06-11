@@ -13,11 +13,14 @@
 							<h2 class="text_fontSizeLarger text_title text_4n box_topMarginHalf">
 								<a href="{{ url('/') }}" class="link_subtle col_whiteText zindex_linkify layout_rel">{{ __('Welcome to My Helper App') }}</a>
 							</h2>
-							<p>{{ __('Where you can receive or provide goods and services. ') }}</p>
+							<p>{{ __('Where you can receive or provide goods. ') }}</p>
 						</div>
-						<div class="tile-hidden">
+						<div class="pb-10 pt-10">
+							&nbsp;
+						</div>
+						<!--<div class="tile-hidden">
 						   <a href="{{ url('/') }}" class="grid-6 btn btn_short box_topMargin1 zindex_linkify">Learn more</a>
-						</div>
+						</div>-->
          
 					</div>
 				</div>
@@ -36,11 +39,15 @@
 								</h4>
 								<p>{{ __('Create your request.') }}</p>
 							</div>
-							<div class="tile-hidden">
-								
+							@if ( Auth::user() )
+							<div class="tile-hidden">								
+								<a href="{{ route('new.make.request') }}" class="grid-6 btn btn_short box_topMargin2 zindex_linkify">Create</a>
+							</div>
+							@else
+							<div class="tile-hidden">								
 								<a href="{{ route('make.request') }}" class="grid-6 btn btn_short box_topMargin2 zindex_linkify">Create</a>
 							</div>
-							 
+							@endif
 						</div>
 					</div>
 				</div>
@@ -56,10 +63,15 @@
 								</h4>
 								<p>{{ __('Select any request to provide help.') }}</p>
 							</div>
-							<div class="tile-hidden">
-								
+							@if ( Auth::user() )
+							<div class="tile-hidden">								
+								<a href="{{ route('new.provide.request') }}" class="grid-6 btn btn_short box_topMargin2 zindex_linkify">Select</a>
+							</div>
+							@else
+							<div class="tile-hidden">								
 								<a href="{{ route('provide.request') }}" class="grid-6 btn btn_short box_topMargin2 zindex_linkify">Select</a>
 							</div>
+							@endif
 							 
 						</div>
 					</div>
@@ -111,9 +123,9 @@
 		   function setTileHeights(){for(var e=window.innerWidth||document.documentElement.clientWidth||document.getElementsByTagName("body")[0].clientWidth,t=e<1024?1:2,i=document.getElementsByClassName("tile"),n=1;n<5;n++)i[n].style.height=Math.round(e/t/3-4)+"px";document.getElementsByClassName("tile-lg")[0].style.height=2*Math.round(e/t/3)-6+"px"}setTileHeights(),window.addEventListener?window.addEventListener("resize",setTileHeights,!1):window.attachEvent?window.attachEvent("onresize",setTileHeights):window.onresize=setTileHeights;
 		</script>
 		
-		<div class="grid-parent col_ggPrimary5VeryLight box_horizontalPadded2 layout_center layout_centerVertical col_ggPrimary5Text page-cta">
-			<span class="grid-12 grid-lg-6 text_fontSizeSmall_2 box_verticalPadded2 text_allCaps layout_alignLeft">Requests</span>
-			<a href="{{route('all_requests')}}" class="grid-12 grid-lg-6 text_fontSizeSmall col_ggPrimary5Text box_verticalPadded2 text_allCaps layout_alignRight">Explore ›</a>
+		<div class="grid-parent col_ggPrimary5VeryLight box_horizontalPadded2  col_ggPrimary5Text page-cta">
+			<span class="grid-12 grid-lg-6 text_fontSizeSmall_2 text_allCaps layout_alignLeft">Requests</span>
+			<a href="{{route('all_requests')}}" class="grid-12 grid-lg-6 text_fontSizeSmall col_ggPrimary5Text text_allCaps layout_alignRight absolute-canvas bs-padded right-ab">Explore ›</a>
 		</div>
 		
 		<section class="requests-slides">
@@ -267,6 +279,11 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 pt-40 pb-40">
+						<div class="text-center">
+							<a href="{{route('all_requests')}}" class="btn btn_simple btn_transparent btn_ggPrimary2">{{ __( 'See all requests' ) }}</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -276,7 +293,7 @@
 				<div class="layout_centerVertical">
 					<div class="grid-parent grid-padder">
 					   
-						<div class="grid-12 box_verticalPadded1">
+						<div class="grid-12 box_verticalPadded1 bs-padded">
 							<!--<span class="text_fontSizeLarger text_md_fontSizeJumbo text_title text_7n text_lineHeightLoose">3564</span><br>-->
 							<div class="text_fontSizeLarge"><span>{{ __('This platform will help create an avenue for minimal wealth distribution among the rich and the poor.') }}</span><br /> 
 								- <br />{{ __('Abubakar Suleiman') }}

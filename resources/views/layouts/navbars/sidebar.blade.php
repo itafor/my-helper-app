@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div id="sidebar-nav" class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo">
             <!--<a href="#" class="simple-text logo-mini">{{ _('LC') }}</a>-->
